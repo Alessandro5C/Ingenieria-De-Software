@@ -9,7 +9,7 @@ namespace LetSkole.Entities
     public class Activity:EntityBase
     {
         public int UserId { get; set; }
-        public User User { get; set; }
+        //public User User { get; set; }
 
 
         [Required]

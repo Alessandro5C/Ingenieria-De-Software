@@ -59,8 +59,6 @@ namespace LetSkole.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Activities");
                 });
 
@@ -181,17 +179,6 @@ namespace LetSkole.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.Activity", b =>
-                {
-                    b.HasOne("LetSkole.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.Reward", b =>

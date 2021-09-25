@@ -8,24 +8,30 @@
     ".NETStandard,Version=v2.1": []
   },
   "packageFolders": {
-    "C:\\Users\\aldav\\.nuget\\packages\\": {}
+    "C:\\Users\\oscar\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\git\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
+      "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
       "projectName": "LetSkole.Dto",
-      "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
-      "packagesPath": "C:\\Users\\aldav\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Dto\\obj\\",
+      "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
+      "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\aldav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

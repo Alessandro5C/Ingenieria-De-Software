@@ -7207,35 +7207,41 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aldav\\.nuget\\packages\\": {}
+    "C:\\Users\\oscar\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\git\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj",
+      "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj",
       "projectName": "LetSkole.Services",
-      "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj",
-      "packagesPath": "C:\\Users\\aldav\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Services\\obj\\",
+      "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj",
+      "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\aldav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
-              "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
+            "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
             },
-            "C:\\git\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj": {
-              "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj"
+            "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj": {
+              "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj"
             }
           }
         }

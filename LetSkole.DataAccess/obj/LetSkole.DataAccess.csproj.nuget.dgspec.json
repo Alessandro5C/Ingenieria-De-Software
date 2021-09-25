@@ -1,33 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {}
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
         "projectName": "LetSkole.DataAccess",
-        "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\aldav\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\aldav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
-                "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj"
+              "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+                "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj"
               }
             }
           }
@@ -76,22 +81,27 @@
         }
       }
     },
-    "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
         "projectName": "LetSkole.Entities",
-        "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
-        "packagesPath": "C:\\Users\\aldav\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\aldav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
