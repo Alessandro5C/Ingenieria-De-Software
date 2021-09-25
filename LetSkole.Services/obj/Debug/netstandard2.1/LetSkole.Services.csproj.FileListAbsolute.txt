@@ -1,0 +1,14 @@
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Services.deps.json
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Services.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Services.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csprojAssemblyReference.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.AssemblyInfoInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.AssemblyInfo.cs
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CopyComplete

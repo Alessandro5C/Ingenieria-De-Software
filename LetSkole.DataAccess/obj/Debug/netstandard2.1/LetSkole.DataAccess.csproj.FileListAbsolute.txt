@@ -1,0 +1,12 @@
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.deps.json
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csprojAssemblyReference.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.AssemblyInfoInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.AssemblyInfo.cs
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CopyComplete
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.pdb

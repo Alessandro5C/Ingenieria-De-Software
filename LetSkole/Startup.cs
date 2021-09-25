@@ -1,7 +1,9 @@
+using LetSkole.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,9 +30,11 @@ namespace LetSkole
         {
 
             services.AddControllers();
+            services.AddDbContext<LetSkoleDbContext>(
+                options => options.UseSqlServer(@"Server = DESKTOP-PPGAMC3; Database = LetSkoleDb; Integrated Security = true;"));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetSkole", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetSkole.Api", Version = "v1" });
             });
         }
 

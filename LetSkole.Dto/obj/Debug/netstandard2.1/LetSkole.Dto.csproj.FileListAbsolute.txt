@@ -1,0 +1,9 @@
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.deps.json
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csprojAssemblyReference.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfoInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfo.cs
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb

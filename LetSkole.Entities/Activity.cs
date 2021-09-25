@@ -5,9 +5,13 @@ using System.Text;
 
 namespace LetSkole.Entities
 {
-    //Falta UserId :(
+
     public class Activity:EntityBase
     {
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+
         [Required]
         [StringLength(15)]
         public string Name { get; set; }

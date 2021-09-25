@@ -1,0 +1,9 @@
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.deps.json
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csprojAssemblyReference.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.AssemblyInfoInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.AssemblyInfo.cs
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.pdb

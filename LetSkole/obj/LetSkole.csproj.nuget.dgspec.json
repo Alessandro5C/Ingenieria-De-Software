@@ -1,17 +1,221 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\LetSkole\\LetSkole.csproj": {}
+    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\LetSkole\\LetSkole.csproj": {
+    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\LetSkole\\LetSkole.csproj",
-        "projectName": "LetSkole",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\LetSkole\\LetSkole.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "projectName": "LetSkole.DataAccess",
+        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\LetSkole\\obj\\",
+        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "projectName": "LetSkole.Entities",
+        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj",
+        "projectName": "LetSkole.Services",
+        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj",
+        "projectName": "LetSkole",
+        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -31,7 +235,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj": {
+                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -44,6 +252,12 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"

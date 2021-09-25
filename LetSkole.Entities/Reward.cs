@@ -6,9 +6,11 @@ using System.Text;
 namespace LetSkole.Entities
 {
     public class Reward:EntityBase
-        //Falta GameID :(
-        //tambien falta "linkear" a Users T.T
+        //falta "linkear" a Users T.T
     {
+        public int GameId { get; set; }
+        public Game Game { get; set; }
+
         [Required]
         [StringLength(15)]
         public string Name { get; set; }
