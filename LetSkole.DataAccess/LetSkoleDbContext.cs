@@ -23,7 +23,7 @@ namespace LetSkole.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server = DESKTOP-PPGAMC3; Database = LetSkoleDb; Integrated Security = true;");
+                .UseSqlServer(@"Server = LAPTOP-LH98T54I; Database = LetSkoleDb; Integrated Security = true;");
         }
 
         public DbSet<User> Users { get; set; }

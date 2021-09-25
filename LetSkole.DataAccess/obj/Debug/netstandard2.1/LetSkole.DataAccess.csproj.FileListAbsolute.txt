@@ -10,3 +10,16 @@ C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\net
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CopyComplete
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.dll
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.deps.json
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.AssemblyReference.cache
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.AssemblyInfoInputs.cache
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.AssemblyInfo.cs
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CoreCompileInputs.cache
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CopyComplete
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\git\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.pdb

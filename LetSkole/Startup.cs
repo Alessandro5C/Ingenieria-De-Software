@@ -31,7 +31,7 @@ namespace LetSkole
 
             services.AddControllers();
             services.AddDbContext<LetSkoleDbContext>(
-                options => options.UseSqlServer(@"Server = DESKTOP-PPGAMC3; Database = LetSkoleDb; Integrated Security = true;"));
+                options => options.UseSqlServer(@"Server = LAPTOP-LH98T54I; Database = LetSkoleDb; Integrated Security = true;"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetSkole.Api", Version = "v1" });

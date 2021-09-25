@@ -7,3 +7,13 @@ C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netst
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.dll
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\git\Ingenieria-De-Software\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.deps.json
+C:\git\Ingenieria-De-Software\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\git\Ingenieria-De-Software\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.AssemblyReference.cache
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.AssemblyInfoInputs.cache
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.AssemblyInfo.cs
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.CoreCompileInputs.cache
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\git\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.pdb
