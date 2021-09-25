@@ -27,3 +27,5 @@ C:\git\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkol
 C:\git\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CopyComplete
 C:\git\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.dll
 C:\git\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.pdb
+C:\git\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\git\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Dto.pdb

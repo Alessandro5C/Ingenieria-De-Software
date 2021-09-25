@@ -5,7 +5,7 @@ using LetSkole.Entities;
 
 namespace LetSkole.DataAccess
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
        ICollection<User> GetCollection (string filter);
         User GetItem (int id);

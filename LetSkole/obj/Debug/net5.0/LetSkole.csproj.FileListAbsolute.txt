@@ -161,3 +161,5 @@ C:\git\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\LetSkole.dll
 C:\git\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\ref\LetSkole.dll
 C:\git\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\LetSkole.pdb
 C:\git\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\LetSkole.genruntimeconfig.cache
+C:\git\Ingenieria-De-Software\LetSkole\bin\Debug\net5.0\LetSkole.Dto.dll
+C:\git\Ingenieria-De-Software\LetSkole\bin\Debug\net5.0\LetSkole.Dto.pdb

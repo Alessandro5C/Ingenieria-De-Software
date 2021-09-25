@@ -1380,6 +1380,14 @@
           "LetSkole.DataAccess.dll": {}
         }
       },
+      "LetSkole.Dto/1.0.0": {
+        "runtime": {
+          "LetSkole.Dto.dll": {}
+        },
+        "compile": {
+          "LetSkole.Dto.dll": {}
+        }
+      },
       "LetSkole.Entities/1.0.0": {
         "dependencies": {
           "System.ComponentModel.Annotations": "5.0.0"
@@ -1393,7 +1401,8 @@
       },
       "LetSkole.Services/1.0.0": {
         "dependencies": {
-          "LetSkole.DataAccess": "1.0.0"
+          "LetSkole.DataAccess": "1.0.0",
+          "LetSkole.Dto": "1.0.0"
         },
         "runtime": {
           "LetSkole.Services.dll": {}
@@ -3811,6 +3820,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "LetSkole.DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LetSkole.Dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

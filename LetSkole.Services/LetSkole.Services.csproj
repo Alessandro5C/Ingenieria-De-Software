@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LetSkole.DataAccess\LetSkole.DataAccess.csproj" />
+    <ProjectReference Include="..\LetSkole.Dto\LetSkole.Dto.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,3 +7,13 @@ C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandar
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
 C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\git\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.deps.json
+C:\git\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\git\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.AssemblyReference.cache
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfoInputs.cache
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfo.cs
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\git\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb

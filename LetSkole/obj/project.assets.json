@@ -1597,6 +1597,16 @@
           "bin/placeholder/LetSkole.DataAccess.dll": {}
         }
       },
+      "LetSkole.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/LetSkole.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LetSkole.Dto.dll": {}
+        }
+      },
       "LetSkole.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -1614,7 +1624,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
-          "LetSkole.DataAccess": "1.0.0"
+          "LetSkole.DataAccess": "1.0.0",
+          "LetSkole.Dto": "1.0.0"
         },
         "compile": {
           "bin/placeholder/LetSkole.Services.dll": {}
@@ -5978,6 +5989,11 @@
       "type": "project",
       "path": "../LetSkole.DataAccess/LetSkole.DataAccess.csproj",
       "msbuildProject": "../LetSkole.DataAccess/LetSkole.DataAccess.csproj"
+    },
+    "LetSkole.Dto/1.0.0": {
+      "type": "project",
+      "path": "../LetSkole.Dto/LetSkole.Dto.csproj",
+      "msbuildProject": "../LetSkole.Dto/LetSkole.Dto.csproj"
     },
     "LetSkole.Entities/1.0.0": {
       "type": "project",

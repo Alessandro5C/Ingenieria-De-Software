@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LetSkole.Services;
 
 namespace LetSkole
 {
@@ -30,6 +31,7 @@ namespace LetSkole
         {
 
             services.AddControllers();
+            services.AddInjection();
             services.AddDbContext<LetSkoleDbContext>(
                 options => options.UseSqlServer(@"Server = LAPTOP-LH98T54I; Database = LetSkoleDb; Integrated Security = true;"));
             services.AddSwaggerGen(c =>
