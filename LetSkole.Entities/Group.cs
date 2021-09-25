@@ -13,5 +13,7 @@ namespace LetSkole.Entities
         [Required]
         [StringLength(256)]
         public string Description { get; set; }
+
+
     }
 }

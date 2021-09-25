@@ -27,3 +27,13 @@ C:\Users\oscar\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard
 C:\Users\oscar\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
 C:\Users\oscar\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
 C:\Users\oscar\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.deps.json
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.AssemblyReference.cache
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfoInputs.cache
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfo.cs
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\Tomas\Desktop\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb

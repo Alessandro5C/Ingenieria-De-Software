@@ -10,7 +10,9 @@ namespace LetSkole.Services
             return services.AddScoped<IUserRepository, UserRepository>()
                 .AddTransient<IUserService, UserService>()
                 .AddScoped<IActivityRepository, ActivityRepository>()
-                .AddTransient<IActivityService,ActivityService>();
+                .AddTransient<IActivityService,ActivityService>()
+                .AddScoped<IGroupsRepository, GroupsRepository>()
+                .AddTransient<IGroupService, GroupService>();
         }
     }
 }
