@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/[controller]/[action]")]
     [ApiController]
     public class ActivityController : ControllerBase
     {
@@ -29,6 +29,28 @@ namespace LetSkole.Controllers
         {
             return _service.GetCollection(filter);
         }
+        
+        [HttpGet]
+        public ActivityDto GetItemById ([FromQuery] int id)
+        {
+            return _service.GetItem(id);
+        }
+
+        [HttpDelete]
+        public void Delete ([FromQuery] int id)
+        {
+            _service.Delete(id);
+        }
+
+        [HttpPut]
+        public void Put ([FromQuery] ActivityDto activityDto)
+        {
+            _service.Update(activityDto);
+        }
+
 
     }
+
+
+
 }

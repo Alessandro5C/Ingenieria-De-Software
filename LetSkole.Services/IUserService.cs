@@ -8,7 +8,7 @@ namespace LetSkole.Services
         ICollection<UserDto> GetCollection (string filter);
         UserDto GetItem (int id);
         void Create (UserDto entity);
-        void Update (int id, UserDto entity);
+        void Update (UserDto entity);
         void Delete (int id); 
     }
 }

@@ -29,10 +29,19 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        //Este de aqui también falta
         public UserDto GetItem(int id)
         {
-            throw new System.NotImplementedException();
+            User user = _repository.GetItem(id);
+            UserDto userDto = new UserDto();
+
+            userDto.Id = user.Id;
+            userDto.Name = user.Name;
+            userDto.Student = user.Student;
+            userDto.School = user.School;
+            userDto.Email = user.Email;
+            userDto.NumTelf = user.NumTelf;
+
+            return userDto;
         }
 
         public void Create(UserDto entity)
@@ -48,15 +57,23 @@ namespace LetSkole.Services
             });
         }
 
-        //Faltan estas 2 de aqui
-        public void Update(int id, UserDto entity)
+        public void Update(UserDto entity)
         {
-            throw new System.NotImplementedException();
+            User user = _repository.GetItem(entity.Id);
+
+            user.Name = entity.Name;
+            user.Student = entity.Student;
+            user.School = entity.School;
+            user.Email = entity.Email;
+            user.NumTelf = entity.NumTelf;
+
+            _repository.Update(user);
+
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            _repository.Delete(id);
         }
     }
 }

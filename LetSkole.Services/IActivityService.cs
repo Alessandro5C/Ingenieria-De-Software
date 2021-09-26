@@ -10,7 +10,7 @@ namespace LetSkole.Services
         ICollection<ActivityDto> GetCollection(string filter);
         ActivityDto GetItem(int id);
         void Create(ActivityDto entity);
-        void Update(int id, ActivityDto entity);
+        void Update(ActivityDto entity);
         void Delete(int id);
     }
 }

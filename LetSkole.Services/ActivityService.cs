@@ -40,7 +40,7 @@ namespace LetSkole.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
 
         public ICollection<ActivityDto> GetCollection(string filter)
@@ -48,6 +48,7 @@ namespace LetSkole.Services
             var Collection = _repository.GetActivities(filter ?? string.Empty);
             return Collection.Select(c => new ActivityDto
             {
+                Id = c.Id,
                 UserId = c.UserId,
                 Name = c.Name,
                 Description = c.Description,
@@ -62,12 +63,37 @@ namespace LetSkole.Services
 
         public ActivityDto GetItem(int id)
         {
-            throw new NotImplementedException();
+            Activity activity = _repository.GetItem(id);
+            ActivityDto activityDto = new ActivityDto();
+
+            activityDto.Id = activity.Id;
+            activityDto.UserId = activity.UserId;
+            activityDto.Name = activity.Name;
+            activityDto.Description = activity.Description;
+            activityDto.StartDate = activity.StartDate;
+            activityDto.EndDate = activity.EndDate;
+            activityDto.Completed = activity.Completed;
+            activityDto.DoDate = activity.DoDate;
+            activityDto.StartTime = activity.StartTime;
+            activityDto.EndTime = activity.EndTime;
+            return activityDto;
         }
 
-        public void Update(int id, ActivityDto entity)
+        public void Update(ActivityDto entity)
         {
-            throw new NotImplementedException();
+            Activity activity = _repository.GetItem(entity.Id);
+
+            activity.UserId = entity.UserId;
+            activity.Name = entity.Name;
+            activity.Description = entity.Description;
+            activity.StartDate = entity.StartDate;
+            activity.EndDate = entity.EndDate;
+            activity.Completed = entity.Completed;
+            activity.DoDate = entity.DoDate;
+            activity.StartTime = entity.StartTime;
+            activity.EndTime = entity.EndTime;
+
+            _repository.Update(activity);
         }
     }
 }

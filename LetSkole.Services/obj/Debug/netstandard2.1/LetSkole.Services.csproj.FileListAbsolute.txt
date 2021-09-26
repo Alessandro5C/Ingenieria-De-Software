@@ -80,3 +80,20 @@ C:\Users\Diego Barraza\source\repos\Ingenieria-De-Software\LetSkole.Services\obj
 C:\Users\Diego Barraza\source\repos\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CopyComplete
 C:\Users\Diego Barraza\source\repos\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.dll
 C:\Users\Diego Barraza\source\repos\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.pdb
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Services.deps.json
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Services.dll
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Services.pdb
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.AssemblyInfo.cs
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CopyComplete
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.dll
+C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.pdb
