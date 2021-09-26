@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace LetSkole.Controllers
 {
     [Route("api/v1/[controller]")]
+
     [ApiController]
     public class GroupController : Controller
     {
@@ -19,28 +20,40 @@ namespace LetSkole.Controllers
             _service = service;
         }
 
+        [Route("Create")]
         [HttpPost]
         public void Post([FromBody] GroupDto GroupDto)
         {
             _service.Create(GroupDto);
         }
 
+        [Route("GetAllByFilter")]
         [HttpGet]
         public IEnumerable<GroupDto> GetAllByFilter([FromQuery] string filter)
         {
             return _service.GetCollection(filter);
         }
 
-       // [HttpGet]
-        /*public GroupDto GetItemById([FromQuery] int id)
+
+        [Route("Update")]
+        [HttpPut]
+        public void Put([FromQuery] GroupDto groupDto)
         {
-            return _service.GetItem(id);
+            _service.Update(groupDto);
         }
 
-        [HttpGet]
-        public IActionResult Index()
+        [Route("Delete")]
+        [HttpDelete]
+        public void Delete([FromQuery] int id)
         {
-            return View();
-        }*/
-    }
+            _service.Delete(id);
+        }
+
+        [Route("GetById")]
+        [HttpGet]
+        public GroupDto GetItemById([FromQuery] int id)
+        {
+        return _service.GetItem(id);
+        }
+}
 }
