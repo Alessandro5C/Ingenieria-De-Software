@@ -6,20 +6,22 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
+
 namespace LetSkole.Services
 {
-    public class GroupService : IGroupService
+    public class RewardService : IRewardService
     {
-        private readonly IGroupsRepository _repository;
+        private readonly IRewardsRepository _repository;
 
-        public GroupService(IGroupsRepository repository)
+        public RewardService(IRewardsRepository repository)
         {
             _repository = repository;
         }
 
-        public void Create(GroupDto entity)
+        public void Create(RewardDto entity)
         {
-            _repository.Create(new Group
+            _repository.Create(new Reward
+
             {
                 Name = entity.Name,
                 Description = entity.Description,
@@ -31,29 +33,27 @@ namespace LetSkole.Services
             throw new NotImplementedException();
         }
 
-        public ICollection<GroupDto> GetCollection(string filter)
+        public ICollection<RewardDto> GetCollection(string filter)
         {
             var Collection = _repository.GetCollection(filter ?? string.Empty);
-            return Collection.Select(c => new GroupDto
+            return Collection.Select(c => new RewardDto
             {
                 Description = c.Description,
                 Name = c.Name,
-                Id = c.Id,
             }).ToList();
         }
 
-        public GroupDto GetItem(int id)
+        public RewardDto GetItem(int id)
         {
-             
-            Group Tomas = _repository.GetItem(id);
-            GroupDto Pastor = new GroupDto(); 
-            Pastor.Id = Tomas.Id;
-            Pastor.Name = Tomas.Name;
-            Pastor.Description = Tomas.Description;
-            return Pastor;
+            Reward reward = _repository.GetItem(id);
+            RewardDto rewardDto = new RewardDto();
+            rewardDto.Id = reward.Id;
+            rewardDto.Name = reward.Name;
+            rewardDto.Description = reward.Description;
+            return rewardDto;
         }
 
-        public void Update(int id, GroupDto entity)
+        public void Update(int id, RewardDto entity)
         {
             throw new NotImplementedException();
         }

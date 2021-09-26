@@ -9,11 +9,11 @@ namespace LetSkole.Entities
     public class Activity:EntityBase
     {
         public int UserId { get; set; }
-        //public User User { get; set; }
+        public User User { get; set; }
 
 
         [Required]
-        [StringLength(15)]
+        [StringLength(20)]
         public string Name { get; set; }
         [Required]
         [StringLength(256)]

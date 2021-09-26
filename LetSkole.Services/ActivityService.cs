@@ -26,7 +26,7 @@ namespace LetSkole.Services
          
             _repository.Create(new Activity
             {
-                
+                UserId = entity.UserId, //validar el user id
                 Name = entity.Name,
                 Description = entity.Description,
                 StartDate = entity.StartDate,

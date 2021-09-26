@@ -7,7 +7,7 @@ namespace LetSkole.Services
 {
     public interface IGroupService
     {
-        ICollection<GroupDto> GetActivities(string filter);
+        ICollection<GroupDto> GetCollection(string filter);
         GroupDto GetItem(int id);
         void Create(GroupDto entity);
         void Update(int id, GroupDto entity);

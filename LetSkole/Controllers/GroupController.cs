@@ -28,7 +28,7 @@ namespace LetSkole.Controllers
         [HttpGet]
         public IEnumerable<GroupDto> GetAllByFilter([FromQuery] string filter)
         {
-            return _service.GetActivities(filter);
+            return _service.GetCollection(filter);
         }
 
        // [HttpGet]
