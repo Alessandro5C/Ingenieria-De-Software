@@ -10,7 +10,7 @@ namespace LetSkole.Services
         ICollection<GroupDto> GetCollection(string filter);
         GroupDto GetItem(int id);
         void Create(GroupDto entity);
-        void Update(int id, GroupDto entity);
+        void Update(GroupDto entity);
         void Delete(int id);
 
     }

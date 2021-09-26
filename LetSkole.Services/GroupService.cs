@@ -28,7 +28,7 @@ namespace LetSkole.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
 
         public ICollection<GroupDto> GetCollection(string filter)
@@ -36,26 +36,35 @@ namespace LetSkole.Services
             var Collection = _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new GroupDto
             {
+                Id = c.Id,
                 Description = c.Description,
                 Name = c.Name,
-                Id = c.Id,
+
             }).ToList();
         }
 
         public GroupDto GetItem(int id)
         {
-             
-            Group Tomas = _repository.GetItem(id);
-            GroupDto Pastor = new GroupDto(); 
-            Pastor.Id = Tomas.Id;
-            Pastor.Name = Tomas.Name;
-            Pastor.Description = Tomas.Description;
-            return Pastor;
+
+  
+            Group group = _repository.GetItem(id);
+
+            GroupDto groupDto = new GroupDto();
+            groupDto.Id = group.Id;
+            groupDto.Name = group.Name;
+            groupDto.Description = group.Description;
+            return groupDto;
         }
 
-        public void Update(int id, GroupDto entity)
+        public void Update( GroupDto entity)
         {
-            throw new NotImplementedException();
+
+
+            Group group = _repository.GetItem(entity.Id);
+
+            group.Name = entity.Name;
+            group.Description = entity.Description;
+            _repository.Update(group);
         }
     }
 }
