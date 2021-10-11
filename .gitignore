@@ -35,8 +35,17 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
-LetSkole/.vs/
 
+#Inside others
+LetSkole/.vs/
 LetSkole/.idea/
 LetSkole/bin/
 LetSkole/obj/
+LetSkole.DataAccess/bin/
+LetSkole.DataAccess/obj/
+LetSkole.Dto/bin/
+LetSkole.Dto/obj/
+LetSkole.Entities/obj/
+LetSkole.Entities/obj/
+LetSkole.Services/obj/
+LetSkole.Services/obj/
