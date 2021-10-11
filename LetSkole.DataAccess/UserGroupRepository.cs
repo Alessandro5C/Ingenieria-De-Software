@@ -16,7 +16,8 @@ namespace LetSkole.DataAccess
         }
         public void Create(UserGroup entity)
         {
-            throw new NotImplementedException();
+            _context.Set<UserGroup>().Add(entity);
+            _context.SaveChanges();
         }
 
         public void DeleteUsingGroup(int GroupId)
@@ -29,15 +30,13 @@ namespace LetSkole.DataAccess
             throw new NotImplementedException();
         }
 
-        public ICollection<UserGroup> GetActivities(string filter)
+        public ICollection<UserGroup> GetItems(int filter)
         {
-            throw new NotImplementedException();
+            return _context.userGroups.Where(c => c.GroupId.Equals(filter))
+                .ToList();
         }
 
-        public UserGroup GetItem(int CursoId)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void Update(UserGroup entity)
         {

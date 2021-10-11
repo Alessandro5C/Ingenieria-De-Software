@@ -5,10 +5,9 @@ using System.Text;
 
 namespace LetSkole.DataAccess
 {
-    public interface IUserGroupRepository //otra prueba
+    public interface IUserGroupRepository 
     {
-        ICollection<UserGroup> GetActivities(string filter);
-        UserGroup GetItem(int CursoId);
+        ICollection<UserGroup> GetItems(int filter);
         void Create(UserGroup entity);
         void Update(UserGroup entity);
         void DeleteUsingUser(int UserId, int GroupId);
