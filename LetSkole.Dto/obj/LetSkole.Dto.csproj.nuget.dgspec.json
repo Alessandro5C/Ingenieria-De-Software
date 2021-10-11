@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj": {}
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
         "projectName": "LetSkole.Dto",
-        "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj",
-        "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

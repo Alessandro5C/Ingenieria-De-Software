@@ -21,8 +21,8 @@ namespace LetSkole.Services
         public void Create(RewardDto entity)
         {
             _repository.Create(new Reward
-
             {
+                GameId=entity.GameId,
                 Name = entity.Name,
                 Description = entity.Description,
                 Image = entity.Image,
@@ -39,6 +39,7 @@ namespace LetSkole.Services
             var Collection = _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new RewardDto
             {
+                GameId=c.GameId,
                 Description = c.Description,
                 Name = c.Name,
                 Image = c.Image,
@@ -50,6 +51,7 @@ namespace LetSkole.Services
             Reward reward = _repository.GetItem(id);
             RewardDto rewardDto = new RewardDto();
             rewardDto.Id = reward.Id;
+            rewardDto.GameId = reward.GameId;
             rewardDto.Name = reward.Name;
             rewardDto.Description = reward.Description;
             rewardDto.Image = reward.Image;
@@ -59,6 +61,7 @@ namespace LetSkole.Services
         public void Update(RewardDto entity)
         {
             Reward reward = _repository.GetItem(entity.Id);
+            reward.GameId = entity.GameId;
             reward.Name = entity.Name;
             reward.Description = entity.Description;
             reward.Image = entity.Image;

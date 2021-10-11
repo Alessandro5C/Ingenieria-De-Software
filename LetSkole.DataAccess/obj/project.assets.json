@@ -7265,19 +7265,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Diego Barraza\\.nuget\\packages\\": {}
+    "C:\\Users\\oscar\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
       "projectName": "LetSkole.DataAccess",
-      "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
-      "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\obj\\",
+      "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+      "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7291,8 +7295,8 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj": {
-              "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj"
+            "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+              "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj"
             }
           }
         }
