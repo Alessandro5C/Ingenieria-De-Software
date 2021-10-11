@@ -11,11 +11,12 @@ namespace LetSkole.Services
     public class UserGroupService : IUserGroupService
     {
         private readonly IUserGroupRepository _repository;
+        private readonly IGroupsRepository _groupsRepository;
 
-
-        public UserGroupService(IUserGroupRepository repository)
+        public UserGroupService(IUserGroupRepository repository, IGroupsRepository groupsRepository)
         {
             _repository = repository;
+            _groupsRepository = groupsRepository;
         }
 
         public void Create(UserGroupDto entity)
@@ -37,34 +38,45 @@ namespace LetSkole.Services
             });
         }
 
-        public void DeleteUsingGroup(int GroupId)
+        public void DeleteUsingGroup(int groupId)
         {
+            //Todavia no va
             throw new NotImplementedException();
         }
 
-        public void DeleteUsingUser(int UserId, int GroupId)
+        public void DeleteUsingUser(int userId, int groupId)
         {
+            _repository.DeleteUsingUser(userId, groupId);
             throw new NotImplementedException();
         }
 
         public ICollection<UserGroupDto> GetItems(int filter)
         {
-            var Collection = _repository.GetItems(filter);
-            return Collection.Select(c => new UserGroupDto
+            var collection = _repository.GetItems(filter);
+            return collection.Select(c => new UserGroupDto
             {
                 UserId = c.UserId,
                 GroupId = c.GroupId,
                 Admin = c.Admin,
                 Grade = c.Grade
-               
             }).ToList();
         }
 
-        
-
         public void Update(UserGroupDto entity)
         {
-            throw new NotImplementedException();
+            Group @group = _groupsRepository.GetItem(entity.GroupId);
+            UserGroup userGroup = _repository.GetItem(entity.UserId, entity.GroupId);
+
+            if (entity.Grade <= group.MaxGrade)
+            {
+                userGroup.Grade = entity.Grade;
+            }
+            else
+            {
+                throw new Exception("La nota ingresada es mayor a lo permitido.");
+            }
+
+            _repository.Update(userGroup);
         }
     }
 }

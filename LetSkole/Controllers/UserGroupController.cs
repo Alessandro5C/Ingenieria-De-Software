@@ -40,13 +40,13 @@ namespace LetSkole.Controllers
         }
 
         [HttpDelete]
-        public void DeleteUsingUser([FromQuery] int UserId,int GroupId)
+        public void DeleteUsingUser([FromQuery] int userId,int groupId)
         {
-            _service.DeleteUsingUser(UserId,GroupId);
+            _service.DeleteUsingUser(userId,groupId);
         }
 
         [HttpPut]
-        public void Put([FromQuery] UserGroupDto userGroupDto)
+        public void Put([FromBody] UserGroupDto userGroupDto)
         {
             _service.Update(userGroupDto);
         }
