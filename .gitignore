@@ -36,3 +36,7 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 LetSkole/.vs/
+
+LetSkole/.idea/
+LetSkole/bin/
+LetSkole/obj/

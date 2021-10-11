@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LetSkole.DataAccess
 {
-    public interface IUserGroupRepository
+    public interface IUserGroupRepository //otra prueba
     {
         ICollection<UserGroup> GetActivities(string filter);
         UserGroup GetItem(int CursoId);
