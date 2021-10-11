@@ -13,7 +13,6 @@ namespace LetSkole.Dto
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Completed { get; set; }
-        public DateTime DoDate { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
     }
