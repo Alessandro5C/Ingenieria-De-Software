@@ -23,5 +23,6 @@ namespace LetSkole.Entities
         [StringLength(30)]
         public string School { get; set; }
 
+        public List<UserGroup> userGroups { get; set; }
     }
 }

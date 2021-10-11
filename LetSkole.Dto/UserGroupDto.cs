@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LetSkole.Entities
+namespace LetSkole.Dto
 {
-    //falta UserId y GroupId ):
-    public class UserGroup
+    public class UserGroupDto
     {
         public int UserId { get; set; }
-        public int GroupId { get; set; }
+        public int CursoId { get; set; }
         public short Grade { get; set; }
         public bool Admin { get; set; }
     }
