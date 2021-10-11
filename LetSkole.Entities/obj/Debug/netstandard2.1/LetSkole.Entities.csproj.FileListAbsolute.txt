@@ -57,3 +57,13 @@ C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSko
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.CoreCompileInputs.cache
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.dll
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.deps.json
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.AssemblyReference.cache
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.AssemblyInfoInputs.cache
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.AssemblyInfo.cs
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Entities\obj\Debug\netstandard2.1\LetSkole.Entities.pdb

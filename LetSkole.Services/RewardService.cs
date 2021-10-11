@@ -25,12 +25,13 @@ namespace LetSkole.Services
             {
                 Name = entity.Name,
                 Description = entity.Description,
+                Image = entity.Image,
             });
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
 
         public ICollection<RewardDto> GetCollection(string filter)
@@ -40,6 +41,7 @@ namespace LetSkole.Services
             {
                 Description = c.Description,
                 Name = c.Name,
+                Image = c.Image,
             }).ToList();
         }
 
@@ -50,12 +52,17 @@ namespace LetSkole.Services
             rewardDto.Id = reward.Id;
             rewardDto.Name = reward.Name;
             rewardDto.Description = reward.Description;
+            rewardDto.Image = reward.Image;
             return rewardDto;
         }
 
-        public void Update(int id, RewardDto entity)
+        public void Update(RewardDto entity)
         {
-            throw new NotImplementedException();
+            Reward reward = _repository.GetItem(entity.Id);
+            reward.Name = entity.Name;
+            reward.Description = entity.Description;
+            reward.Image = entity.Image;
+            _repository.Update(reward);
         }
     }
 }

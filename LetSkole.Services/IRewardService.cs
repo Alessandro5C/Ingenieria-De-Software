@@ -12,7 +12,7 @@ namespace LetSkole.Services
 
         void Create(RewardDto entity);
 
-        void Update(int id, RewardDto entity);
+        void Update(RewardDto entity);
 
         void Delete(int id);
 

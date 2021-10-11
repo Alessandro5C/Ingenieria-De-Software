@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj": {}
+    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole\\LetSkole.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
         "projectName": "LetSkole.DataAccess",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +28,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj"
+              "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+                "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj"
               }
             }
           }
@@ -78,25 +74,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj": {
+    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj",
+        "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj",
         "projectName": "LetSkole.Dto",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\obj\\",
+        "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj",
+        "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -136,25 +128,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj",
         "projectName": "LetSkole.Entities",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\obj\\",
+        "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Entities\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -200,25 +188,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj": {
+    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Services\\LetSkole.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj",
+        "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Services\\LetSkole.Services.csproj",
         "projectName": "LetSkole.Services",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\obj\\",
+        "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Services\\LetSkole.Services.csproj",
+        "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Services\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -232,11 +216,11 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
+              "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
               },
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj"
+              "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj": {
+                "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Dto\\LetSkole.Dto.csproj"
               }
             }
           }
@@ -265,25 +249,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj": {
+    "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole\\LetSkole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj",
+        "projectUniqueName": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole\\LetSkole.csproj",
         "projectName": "LetSkole",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\LetSkole.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole\\obj\\",
+        "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole\\LetSkole.csproj",
+        "packagesPath": "C:\\Users\\Diego Barraza\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Diego Barraza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -297,8 +277,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj"
+              "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Services\\LetSkole.Services.csproj": {
+                "projectPath": "C:\\Users\\Diego Barraza\\Desktop\\Nueva carpeta\\LetSkole.Services\\LetSkole.Services.csproj"
               }
             }
           }
@@ -342,7 +322,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
