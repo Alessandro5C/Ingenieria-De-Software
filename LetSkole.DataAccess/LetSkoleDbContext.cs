@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LetSkole.DataAccess
 {
-    public class LetSkoleDbContext:DbContext
+    public class LetSkoleDbContext : DbContext
     {
         public LetSkoleDbContext(
             DbContextOptions<LetSkoleDbContext> options)
@@ -23,7 +23,11 @@ namespace LetSkole.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server = @Colocar_Server_Name; Database = LetSkoleDb; Integrated Security = true;");
+                .UseSqlServer(@"Server = DESKTOP-PPGAMC3; Database = LetSkoleDb; Integrated Security = true;");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserGroup>().HasKey(x => new { x.UserId, x.GroupId });
         }
 
         public DbSet<User> Users { get; set; }
@@ -32,5 +36,6 @@ namespace LetSkole.DataAccess
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<UserGroup> userGroups { get; set; }
     }
 }
