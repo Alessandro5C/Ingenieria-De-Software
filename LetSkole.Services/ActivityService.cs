@@ -13,14 +13,17 @@ namespace LetSkole.Services
 
         private readonly IActivityRepository _repository;
 
+        //Falta agregar la entidad User repository
+        //private readonly IUserRepository _repository2;
 
-        public ActivityService (IActivityRepository repository)
+
+        public ActivityService(IActivityRepository repository)
         {
             _repository = repository;
         }
 
 
-        public void Create (ActivityDto entity)
+        public void Create(ActivityDto entity)
         {
             DateTime auxStartDate = DateTime.Now;
             DateTime auxEndDate = entity.EndDate;
@@ -56,7 +59,7 @@ namespace LetSkole.Services
                 }
             }
 
-            if (entity.Name == "")
+            if (entity.Name == "" || entity.Name == null)
             {
                 throw new Exception("Falta ingresar nombre");
                 return;
@@ -67,56 +70,20 @@ namespace LetSkole.Services
                 UserId = entity.UserId, //validar el user id
                 Name = entity.Name,
                 Description = entity.Description,
-                StartDate = DateTime.Now,  // Tiempo del sistema
+                StartDate = DateTime.Now, // Tiempo del sistema
                 EndDate = entity.EndDate,
                 Completed = false, // Siempre inicia en falso
                 StartTime = entity.StartTime,
                 EndTime = entity.EndTime,
             });
-
-
-            //if (auxStartTime == "0:0:0" && auxEndTime == "0:0:0")
-            //{
-            //    // no comparo
-            //}
-            //else
-            //{
-            //    int aux = DateTime.Compare(auxStartDate, auxEndDate);
-            //    if (aux < 0)
-            //    {
-            //        // Crea
-            //    }
-            //}
-
-            //int res = DateTime.Compare(auxStartDate, auxEndDate);
-            //if (res < 0)
-            //{
-            //    // crear
-            //    _repository.Create(new Activity
-            //    {
-            //        UserId = entity.UserId, //validar el user id
-            //        Name = entity.Name,
-            //        Description = entity.Description,
-            //        StartDate = DateTime.Now,  // Tiempo del sistema
-            //        EndDate = entity.EndDate,
-            //        Completed = false, // Siempre inicia en falso
-            //        StartTime = entity.StartTime,
-            //        EndTime = entity.EndTime,
-            //    });
-            //}
-            //else
-            //{
-            //    // botamos error
-
-            //}
         }
 
-        public void Delete (int id)
+        public void Delete(int id)
         {
             _repository.Delete(id);
         }
 
-        public ICollection<ActivityDto> GetCollection (string filter)
+        public ICollection<ActivityDto> GetCollection(string filter)
         {
             var Collection = _repository.GetActivities(filter ?? string.Empty);
             return Collection.Select(c => new ActivityDto
@@ -133,10 +100,14 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public ActivityDto GetItem (int id)
+        public ActivityDto GetItem(int id)
         {
             Activity activity = _repository.GetItem(id);
             ActivityDto activityDto = new ActivityDto();
+
+
+
+
 
             activityDto.Id = activity.Id;
             activityDto.UserId = activity.UserId;
@@ -150,19 +121,114 @@ namespace LetSkole.Services
             return activityDto;
         }
 
-        public void Update (ActivityDto entity)
+        public void Update(ActivityDto entity)
         {
+
             Activity activity = _repository.GetItem(entity.Id);
+            DateTime inicio = DateTime.MinValue;
 
-            activity.UserId = entity.UserId;
-            activity.Name = entity.Name;
-            activity.Description = entity.Description;
-            activity.StartDate = entity.StartDate;
-            activity.EndDate = entity.EndDate;
+            if (activity == null)
+            {
+                throw new Exception("El id de la actividad no existe");
+                return;
+            }
+
+            //Falta comprobar si el usuario existe
+            /*Activity activityUserID = _repository.GetItem(entity.UserId);
+            if (activityUserID == null)
+            {
+                throw new Exception("El id del usuario no existe");
+                return;
+            }*/
+
+
+            //Nombre
+            if (entity.Name == "" || entity.Name == null)
+            {
+                activity.Name = activity.Name;
+            }
+            else
+            {
+                activity.Name = entity.Name;
+            }
+
+            //Description
+            if (entity.Description == "" || entity.Description == null)
+            {
+                activity.Description = activity.Description;
+            }
+            else
+            {
+                activity.Description = entity.Description;
+            }
+
+
+            if (entity.EndDate == inicio)
+            {
+                activity.EndDate = activity.EndDate;
+            }
+            else
+            {
+                DateTime auxEndDate = entity.EndDate;
+                int resCom = DateTime.Compare(activity.StartDate, auxEndDate);
+                if (resCom < 0)
+                {
+                    //Modifico
+                    activity.EndDate = entity.EndDate;
+                }
+                else
+                {
+                    throw new Exception("Fecha incorrecta");
+                    return;
+                }
+
+
+
+            }
+
             activity.Completed = entity.Completed;
-            activity.StartTime = entity.StartTime;
-            activity.EndTime = entity.EndTime;
 
+            DateTime auxStartDate = entity.StartDate;
+            DateTime auxStarTime = entity.StartTime;
+
+            int res3 = DateTime.Compare(auxStartDate, entity.StartTime);
+            if (res3 >= 0)
+            {
+                throw new Exception("Fecha incorrecta");
+                return;
+            }
+
+            DateTime auxEndDate2 = entity.EndDate;
+            res3 = DateTime.Compare(entity.StartTime, auxEndDate2);
+            if (res3 >= 0)
+            {
+                throw new Exception("Fecha incorrecta");
+                return;
+            }
+
+            res3 = DateTime.Compare(entity.EndTime, auxStartDate);
+            if (res3 <= 0)
+            {
+                throw new Exception("Fecha incorrecta");
+                return;
+            }
+
+            res3 = DateTime.Compare(entity.EndTime, auxEndDate2);
+            if (res3 >= 0)
+            {
+                throw new Exception("Fecha incorrecta");
+                return;
+            }
+
+            res3 = DateTime.Compare(entity.StartTime, entity.EndTime);
+            if (res3 >= 0)
+            {
+                throw new Exception("Fecha incorrecta");
+                return;
+
+            }
+
+            activity.StartTime = entity.StartTime;
             _repository.Update(activity);
         }
     }
