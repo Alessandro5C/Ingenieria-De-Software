@@ -14,6 +14,6 @@ namespace LetSkole.Entities
         [StringLength(256)]
         public string Description { get; set; }
 
-        public List<UserGroup> userGroups { get; set; }
+
     }
 }

@@ -439,5 +439,3 @@ C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSko
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\ref\LetSkole.dll
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\LetSkole.pdb
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole\obj\Debug\net5.0\LetSkole.genruntimeconfig.cache
-C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole\bin\Debug\net5.0\LetSkole.Dto.dll
-C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole\bin\Debug\net5.0\LetSkole.Dto.pdb

@@ -25,10 +25,6 @@ namespace LetSkole.DataAccess
             optionsBuilder
                 .UseSqlServer(@"Server = @Colocar_Server_Name; Database = LetSkoleDb; Integrated Security = true;");
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserGroup>().HasKey(x => new { x.UserId, x.GroupId });
-        }
 
         public DbSet<User> Users { get; set; }
         //public DbSet<UserGroup> UserGroups { get; set; }
@@ -36,6 +32,5 @@ namespace LetSkole.DataAccess
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Activity> Activities { get; set; }
-        public DbSet<UserGroup> userGroups { get; set; }
     }
 }

@@ -183,30 +183,6 @@ namespace LetSkole.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Admin")
-                        .HasColumnType("bit");
-
-                    b.Property<short>("Grade")
-                        .HasColumnType("smallint");
-
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "CursoId");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("userGroups");
-                });
-
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>
                 {
                     b.HasOne("LetSkole.Entities.User", "User")
@@ -227,29 +203,6 @@ namespace LetSkole.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
-                {
-                    b.HasOne("LetSkole.Entities.Group", null)
-                        .WithMany("userGroups")
-                        .HasForeignKey("GroupId");
-
-                    b.HasOne("LetSkole.Entities.User", null)
-                        .WithMany("userGroups")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.Group", b =>
-                {
-                    b.Navigation("userGroups");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.User", b =>
-                {
-                    b.Navigation("userGroups");
                 });
 #pragma warning restore 612, 618
         }

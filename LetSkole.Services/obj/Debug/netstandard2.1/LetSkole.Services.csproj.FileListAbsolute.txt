@@ -97,5 +97,3 @@ C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSko
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.csproj.CopyComplete
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.dll
 C:\Users\PC\Desktop\GitHub\Ingeniería de Software\Ingenieria-De-Software\LetSkole.Services\obj\Debug\netstandard2.1\LetSkole.Services.pdb
-C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Dto.dll
-C:\Users\ADMIN\source\repos\IngenieriaSoftware\LetSkole.Services\bin\Debug\netstandard2.1\LetSkole.Dto.pdb
