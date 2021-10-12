@@ -32,7 +32,7 @@ namespace LetSkole.DataAccess
 
         public ICollection<UserGroup> GetItems(int filter)
         {
-            return _context.userGroups.Where(c => c.GroupId.Equals(filter))
+            return _context.UserGroups.Where(c => c.GroupId.Equals(filter))
                 .ToList();
         }
 

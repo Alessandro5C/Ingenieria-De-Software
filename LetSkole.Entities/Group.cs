@@ -13,7 +13,6 @@ namespace LetSkole.Entities
         [Required]
         [StringLength(256)]
         public string Description { get; set; }
-
-
+        public int MaxGrade { get; set; }
     }
 }

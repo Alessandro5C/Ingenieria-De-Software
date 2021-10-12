@@ -5,7 +5,6 @@ using System.Text;
 
 namespace LetSkole.Entities
 {
-    //falta "linkear" a rewards 
     public class User:EntityBase
     {
         [Required]
@@ -23,5 +22,6 @@ namespace LetSkole.Entities
         [StringLength(30)]
         public string School { get; set; }
 
+        public ICollection<Reward> Rewards { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace LetSkole.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server = LAPTOP-RQ0MU7P8; Database = LetSkoleDb; Integrated Security = true;");
+                .UseSqlServer(@"Server = LAPTOP-LH98T54I; Database = LetSkoleDb; Integrated Security = true;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,11 +31,11 @@ namespace LetSkole.DataAccess
         }
 
         public DbSet<User> Users { get; set; }
-        //public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Activity> Activities { get; set; }
-        public DbSet<UserGroup> userGroups { get; set; }
+        
+        public DbSet<UserGroup> UserGroups { get; set; }
     }
 }

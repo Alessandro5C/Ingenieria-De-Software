@@ -6,7 +6,6 @@ using System.Text;
 namespace LetSkole.Entities
 {
     public class Reward:EntityBase
-        //falta "linkear" a Users T.T
     {
         public int GameId { get; set; }
         public Game Game { get; set; }
@@ -20,5 +19,7 @@ namespace LetSkole.Entities
         [Required]
         [StringLength(256)]
         public string Image { get; set; }
+        
+        public ICollection<User> Users { get; set; }
     }
 }

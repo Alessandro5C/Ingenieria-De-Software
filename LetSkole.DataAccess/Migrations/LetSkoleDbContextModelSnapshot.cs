@@ -100,6 +100,9 @@ namespace LetSkole.DataAccess.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int>("MaxGrade")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -196,7 +199,24 @@ namespace LetSkole.DataAccess.Migrations
 
                     b.HasKey("UserId", "GroupId");
 
-                    b.ToTable("userGroups");
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("UserGroups");
+                });
+
+            modelBuilder.Entity("RewardUser", b =>
+                {
+                    b.Property<int>("RewardsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RewardsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("RewardUser");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>
@@ -219,6 +239,40 @@ namespace LetSkole.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
+                {
+                    b.HasOne("LetSkole.Entities.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LetSkole.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RewardUser", b =>
+                {
+                    b.HasOne("LetSkole.Entities.Reward", null)
+                        .WithMany()
+                        .HasForeignKey("RewardsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LetSkole.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
