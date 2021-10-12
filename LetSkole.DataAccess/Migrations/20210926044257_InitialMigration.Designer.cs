@@ -4,14 +4,16 @@ using LetSkole.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LetSkole.DataAccess.Migrations
 {
     [DbContext(typeof(LetSkoleDbContext))]
-    partial class LetSkoleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210926044257_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,9 @@ namespace LetSkole.DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("DoDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -178,25 +183,6 @@ namespace LetSkole.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Admin")
-                        .HasColumnType("bit");
-
-                    b.Property<short>("Grade")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("UserId", "GroupId");
-
-                    b.ToTable("userGroups");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>

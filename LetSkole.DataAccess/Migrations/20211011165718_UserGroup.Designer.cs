@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LetSkole.DataAccess.Migrations
 {
     [DbContext(typeof(LetSkoleDbContext))]
-    [Migration("20211011231728_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20211011165718_UserGroup")]
+    partial class UserGroup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,9 +101,6 @@ namespace LetSkole.DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("MaxGrade")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -201,9 +198,7 @@ namespace LetSkole.DataAccess.Migrations
 
                     b.HasKey("UserId", "GroupId");
 
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("UserGroups");
+                    b.ToTable("userGroups");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>
@@ -226,25 +221,6 @@ namespace LetSkole.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
-                {
-                    b.HasOne("LetSkole.Entities.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LetSkole.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,3 @@
 is_global = true
 build_property.RootNamespace = LetSkole.Dto
-<<<<<<< Updated upstream
 build_property.ProjectDir = C:\Users\oscar\Desktop\Ingenieria-De-Software\LetSkole.Dto\
-=======
-build_property.ProjectDir = C:\git\Ingenieria-De-Software\LetSkole.Dto\
->>>>>>> Stashed changes

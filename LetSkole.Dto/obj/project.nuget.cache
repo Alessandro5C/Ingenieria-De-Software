@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< Updated upstream
   "dgSpecHash": "ctjwDO3vFcVEY8XSZvrm6ROoe8JrpCwUlYaU6XD4wsS9Xr8XLQUZ9evX5kkQzuXPhkkh0DNAz/sQSiaR5bdj+w==",
   "success": true,
   "projectFilePath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
-=======
-  "dgSpecHash": "qHZO6Q/TRHzjNNJRmghdh2W2ABbDrkd54zduybFdkUiV2qcHx8uqW3OJw5sp14HIi7BmfMVyaNvQp6v98yuJGg==",
-  "success": true,
-  "projectFilePath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
->>>>>>> Stashed changes
   "expectedPackageFiles": [],
   "logs": []
 }

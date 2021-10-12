@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< Updated upstream
     "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {}
   },
   "projects": {
@@ -20,40 +19,20 @@
         "configFilePaths": [
           "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-    "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {}
-  },
-  "projects": {
-    "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
-        "projectName": "LetSkole.DataAccess",
-        "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\aldav\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.DataAccess\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\aldav\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> Stashed changes
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-<<<<<<< Updated upstream
               "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
                 "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj"
-=======
-              "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
-                "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj"
->>>>>>> Stashed changes
               }
             }
           }
@@ -102,7 +81,6 @@
         }
       }
     },
-<<<<<<< Updated upstream
     "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -118,24 +96,12 @@
         "configFilePaths": [
           "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-    "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
-        "projectName": "LetSkole.Entities",
-        "projectPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
-        "packagesPath": "C:\\Users\\aldav\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Ingenieria-De-Software\\LetSkole.Entities\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\aldav\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> Stashed changes
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
