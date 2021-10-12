@@ -23,6 +23,7 @@ namespace LetSkole.Services
             {
                 Name = entity.Name,
                 Description = entity.Description,
+                MaxGrade = entity.MaxGrade
             });
         }
 
@@ -39,31 +40,27 @@ namespace LetSkole.Services
                 Id = c.Id,
                 Description = c.Description,
                 Name = c.Name,
-
+                MaxGrade = c.MaxGrade
             }).ToList();
         }
 
         public GroupDto GetItem(int id)
         {
-
-  
             Group group = _repository.GetItem(id);
-
             GroupDto groupDto = new GroupDto();
             groupDto.Id = group.Id;
             groupDto.Name = group.Name;
             groupDto.Description = group.Description;
+            groupDto.MaxGrade = group.MaxGrade;
             return groupDto;
         }
 
         public void Update( GroupDto entity)
         {
-
-
             Group group = _repository.GetItem(entity.Id);
-
             group.Name = entity.Name;
             group.Description = entity.Description;
+            //group.MaxGrade = entity.MaxGrade;
             _repository.Update(group);
         }
     }

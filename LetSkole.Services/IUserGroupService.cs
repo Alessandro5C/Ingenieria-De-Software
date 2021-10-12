@@ -7,11 +7,11 @@ namespace LetSkole.Services
 {
     public interface IUserGroupService
     {
-        ICollection<UserGroupDto> GetItems(int filter);
+        ICollection<UserGroupDto> GetItems(int groupId);
         
         void Create(UserGroupDto entity);
         void Update(UserGroupDto entity);
-        void DeleteUsingUser(int UserId, int GroupId);
+        void DeleteUsingUser(int userId, int groupId);
         void DeleteUsingGroup(int GroupId);
 
     }

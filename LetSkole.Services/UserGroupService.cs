@@ -12,7 +12,6 @@ namespace LetSkole.Services
     {
         private readonly IUserGroupRepository _repository;
 
-
         public UserGroupService(IUserGroupRepository repository)
         {
             _repository = repository;
@@ -20,14 +19,7 @@ namespace LetSkole.Services
 
         public void Create(UserGroupDto entity)
         {
-            int adminAux;
-            if (entity.Admin == true){
-                adminAux = 1;
-            }
-            else
-            {
-                adminAux = 0;
-            }
+            //Aqui debemos ver quien cree el grupo sea un profesor
             _repository.Create(new UserGroup
             {
                 UserId = entity.UserId, 
@@ -37,34 +29,42 @@ namespace LetSkole.Services
             });
         }
 
-        public void DeleteUsingGroup(int GroupId)
+        public void DeleteUsingGroup(int groupId)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteUsingUser(int UserId, int GroupId)
+        public void DeleteUsingUser(int userId, int groupId)
         {
-            throw new NotImplementedException();
+            _repository.DeleteUsingUser(userId, groupId);
         }
 
-        public ICollection<UserGroupDto> GetItems(int filter)
+        public ICollection<UserGroupDto> GetItems(int groupId)
         {
-            var Collection = _repository.GetItems(filter);
+            var Collection = _repository.GetItems(groupId);
             return Collection.Select(c => new UserGroupDto
             {
                 UserId = c.UserId,
                 GroupId = c.GroupId,
                 Admin = c.Admin,
                 Grade = c.Grade
-               
             }).ToList();
         }
 
-        
-
         public void Update(UserGroupDto entity)
         {
-            throw new NotImplementedException();
+            UserGroup userGroup = _repository.GetItem(entity.UserId, entity.GroupId);
+
+            if (0 <= entity.Grade && entity.Grade <= userGroup.Group.MaxGrade)
+            {
+                userGroup.Grade = entity.Grade;
+            }
+            else
+            {
+                throw new Exception("La nota ingresada es mayor a lo permitido.");
+            }
+            
+            _repository.Update(userGroup);
         }
     }
 }

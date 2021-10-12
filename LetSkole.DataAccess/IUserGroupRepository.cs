@@ -8,9 +8,10 @@ namespace LetSkole.DataAccess
     public interface IUserGroupRepository 
     {
         ICollection<UserGroup> GetItems(int filter);
+        UserGroup GetItem(int userId, int groupId);
         void Create(UserGroup entity);
         void Update(UserGroup entity);
-        void DeleteUsingUser(int UserId, int GroupId);
-        void DeleteUsingGroup(int GroupId);
+        void DeleteUsingUser(int userId, int groupId);
+        void DeleteUsingGroup(int groupId);
     }
 }

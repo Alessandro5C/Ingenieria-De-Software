@@ -36,6 +36,9 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
+*.dll
+*.pdb
+
 #Inside others
 LetSkole/.vs/
 LetSkole/.idea/

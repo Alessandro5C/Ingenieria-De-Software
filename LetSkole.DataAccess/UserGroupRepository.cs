@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace LetSkole.DataAccess
 {
@@ -14,20 +15,36 @@ namespace LetSkole.DataAccess
         {
             _context = context;
         }
+
+        public UserGroup GetItem(int userId, int groupId)
+        {
+            UserGroup userGroup = _context.UserGroups.
+                Find(userId, groupId);
+            userGroup.User = _context.Users.Find(userId);
+            userGroup.Group = _context.Groups.Find(groupId);
+            return userGroup;
+        }
+
         public void Create(UserGroup entity)
         {
             _context.Set<UserGroup>().Add(entity);
             _context.SaveChanges();
         }
 
-        public void DeleteUsingGroup(int GroupId)
+        public void DeleteUsingGroup(int groupId)
         {
+            //Este todavía no lo voy a implementar
             throw new NotImplementedException();
         }
 
-        public void DeleteUsingUser(int UserId, int GroupId)
+        public void DeleteUsingUser(int userId, int groupId)
         {
-            throw new NotImplementedException();
+            _context.Entry(new UserGroup
+            {
+                UserId = userId,
+                GroupId = groupId
+            }).State = EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public ICollection<UserGroup> GetItems(int filter)
@@ -36,11 +53,11 @@ namespace LetSkole.DataAccess
                 .ToList();
         }
 
-        
-
         public void Update(UserGroup entity)
         {
-            throw new NotImplementedException();
+            _context.Set<UserGroup>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
