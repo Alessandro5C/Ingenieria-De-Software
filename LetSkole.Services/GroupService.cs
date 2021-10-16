@@ -12,11 +12,13 @@ namespace LetSkole.Services
     {
         private readonly IGroupsRepository _repository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserGroupRepository _userGroupRepository;
 
-        public GroupService(IGroupsRepository repository, IUserRepository userRepository)
+        public GroupService(IGroupsRepository repository, IUserRepository userRepository, IUserGroupRepository userGroupRepository)
         {
             _repository = repository;
             _userRepository = userRepository;
+            _userGroupRepository = userGroupRepository;
         }
 
         public void Create(int id, GroupDto entity)
@@ -53,6 +55,22 @@ namespace LetSkole.Services
                 MaxGrade = c.MaxGrade
             }).ToList();
         }
+
+
+        ///
+        /*public ICollection<GroupDto> GetCollectionByTeacherId(int id)
+        {
+            User user = _userRepository.GetItem(id);
+            /* Botar un error de exeption 
+            if(user == null) {
+                throw new Exception("No existe profesor");
+                
+            }*/
+            /*ICollection<GroupDto> collectionUserGroup = _userGroupRepository.GetItemsByTeacherId(id);
+            ICollection<Group> groups;
+            foreach()
+        }*/
+
 
         public GroupDto GetItem(int id)
         {

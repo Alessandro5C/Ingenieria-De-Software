@@ -59,5 +59,11 @@ namespace LetSkole.DataAccess
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
         }
+
+        public ICollection<UserGroup> GetItemsByTeacherId(int id)
+        {
+            return _context.UserGroups.Where(c => c.UserId.Equals(id))
+                .ToList();
+        }
     }
 }

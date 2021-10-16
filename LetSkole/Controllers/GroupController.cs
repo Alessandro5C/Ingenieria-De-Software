@@ -35,6 +35,14 @@ namespace LetSkole.Controllers
         }
 
 
+        /*[Route("GetAllByTeacherId")]
+        [HttpGet]
+        public IEnumerable<GroupDto> GetAllByTeacherId([FromQuery] int id)
+        {
+            return _service.GetCollectionByTeacherId(id);
+        }*/
+
+
         [Route("Update")]
         [HttpPut]
         public void Put([FromQuery] GroupDto groupDto)
