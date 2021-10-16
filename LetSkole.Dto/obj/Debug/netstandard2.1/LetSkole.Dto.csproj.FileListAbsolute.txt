@@ -67,3 +67,13 @@ C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Dto\obj\Debug\netstandard2
 C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
 C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
 C:\Users\Diego Barraza\Desktop\Nueva carpeta\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.deps.json
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\bin\Debug\netstandard2.1\LetSkole.Dto.pdb
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.AssemblyInfo.cs
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.dll
+C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.Dto\obj\Debug\netstandard2.1\LetSkole.Dto.pdb

@@ -11,14 +11,24 @@ namespace LetSkole.Services
     public class GroupService : IGroupService
     {
         private readonly IGroupsRepository _repository;
+        private readonly IUserRepository _userRepository;
 
-        public GroupService(IGroupsRepository repository)
+        public GroupService(IGroupsRepository repository, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
 
-        public void Create(GroupDto entity)
+        public void Create(int id, GroupDto entity)
         {
+            // Validar que exista el profesor
+            User user = _userRepository.GetItem(id);
+
+            if(user == null)
+            {
+                throw new Exception("User no existe");
+                return;
+            }
             _repository.Create(new Group
             {
                 Name = entity.Name,
