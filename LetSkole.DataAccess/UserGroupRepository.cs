@@ -60,9 +60,15 @@ namespace LetSkole.DataAccess
             _context.SaveChanges();
         }
 
-        public ICollection<UserGroup> GetItemsByTeacherId(int id)
+        public ICollection<UserGroup> GetItemsByTeacherId(int userId)
         {
-            return _context.UserGroups.Where(c => c.UserId.Equals(id))
+            // User Id (id) y que sea admin (true)
+            // Collection y Id's de grupos
+            // 
+            // UserGroup userGroup = _context.UserGroups.Find(userId);
+            // - Priorizar llamadas a base de datos -
+
+            return _context.UserGroups.Where(c => c.UserId.Equals(userId))
                 .ToList();
         }
     }

@@ -22,9 +22,9 @@ namespace LetSkole.Controllers
 
         [Route("Create")]
         [HttpPost]
-        public void Post([FromQuery] int id, [FromBody] GroupDto GroupDto)
+        public void Post([FromQuery] int userId, [FromBody] GroupDto GroupDto)
         {
-            _service.Create(id, GroupDto);
+            _service.Create(userId, GroupDto);
         }
 
         [Route("GetAllByFilter")]

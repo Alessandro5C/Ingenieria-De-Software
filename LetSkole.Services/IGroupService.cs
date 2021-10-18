@@ -12,7 +12,7 @@ namespace LetSkole.Services
         //ICollection<GroupDto> GetCollectionByTeacherId(int id);
         
         //Deberia retornar un GroupDto
-        void Create(int id, GroupDto entity);
+        void Create(int userId, GroupDto entity);
         void Update(GroupDto entity);
         void Delete(int id);
 

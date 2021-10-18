@@ -12,65 +12,62 @@ namespace LetSkole.Services
     {
 
         private readonly IActivityRepository _repository;
-
+        private readonly IUserRepository _userRepository;
         //Falta agregar la entidad User repository
         //private readonly IUserRepository _repository2;
 
 
-        public ActivityService(IActivityRepository repository)
+        public ActivityService(IActivityRepository repository, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
-
 
         public void Create(ActivityDto entity)
         {
-            DateTime auxStartDate = DateTime.Now;
-            DateTime auxEndDate = entity.EndDate;
+            DateTime now = DateTime.Now;
+            DateTime inicio = DateTime.MinValue;
+            entity.StartDate = new DateTime(now.Year, now.Month, now.Day);
 
-            DateTime auxStartTime = entity.StartTime;
-            DateTime auxEndTime = entity.EndTime;
+            // Validar user
+            User user = _userRepository.GetItem(entity.UserId);
+            if(user == null)
+            {
+                throw new Exception("User not found");
+            }
 
             // Buscamos errores
-            int res = DateTime.Compare(auxStartDate, auxEndDate);
+            int res = DateTime.Compare(entity.StartDate, entity.EndDate);
             if (res >= 0)
             {
                 throw new Exception("Fecha invalida");
-                return;
             }
 
-            DateTime inicio = DateTime.MinValue;
-
-            if (auxStartTime != inicio && auxEndTime != inicio)
+            if (entity.StartTime != inicio && entity.EndTime != inicio)
             {
                 // Puedo comparar 
-                int res1 = DateTime.Compare(auxStartTime, auxEndTime);
-                if (res1 >= 0)
+                if (DateTime.Compare(entity.StartTime, entity.EndTime) >= 0)
                 {
                     throw new Exception("Fecha invalida");
-                    return;
                 }
 
-                int res2 = DateTime.Compare(auxStartDate, auxStartTime);
-                if (res2 > 0)
+                if (DateTime.Compare(entity.StartDate, entity.StartTime) > 0)
                 {
                     throw new Exception("Fecha invalida");
-                    return;
                 }
             }
 
             if (entity.Name == "" || entity.Name == null)
             {
                 throw new Exception("Falta ingresar nombre");
-                return;
             }
-            // No encontré errores
+     
             _repository.Create(new Activity
             {
                 UserId = entity.UserId, //validar el user id
                 Name = entity.Name,
                 Description = entity.Description,
-                StartDate = DateTime.Now, // Tiempo del sistema
+                StartDate = entity.StartDate, // Tiempo del sistema a las 0:0:0 horas
                 EndDate = entity.EndDate,
                 Completed = false, // Siempre inicia en falso
                 StartTime = entity.StartTime,

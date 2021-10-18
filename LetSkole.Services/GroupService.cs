@@ -21,16 +21,20 @@ namespace LetSkole.Services
             _userGroupRepository = userGroupRepository;
         }
 
-        public void Create(int id, GroupDto entity)
+        public void Create(int userId, GroupDto entity)
         {
             // Validar que exista el profesor
-            User user = _userRepository.GetItem(id);
+            User user = _userRepository.GetItem(userId);
 
             if(user == null)
             {
                 throw new Exception("User no existe");
-                return;
             }
+            if(user.Student == true)
+            {
+                throw new Exception("Los estudiantes no pueden crear grupo");
+            }
+
             _repository.Create(new Group
             {
                 Name = entity.Name,
@@ -57,14 +61,14 @@ namespace LetSkole.Services
         }
 
 
-        ///
-        /*public ICollection<GroupDto> GetCollectionByTeacherId(int id)
+        /*
+        public ICollection<GroupDto> GetCollectionByTeacherId(int id)
         {
             User user = _userRepository.GetItem(id);
             /* Botar un error de exeption 
             if(user == null) {
                 throw new Exception("No existe profesor");
-                
+                return;
             }*/
             /*ICollection<GroupDto> collectionUserGroup = _userGroupRepository.GetItemsByTeacherId(id);
             ICollection<Group> groups;
