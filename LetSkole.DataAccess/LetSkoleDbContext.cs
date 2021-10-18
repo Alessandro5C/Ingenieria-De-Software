@@ -23,7 +23,7 @@ namespace LetSkole.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server = _hostname_; Database = LetSkoleDb; Integrated Security = true;");
+                .UseSqlServer(@"Server = _hostname_; Database = LetSkoleDb; Integrated Security = true;");   
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

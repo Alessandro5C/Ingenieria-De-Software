@@ -66,5 +66,10 @@ namespace LetSkole.Services
             
             _repository.Update(userGroup);
         }
+        public int SearchGrade(int userId, int groupId)
+        {
+            int grade = _repository.SearchGrade(userId, groupId);
+            return grade;
+        }
     }
 }

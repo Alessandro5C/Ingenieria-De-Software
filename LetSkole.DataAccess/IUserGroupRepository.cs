@@ -15,5 +15,6 @@ namespace LetSkole.DataAccess
         void Update(UserGroup entity);
         void DeleteUsingUser(int userId, int groupId);
         void DeleteUsingGroup(int groupId);
+        int SearchGrade(int userId, int groupId);
     }
 }

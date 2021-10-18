@@ -71,5 +71,14 @@ namespace LetSkole.DataAccess
             return _context.UserGroups.Where(c => c.UserId.Equals(userId))
                 .ToList();
         }
+        public int SearchGrade(int userId, int groupId)
+        {
+            UserGroup userGroup = _context.UserGroups.
+               Find(userId, groupId);
+            userGroup.User = _context.Users.Find(userId);
+            userGroup.Group = _context.Groups.Find(groupId);
+            int grade = userGroup.Grade;
+            return grade;
+        }
     }
 }

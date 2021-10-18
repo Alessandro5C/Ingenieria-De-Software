@@ -13,6 +13,6 @@ namespace LetSkole.Services
         void Update(UserGroupDto entity);
         void DeleteUsingUser(int userId, int groupId);
         void DeleteUsingGroup(int GroupId);
-
+        int SearchGrade(int userId, int groupId);
     }
 }

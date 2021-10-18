@@ -50,6 +50,10 @@ namespace LetSkole.Controllers
         {
             _service.Update(userGroupDto);
         }
-
+        [HttpGet]
+        public int SearchGrade([FromQuery] int userId, int groupId)
+        {
+            return _service.SearchGrade(userId, groupId);
+        }
     }
 }
