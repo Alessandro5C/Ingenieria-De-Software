@@ -25,7 +25,7 @@ namespace LetSkole.Services
                 UserId = entity.UserId, 
                 GroupId = entity.GroupId,
                 Grade = -1,
-                Admin = entity.Admin,
+                Admin = false,
             });
         }
 

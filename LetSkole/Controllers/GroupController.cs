@@ -9,12 +9,10 @@ using System.Threading.Tasks;
 namespace LetSkole.Controllers
 {
     [Route("api/v1/[controller]")]
-
     [ApiController]
     public class GroupController : Controller
     {
         private readonly IGroupService _service;
-
         public GroupController(IGroupService service)
         {
             _service = service;
@@ -34,14 +32,12 @@ namespace LetSkole.Controllers
             return _service.GetCollection(filter);
         }
 
-
-        /*[Route("GetAllByTeacherId")]
+        [Route("GetAllByTeacherId")]
         [HttpGet]
-        public IEnumerable<GroupDto> GetAllByTeacherId([FromQuery] int id)
+        public IEnumerable<GroupDto> GetAllByTeacherId ([FromQuery] int userId)
         {
-            return _service.GetCollectionByTeacherId(id);
-        }*/
-
+            return _service.GetCollectionByTeacherId(userId);
+        }
 
         [Route("Update")]
         [HttpPut]
@@ -63,5 +59,5 @@ namespace LetSkole.Controllers
         {
         return _service.GetItem(id);
         }
-}
+    }
 }

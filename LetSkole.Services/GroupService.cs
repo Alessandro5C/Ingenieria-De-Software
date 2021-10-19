@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections;
 
 namespace LetSkole.Services
 {
@@ -34,13 +35,22 @@ namespace LetSkole.Services
             {
                 throw new Exception("Los estudiantes no pueden crear grupo");
             }
-
-            _repository.Create(new Group
+            Group group = new Group
             {
                 Name = entity.Name,
                 Description = entity.Description,
                 MaxGrade = entity.MaxGrade
-            });
+            };
+
+            _repository.Create(group);
+
+            UserGroup userGroup = new UserGroup {
+                GroupId = group.Id,
+                UserId = user.Id,
+                Grade = -1,
+                Admin = true
+            };
+            _userGroupRepository.Create(userGroup);
         }
 
         public void Delete(int id)
@@ -60,21 +70,38 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-
-        /*
-        public ICollection<GroupDto> GetCollectionByTeacherId(int id)
+        public ICollection<GroupDto> GetCollectionByTeacherId (int userId)
         {
-            User user = _userRepository.GetItem(id);
-            /* Botar un error de exeption 
-            if(user == null) {
-                throw new Exception("No existe profesor");
-                return;
-            }*/
-            /*ICollection<GroupDto> collectionUserGroup = _userGroupRepository.GetItemsByTeacherId(id);
-            ICollection<Group> groups;
-            foreach()
-        }*/
+            User user = _userRepository.GetItem(userId);
 
+            if (user == null)
+            {
+                throw new Exception("User no existe");
+            }
+            if (user.Student == true)
+            {
+                throw new Exception("Los estudiantes no pueden crear grupo");
+            }
+
+            // Error solucionado, el group retorna null de la base de datos
+            ICollection<UserGroup> userGroup = _userGroupRepository.GetItemsByTeacherId(userId);
+
+            // Manipulando el ICollection
+            IEnumerator enumerator = userGroup.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                UserGroup u = (UserGroup)enumerator.Current;
+                u.Group = _repository.GetItem(u.GroupId);
+            }
+
+            return userGroup.Select(c => new GroupDto
+            {   Id = c.GroupId,
+                Description = c.Group.Description,
+                Name = c.Group.Name,
+                MaxGrade = c.Group.MaxGrade
+            }).ToList();
+        }
 
         public GroupDto GetItem(int id)
         {
