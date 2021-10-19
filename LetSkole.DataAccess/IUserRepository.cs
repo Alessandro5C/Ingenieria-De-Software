@@ -11,6 +11,8 @@ namespace LetSkole.DataAccess
         User GetItem (int id);
         void Create (User entity);
         void Update (User entity);
-        void Delete (int id); 
+        void Delete (int id);
+        string SearchNumTel(int userId);
+
     }
 }

@@ -48,6 +48,11 @@ namespace LetSkole.Controllers
         {
             _service.Delete(id);
         }
+        [HttpGet]
+        public string SearchNumTel([FromQuery] int userId)
+        {
+            return _service.SearchNumTel(userId);
+        }
 
     }
 }

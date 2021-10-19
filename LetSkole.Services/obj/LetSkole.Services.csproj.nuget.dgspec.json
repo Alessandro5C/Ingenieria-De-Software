@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj": {}
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
         "projectName": "LetSkole.DataAccess",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +31,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj"
+              "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+                "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj"
               }
             }
           }
@@ -78,25 +77,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
         "projectName": "LetSkole.Dto",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -136,25 +134,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
         "projectName": "LetSkole.Entities",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\LetSkole.Entities.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Entities\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -200,25 +197,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj": {
+    "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj",
+        "projectUniqueName": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj",
         "projectName": "LetSkole.Services",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\LetSkole.Services.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Services\\obj\\",
+        "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\LetSkole.Services.csproj",
+        "packagesPath": "C:\\Users\\oscar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -232,11 +228,11 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
+              "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.DataAccess\\LetSkole.DataAccess.csproj"
               },
-              "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\source\\repos\\IngenieriaSoftware\\LetSkole.Dto\\LetSkole.Dto.csproj"
+              "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj": {
+                "projectPath": "C:\\Users\\oscar\\Desktop\\Ingenieria-De-Software\\LetSkole.Dto\\LetSkole.Dto.csproj"
               }
             }
           }
@@ -265,7 +261,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

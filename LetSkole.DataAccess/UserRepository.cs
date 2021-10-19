@@ -48,5 +48,13 @@ namespace LetSkole.DataAccess
             }).State = EntityState.Deleted;
             _context.SaveChanges();
         }
+
+        public string SearchNumTel(int userId)
+        {
+            User user = _context.Users.Find(userId);
+            string NumTel = user.NumTelf;
+            return NumTel;
+        }
+
     }
 }

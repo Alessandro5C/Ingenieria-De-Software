@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using LetSkole.DataAccess;
 using LetSkole.Dto;
 using LetSkole.Entities;
@@ -25,7 +27,8 @@ namespace LetSkole.Services
                 Student = c.Student,
                 School = c.School,
                 Email = c.Email,
-                NumTelf = c.NumTelf
+                NumTelf = c.NumTelf,
+                Birthday=c.Birthday
             }).ToList();
         }
 
@@ -40,12 +43,58 @@ namespace LetSkole.Services
             userDto.School = user.School;
             userDto.Email = user.Email;
             userDto.NumTelf = user.NumTelf;
+            userDto.Birthday = user.Birthday;
 
             return userDto;
         }
 
         public void Create(UserDto entity)
         {
+            DateTime auxDate = DateTime.Now;
+            DateTime auxbirthday = entity.Birthday;
+
+            int res = DateTime.Compare(auxDate, auxbirthday);
+
+            if (res <= 0)
+            {
+                throw new Exception("Fecha invalida");
+
+            }
+
+
+            if (entity.Name == "" || entity.Name == null)
+            {
+                throw new Exception("Falta ingresar nombre");
+
+            }
+
+            if (string.IsNullOrEmpty(entity.Email))
+            {
+                throw new Exception("Falta ingresar correo electronico");
+            }
+            try
+            {
+                var correo = new MailAddress(entity.Email);
+                entity.Email = correo.Address;
+
+            }
+            catch
+            {
+                throw new Exception("Correo electronico invalido");
+                return;
+            }
+
+            try
+            {
+                int i = Convert.ToInt32(entity.NumTelf);
+                Console.WriteLine(i);
+                
+            }
+            catch
+            {
+                throw new Exception("Numero de celular invalido");
+                return;
+            }
             _repository.Create(new User
             {
                 Name = entity.Name,
@@ -75,5 +124,12 @@ namespace LetSkole.Services
         {
             _repository.Delete(id);
         }
+
+        public string SearchNumTel(int userId)
+        {
+            string Numtel = _repository.SearchNumTel(userId);
+            return Numtel;
+        }
+
     }
 }

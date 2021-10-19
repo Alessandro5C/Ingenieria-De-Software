@@ -9,6 +9,7 @@ namespace LetSkole.Services
         UserDto GetItem (int id);
         void Create (UserDto entity);
         void Update (UserDto entity);
-        void Delete (int id); 
+        void Delete (int id);
+        string SearchNumTel(int userId);
     }
 }
