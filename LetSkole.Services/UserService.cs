@@ -50,17 +50,11 @@ namespace LetSkole.Services
 
         public void Create(UserDto entity)
         {
-            DateTime auxDate = DateTime.Now;
-            DateTime auxbirthday = entity.Birthday;
-
-            int res = DateTime.Compare(auxDate, auxbirthday);
-
-            if (res <= 0)
+            if (entity.Birthday == null)
             {
-                throw new Exception("Fecha invalida");
+                throw new Exception("Falta ingresar nombre");
 
             }
-
 
             if (entity.Name == "" || entity.Name == null)
             {

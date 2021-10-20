@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jThe8hBrK0YAg3V4ACajLlTUKZU4pTx7B2npfndkKsIS0m2VzJHgwkHckIRVi8x0vyjmAkVuXTnOHUMnfe/jCQ==",
+  "dgSpecHash": "ugyo7sR1PDZ5J71H+vH8pNzULoGeB0kym5OtOo69/YM2oZfBleDrVkFxOibAvuT8aTthf2dQ9a6e6cmSdb9JIA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Desktop\\GitHub\\Ingenieria-De-Software\\LetSkole.Entities\\LetSkole.Entities.csproj",
+  "projectFilePath": "C:\\Users\\Diego Barraza\\Desktop\\COMMIT MAÑANA\\LetSkole.Entities\\LetSkole.Entities.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\PC\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+    "C:\\Users\\Diego Barraza\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

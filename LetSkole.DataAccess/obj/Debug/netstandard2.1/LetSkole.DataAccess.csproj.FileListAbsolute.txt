@@ -101,3 +101,16 @@ C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\
 C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CopyComplete
 C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.dll
 C:\Users\PC\Desktop\GitHub\Ingenieria-De-Software\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.deps.json
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.DataAccess.pdb
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.Entities.dll
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\bin\Debug\netstandard2.1\LetSkole.Entities.pdb
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.AssemblyInfo.cs
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.csproj.CopyComplete
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.dll
+C:\Users\Diego Barraza\Desktop\COMMIT MAÑANA\LetSkole.DataAccess\obj\Debug\netstandard2.1\LetSkole.DataAccess.pdb
