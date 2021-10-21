@@ -36,22 +36,3 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-*.dll
-*.pdb
-
-#Inside others
-LetSkole/.vs/
-LetSkole/.idea/
-LetSkole/bin/
-LetSkole/obj/
-LetSkole.DataAccess/bin/
-LetSkole.DataAccess/obj/
-LetSkole.Dto/bin/
-LetSkole.Dto/obj/
-LetSkole.Entities/bin/
-LetSkole.Entities/obj/
-LetSkole.Services/bin/
-LetSkole.Services/obj/
-
-**/obj/
-**/bin/
