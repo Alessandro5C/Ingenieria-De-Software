@@ -46,6 +46,7 @@ namespace LetSkole.Controllers
         [HttpDelete]
         public void Delete ([FromQuery] int id)
         {
+           
             _service.Delete(id);
         }
         [HttpGet]

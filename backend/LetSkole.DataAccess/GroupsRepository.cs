@@ -32,6 +32,8 @@ namespace LetSkole.DataAccess
             {
                 Id = id
             }).State = EntityState.Deleted;
+            //Falta encontrar el Group
+            //_context.Groups.Remove();
             _context.SaveChanges();
         }
 

@@ -41,16 +41,16 @@ namespace LetSkole.Controllers
 
         [Route("Update")]
         [HttpPut]
-        public void Put([FromQuery] GroupDto groupDto)
+        public void Put([FromQuery] GroupDto groupDto, [FromQuery] int userId)
         {
-            _service.Update(groupDto);
+            _service.Update(groupDto, userId);
         }
 
         [Route("Delete")]
         [HttpDelete]
-        public void Delete([FromQuery] int id)
+        public void Delete([FromQuery] int id, [FromQuery] int userId)
         {
-            _service.Delete(id);
+            _service.Delete(id, userId);
         }
 
         [Route("GetById")]

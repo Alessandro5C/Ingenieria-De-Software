@@ -23,5 +23,6 @@ namespace LetSkole.Entities
         public string School { get; set; }
 
         public ICollection<Reward> Rewards { get; set; }
+        public ICollection<UserGroup> UserGroups { get; set; }
     }
 }

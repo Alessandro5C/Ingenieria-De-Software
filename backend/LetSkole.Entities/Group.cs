@@ -14,5 +14,19 @@ namespace LetSkole.Entities
         [StringLength(256)]
         public string Description { get; set; }
         public int MaxGrade { get; set; }
+
+        public ICollection<UserGroup> UserGroups { get; set; }
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !(this.GetType().Equals(obj.GetType())))
+            {
+                return false;
+            }
+            else
+            {
+                Group g = (Group)obj;
+                return Id == g.Id;
+            }
+        }
     }
 }

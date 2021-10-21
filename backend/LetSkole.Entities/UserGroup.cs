@@ -13,5 +13,6 @@ namespace LetSkole.Entities
         
         public short Grade { get; set; }
         public bool Admin { get; set; }
+
     }
 }

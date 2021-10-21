@@ -53,8 +53,55 @@ namespace LetSkole.Services
             _userGroupRepository.Create(userGroup);
         }
 
-        public void Delete(int id)
+        //Retornamos los grupos de un profesor por su Id
+        public ICollection<Group> getGroupsByTeacherId(int userId)
         {
+            ICollection<UserGroup> userGroup = _userGroupRepository.GetItemsByTeacherId(userId);
+
+            // Manipulando el ICollection
+            IEnumerator enumerator = userGroup.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                UserGroup u = (UserGroup)enumerator.Current;
+                u.Group = _repository.GetItem(u.GroupId);
+            }
+
+            ICollection<Group> collectionGroup =  userGroup.Select(c => new Group
+            {
+                Id = c.GroupId,
+                Description = c.Group.Description,
+                Name = c.Group.Name,
+                MaxGrade = c.Group.MaxGrade
+            }).ToList();
+
+            return collectionGroup;
+        }
+
+        public void Delete(int id, int userId)
+        {
+            User auxUser = _userRepository.GetItem(userId);
+
+            ICollection<Group> auxGroupsTeacher = getGroupsByTeacherId(userId);
+            Group auxGroup = _repository.GetItem(id);
+
+            if(auxGroupsTeacher.Contains(auxGroup) == false)
+            {
+                throw new Exception("El grupo que quiere eliminar le pertenece a otro usuario");
+            }
+            
+            if (auxUser == null)
+            {
+                throw new Exception("Usuario no existe");
+            }
+
+            if(auxUser.Student == true)
+            {
+                throw new Exception("El estudiante no puede eliminar un grupo");
+            }
+            
+
+            
             _repository.Delete(id);
         }
 
@@ -114,9 +161,32 @@ namespace LetSkole.Services
             return groupDto;
         }
 
-        public void Update( GroupDto entity)
+        public void Update(GroupDto entity, int userId)
         {
+            
             Group group = _repository.GetItem(entity.Id);
+
+            User auxUser = _userRepository.GetItem(userId);
+            ICollection<Group> auxGroupsTeacher = getGroupsByTeacherId(userId);
+
+            Group auxGroup = new Group { Id = entity.Id };
+            bool contenedor = auxGroupsTeacher.Contains(group);
+
+
+
+            if (contenedor == false)
+            {
+                throw new Exception("No puede editar el grupo de otro usuario");
+            }
+
+            
+
+            if (group == null)
+            {
+                throw new Exception("El grupo no existe");
+            }
+
+
             group.Name = entity.Name;
             group.Description = entity.Description;
             //group.MaxGrade = entity.MaxGrade;
