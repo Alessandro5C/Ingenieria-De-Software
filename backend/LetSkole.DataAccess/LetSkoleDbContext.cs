@@ -22,8 +22,9 @@ namespace LetSkole.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseSqlServer(@"Server = DESKTOP-KJHB0PG; Database = LetSkoleDb; Integrated Security = true;");   
+            //This line, can even be commented, unless you do `dotnet ef database` commands
+            // optionsBuilder
+            //     .UseSqlServer(@"Server = _hostname_; Database = LetSkoleDb; Integrated Security = true;");   
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
