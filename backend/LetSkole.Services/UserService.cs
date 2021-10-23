@@ -35,6 +35,11 @@ namespace LetSkole.Services
         public UserDto GetItem(int id)
         {
             User user = _repository.GetItem(id);
+            if(user == null)
+            {
+                throw new NullReferenceException("Not exist User with id " + id.ToString());
+            }
+
             UserDto userDto = new UserDto();
 
             userDto.Id = user.Id;
@@ -52,29 +57,26 @@ namespace LetSkole.Services
         {
             if (entity.Birthday == null)
             {
-                throw new Exception("Falta ingresar nombre");
-
+                throw new LetSkoleException("Falta ingresar nombre");
             }
 
             if (entity.Name == "" || entity.Name == null)
             {
-                throw new Exception("Falta ingresar nombre");
-
+                throw new LetSkoleException("Falta ingresar nombre");
             }
 
             if (string.IsNullOrEmpty(entity.Email))
             {
-                throw new Exception("Falta ingresar correo electronico");
+                throw new LetSkoleException("Falta ingresar correo electronico");
             }
             try
             {
                 var correo = new MailAddress(entity.Email);
                 entity.Email = correo.Address;
-
             }
             catch
             {
-                throw new Exception("Correo electronico invalido");
+                throw new LetSkoleException("Correo electronico invalido");
                 return;
             }
 
@@ -82,13 +84,13 @@ namespace LetSkole.Services
             {
                 int i = Convert.ToInt32(entity.NumTelf);
                 Console.WriteLine(i);
-                
             }
             catch
             {
-                throw new Exception("Numero de celular invalido");
+                throw new LetSkoleException("Numero de celular invalido");
                 return;
             }
+
             _repository.Create(new User
             {
                 Name = entity.Name,

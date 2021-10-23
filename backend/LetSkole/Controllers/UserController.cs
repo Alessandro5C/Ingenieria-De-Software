@@ -20,21 +20,43 @@ namespace LetSkole.Controllers
             _service = service;
         }
         [HttpPost]
-        public void Post([FromBody] UserDto userDto)
+        public async Task<ActionResult<UserDto>> Post([FromBody] UserDto userDto)
         {
-            _service.Create(userDto);
+            try
+            {
+                _service.Create(userDto);
+            }
+            catch( LetSkoleException e)
+            {
+                return BadRequest(e.Message + " " + e.value);
+            }
+
+            return CreatedAtAction(nameof(GetItemById), new { id = userDto.Id });
         }
 
         [HttpGet]
-        public IEnumerable<UserDto> GetAllByFilter([FromQuery] string filter)
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAllByFilter([FromQuery] string filter)
         {
-            return _service.GetCollection(filter);
+            return Accepted(_service.GetCollection(filter));
         }
         
         [HttpGet]
-        public UserDto GetItemById ([FromQuery] int id)
+        public async Task<ActionResult<UserDto>> GetItemById ([FromQuery] int id)
         {
-            return _service.GetItem(id);
+            UserDto userDto;
+            try
+            {
+                userDto = await _service.GetItem(id);
+            }
+            catch(NullReferenceException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (LetSkoleException e)
+            {
+                return BadRequest(e.Message + " " + e.value);
+            }
+            return userDto;
         }
 
         [HttpPut]
