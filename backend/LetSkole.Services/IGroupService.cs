@@ -14,7 +14,7 @@ namespace LetSkole.Services
         //Deberia retornar un GroupDto
         void Create (int userId, GroupDto entity);
         void Update(GroupDto entity, int userId);
-        void Delete(int id, int userId);
+        void Delete(int id);
 
     }
 }

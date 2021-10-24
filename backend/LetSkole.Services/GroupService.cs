@@ -78,32 +78,11 @@ namespace LetSkole.Services
             return collectionGroup;
         }
 
-        public void Delete(int id, int userId)
-        {
-            User auxUser = _userRepository.GetItem(userId);
-
-            ICollection<Group> auxGroupsTeacher = getGroupsByTeacherId(userId);
-            Group auxGroup = _repository.GetItem(id);
-
-            if(auxGroupsTeacher.Contains(auxGroup) == false)
-            {
-                throw new Exception("El grupo que quiere eliminar le pertenece a otro usuario");
-            }
-            
-            if (auxUser == null)
-            {
-                throw new Exception("Usuario no existe");
-            }
-
-            if(auxUser.Student == true)
-            {
-                throw new Exception("El estudiante no puede eliminar un grupo");
-            }
-            
-
-            
+        public void Delete(int id)
+        { 
             _repository.Delete(id);
         }
+
 
         public ICollection<GroupDto> GetCollection(string filter)
         {
@@ -130,23 +109,11 @@ namespace LetSkole.Services
                 throw new Exception("Los estudiantes no pueden crear grupo");
             }
 
-            // Error solucionado, el group retorna null de la base de datos
-            ICollection<UserGroup> userGroup = _userGroupRepository.GetItemsByTeacherId(userId);
-
-            // Manipulando el ICollection
-            IEnumerator enumerator = userGroup.GetEnumerator();
-
-            while (enumerator.MoveNext())
-            {
-                UserGroup u = (UserGroup)enumerator.Current;
-                u.Group = _repository.GetItem(u.GroupId);
-            }
-
-            return userGroup.Select(c => new GroupDto
-            {   Id = c.GroupId,
-                Description = c.Group.Description,
-                Name = c.Group.Name,
-                MaxGrade = c.Group.MaxGrade
+            return _repository.GetCollectionByTeacher(userId).Select(c => new GroupDto
+            {   Id = c.Id,
+                Description = c.Description,
+                Name = c.Name,
+                MaxGrade = c.MaxGrade
             }).ToList();
         }
 

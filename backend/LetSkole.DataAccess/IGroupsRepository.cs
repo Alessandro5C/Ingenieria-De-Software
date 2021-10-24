@@ -9,6 +9,8 @@ namespace LetSkole.DataAccess
     public interface IGroupsRepository
     {
         ICollection<Group> GetCollection(string filter);
+
+        ICollection<Group> GetCollectionByTeacher(int userId);
         Group GetItem(int id); 
         void Create(Group entity);
         void Update(Group entity);

@@ -48,9 +48,9 @@ namespace LetSkole.Controllers
 
         [Route("Delete")]
         [HttpDelete]
-        public void Delete([FromQuery] int id, [FromQuery] int userId)
+        public void Delete([FromQuery] int id)
         {
-            _service.Delete(id, userId);
+            _service.Delete(id);
         }
 
         [Route("GetById")]
