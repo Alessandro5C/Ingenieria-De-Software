@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
@@ -16,37 +17,37 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public void Create(Activity entity)
+        public async Task<ICollection<Activity>> GetActivities(string filter)
         {
-            _context.Set<Activity>().Add(entity);
-            _context.SaveChanges();
+            return await _context.Activities.Where(c => c.Name.Contains(filter))
+                   .ToListAsync();
         }
 
-        public void Delete(int id)
+        public async Task<Activity> GetItem(int id)=>
+            await _context.Activities
+            .SingleOrDefaultAsync(c => c.Id.Equals(id));
+        
+
+        public async Task Create(Activity entity)
+        {
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Update(Activity entity)
+        {
+            _context.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
         {
             _context.Entry(new Activity
             {
-                Id = id
-            }).State = EntityState.Deleted;
-            _context.SaveChanges();
-        }
-
-        public ICollection<Activity> GetActivities(string filter)
-        {
-            return _context.Activities.Where(c => c.Name.Contains(filter))
-                .ToList();
-        }
-
-        public Activity GetItem(int id)
-        {
-            return _context.Activities.Find(id);
-        }
-
-        public void Update(Activity entity)
-        {
-            _context.Set<Activity>().Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+               Id = id
+             }).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
     }
 }

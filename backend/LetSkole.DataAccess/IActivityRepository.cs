@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
     public interface IActivityRepository
     {
-        ICollection<Activity> GetActivities(string filter);
-        Activity GetItem(int id);
-        void Create(Activity entity);
-        void Update(Activity entity);
-        void Delete(int id);
+        Task<ICollection<Activity>> GetActivities(string filter);
+        Task<Activity> GetItem(int id);
+        Task Create(Activity entity);
+        Task Update(Activity entity);
+        Task Delete(int id);
     }
 }

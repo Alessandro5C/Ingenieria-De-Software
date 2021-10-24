@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
@@ -23,21 +24,21 @@ namespace LetSkole.Services
             _userRepository = userRepository;
         }
 
-        public void Create(ActivityDto entity)
+        public async Task Create(ActivityDto entity)
         {
             DateTime now = DateTime.Now;
             DateTime inicio = DateTime.MinValue;
             entity.StartDate = new DateTime(now.Year, now.Month, now.Day);
 
-            // Validar user
+            //Validar user
             User user = _userRepository.GetItem(entity.UserId);
-            if(user == null)
+            if (user == null)
             {
                 throw new Exception("User not found");
             }
 
-            // Buscamos errores
-            int res = DateTime.Compare(entity.StartDate, entity.EndDate);
+            //Buscamos errores
+                int res = DateTime.Compare(entity.StartDate, entity.EndDate);
             if (res >= 0)
             {
                 throw new Exception("Fecha invalida");
@@ -45,8 +46,8 @@ namespace LetSkole.Services
 
             if (entity.StartTime != inicio && entity.EndTime != inicio)
             {
-                // Puedo comparar 
-                if (DateTime.Compare(entity.StartTime, entity.EndTime) >= 0)
+                //Puedo comparar
+                    if (DateTime.Compare(entity.StartTime, entity.EndTime) >= 0)
                 {
                     throw new Exception("Fecha invalida");
                 }
@@ -61,8 +62,8 @@ namespace LetSkole.Services
             {
                 throw new Exception("Falta ingresar nombre");
             }
-     
-            _repository.Create(new Activity
+
+           await _repository.Create(new Activity
             {
                 UserId = entity.UserId, //validar el user id
                 Name = entity.Name,
@@ -75,15 +76,15 @@ namespace LetSkole.Services
             });
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _repository.Delete(id);
+            await _repository.Delete(id);
         }
 
-        public ICollection<ActivityDto> GetCollection(string filter)
+        public async Task<ICollection<ActivityDto>> GetCollection(string filter)
         {
-            var Collection = _repository.GetActivities(filter ?? string.Empty);
-            return Collection.Select(c => new ActivityDto
+            var Collection = await _repository.GetActivities(filter ?? string.Empty);
+            return  Collection.Select(c => new ActivityDto
             {
                 Id = c.Id,
                 UserId = c.UserId,
@@ -97,14 +98,10 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public ActivityDto GetItem(int id)
+        public async Task<ActivityDto> GetItem(int id)
         {
-            Activity activity = _repository.GetItem(id);
+            Activity activity = await _repository.GetItem(id);
             ActivityDto activityDto = new ActivityDto();
-
-
-
-
 
             activityDto.Id = activity.Id;
             activityDto.UserId = activity.UserId;
@@ -118,10 +115,9 @@ namespace LetSkole.Services
             return activityDto;
         }
 
-        public void Update(ActivityDto entity)
+        public async Task Update(ActivityDto entity)
         {
-
-            Activity activity = _repository.GetItem(entity.Id);
+            Activity activity = await _repository.GetItem(entity.Id);
             DateTime inicio = DateTime.MinValue;
 
             if (activity == null)
@@ -130,17 +126,17 @@ namespace LetSkole.Services
                 return;
             }
 
-            //Falta comprobar si el usuario existe
-            /*Activity activityUserID = _repository.GetItem(entity.UserId);
-            if (activityUserID == null)
-            {
-                throw new Exception("El id del usuario no existe");
-                return;
-            }*/
+           // Falta comprobar si el usuario existe
+                /*Activity activityUserID = _repository.GetItem(entity.UserId);
+                if (activityUserID == null)
+                {
+                    throw new Exception("El id del usuario no existe");
+                    return;
+                }*/
 
 
-            //Nombre
-            if (entity.Name == "" || entity.Name == null)
+               // Nombre
+                if (entity.Name == "" || entity.Name == null)
             {
                 activity.Name = activity.Name;
             }
@@ -150,7 +146,7 @@ namespace LetSkole.Services
             }
 
             //Description
-            if (entity.Description == "" || entity.Description == null)
+                if (entity.Description == "" || entity.Description == null)
             {
                 activity.Description = activity.Description;
             }
@@ -171,7 +167,7 @@ namespace LetSkole.Services
                 if (resCom < 0)
                 {
                     //Modifico
-                    activity.EndDate = entity.EndDate;
+                        activity.EndDate = entity.EndDate;
                 }
                 else
                 {
@@ -226,7 +222,9 @@ namespace LetSkole.Services
             }
 
             activity.StartTime = entity.StartTime;
-            _repository.Update(activity);
+            await _repository.Update(activity);
         }
+
+
     }
 }

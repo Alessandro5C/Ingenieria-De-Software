@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
     public interface IRewardsRepository
     {
-        ICollection<Reward> GetCollection(string filter);
-        Reward GetItem(int id);
-        void Create(Reward entity);
-        void Update(Reward entity);
-        void Delete(int id);
+        Task <ICollection<Reward>> GetCollection(string filter);
+        Task <Reward> GetItem(int id);
+        Task Create(Reward entity);
+        Task Update(Reward entity);
+        Task Delete(int id);
 
     }
 }

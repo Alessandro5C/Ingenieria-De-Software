@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
@@ -18,37 +18,37 @@ namespace LetSkole.Services
             _repository = repository;
         }
 
-        public void Create(RewardDto entity)
+        public async Task Create(RewardDto entity)
         {
-            _repository.Create(new Reward
+            await _repository.Create(new Reward
             {
-                GameId=entity.GameId,
+                GameId = entity.GameId,
                 Name = entity.Name,
                 Description = entity.Description,
                 Image = entity.Image,
             });
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _repository.Delete(id);
+            await _repository.Delete(id);
         }
 
-        public ICollection<RewardDto> GetCollection(string filter)
+        public async Task<ICollection<RewardDto>> GetCollection(string filter)
         {
-            var Collection = _repository.GetCollection(filter ?? string.Empty);
+            var Collection = await _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new RewardDto
             {
-                GameId=c.GameId,
+                GameId = c.GameId,
                 Description = c.Description,
                 Name = c.Name,
                 Image = c.Image,
             }).ToList();
         }
 
-        public RewardDto GetItem(int id)
+        public async Task<RewardDto> GetItem(int id)
         {
-            Reward reward = _repository.GetItem(id);
+            Reward reward = await _repository.GetItem(id);
             RewardDto rewardDto = new RewardDto();
             rewardDto.Id = reward.Id;
             rewardDto.GameId = reward.GameId;
@@ -58,14 +58,14 @@ namespace LetSkole.Services
             return rewardDto;
         }
 
-        public void Update(RewardDto entity)
+        public async Task Update(RewardDto entity)
         {
-            Reward reward = _repository.GetItem(entity.Id);
+            Reward reward = await _repository.GetItem(entity.Id);
             reward.GameId = entity.GameId;
             reward.Name = entity.Name;
             reward.Description = entity.Description;
             reward.Image = entity.Image;
-            _repository.Update(reward);
+            await _repository.Update(reward);
         }
     }
 }

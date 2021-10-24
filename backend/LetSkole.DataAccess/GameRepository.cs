@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
@@ -16,15 +17,14 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public ICollection<Game> GetCollection(string filter)
+        public async Task<ICollection<Game>> GetCollection(string filter)
         {
-            return _context.Games.Where(c => c.Name.Contains(filter))
-                .ToList();
+            return await _context.Games.Where(c => c.Name.Contains(filter))
+                 .ToListAsync();
         }
 
-        public Game GetItem(int id)
-        {
-            return _context.Games.Find(id);
-        }
+        public async Task<Game> GetItem(int id) =>
+            await _context.Games
+            .SingleOrDefaultAsync(c => c.Id.Equals(id));
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
@@ -17,9 +18,9 @@ namespace LetSkole.Services
             _repository = repository;
         }
 
-        public ICollection<GameDto> GetCollection(string filter)
+        public async Task<ICollection<GameDto>> GetCollection(string filter)
         {
-            var Collection = _repository.GetCollection(filter ?? string.Empty);
+            var Collection =  await _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new GameDto
             {
                 Id = c.Id,
@@ -30,9 +31,9 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public GameDto GetItem(int id)
+        public async Task<GameDto> GetItem(int id)
         {
-            Game game = _repository.GetItem(id);
+            Game game = await _repository.GetItem(id);
             GameDto gameDto = new GameDto();
 
             gameDto.Id = game.Id;
@@ -43,5 +44,6 @@ namespace LetSkole.Services
 
             return gameDto;
         }
+
     }
 }

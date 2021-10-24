@@ -21,15 +21,15 @@ namespace LetSkole.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<GameDto> GetAllByFilter([FromQuery] string filter)
+        public async Task<ActionResult<IEnumerable<GameDto>>> GetAllByFilter([FromQuery] string filter)
         {
-            return _service.GetCollection(filter);
+            return Accepted(await _service.GetCollection(filter));
         }
 
         [HttpGet]
-        public GameDto GetItemById([FromQuery] int id)
+        public async Task<ActionResult<GameDto>> GetItemById([FromQuery] int id)
         {
-            return _service.GetItem(id);
+            return Accepted(await _service.GetItem(id));
         }
 
     }

@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using LetSkole.Dto;
 
 namespace LetSkole.Services
 {
     public interface IRewardService
     {
-        ICollection<RewardDto> GetCollection(string filter);
-        RewardDto GetItem(int id);
-
-        void Create(RewardDto entity);
-
-        void Update(RewardDto entity);
-
-        void Delete(int id);
+        Task <ICollection<RewardDto>> GetCollection(string filter);
+        Task <RewardDto> GetItem(int id);
+        Task Create(RewardDto entity);
+        Task Update(RewardDto entity);
+        Task Delete(int id);
 
     }
 }

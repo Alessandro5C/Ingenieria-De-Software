@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
@@ -13,40 +14,47 @@ namespace LetSkole.DataAccess
 
         public RewardsRepository(LetSkoleDbContext context)
         {
-            //Representa mi base de datos
+
             _context = context;
         }
 
-        public void Create(Reward entity)
+        public async Task Create(Reward entity)
         {
-            _context.Set<Reward>().Add(entity);
-            _context.SaveChanges();
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             _context.Entry(new Reward
             {
                 Id = id
             }).State = EntityState.Deleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<Reward> GetCollection(string filter)
+        public async Task<ICollection<Reward>> GetCollection(string filter)
         {
-            return _context.Rewards.Where(c => c.Name.Contains(filter))
-                .ToList();
+            //return await _context.Rewards.Where(c => c.Name.Contains(filter))
+            //    .ToListAsync();
+            Reward reward;
+            Game game;
+            ICollection<Reward> query = _context.Rewards.Join(reward => reward.GamesId,
+                                                              game => game.Id,
+                                                              (r, g) => new { r.Name, g.description });
         }
 
-        public Reward GetItem(int id)
+        public async Task<Reward> GetItem(int id)=>
+            await _context.Rewards
+                .SingleOrDefaultAsync(c => c.Id.Equals(id));
+    
+
+        public async Task Update(Reward entity)
         {
-            return _context.Rewards.Find(id);
-        }
-        public void Update(Reward entity)
-        {
-            _context.Set<Reward>().Attach(entity);
+            _context.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
+
     }
 }

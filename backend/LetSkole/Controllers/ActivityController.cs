@@ -19,33 +19,36 @@ namespace LetSkole.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] ActivityDto ActivityDto)
+        public async Task<ActionResult<ActivityDto>> Post([FromBody] ActivityDto ActivityDto)
         {
-            _service.Create(ActivityDto);
+            await _service.Create(ActivityDto);
+            return CreatedAtAction(nameof(GetItemById), new { id = ActivityDto.Id });
         }
 
         [HttpGet]
-        public IEnumerable<ActivityDto> GetAllByFilter([FromQuery] string filter)
+        public async Task<ActionResult<IEnumerable<ActivityDto>>> GetAllByFilter([FromQuery] string filter)
         {
-            return _service.GetCollection(filter);
+            return Accepted(await _service.GetCollection(filter));
         }
         
         [HttpGet]
-        public ActivityDto GetItemById ([FromQuery] int id)
+        public async Task<ActionResult<ActivityDto>> GetItemById ([FromQuery] int id)
         {
-            return _service.GetItem(id);
+            return Ok( await _service.GetItem(id));
         }
 
         [HttpDelete]
-        public void Delete ([FromQuery] int id)
+        public async Task<IActionResult> Delete ([FromQuery] int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
+            return NoContent();
         }
 
         [HttpPut]
-        public void Put ([FromQuery] ActivityDto activityDto)
+        public async Task<IActionResult> Put ([FromQuery] ActivityDto activityDto)
         {
-            _service.Update(activityDto);
+            await _service.Update(activityDto);
+            return Accepted();
         }
 
 
