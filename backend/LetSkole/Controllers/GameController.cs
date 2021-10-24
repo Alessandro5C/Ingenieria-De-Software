@@ -29,7 +29,13 @@ namespace LetSkole.Controllers
         [HttpGet]
         public async Task<ActionResult<GameDto>> GetItemById([FromQuery] int id)
         {
-            return Accepted(await _service.GetItem(id));
+            try
+            {
+                return Accepted(await _service.GetItem(id));
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

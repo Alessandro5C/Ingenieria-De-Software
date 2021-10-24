@@ -14,10 +14,7 @@ namespace LetSkole.Services
 
         private readonly IActivityRepository _repository;
         private readonly IUserRepository _userRepository;
-        //Falta agregar la entidad User repository
-        //private readonly IUserRepository _repository2;
-
-
+        
         public ActivityService(IActivityRepository repository, IUserRepository userRepository)
         {
             _repository = repository;
@@ -31,7 +28,7 @@ namespace LetSkole.Services
             entity.StartDate = new DateTime(now.Year, now.Month, now.Day);
 
             //Validar user
-            User user = _userRepository.GetItem(entity.UserId);
+            User user = await _userRepository.GetItem(entity.UserId);
             if (user == null)
             {
                 throw new Exception("User not found");
@@ -41,7 +38,7 @@ namespace LetSkole.Services
                 int res = DateTime.Compare(entity.StartDate, entity.EndDate);
             if (res >= 0)
             {
-                throw new Exception("Fecha invalida");
+                throw new Exception("Date invalid");
             }
 
             if (entity.StartTime != inicio && entity.EndTime != inicio)
@@ -49,18 +46,18 @@ namespace LetSkole.Services
                 //Puedo comparar
                     if (DateTime.Compare(entity.StartTime, entity.EndTime) >= 0)
                 {
-                    throw new Exception("Fecha invalida");
+                    throw new Exception("Date invalid");
                 }
 
                 if (DateTime.Compare(entity.StartDate, entity.StartTime) > 0)
                 {
-                    throw new Exception("Fecha invalida");
+                    throw new Exception("Date invalid");
                 }
             }
 
             if (entity.Name == "" || entity.Name == null)
             {
-                throw new Exception("Falta ingresar nombre");
+                throw new Exception("A name is necessary");
             }
 
            await _repository.Create(new Activity
@@ -122,8 +119,7 @@ namespace LetSkole.Services
 
             if (activity == null)
             {
-                throw new Exception("El id de la actividad no existe");
-                return;
+                throw new Exception("Id activity doesn't exists");
             }
 
            // Falta comprobar si el usuario existe
@@ -171,8 +167,7 @@ namespace LetSkole.Services
                 }
                 else
                 {
-                    throw new Exception("Fecha incorrecta");
-                    return;
+                    throw new Exception("Invalid date");
                 }
 
 
@@ -187,38 +182,32 @@ namespace LetSkole.Services
             int res3 = DateTime.Compare(auxStartDate, entity.StartTime);
             if (res3 >= 0)
             {
-                throw new Exception("Fecha incorrecta");
-                return;
+                throw new Exception("Invalid date");
             }
 
             DateTime auxEndDate2 = entity.EndDate;
             res3 = DateTime.Compare(entity.StartTime, auxEndDate2);
             if (res3 >= 0)
             {
-                throw new Exception("Fecha incorrecta");
-                return;
+                throw new Exception("Invalid date");
             }
 
             res3 = DateTime.Compare(entity.EndTime, auxStartDate);
             if (res3 <= 0)
             {
-                throw new Exception("Fecha incorrecta");
-                return;
+                throw new Exception("Invalid date");
             }
 
             res3 = DateTime.Compare(entity.EndTime, auxEndDate2);
             if (res3 >= 0)
             {
-                throw new Exception("Fecha incorrecta");
-                return;
+                throw new Exception("Invalid date");
             }
 
             res3 = DateTime.Compare(entity.StartTime, entity.EndTime);
             if (res3 >= 0)
             {
-                throw new Exception("Fecha incorrecta");
-                return;
-
+                throw new Exception("Invalid date");
             }
 
             activity.StartTime = entity.StartTime;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
@@ -20,46 +21,46 @@ namespace LetSkole.DataAccess
         }
 
 
-        public void Create(Group entity)
+        public async Task Create(Group entity)
         {
             _context.Set<Group>().Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             _context.Entry(new Group
             {
                 Id = id
             }).State = EntityState.Deleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<Group> GetCollection(string filter)
+        public async Task<ICollection<Group>> GetCollection(string filter)
         {
-            return _context.Groups.Where(c => c.Name.Contains(filter))
-                .ToList();
+            return await _context.Groups.Where(c => c.Name.Contains(filter))
+                .ToListAsync();
         }
 
-        public ICollection<Group> GetCollectionByTeacher(int userId)
+        public async Task<ICollection<Group>> GetCollectionByTeacher(int userId)
         {
-
-            ICollection<Group> query =  _context.Groups.Join(_context.UserGroups, group => group.Id, userGroup => userGroup.GroupId, (group, userGroup) => new { PersonId = userGroup.UserId, Id = group.Id, Name = group.Name, Description = group.Description, maxGrade = group.MaxGrade })
+            var query = await _context.Groups.Join(_context.UserGroups, group => group.Id, userGroup => userGroup.GroupId, (group, userGroup) => new { PersonId = userGroup.UserId, Id = group.Id, Name = group.Name, Description = group.Description, maxGrade = group.MaxGrade })
                    .Where(person => person.PersonId == userId)
-                   .Select(g => new Group{ Id = g.Id, Name = g.Name, Description = g.Description, MaxGrade = g.maxGrade }).ToList();
+                   .Select(g => new Group{ Id = g.Id, Name = g.Name, Description = g.Description, MaxGrade = g.maxGrade }).ToListAsync();
 
             return query;        
         }
-        public Group GetItem(int id)
+
+        public async Task<Group> GetItem(int id)
         {
-            return _context.Groups.Find(id);
+            return await _context.Groups.FindAsync(id);
         }
 
-        public void Update(Group entity)
+        public async Task Update(Group entity)
         {
             _context.Set<Group>().Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

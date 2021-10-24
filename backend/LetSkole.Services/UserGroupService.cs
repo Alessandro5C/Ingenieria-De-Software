@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
@@ -17,31 +18,39 @@ namespace LetSkole.Services
             _repository = repository;
         }
 
-        public void Create(UserGroupDto entity)
+        public async Task Create(UserGroupDto entity)
         {
-            //Aqui debemos ver quien cree el grupo sea un profesor
-            _repository.Create(new UserGroup
+            try
             {
-                UserId = entity.UserId, 
-                GroupId = entity.GroupId,
-                Grade = -1,
-                Admin = false,
-            });
+                //Aqui debemos ver quien cree el grupo sea un profesor
+                await _repository.Create(new UserGroup
+                {
+                    UserId = entity.UserId,
+                    GroupId = entity.GroupId,
+                    Grade = -1,
+                    Admin = false,
+                });
+            }
+            catch (Exception)
+            {
+                throw new LetSkoleException("Error creating user group");
+            }
         }
 
-        public void DeleteUsingGroup(int groupId)
+        public async Task DeleteUsingGroup(int groupId)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteUsingUser(int userId, int groupId)
+        public async Task DeleteUsingUser(int userId, int groupId)
         {
             _repository.DeleteUsingUser(userId, groupId);
         }
 
-        public ICollection<UserGroupDto> GetItems(int groupId)
+        public async Task<ICollection<UserGroupDto>> GetItems(int groupId)
         {
-            var Collection = _repository.GetItems(groupId);
+            var Collection = await _repository.GetItems(groupId);
+
             return Collection.Select(c => new UserGroupDto
             {
                 UserId = c.UserId,
@@ -51,9 +60,9 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public void Update(UserGroupDto entity)
+        public async Task Update(UserGroupDto entity)
         {
-            UserGroup userGroup = _repository.GetItem(entity.UserId, entity.GroupId);
+            UserGroup userGroup = await _repository.GetItem(entity.UserId, entity.GroupId);
 
             if (0 <= entity.Grade && entity.Grade <= userGroup.Group.MaxGrade)
             {
@@ -61,14 +70,14 @@ namespace LetSkole.Services
             }
             else
             {
-                throw new Exception("La nota ingresada es mayor a lo permitido.");
+                throw new Exception("The grade you enter is more than the accepted");
             }
             
-            _repository.Update(userGroup);
+            await _repository.Update(userGroup);
         }
-        public int SearchGrade(int userId, int groupId)
+        public async Task<int> SearchGrade(int userId, int groupId)
         {
-            int grade = _repository.SearchGrade(userId, groupId);
+            int grade = await _repository.SearchGrade(userId, groupId);
             return grade;
         }
     }

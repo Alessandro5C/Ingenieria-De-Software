@@ -20,44 +20,84 @@ namespace LetSkole.Controllers
 
         [Route("Create")]
         [HttpPost]
-        public void Post([FromQuery] int userId, [FromBody] GroupDto GroupDto)
+        public async Task<ActionResult<GroupDto>> Post([FromQuery] int userId, [FromBody] GroupDto GroupDto)
         {
-            _service.Create(userId, GroupDto);
+            try
+            {
+                await _service.Create(userId, GroupDto);
+            } catch(LetSkoleException e)
+            {
+                return BadRequest(e.Message + " " + e.value);
+            }
+            return CreatedAtAction(nameof(GetItemById), new { id = GroupDto.Id }, GroupDto);
         }
 
         [Route("GetAllByFilter")]
         [HttpGet]
-        public IEnumerable<GroupDto> GetAllByFilter([FromQuery] string filter)
+        public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByFilter([FromQuery] string filter)
         {
-            return _service.GetCollection(filter);
+            return Accepted(await _service.GetCollection(filter));
         }
 
         [Route("GetAllByTeacherId")]
         [HttpGet]
-        public IEnumerable<GroupDto> GetAllByTeacherId ([FromQuery] int userId)
+        public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] int userId)
         {
-            return _service.GetCollectionByTeacherId(userId);
+            IEnumerable<GroupDto> collection;
+            try
+            {
+                collection = await _service.GetCollectionByTeacherId(userId);
+            } catch(NullReferenceException e)
+            {
+                return NotFound(e.Message);
+            } catch(LetSkoleException e)
+            {
+                return BadRequest(e.Message + " " + e.value);
+            }
+            return Ok(collection);
         }
 
         [Route("Update")]
         [HttpPut]
-        public void Put([FromQuery] GroupDto groupDto, [FromQuery] int userId)
+        public async Task<IActionResult> Put([FromQuery] GroupDto groupDto, [FromQuery] int userId)
         {
-            _service.Update(groupDto, userId);
+            try
+            {
+                await _service.Update(groupDto, userId);
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Accepted();
         }
 
         [Route("Delete")]
         [HttpDelete]
-        public void Delete([FromQuery] int id)
+        public async Task<IActionResult> Delete([FromQuery] int id)
         {
-            _service.Delete(id);
+            try
+            {
+                await _service.Delete(id);
+            } catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Accepted();
         }
 
         [Route("GetById")]
         [HttpGet]
-        public GroupDto GetItemById([FromQuery] int id)
+        public async Task<ActionResult<GroupDto>> GetItemById ([FromQuery] int id)
         {
-        return _service.GetItem(id);
+            GroupDto group;
+            try {
+                group = await _service.GetItem(id);
+            } catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Accepted(group);
         }
+
     }
 }

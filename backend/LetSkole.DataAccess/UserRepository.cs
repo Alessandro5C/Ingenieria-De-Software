@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using LetSkole.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace LetSkole.DataAccess
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly LetSkoleDbContext _context;
 
@@ -15,43 +16,42 @@ namespace LetSkole.DataAccess
         {
             _context = context;
         }
+
+        public async Task<ICollection<User>> GetCollection (string filter)
+        => await _context.Users.Where(c => c.Name.Contains(filter))
+                .ToListAsync();
         
-        public ICollection<User> GetCollection(string filter)
+        public async Task<User> GetItem(int id)
         {
-            return _context.Users.Where(c => c.Name.Contains(filter))
-                .ToList();
+            User user = await _context.Users.FindAsync(id);
+            return user;
         }
 
-        public User GetItem(int id)
-        {
-            return _context.Users.Find(id);
-        }
-
-        public void Create(User entity)
+        public async Task Create(User entity)
         {
             _context.Set<User>().Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(User entity)
+        public async Task Update(User entity)
         {
             _context.Set<User>().Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             _context.Entry(new User
             {
                 Id = id
             }).State = EntityState.Deleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public string SearchNumTel(int userId)
+        public async Task<string> SearchNumTel(int userId)
         {
-            User user = _context.Users.Find(userId);
+            User user = await _context.Users.SingleOrDefaultAsync(c => c.Id.Equals(userId));
             string NumTel = user.NumTelf;
             return NumTel;
         }

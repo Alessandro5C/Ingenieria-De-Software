@@ -24,20 +24,20 @@ namespace LetSkole.Controllers
         {
             try
             {
-                _service.Create(userDto);
+                await _service.Create(userDto);
             }
             catch( LetSkoleException e)
             {
                 return BadRequest(e.Message + " " + e.value);
             }
 
-            return CreatedAtAction(nameof(GetItemById), new { id = userDto.Id });
+            return CreatedAtAction(nameof(GetItemById), new { id = userDto.Id }, userDto);
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllByFilter([FromQuery] string filter)
         {
-            return Accepted(_service.GetCollection(filter));
+            return Accepted(await _service.GetCollection(filter));
         }
         
         [HttpGet]
@@ -46,7 +46,7 @@ namespace LetSkole.Controllers
             UserDto userDto;
             try
             {
-                userDto =  _service.GetItem(id);
+                userDto =  await _service.GetItem(id);
             }
             catch(NullReferenceException e)
             {
@@ -56,26 +56,51 @@ namespace LetSkole.Controllers
             {
                 return BadRequest(e.Message + " " + e.value);
             }
-            return userDto;
+            return Ok(userDto);
         }
 
         [HttpPut]
-        public void Put ([FromQuery] UserDto userDto)
+        public async Task<IActionResult> Put ([FromQuery] UserDto userDto)
         {
-            _service.Update(userDto);
+            try
+            {
+                await _service.Update(userDto);
+            }
+            catch ( Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Accepted();
         }
 
         [HttpDelete]
-        public void Delete ([FromQuery] int id)
+        public async Task<IActionResult> Delete ([FromQuery] int id)
         {
-           
-            _service.Delete(id);
+            try
+            {
+                await _service.Delete(id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Accepted();
         }
         [HttpGet]
-        public string SearchNumTel([FromQuery] int userId)
+        public async Task<ActionResult<string>> SearchNumTel ([FromQuery] int userId)
         {
-            return _service.SearchNumTel(userId);
+            string str;
+            try {
+                str = await _service.SearchNumTel(userId);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+            return Accepted(str);
         }
+
 
     }
 }

@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using LetSkole.Dto;
 
 namespace LetSkole.Services
 {
     public interface IGroupService
     {
-        ICollection<GroupDto> GetCollection(string filter);
-        GroupDto GetItem(int id);
-        ICollection<GroupDto> GetCollectionByTeacherId (int userId);
+        Task<ICollection<GroupDto>> GetCollection(string filter);
+        Task<GroupDto> GetItem(int id);
+        Task<ICollection<GroupDto>> GetCollectionByTeacherId (int userId);
 
         //Deberia retornar un GroupDto
-        void Create (int userId, GroupDto entity);
-        void Update(GroupDto entity, int userId);
-        void Delete(int id);
+        Task Create (int userId, GroupDto entity);
+        Task Update(GroupDto entity, int userId);
+        Task Delete(int id);
 
     }
 }

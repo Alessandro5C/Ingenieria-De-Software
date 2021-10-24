@@ -21,39 +21,81 @@ namespace LetSkole.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] UserGroupDto userGroupDto)
+        public async Task<ActionResult<UserGroupDto>> Post([FromBody] UserGroupDto userGroupDto)
         {
-            _service.Create(userGroupDto);
+            try
+            {
+                await _service.Create(userGroupDto);
+            }
+            catch(LetSkoleException e)
+            {
+                return BadRequest(e.Message + " " + e.value);
+            }
+
+            return CreatedAtAction(nameof(GetItemById), new { userId = userGroupDto.UserId, groupId = userGroupDto.GroupId }, userGroupDto);
         }
 
         [HttpGet]
-        public IEnumerable<UserGroupDto> GetItemById([FromQuery] int groupId)
+        public async Task<ActionResult<IEnumerable<UserGroupDto>>> GetItemById ([FromQuery] int groupId)
         {
-            return _service.GetItems(groupId);
+
+            return Accepted(await _service.GetItems(groupId));
         }
 
         
         [HttpDelete]
-        public void DeleteUsingGroup([FromQuery] int groupId)
+        public async Task<IActionResult> DeleteUsingGroup([FromQuery] int groupId)
         {
-            _service.DeleteUsingGroup(groupId);
+            try
+            {
+               await _service.DeleteUsingGroup(groupId);
+            } catch(Exception e)
+            {
+                return NotFound(e.Message);
+            }
+            return NoContent();
         }
 
         [HttpDelete]
-        public void DeleteUsingUser([FromQuery] int userId,int groupId)
+        public async Task<IActionResult> DeleteUsingUser([FromQuery] int userId,int groupId)
         {
-            _service.DeleteUsingUser(userId,groupId);
+            try
+            {
+                await _service.DeleteUsingUser(userId,groupId);
+            } catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+
+            return NoContent();
         }
 
         [HttpPut]
-        public void Put([FromBody] UserGroupDto userGroupDto)
+        public async Task<IActionResult> Put([FromBody] UserGroupDto userGroupDto)
         {
-            _service.Update(userGroupDto);
+            try
+            {
+                await _service.Update(userGroupDto);
+            } catch(NullReferenceException e)
+            {
+                return NotFound(e.Message);
+            }
+            return NoContent();
         }
         [HttpGet]
-        public int SearchGrade([FromQuery] int userId, int groupId)
+        public async Task<ActionResult<int>> SearchGrade ([FromQuery] int userId, int groupId)
         {
-            return _service.SearchGrade(userId, groupId);
+            Int32 grade;
+
+            try
+            {
+                grade = await _service.SearchGrade(userId, groupId);
+            } catch(Exception e)
+            {
+                return NotFound(e.Message);
+            }
+            return Accepted(grade);
+
         }
     }
 }

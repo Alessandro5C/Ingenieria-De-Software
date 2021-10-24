@@ -2,18 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
     public interface IGroupsRepository
     {
-        ICollection<Group> GetCollection(string filter);
-
-        ICollection<Group> GetCollectionByTeacher(int userId);
-        Group GetItem(int id); 
-        void Create(Group entity);
-        void Update(Group entity);
-        void Delete(int id);
+        Task<ICollection<Group>> GetCollection(string filter);
+        Task<ICollection<Group>> GetCollectionByTeacher(int userId);
+        Task<Group> GetItem(int id); 
+        Task Create(Group entity);
+        Task Update(Group entity);
+        Task Delete(int id);
     }
 }

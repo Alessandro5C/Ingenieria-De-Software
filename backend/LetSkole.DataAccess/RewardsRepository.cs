@@ -35,13 +35,8 @@ namespace LetSkole.DataAccess
 
         public async Task<ICollection<Reward>> GetCollection(string filter)
         {
-            //return await _context.Rewards.Where(c => c.Name.Contains(filter))
-            //    .ToListAsync();
-            Reward reward;
-            Game game;
-            ICollection<Reward> query = _context.Rewards.Join(reward => reward.GamesId,
-                                                              game => game.Id,
-                                                              (r, g) => new { r.Name, g.description });
+            return await _context.Rewards.Where(c => c.Name.Contains(filter))
+                .ToListAsync();
         }
 
         public async Task<Reward> GetItem(int id)=>

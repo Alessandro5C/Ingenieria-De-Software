@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
@@ -16,67 +17,61 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public UserGroup GetItem(int userId, int groupId)
+        public async Task<UserGroup> GetItem(int userId, int groupId)
         {
-            UserGroup userGroup = _context.UserGroups.
-                Find(userId, groupId);
-            userGroup.User = _context.Users.Find(userId);
-            userGroup.Group = _context.Groups.Find(groupId);
-            return userGroup;
+            UserGroup userGroup = await _context.UserGroups.
+                FindAsync(userId, groupId);
+            userGroup.User = await  _context.Users.FindAsync(userId);
+            userGroup.Group = await _context.Groups.FindAsync(groupId);
+            return userGroup; 
         }
 
-        public void Create(UserGroup entity)
+        public async Task Create(UserGroup entity)
         {
             _context.Set<UserGroup>().Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteUsingGroup(int groupId)
+        public async Task DeleteUsingGroup(int groupId)
         {
             //Este todavía no lo voy a implementar
             throw new NotImplementedException();
         }
 
-        public void DeleteUsingUser(int userId, int groupId)
+        public async Task DeleteUsingUser(int userId, int groupId)
         {
             _context.Entry(new UserGroup
             {
                 UserId = userId,
                 GroupId = groupId
             }).State = EntityState.Deleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<UserGroup> GetItems(int filter)
+        public async Task<ICollection<UserGroup>> GetItems(int filter)
         {
-            return _context.UserGroups.Where(c => c.GroupId.Equals(filter))
-                .ToList();
+            return  await _context.UserGroups.Where(c => c.GroupId.Equals(filter))
+                .ToListAsync();
         }
 
-        public void Update(UserGroup entity)
+        public async Task Update(UserGroup entity)
         {
             _context.Set<UserGroup>().Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<UserGroup> GetItemsByTeacherId(int userId)
+        public async Task<ICollection<UserGroup>> GetItemsByTeacherId(int userId)
         {
-            // User Id (id) y que sea admin (true)
-            // Collection y Id's de grupos
-            // 
-            // UserGroup userGroup = _context.UserGroups.Find(userId);
-            // - Priorizar llamadas a base de datos -
-
-            return _context.UserGroups.Where(c => c.UserId.Equals(userId))
-                .ToList();
+            return await _context.UserGroups.Where(c => c.UserId.Equals(userId))
+                .ToListAsync();
         }
-        public int SearchGrade(int userId, int groupId)
+        public async Task<int> SearchGrade(int userId, int groupId)
         {
-            UserGroup userGroup = _context.UserGroups.
-               Find(userId, groupId);
-            userGroup.User = _context.Users.Find(userId);
-            userGroup.Group = _context.Groups.Find(groupId);
+            UserGroup userGroup = await _context.UserGroups.
+               FindAsync(userId, groupId);
+            userGroup.User = await _context.Users.FindAsync(userId);
+            userGroup.Group = await _context.Groups.FindAsync(groupId);
             int grade = userGroup.Grade;
             return grade;
         }

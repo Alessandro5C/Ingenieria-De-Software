@@ -22,7 +22,13 @@ namespace LetSkole.Controllers
         [HttpPost]
         public async Task<ActionResult<ActivityDto>> Post([FromBody] RewardDto rewardDto)
         {
-            await _service.Create(rewardDto);
+            try
+            {
+                await _service.Create(rewardDto);
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
             return CreatedAtAction(nameof(GetItemById), new { id = rewardDto.Id });
         }
 
@@ -35,20 +41,38 @@ namespace LetSkole.Controllers
         [HttpGet]
         public async Task<ActionResult<RewardDto>>GetItemById([FromQuery] int id)
         {
-            return Ok(await _service.GetItem(id));
+            try
+            {
+                return Ok(await _service.GetItem(id));
+            } catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut]
         public async Task<IActionResult> Put([FromQuery] RewardDto rewardDto)
         {
-            await _service.Update(rewardDto);
+            try
+            {
+                await _service.Update(rewardDto);
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
             return Accepted();
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
-            await _service.Delete(id);
+            try
+            {
+                await _service.Delete(id);
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
             return NoContent();
         }
 

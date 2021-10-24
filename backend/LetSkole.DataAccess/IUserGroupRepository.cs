@@ -2,19 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LetSkole.DataAccess
 {
     public interface IUserGroupRepository 
     {
-        ICollection<UserGroup> GetItems(int filter);
+        Task<ICollection<UserGroup>> GetItems(int filter);
 
-        ICollection<UserGroup> GetItemsByTeacherId(int id);
-        UserGroup GetItem(int userId, int groupId);
-        void Create(UserGroup entity);
-        void Update(UserGroup entity);
-        void DeleteUsingUser(int userId, int groupId);
-        void DeleteUsingGroup(int groupId);
-        int SearchGrade(int userId, int groupId);
+        Task<ICollection<UserGroup>> GetItemsByTeacherId(int id);
+        Task<UserGroup> GetItem (int userId, int groupId);
+        Task Create(UserGroup entity);
+        Task Update (UserGroup entity);
+        Task DeleteUsingUser (int userId, int groupId);
+        Task DeleteUsingGroup (int groupId);
+        Task<int> SearchGrade (int userId, int groupId);
     }
 }

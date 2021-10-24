@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using LetSkole.DataAccess;
 using LetSkole.Dto;
 using LetSkole.Entities;
@@ -17,12 +18,11 @@ namespace LetSkole.Services
             _repository = repository;
         }
         
-        public ICollection<UserDto> GetCollection(string filter)
+        public async Task<ICollection<UserDto>> GetCollection(string filter)
         {
-            var Collection = _repository.GetCollection(filter ?? string.Empty);
+            var Collection = await _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new UserDto
-            {
-                Id = c.Id,
+            {   Id = c.Id,
                 Name = c.Name,
                 Student = c.Student,
                 School = c.School,
@@ -32,12 +32,12 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public UserDto GetItem(int id)
+        public async Task<UserDto> GetItem(int id)
         {
-            User user = _repository.GetItem(id);
+            User user = await _repository.GetItem(id);
             if(user == null)
             {
-                throw new NullReferenceException("Not exist User with id " + id.ToString());
+                throw new NullReferenceException("No User exist with id " + id.ToString());
             }
 
             UserDto userDto = new UserDto();
@@ -53,21 +53,21 @@ namespace LetSkole.Services
             return userDto;
         }
 
-        public void Create(UserDto entity)
+        public async Task Create (UserDto entity)
         {
             if (entity.Birthday == null)
             {
-                throw new LetSkoleException("Falta ingresar nombre");
+                throw new LetSkoleException("It is neccesary to add a birthday");
             }
 
             if (entity.Name == "" || entity.Name == null)
             {
-                throw new LetSkoleException("Falta ingresar nombre");
+                throw new LetSkoleException("It is neccesary to add a name");
             }
 
             if (string.IsNullOrEmpty(entity.Email))
             {
-                throw new LetSkoleException("Falta ingresar correo electronico");
+                throw new LetSkoleException("It is neccesary to add email");
             }
             try
             {
@@ -76,8 +76,7 @@ namespace LetSkole.Services
             }
             catch
             {
-                throw new LetSkoleException("Correo electronico invalido");
-                return;
+                throw new LetSkoleException("Email invalid");
             }
 
             try
@@ -87,11 +86,10 @@ namespace LetSkole.Services
             }
             catch
             {
-                throw new LetSkoleException("Numero de celular invalido");
-                return;
+                throw new LetSkoleException("Phone number invalid");
             }
 
-            _repository.Create(new User
+            await _repository.Create(new User
             {
                 Name = entity.Name,
                 Birthday = entity.Birthday,
@@ -102,9 +100,15 @@ namespace LetSkole.Services
             });
         }
 
-        public void Update(UserDto entity)
+        public async Task Update(UserDto entity)
         {
-            User user = _repository.GetItem(entity.Id);
+
+            User user = await _repository.GetItem(entity.Id);
+            
+            if(user == null)
+            {
+                throw new NullReferenceException("No User exist with id " + entity.Id.ToString());
+            }
 
             user.Name = entity.Name;
             user.Student = entity.Student;
@@ -112,19 +116,29 @@ namespace LetSkole.Services
             user.Email = entity.Email;
             user.NumTelf = entity.NumTelf;
 
-            _repository.Update(user);
-
+            await _repository.Update(user);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-
-            _repository.Delete(id);
+            try
+            {
+                await _repository.Delete(id);
+             
+            } catch (Exception e)
+            {
+                throw new NullReferenceException("Error deleting user id " + id.ToString());
+            }
         }
 
-        public string SearchNumTel(int userId)
+        public async Task<string> SearchNumTel(int userId)
         {
-            string Numtel = _repository.SearchNumTel(userId);
+
+            string Numtel = await _repository.SearchNumTel(userId);
+            if (Numtel == null){
+                throw new NullReferenceException("Phone number invalid, user id " + userId.ToString());
+            }
+
             return Numtel;
         }
 

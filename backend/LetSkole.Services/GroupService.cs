@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
@@ -22,18 +23,18 @@ namespace LetSkole.Services
             _userGroupRepository = userGroupRepository;
         }
 
-        public void Create(int userId, GroupDto entity)
+        public async Task Create(int userId, GroupDto entity)
         {
             // Validar que exista el profesor
-            User user = _userRepository.GetItem(userId);
+            User user = _userRepository.GetItem(userId).Result;
 
             if(user == null)
             {
-                throw new Exception("User no existe");
+                throw new Exception("User doesn't exist");
             }
             if(user.Student == true)
             {
-                throw new Exception("Los estudiantes no pueden crear grupo");
+                throw new Exception("Students cannot create a group");
             }
             Group group = new Group
             {
@@ -42,7 +43,7 @@ namespace LetSkole.Services
                 MaxGrade = entity.MaxGrade
             };
 
-            _repository.Create(group);
+            await _repository.Create(group);
 
             UserGroup userGroup = new UserGroup {
                 GroupId = group.Id,
@@ -50,43 +51,17 @@ namespace LetSkole.Services
                 Grade = -1,
                 Admin = true
             };
-            _userGroupRepository.Create(userGroup);
+            await _userGroupRepository.Create(userGroup);
         }
 
-        //Retornamos los grupos de un profesor por su Id
-        public ICollection<Group> getGroupsByTeacherId(int userId)
-        {
-            ICollection<UserGroup> userGroup = _userGroupRepository.GetItemsByTeacherId(userId);
-
-            // Manipulando el ICollection
-            IEnumerator enumerator = userGroup.GetEnumerator();
-
-            while (enumerator.MoveNext())
-            {
-                UserGroup u = (UserGroup)enumerator.Current;
-                u.Group = _repository.GetItem(u.GroupId);
-            }
-
-            ICollection<Group> collectionGroup =  userGroup.Select(c => new Group
-            {
-                Id = c.GroupId,
-                Description = c.Group.Description,
-                Name = c.Group.Name,
-                MaxGrade = c.Group.MaxGrade
-            }).ToList();
-
-            return collectionGroup;
-        }
-
-        public void Delete(int id)
+        public async Task Delete(int id)
         { 
-            _repository.Delete(id);
+            await _repository.Delete(id);
         }
 
-
-        public ICollection<GroupDto> GetCollection(string filter)
+        public async Task<ICollection<GroupDto>> GetCollection(string filter)
         {
-            var Collection = _repository.GetCollection(filter ?? string.Empty);
+            var Collection = await _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new GroupDto
             {
                 Id = c.Id,
@@ -96,20 +71,21 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public ICollection<GroupDto> GetCollectionByTeacherId (int userId)
+        public async Task<ICollection<GroupDto>> GetCollectionByTeacherId (int userId)
         {
-            User user = _userRepository.GetItem(userId);
+            User user = await _userRepository.GetItem(userId);
 
             if (user == null)
             {
-                throw new Exception("User no existe");
+                throw new Exception("User doesn't exist");
             }
             if (user.Student == true)
             {
-                throw new Exception("Los estudiantes no pueden crear grupo");
+                throw new Exception("Students get groups");
             }
 
-            return _repository.GetCollectionByTeacher(userId).Select(c => new GroupDto
+            var collectionTeacher =  await _repository.GetCollectionByTeacher(userId);
+            return collectionTeacher.Select(c => new GroupDto
             {   Id = c.Id,
                 Description = c.Description,
                 Name = c.Name,
@@ -117,9 +93,9 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public GroupDto GetItem(int id)
+        public async Task<GroupDto> GetItem(int id)
         {
-            Group group = _repository.GetItem(id);
+            Group group = await _repository.GetItem(id);
             GroupDto groupDto = new GroupDto();
             groupDto.Id = group.Id;
             groupDto.Name = group.Name;
@@ -128,36 +104,32 @@ namespace LetSkole.Services
             return groupDto;
         }
 
-        public void Update(GroupDto entity, int userId)
+        public async Task Update(GroupDto entity, int userId)
         {
             
-            Group group = _repository.GetItem(entity.Id);
+            Group group = await _repository.GetItem(entity.Id);
 
-            User auxUser = _userRepository.GetItem(userId);
-            ICollection<Group> auxGroupsTeacher = getGroupsByTeacherId(userId);
-
+            User auxUser = _userRepository.GetItem(userId).Result;
+            var auxGroupsTeacher = await _repository.GetCollectionByTeacher(userId);
+           
             Group auxGroup = new Group { Id = entity.Id };
             bool contenedor = auxGroupsTeacher.Contains(group);
 
-
-
             if (contenedor == false)
             {
-                throw new Exception("No puede editar el grupo de otro usuario");
+                throw new LetSkoleException("User " + userId + " can't edit this group");
             }
-
-            
 
             if (group == null)
             {
-                throw new Exception("El grupo no existe");
+                throw new NullReferenceException("The group doesn't exists");
             }
 
 
             group.Name = entity.Name;
             group.Description = entity.Description;
             //group.MaxGrade = entity.MaxGrade;
-            _repository.Update(group);
+            await _repository.Update(group);
         }
     }
 }

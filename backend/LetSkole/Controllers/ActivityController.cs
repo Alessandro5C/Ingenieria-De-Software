@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,8 +22,17 @@ namespace LetSkole.Controllers
         [HttpPost]
         public async Task<ActionResult<ActivityDto>> Post([FromBody] ActivityDto ActivityDto)
         {
-            await _service.Create(ActivityDto);
-            return CreatedAtAction(nameof(GetItemById), new { id = ActivityDto.Id });
+            
+            try
+            {
+                await _service.Create(ActivityDto);
+            } 
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+            return CreatedAtAction(nameof(GetItemById), new { id = ActivityDto.Id }, ActivityDto);
         }
 
         [HttpGet]
@@ -34,7 +44,13 @@ namespace LetSkole.Controllers
         [HttpGet]
         public async Task<ActionResult<ActivityDto>> GetItemById ([FromQuery] int id)
         {
-            return Ok( await _service.GetItem(id));
+            try
+            {
+                return Ok(await _service.GetItem(id));
+            } catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpDelete]

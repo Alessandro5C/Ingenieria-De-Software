@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using LetSkole.Entities;
 
 namespace LetSkole.DataAccess
 {
     public interface IUserRepository
     {
-       ICollection<User> GetCollection (string filter);
-        User GetItem (int id);
-        void Create (User entity);
-        void Update (User entity);
-        void Delete (int id);
-        string SearchNumTel(int userId);
+        Task<ICollection<User>> GetCollection (string filter);
+        Task<User> GetItem (int id);
+        Task Create (User entity);
+        Task Update (User entity);
+        Task Delete (int id);
+        Task<string> SearchNumTel(int userId);
 
     }
 }
