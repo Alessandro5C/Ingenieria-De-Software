@@ -15,7 +15,6 @@ namespace LetSkole.Entities
         public string Description { get; set; }
         public int MaxGrade { get; set; }
 
-        public ICollection<UserGroup> UserGroups { get; set; }
         public override bool Equals(Object obj)
         {
             if ((obj == null) || !(this.GetType().Equals(obj.GetType())))

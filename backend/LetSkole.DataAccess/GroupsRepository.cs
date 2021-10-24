@@ -32,8 +32,6 @@ namespace LetSkole.DataAccess
             {
                 Id = id
             }).State = EntityState.Deleted;
-            //Falta encontrar el Group
-            //_context.Groups.Remove();
             _context.SaveChanges();
         }
 
@@ -43,6 +41,15 @@ namespace LetSkole.DataAccess
                 .ToList();
         }
 
+        public ICollection<Group> GetCollectionByTeacher(int userId)
+        {
+
+            ICollection<Group> query =  _context.Groups.Join(_context.UserGroups, group => group.Id, userGroup => userGroup.GroupId, (group, userGroup) => new { PersonId = userGroup.UserId, Id = group.Id, Name = group.Name, Description = group.Description, maxGrade = group.MaxGrade })
+                   .Where(person => person.PersonId == userId)
+                   .Select(g => new Group{ Id = g.Id, Name = g.Name, Description = g.Description, MaxGrade = g.maxGrade }).ToList();
+
+            return query;        
+        }
         public Group GetItem(int id)
         {
             return _context.Groups.Find(id);

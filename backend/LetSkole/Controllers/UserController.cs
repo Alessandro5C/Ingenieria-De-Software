@@ -46,7 +46,7 @@ namespace LetSkole.Controllers
             UserDto userDto;
             try
             {
-                userDto = await _service.GetItem(id);
+                userDto =  _service.GetItem(id);
             }
             catch(NullReferenceException e)
             {
