@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+//axios.defaults.baseURL = "https://letskole.herokuapp.com/api/v1";
+axios.defaults.baseURL = "https://localhost:5001/api/v1/";
+
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 

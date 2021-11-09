@@ -19,7 +19,7 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="LetSkole" />
     </ListItem>
   </div>
 );
@@ -36,12 +36,14 @@ export const secondaryListItems = (
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Listar Clientes" />
+      <ListItemText primary="Mostrar usuarios" />
     </ListItem>
+
+    
     <ListItem
       button
       component={NavLink}
-      to={"/customers/add"}
+      to={"/v1/User/GetAllByFilter"}
       activeClassName="Mui-selected"
     >
       <ListItemIcon>

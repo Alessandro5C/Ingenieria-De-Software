@@ -16,11 +16,13 @@ import { Link } from "react-router-dom";
 import apiCustomers from "../../api/api.customers";
 import Title from "../../components/dashboard/title";
 import { Customer } from "../../models/customer";
+import { User } from "../../models/user";
 
 function CustomersList() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [customers, setCustomers] = useState<Customer[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [target, setTarget] = useState("");
 
   function changeRemove(
@@ -44,7 +46,7 @@ function CustomersList() {
 
   useEffect(() => {
     apiCustomers.list().then((data) => {
-      setCustomers(data);
+      setUsers(data);
       setInitialLoading(false);
     });
   }, []);

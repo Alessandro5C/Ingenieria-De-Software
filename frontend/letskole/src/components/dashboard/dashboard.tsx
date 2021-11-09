@@ -36,6 +36,7 @@ export default function Dashboard({ children }: Props) {
                         {children}
                     </Grid>
                     <Box style={{ paddingTop: '32px' }}>
+                       
                         <Footer />
                     </Box>
                 </Container>

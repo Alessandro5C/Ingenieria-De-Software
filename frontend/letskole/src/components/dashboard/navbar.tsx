@@ -42,7 +42,7 @@ function Navbar({ toggleDrawer, open }: Props) {
                             flexGrow: 1,
                         }}
                     >
-                        Dashboard
+                        LetSkole
                     </Typography>
                     <IconButton color='inherit'>
                         <Badge badgeContent={4} color='secondary'>
