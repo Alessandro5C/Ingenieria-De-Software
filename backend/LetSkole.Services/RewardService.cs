@@ -12,20 +12,22 @@ namespace LetSkole.Services
     public class RewardService : IRewardService
     {
         private readonly IRewardsRepository _repository;
+        private readonly IUserRepository _userRepository;
 
-        public RewardService(IRewardsRepository repository)
+        public RewardService(IRewardsRepository repository,IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
 
-        public async Task Create(RewardDto entity)
+
+        public async Task CreateRewardxUser(RewardUserDto entity)
         {
-            await _repository.Create(new Reward
+
+            await _repository.Create(new RewardUser
             {
-                GameId = entity.GameId,
-                Name = entity.Name,
-                Description = entity.Description,
-                Image = entity.Image,
+                UserId = entity.UserId,
+                RewardId = entity.RewardId
             });
         }
 
@@ -39,10 +41,22 @@ namespace LetSkole.Services
             var Collection = await _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new RewardDto
             {
+                Id=c.Id,
                 GameId = c.GameId,
                 Description = c.Description,
                 Name = c.Name,
                 Image = c.Image,
+            }).ToList();
+        }
+
+        public async Task<ICollection<RewardUserDto>> GetCollectionRewardUser(int UserId)
+        {
+            var Collection = await _repository.GetCollectionRewardUser(UserId);
+
+            return Collection.Select(c => new RewardUserDto
+            {
+                UserId = c.UserId,
+                RewardId = c.RewardId
             }).ToList();
         }
 
@@ -58,14 +72,5 @@ namespace LetSkole.Services
             return rewardDto;
         }
 
-        public async Task Update(RewardDto entity)
-        {
-            Reward reward = await _repository.GetItem(entity.Id);
-            reward.GameId = entity.GameId;
-            reward.Name = entity.Name;
-            reward.Description = entity.Description;
-            reward.Image = entity.Image;
-            await _repository.Update(reward);
-        }
     }
 }

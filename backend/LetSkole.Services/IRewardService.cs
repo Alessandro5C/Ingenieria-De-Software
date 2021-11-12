@@ -9,10 +9,11 @@ namespace LetSkole.Services
     public interface IRewardService
     {
         Task <ICollection<RewardDto>> GetCollection(string filter);
-        Task <RewardDto> GetItem(int id);
-        Task Create(RewardDto entity);
-        Task Update(RewardDto entity);
+        Task<RewardDto> GetItem(int id);
         Task Delete(int id);
+
+        Task CreateRewardxUser(RewardUserDto entity);
+        Task<ICollection<RewardUserDto>> GetCollectionRewardUser(int userId);
 
     }
 }

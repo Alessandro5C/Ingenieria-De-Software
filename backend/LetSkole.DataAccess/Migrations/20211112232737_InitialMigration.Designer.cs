@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LetSkole.DataAccess.Migrations
 {
     [DbContext(typeof(LetSkoleDbContext))]
-    [Migration("20211021072007_initialMigration")]
-    partial class initialMigration
+    [Migration("20211112232737_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -147,6 +147,21 @@ namespace LetSkole.DataAccess.Migrations
                     b.ToTable("Rewards");
                 });
 
+            modelBuilder.Entity("LetSkole.Entities.RewardUser", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RewardId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RewardId");
+
+                    b.HasIndex("RewardId");
+
+                    b.ToTable("RewardUsers");
+                });
+
             modelBuilder.Entity("LetSkole.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -206,21 +221,6 @@ namespace LetSkole.DataAccess.Migrations
                     b.ToTable("UserGroups");
                 });
 
-            modelBuilder.Entity("RewardUser", b =>
-                {
-                    b.Property<int>("RewardsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RewardsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RewardUser");
-                });
-
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>
                 {
                     b.HasOne("LetSkole.Entities.User", "User")
@@ -243,10 +243,29 @@ namespace LetSkole.DataAccess.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("LetSkole.Entities.RewardUser", b =>
+                {
+                    b.HasOne("LetSkole.Entities.Reward", "Reward")
+                        .WithMany("RewardUsers")
+                        .HasForeignKey("RewardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LetSkole.Entities.User", "User")
+                        .WithMany("RewardUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reward");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
                 {
                     b.HasOne("LetSkole.Entities.Group", "Group")
-                        .WithMany("UserGroups")
+                        .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -262,28 +281,15 @@ namespace LetSkole.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RewardUser", b =>
+            modelBuilder.Entity("LetSkole.Entities.Reward", b =>
                 {
-                    b.HasOne("LetSkole.Entities.Reward", null)
-                        .WithMany()
-                        .HasForeignKey("RewardsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LetSkole.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.Group", b =>
-                {
-                    b.Navigation("UserGroups");
+                    b.Navigation("RewardUsers");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.User", b =>
                 {
+                    b.Navigation("RewardUsers");
+
                     b.Navigation("UserGroups");
                 });
 #pragma warning restore 612, 618

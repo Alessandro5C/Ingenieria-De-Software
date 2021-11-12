@@ -29,6 +29,8 @@ namespace LetSkole.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserGroup>().HasKey(x => new { x.UserId, x.GroupId });
+            modelBuilder.Entity<RewardUser>().HasKey(x => new { x.UserId, x.RewardId });
+
         }
 
         public DbSet<User> Users { get; set; }
@@ -37,6 +39,7 @@ namespace LetSkole.DataAccess
         public DbSet<Game> Games { get; set; }
         public DbSet<Activity> Activities { get; set; }
         
+        public DbSet<RewardUser> RewardUsers { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
     }
 }
