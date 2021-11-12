@@ -5,6 +5,7 @@ import Dashboard from "../../components/dashboard/dashboard";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import CustomersRouter from "./router/customers-router";
 import DashboardRouter from "./router/dashboard-router";
+import UsersRouter from "./router/users-router";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <MuiThemeProvider theme={themeMui}>
         <Switch>
           <Dashboard>
+            <UsersRouter />
             <CustomersRouter />
             <DashboardRouter />
           </Dashboard>

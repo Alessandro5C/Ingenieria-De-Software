@@ -1,6 +1,6 @@
 export class User {
-    Id: number = 0;
-    Name: string = "";
+    id: number = 0;
+    name: string = "";
     student: string = "";
     numTelf: boolean = false;
     email: string="";

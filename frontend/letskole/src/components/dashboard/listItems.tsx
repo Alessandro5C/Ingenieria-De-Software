@@ -26,7 +26,19 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Clientes</ListSubheader>
+    <ListSubheader inset>Usuarios</ListSubheader>
+      <ListItem
+          button
+          component={NavLink}
+          to={"/users/list"}
+          activeClassName="Mui-selected"
+      >
+          <ListItemIcon>
+              <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Mostrar usuarios" />
+      </ListItem>
+
     <ListItem
       button
       component={NavLink}
@@ -36,7 +48,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Mostrar usuarios" />
+      <ListItemText primary="Mostrar clientes" />
     </ListItem>
 
     
