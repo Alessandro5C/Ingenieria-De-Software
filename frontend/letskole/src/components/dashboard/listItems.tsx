@@ -30,6 +30,7 @@ export const secondaryListItems = (
       <ListItem
           button
           component={NavLink}
+          //Agrega al router el "to"
           to={"/users/list"}
           activeClassName="Mui-selected"
       >
@@ -76,5 +77,19 @@ export const secondaryListItems = (
           </ListItemIcon>
           <ListItemText primary="Mostrar grupos" />
       </ListItem>
+
+      
+    <ListSubheader inset>Actividades</ListSubheader>
+    <ListItem
+      button
+      component={NavLink}
+      to={"/activities/list"}
+      activeClassName="Miu-selected">
+      
+      <ListItemIcon>
+        <AssignmentIcon/>
+      </ListItemIcon>
+        <ListItemText primary="Mostrar actividades" />
+    </ListItem>
   </div>
 );

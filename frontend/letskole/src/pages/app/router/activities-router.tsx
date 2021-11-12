@@ -4,14 +4,16 @@ import CustomerForm from "../../customers/customer-form";
 import CustomersDetails from "../../customers/customers-details";
 import CustomersList from "../../customers/customers-list";
 import UsersList from "../../users/users-list";
+import ActivitiesList from "../../activities/activities-list";
+import ActivityForm from "../../activities/activity-form";
 
 
 function UsersRouter() {
     return (
         <React.Fragment>
-            <Route exact path="/users/list" component={UsersList} />
-            <Route exact path="/customers/add" component={CustomerForm} />
-            <Route exact path="/customers/edit/:id" component={CustomerForm} />
+            <Route exact path="/activities/list" component={ActivitiesList} />
+            <Route exact path="/activities/add" component={ActivityForm} />
+            <Route exact path="/activities/edit/:id" component={ActivityForm} />
             <Route exact path="/customers/detail/:id" component={CustomersDetails} />
         </React.Fragment>
     );
