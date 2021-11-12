@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import CustomersRouter from "./router/customers-router";
 import DashboardRouter from "./router/dashboard-router";
 import UsersRouter from "./router/users-router";
+import GroupsRouter from "./router/groups-router";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Dashboard>
             <UsersRouter />
+            <GroupsRouter/>
             <CustomersRouter />
             <DashboardRouter />
           </Dashboard>

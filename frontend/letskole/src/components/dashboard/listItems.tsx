@@ -63,5 +63,18 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Agregar Clientes" />
     </ListItem>
+
+    <ListSubheader inset>Grupos</ListSubheader>
+      <ListItem
+          button
+          component={NavLink}
+          to={"/groups/list"}
+          activeClassName="Mui-selected"
+      >
+          <ListItemIcon>
+              <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Mostrar grupos" />
+      </ListItem>
   </div>
 );
