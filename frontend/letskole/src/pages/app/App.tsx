@@ -8,6 +8,7 @@ import DashboardRouter from "./router/dashboard-router";
 import UsersRouter from "./router/users-router";
 import GroupsRouter from "./router/groups-router";
 import ActivitiesRouter from "./router/activities-router";
+import GamesRouter from "./router/games-router";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <GroupsRouter/>
             <CustomersRouter />
             <ActivitiesRouter />
+            <GamesRouter />
             <DashboardRouter />
           </Dashboard>
         </Switch>

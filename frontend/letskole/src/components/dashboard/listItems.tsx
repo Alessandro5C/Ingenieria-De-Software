@@ -78,6 +78,19 @@ export const secondaryListItems = (
           <ListItemText primary="Mostrar grupos" />
       </ListItem>
 
+    <ListSubheader inset>Juegos</ListSubheader>
+      <ListItem
+          button
+          component={NavLink}
+          to={"/games/list"}
+          activeClassName="Mui-selected"
+      >
+          <ListItemIcon>
+              <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Mostrar juegos" />
+      </ListItem>
+
       
     <ListSubheader inset>Actividades</ListSubheader>
     <ListItem
