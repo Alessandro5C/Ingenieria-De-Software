@@ -22,7 +22,7 @@ namespace LetSkole.Entities
         [StringLength(30)]
         public string School { get; set; }
 
-        public ICollection<Reward> Rewards { get; set; }
+        public ICollection<RewardUser> RewardUsers { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
     }
 }

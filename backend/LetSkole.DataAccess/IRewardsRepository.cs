@@ -10,9 +10,10 @@ namespace LetSkole.DataAccess
     {
         Task <ICollection<Reward>> GetCollection(string filter);
         Task <Reward> GetItem(int id);
-        Task Create(Reward entity);
-        Task Update(Reward entity);
         Task Delete(int id);
+
+        Task Create(RewardUser entity);
+        Task<ICollection<RewardUser>> GetCollectionRewardUser(int userId);
 
     }
 }

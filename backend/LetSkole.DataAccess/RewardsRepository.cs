@@ -18,9 +18,9 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public async Task Create(Reward entity)
+        public async Task Create(RewardUser entity)
         {
-            _context.Add(entity);
+            _context.Set<RewardUser>().Add(entity);
             await _context.SaveChangesAsync();
         }
 
@@ -39,17 +39,17 @@ namespace LetSkole.DataAccess
                 .ToListAsync();
         }
 
+        public async Task<ICollection<RewardUser>> GetCollectionRewardUser(int userId)
+        {
+            return await _context.RewardUsers.Where(c => c.UserId.Equals(userId))
+                .ToListAsync();
+        }
+
         public async Task<Reward> GetItem(int id)=>
             await _context.Rewards
                 .SingleOrDefaultAsync(c => c.Id.Equals(id));
     
 
-        public async Task Update(Reward entity)
-        {
-            _context.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
 
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LetSkole.DataAccess.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -130,24 +130,24 @@ namespace LetSkole.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RewardUser",
+                name: "RewardUsers",
                 columns: table => new
                 {
-                    RewardsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RewardId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RewardUser", x => new { x.RewardsId, x.UsersId });
+                    table.PrimaryKey("PK_RewardUsers", x => new { x.UserId, x.RewardId });
                     table.ForeignKey(
-                        name: "FK_RewardUser_Rewards_RewardsId",
-                        column: x => x.RewardsId,
+                        name: "FK_RewardUsers_Rewards_RewardId",
+                        column: x => x.RewardId,
                         principalTable: "Rewards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RewardUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_RewardUsers_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -164,9 +164,9 @@ namespace LetSkole.DataAccess.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RewardUser_UsersId",
-                table: "RewardUser",
-                column: "UsersId");
+                name: "IX_RewardUsers_RewardId",
+                table: "RewardUsers",
+                column: "RewardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserGroups_GroupId",
@@ -180,7 +180,7 @@ namespace LetSkole.DataAccess.Migrations
                 name: "Activities");
 
             migrationBuilder.DropTable(
-                name: "RewardUser");
+                name: "RewardUsers");
 
             migrationBuilder.DropTable(
                 name: "UserGroups");

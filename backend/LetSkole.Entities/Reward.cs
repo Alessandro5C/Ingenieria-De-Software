@@ -20,6 +20,6 @@ namespace LetSkole.Entities
         [StringLength(256)]
         public string Image { get; set; }
         
-        public ICollection<User> Users { get; set; }
+        public ICollection<RewardUser> RewardUsers { get; set; }
     }
 }
