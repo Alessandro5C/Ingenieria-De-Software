@@ -132,10 +132,9 @@ function CustomersList() {
                           color="inherit"
                           style={{ width: "100px" }}
                           startIcon={
-                            <span className="material-icons">edit</span>
+                            <span className="material-icons">Editar</span>
                           }
                         >
-                          Editar
                         </Button>
 
 
@@ -151,10 +150,9 @@ function CustomersList() {
                           color="default"
                           style={{ width: "100px" }}
                           startIcon={
-                            <span className="material-icons">info</span>
+                            <span className="material-icons">Detalle</span>
                           }
                         >
-                          Detalles
                         </Button>
 
 
@@ -169,11 +167,10 @@ function CustomersList() {
                           style={{ width: "100px" }}
                           startIcon={
                             <span className="material-icons">
-                              delete_outline
+                              Eliminar
                             </span>
                           }
                         >
-                          Eliminar
                         </Button>
 
 

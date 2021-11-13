@@ -114,25 +114,27 @@ namespace LetSkole.Services
 
         public async Task Update(ActivityDto entity)
         {
+            
             Activity activity = await _repository.GetItem(entity.Id);
             DateTime inicio = DateTime.MinValue;
-
+            
             if (activity == null)
             {
                 throw new Exception("Id activity doesn't exists");
             }
 
-           // Falta comprobar si el usuario existe
-                /*Activity activityUserID = _repository.GetItem(entity.UserId);
-                if (activityUserID == null)
-                {
-                    throw new Exception("El id del usuario no existe");
-                    return;
-                }*/
+
+            // Falta comprobar si el usuario existe
+            User user = await _userRepository.GetItem(entity.UserId);
+            if (user == null)
+            {
+                throw new Exception("El id del usuario no existe");
+            }
+            
 
 
-               // Nombre
-                if (entity.Name == "" || entity.Name == null)
+            // Nombre
+            if (entity.Name == "" || entity.Name == null)
             {
                 activity.Name = activity.Name;
             }
@@ -192,7 +194,7 @@ namespace LetSkole.Services
                 throw new Exception("Invalid date");
             }
 
-            res3 = DateTime.Compare(entity.EndTime, auxStartDate);
+            res3 = DateTime.Compare(auxStartDate, entity.EndTime);
             if (res3 <= 0)
             {
                 throw new Exception("Invalid date");
@@ -209,8 +211,7 @@ namespace LetSkole.Services
             {
                 throw new Exception("Invalid date");
             }
-
-            activity.StartTime = entity.StartTime;
+            
             await _repository.Update(activity);
         }
 

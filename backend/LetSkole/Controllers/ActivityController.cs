@@ -61,7 +61,7 @@ namespace LetSkole.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put ([FromQuery] ActivityDto activityDto)
+        public async Task<IActionResult> Put ([FromBody] ActivityDto activityDto)
         {
             await _service.Update(activityDto);
             return Accepted();
