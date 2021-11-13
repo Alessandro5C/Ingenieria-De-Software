@@ -12,7 +12,7 @@ interface OwnSelectTextFieldProps extends StandardTextFieldProps {
     selection: OwnDict[]
 }
 
-const MultilineTextFields = (props:OwnSelectTextFieldProps) => {
+const CustomSelect = (props:OwnSelectTextFieldProps) => {
     const [localValue, setLocalValue] = React.useState(props.value);
     React.useEffect(() => setLocalValue(props.value ?? ""), [props.value])
 
@@ -23,7 +23,6 @@ const MultilineTextFields = (props:OwnSelectTextFieldProps) => {
             SelectProps={{
                 native: true,
             }}
-            // helperText="Please select your currency"
             variant="outlined"
             {...props}
         >
@@ -36,4 +35,4 @@ const MultilineTextFields = (props:OwnSelectTextFieldProps) => {
     );
 }
 
-export default MultilineTextFields;
+export default CustomSelect;

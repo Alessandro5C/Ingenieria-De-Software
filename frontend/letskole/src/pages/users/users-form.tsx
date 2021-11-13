@@ -10,6 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import apiUsers from "../../api/api.user";
 import { User } from "../../models/user";
 import CustomSelect from "../../components/custom-select/custom-select";
+import CustomDatePicker from "../../components/custom-datepicker/custom-datepicker";
 
 function UsersForm() {
     const history = useHistory();
@@ -40,7 +41,6 @@ function UsersForm() {
                 setUser(user);
             });
         } else {
-            console.log(user);
             //setLoading(true);
             apiUsers.add(user).then(() => {
                 //updatedLoading();
@@ -101,13 +101,6 @@ function UsersForm() {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    {/*<CustomTextField*/}
-                                    {/*    value={user.student}*/}
-                                    {/*    onChange={(event) => changeValueUser(event)}*/}
-                                    {/*    required*/}
-                                    {/*    name="student"*/}
-                                    {/*    label="¿Eres estudiante?"*/}
-                                    {/*/>*/}
                                     <CustomSelect
                                         value={user.student}
                                         label="¿Eres estudiante?"
@@ -137,7 +130,8 @@ function UsersForm() {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <CustomTextField
+                                    <CustomDatePicker
+                                        useNative={true}
                                         value={user.birthday}
                                         onChange={(event) => changeValueUser(event)}
                                         required
