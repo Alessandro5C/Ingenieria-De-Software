@@ -195,7 +195,7 @@ namespace LetSkole.Services
             }
 
             res3 = DateTime.Compare(auxStartDate, entity.EndTime);
-            if (res3 <= 0)
+            if (res3 >= 0)
             {
                 throw new Exception("Invalid date");
             }

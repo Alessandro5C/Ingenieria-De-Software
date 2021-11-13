@@ -1,5 +1,4 @@
 import {
-  Button,
   Divider,
   Grid,
   Paper,
@@ -11,6 +10,8 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
+import {default as ButtonL} from '@material-ui/core/Button';
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import apiActivities from "../../api/api.activity";
@@ -19,8 +20,10 @@ import Title from "../../components/dashboard/title";
 import { Activity } from "../../models/activity";
 import { Customer } from "../../models/customer";
 import { User } from "../../models/user";
+import Button from '@mui/material/Button';
 
-function CustomersList() {
+
+function ActivitiesList() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -29,21 +32,17 @@ function CustomersList() {
   const [users, setUsers] = useState<User[]>([]);
   const [target, setTarget] = useState("");
 
-  function changeRemove(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: number
-  ) {
+  function changeRemove(id: number) {
     //const activity = activities.find((x) => x.id === id);
-    const customer = customers.find((x) => x.customerId === id);
+    const activity = activities.find((x) => x.id === id);
 
-    if (customer) {
+    if (activity) {
       //Delete
-      setTarget(event.currentTarget.name);
       setLoading(true);
-      apiCustomers.delete(id).then(() => {
+      apiActivities.delete(id).then(() => {
         setLoading(false);
-        setCustomers(
-          customers.filter((customer) => customer.customerId !== id)
+        setActivities(
+          activities.filter((activity) => activity.id !== id)
         );
       });
     }
@@ -124,7 +123,7 @@ function CustomersList() {
                       <TableCell> {activity.description}</TableCell>
                       <TableCell>
                         
-                        <Button
+                        <ButtonL
                           component={Link}
                           to={`/activities/edit/${activity.id}`}
                           size={"small"}
@@ -135,16 +134,16 @@ function CustomersList() {
                             <span className="material-icons">Editar</span>
                           }
                         >
-                        </Button>
+                        </ButtonL>
 
 
                       </TableCell>
                       <TableCell>
 
 
-                        <Button
+                        <ButtonL
                           component={Link}
-                          to={`/customers/detail/${activity.id}`}
+                          to={`/activities/detail/${activity.id}`}
                           size={"small"}
                           variant="contained"
                           color="default"
@@ -153,24 +152,13 @@ function CustomersList() {
                             <span className="material-icons">Detalle</span>
                           }
                         >
-                        </Button>
+                        </ButtonL>
 
 
                       </TableCell>
                       <TableCell>
-
-
-                        <Button
-                          size={"small"}
-                          variant="contained"
-                          color="default"
-                          style={{ width: "100px" }}
-                          startIcon={
-                            <span className="material-icons">
-                              Eliminar
-                            </span>
-                          }
-                        >
+                        <Button onClick={() => changeRemove(activity.id)}>
+                        Eliminar
                         </Button>
 
 
@@ -194,4 +182,4 @@ function CustomersList() {
   );
 }
 
-export default CustomersList;
+export default ActivitiesList;

@@ -148,19 +148,21 @@ function CustomersList() {
                         </Button>
                       </TableCell>
                       <TableCell>
+                        
                         <Button
                           size={"small"}
                           variant="contained"
                           color="default"
                           style={{ width: "100px" }}
                           startIcon={
-                            <span className="material-icons">
+                              <span className="material-icons">
                               delete_outline
                             </span>
-                          }
+                            }
                         >
-                          Eliminar
+                            Eliminar
                         </Button>
+
                       </TableCell>
                     </TableRow>
                   ))}

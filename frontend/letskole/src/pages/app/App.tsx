@@ -10,10 +10,14 @@ import GroupsRouter from "./router/groups-router";
 import ActivitiesRouter from "./router/activities-router";
 import GamesRouter from "./router/games-router";
 import UserGroupsRouter from "./router/userGroups-router";
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 function App() {
   return (
     <Router>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+
       <MuiThemeProvider theme={themeMui}>
         <Switch>
           <Dashboard>
@@ -27,6 +31,8 @@ function App() {
           </Dashboard>
         </Switch>
       </MuiThemeProvider>
+
+    </MuiPickersUtilsProvider>
     </Router>
   );
 }

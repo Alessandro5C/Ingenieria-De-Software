@@ -116,5 +116,17 @@ export const secondaryListItems = (
       </ListItemIcon>
         <ListItemText primary="Mostrar actividades" />
     </ListItem>
+
+    <ListItem
+      button
+      component={NavLink}
+      to={"/activities/add"}
+      activeClassName="Miu-selected">
+      
+      <ListItemIcon>
+        <AssignmentIcon/>
+      </ListItemIcon>
+        <ListItemText primary="Agregar actividades" />
+    </ListItem>
   </div>
 );
