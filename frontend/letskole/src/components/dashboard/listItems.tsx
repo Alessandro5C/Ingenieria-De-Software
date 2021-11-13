@@ -40,6 +40,18 @@ export const secondaryListItems = (
           <ListItemText primary="Mostrar usuarios" />
       </ListItem>
 
+      <ListItem
+          button
+          component={NavLink}
+          to={"/users/add"}
+          activeClassName="Mui-selected"
+      >
+          <ListItemIcon>
+              <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Agregar usuarios" />
+      </ListItem>
+
     <ListItem
       button
       component={NavLink}
@@ -56,7 +68,7 @@ export const secondaryListItems = (
     <ListItem
       button
       component={NavLink}
-      to={"/v1/User/GetAllByFilter"}
+      to={"/customers/add"}
       activeClassName="Mui-selected"
     >
       <ListItemIcon>
