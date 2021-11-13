@@ -13,38 +13,33 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import apiGroups from "../../api/api.group";
+import apiUserGroup from "../../api/api.usergroup";
 import Title from "../../components/dashboard/title";
 import { Group } from "../../models/group";
+import {userGroup} from "../../models/user-groups"
 
-function GroupsList() {
+function UserGroupsList() {
     const [initialLoading, setInitialLoading] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [groups, setGroups] = useState<Group[]>([]);
+    const [userGroups, setUserGroups] = useState<userGroup[]>([]);
     const [target, setTarget] = useState("");
 
     function changeRemove(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         id: number
     ) {
-        const customer = groups.find((x) => x.id === id);
+        const customer = userGroups.find((x) => x.groupId === id);
 
         if (customer) {
             //Delete
             setTarget(event.currentTarget.name);
             setLoading(true);
-            apiGroups.delete(id).then(() => {
-                setLoading(false);
-                setGroups(
-                    groups.filter((x) => x.id !== id)
-                );
-            });
         }
     }
 
     useEffect(() => {
-        apiGroups.list().then((data) => {
-            setGroups(data);
+        apiUserGroup.list(1).then((data) => {
+            setUserGroups(data);
             setInitialLoading(false);
             console.log(data);
         });
@@ -104,22 +99,21 @@ function GroupsList() {
                                     <TableRow>
                                         <TableCell>Nro</TableCell>
                                         <TableCell>Nombre</TableCell>
-                                        <TableCell>Descripcion</TableCell>
+                                        <TableCell>Nota</TableCell>
                                         <TableCell>Editar</TableCell>
-                                        <TableCell>Detalle</TableCell>
                                         <TableCell>Eliminar</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {groups.map((x, index) => (
-                                        <TableRow key={x.id}>
+                                    {userGroups.map((x, index) => (
+                                        <TableRow key={x.groupId}>
                                             <TableCell>{index + 1}</TableCell>
-                                            <TableCell>{x.name}</TableCell>
-                                            <TableCell> {x.description}</TableCell>
+                                            <TableCell>{x.userId}</TableCell>
+                                            <TableCell> {x.grade}</TableCell>
                                             <TableCell>
                                                 <Button
                                                     component={Link}
-                                                    to={`/customers/edit/${x.id}`}
+                                                    to={`/customers/edit/${x.groupId}`}
                                                     size={"small"}
                                                     variant="contained"
                                                     color="inherit"
@@ -131,21 +125,7 @@ function GroupsList() {
                                                     Editar
                                                 </Button>
                                             </TableCell>
-                                            <TableCell>
-                                                <Button
-                                                    component={Link}
-                                                    to={`/UserGroups/list/${x.id}`}
-                                                    size={"small"}
-                                                    variant="contained"
-                                                    color="default"
-                                                    style={{ width: "100px" }}
-                                                    startIcon={
-                                                        <span className="material-icons">info</span>
-                                                    }
-                                                >
-                                                    Detalles
-                                                </Button>
-                                            </TableCell>
+                                            
                                             <TableCell>
                                                 <Button
                                                     size={"small"}
@@ -180,4 +160,4 @@ function GroupsList() {
     );
 }
 
-export default GroupsList;
+export default UserGroupsList;
