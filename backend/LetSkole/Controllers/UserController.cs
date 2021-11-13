@@ -60,7 +60,7 @@ namespace LetSkole.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put ([FromQuery] UserDto userDto)
+        public async Task<IActionResult> Put ([FromBody] UserDto userDto)
         {
             try
             {

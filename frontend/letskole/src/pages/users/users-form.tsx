@@ -1,4 +1,4 @@
-import {Button, Grid } from "@material-ui/core";
+import {Button, Grid, MenuItem} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import CustomBody from "../../components/body-custom/custom-body";
 import CustomBodyDescription from "../../components/body-custom/custom-body-description";
@@ -23,7 +23,7 @@ function UsersForm() {
     const { id } = useParams<{ id: string }>();
 
     function changeValueUser(
-        event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement >
     ) {
         const { value, name } = event.target;
         setUser({ ...user, [name]: value });
@@ -110,11 +110,22 @@ function UsersForm() {
                                     {/*/>*/}
                                     <CustomSelect
                                         value={user.student}
-                                        // onChange={(event) => changeValueUser(event)}
+                                        label="¿Eres estudiante?"
+                                        onChange={(event) => changeValueUser(event)}
                                         required
                                         name="student"
+                                        helperText="Selecciona cual es tu rol"
+                                        selection={[
+                                            {
+                                                value: true,
+                                                label: "Soy estudiante"
+                                            },
+                                            {
+                                                value: false,
+                                                label: "Soy profesor"
+                                            }
+                                        ]}
                                     />
-
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <CustomTextField

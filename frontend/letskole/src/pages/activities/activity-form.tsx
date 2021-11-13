@@ -6,7 +6,6 @@ import CustomBodyName from "../../components/body-custom/custom-body-name";
 import CustomTextField from "../../components/custom-text-field/custom-text-field";
 import CustomMainForm from "../../components/form/custom-main-form";
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { useHistory, useParams } from "react-router-dom";
 import apiCustomers from "../../api/api.customers";
@@ -14,7 +13,6 @@ import { Customer } from "../../models/customer";
 import { Activity } from "../../models/activity";
 import apiActivities from "../../api/api.activity";
 
-import { DateTimePicker } from "@material-ui/pickers";
 
 function ActivityForm() {
   const history = useHistory();
