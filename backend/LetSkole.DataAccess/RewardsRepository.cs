@@ -39,10 +39,13 @@ namespace LetSkole.DataAccess
                 .ToListAsync();
         }
 
-        public async Task<ICollection<RewardUser>> GetCollectionRewardUser(int userId)
+        public async Task<ICollection<Reward>> GetCollectionRewardUser(int userId)
         {
-            return await _context.RewardUsers.Where(c => c.UserId.Equals(userId))
-                .ToListAsync();
+            var query = await _context.Rewards.Join(_context.RewardUsers, reward => reward.Id, rewardUser => rewardUser.RewardId, (reward, rewardUser) => new { PersonId = rewardUser.UserId, Id = reward.Id,GameId=reward.GameId, Name = reward.Name, Description = reward.Description, Image = reward.Image })
+                               .Where(person => person.PersonId == userId)
+                               .Select(g => new Reward { Id = g.Id,GameId=g.GameId, Name = g.Name, Description = g.Description, Image = g.Image}).ToListAsync();
+
+            return query;
         }
 
         public async Task<Reward> GetItem(int id)=>

@@ -49,14 +49,17 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public async Task<ICollection<RewardUserDto>> GetCollectionRewardUser(int UserId)
+        public async Task<ICollection<RewardDto>> GetCollectionRewardUser(int UserId)
         {
             var Collection = await _repository.GetCollectionRewardUser(UserId);
 
-            return Collection.Select(c => new RewardUserDto
+            return Collection.Select(c => new RewardDto
             {
-                UserId = c.UserId,
-                RewardId = c.RewardId
+                Id = c.Id,
+                GameId = c.GameId,
+                Description = c.Description,
+                Name = c.Name,
+                Image = c.Image,
             }).ToList();
         }
 

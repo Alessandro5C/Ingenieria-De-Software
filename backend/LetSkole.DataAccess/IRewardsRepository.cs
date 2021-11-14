@@ -13,7 +13,7 @@ namespace LetSkole.DataAccess
         Task Delete(int id);
 
         Task Create(RewardUser entity);
-        Task<ICollection<RewardUser>> GetCollectionRewardUser(int userId);
+        Task<ICollection<Reward>> GetCollectionRewardUser(int userId);
 
     }
 }

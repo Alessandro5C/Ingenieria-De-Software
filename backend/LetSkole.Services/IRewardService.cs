@@ -13,7 +13,7 @@ namespace LetSkole.Services
         Task Delete(int id);
 
         Task CreateRewardxUser(RewardUserDto entity);
-        Task<ICollection<RewardUserDto>> GetCollectionRewardUser(int userId);
+        Task<ICollection<RewardDto>> GetCollectionRewardUser(int userId);
 
     }
 }
