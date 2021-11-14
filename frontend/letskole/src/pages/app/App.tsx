@@ -12,13 +12,17 @@ import GamesRouter from "./router/games-router";
 import UserGroupsRouter from "./router/userGroups-router";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-
+import moment from 'moment-timezone'
+let launchMoment = require('moment')
+require('moment-timezone')
+moment.tz('America/New_York')
 function App() {
   return (
     <Router>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
       <MuiThemeProvider theme={themeMui}>
+        
         <Switch>
           <Dashboard>
             <UsersRouter />

@@ -3,9 +3,9 @@ export class Activity{
     userId: number = 0;
     name: string = '';
     description: string = '';
-    startDate: Date = new Date();
-    endDate: Date = new Date(); 
+    startDate: string ='';
+    endDate: string = ''; 
     completed: boolean = false;
-    startTime: Date = new Date();
-    endTime: Date = new Date();
+    startTime:string = '';
+    endTime: string = '';
 }

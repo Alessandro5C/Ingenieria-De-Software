@@ -30,10 +30,10 @@ function ActivityDetails() {
       apiActivities.detail(id).then((data) => {
         setActivity(data);
         setInitialLoading(false);
-        setStartDate(data.startDate);
-        setEndDate(data.endDate);
-        setStartTime(data.startTime);
-        setEndTime(data.endTime);
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        setStartTime(new Date(data.startTime));
+        setEndTime(new Date(data.endTime));
       });
     }
   }, [id]);

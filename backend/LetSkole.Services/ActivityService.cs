@@ -178,6 +178,7 @@ namespace LetSkole.Services
 
             activity.Completed = entity.Completed;
 
+
             DateTime auxStartDate = entity.StartDate;
             DateTime auxStarTime = entity.StartTime;
 
@@ -211,7 +212,16 @@ namespace LetSkole.Services
             {
                 throw new Exception("Invalid date");
             }
-            
+
+            activity.StartDate = entity.StartDate;
+            activity.StartTime = entity.StartTime;
+            activity.EndDate = entity.EndDate;
+            activity.EndTime = entity.EndTime;
+            activity.Description = entity.Description;
+            activity.Id = entity.Id;
+            activity.Name = entity.Name;
+            activity.UserId = entity.UserId;
+
             await _repository.Update(activity);
         }
 

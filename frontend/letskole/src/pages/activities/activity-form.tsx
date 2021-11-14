@@ -13,11 +13,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { DateTimePicker } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
 
+
 import { useHistory, useParams } from "react-router-dom";
 import apiCustomers from "../../api/api.customers";
 import { Customer } from "../../models/customer";
 import { Activity } from "../../models/activity";
 import apiActivities from "../../api/api.activity";
+import { format } from "date-fns";
+
 
 
 function ActivityForm() {
@@ -42,10 +45,10 @@ function ActivityForm() {
       apiActivities.detail(id).then((data) => {
         setActivity(data);
         setInitialLoading(false);
-        setStartDate(data.startDate);
-        setEndDate(data.endDate);
-        setStartTime(data.startTime);
-        setEndTime(data.endTime);
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        setStartTime(new Date(data.startTime));
+        setEndTime(new Date(data.endTime));
         setCompleted(data.completed);
       });
 
@@ -70,23 +73,25 @@ function ActivityForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (id) {
-        activity.startDate = startDate;
-        activity.endDate = endDate;
-        activity.startTime = startTime;
-        activity.endTime = endTime;
+   
+        activity.startDate = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
+        activity.endDate = format(endDate, "yyyy-MM-dd'T'HH:mm:ss");
+        activity.startTime = format(startTime, "yyyy-MM-dd'T'HH:mm:ss");
+        activity.endTime = format(endTime, "yyyy-MM-dd'T'HH:mm:ss");
         activity.completed = completed;
       //setLoading(true);
         apiActivities.edit(activity).then(() => {
         // updatedLoading();
         //setMessage("Se edito correctamento el cliente");
         history.push(`/activities/detail/${id}`);
+        console.log(activity);
         setActivity(activity);
       });
     } else {
-        activity.startDate = startDate;
-        activity.endDate = endDate;
-        activity.startTime = startTime;
-        activity.endTime = endTime;
+        activity.startDate = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
+        activity.endDate = format(endDate, "yyyy-MM-dd'T'HH:mm:ss");
+        activity.startTime = format(startTime, "yyyy-MM-dd'T'HH:mm:ss");
+        activity.endTime = format(endTime, "yyyy-MM-dd'T'HH:mm:ss");
         activity.completed = completed;
         activity.userId = 1;
         console.log(activity);
