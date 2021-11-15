@@ -37,6 +37,11 @@ function UserGroupsList() {
         }
     }
 
+    const deleteUserFromGroup = (
+        userId : number, groupId: number) => {
+        apiUserGroup.deleteUser(userId,groupId);
+    }
+
     useEffect(() => {
         apiUserGroup.list(1).then((data) => {
             setUserGroups(data);
@@ -128,6 +133,9 @@ function UserGroupsList() {
                                             
                                             <TableCell>
                                                 <Button
+                                                    onClick={() => {
+                                                        deleteUserFromGroup(x.userId,x.groupId);
+                                                    }}
                                                     size={"small"}
                                                     variant="contained"
                                                     color="default"
