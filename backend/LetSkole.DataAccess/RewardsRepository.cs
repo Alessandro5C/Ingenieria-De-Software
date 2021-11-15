@@ -24,11 +24,13 @@ namespace LetSkole.DataAccess
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int userId, int rewardid)
         {
-            _context.Entry(new Reward
+            
+            _context.Entry(new RewardUser
             {
-                Id = id
+                UserId=userId,
+                RewardId=rewardid
             }).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }

@@ -125,7 +125,7 @@ function UsersList() {
                                                     color="inherit"
                                                     style={{ width: "100px" }}
                                                     startIcon={
-                                                        <span className="material-icons">edit</span>
+                                                        <span className="material-icons"></span>
                                                     }
                                                 >
                                                     Editar

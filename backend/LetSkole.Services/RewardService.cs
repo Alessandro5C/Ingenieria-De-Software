@@ -31,9 +31,9 @@ namespace LetSkole.Services
             });
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int userid,int rewardid)
         {
-            await _repository.Delete(id);
+            await _repository.Delete(userid,rewardid);
         }
 
         public async Task<ICollection<RewardDto>> GetCollection(string filter)

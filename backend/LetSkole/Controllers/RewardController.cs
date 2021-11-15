@@ -59,11 +59,11 @@ namespace LetSkole.Controllers
 
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery] int id)
+        public async Task<IActionResult> Delete([FromQuery] int userId,int rewardId)
         {
             try
             {
-                await _service.Delete(id);
+                await _service.Delete(userId,rewardId);
             } catch (Exception e)
             {
                 return BadRequest(e.Message);

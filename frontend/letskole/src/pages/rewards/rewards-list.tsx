@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import apiGroups from "../../api/api.group";
-import apiReward from "../../api/api.reward";
+import apiRewards from "../../api/api.reward";
 import Title from "../../components/dashboard/title";
 import { Reward } from "../../models/reward";
 
@@ -23,18 +23,19 @@ function RewardList() {
     const [loading, setLoading] = useState(false);
     const [rewards, setRewards] = useState<Reward[]>([]);
     const [target, setTarget] = useState("");
-    const { id } = useParams<{ id: string }>();
+    const {id } = useParams<{ id: string}>();//id =userid
     
     useEffect(() => {
-          apiReward.detail(id).then((data) => {
+          apiRewards.detail(id).then((data) => {
             setRewards(data);
             setInitialLoading(false);
           });   
       }, [id]);
 
+
     function changeRemove(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        id: number
+        id: number,userId:number
     ) {
         const customer = rewards.find((x) => x.id === id);
 
@@ -42,15 +43,12 @@ function RewardList() {
             //Delete
             setTarget(event.currentTarget.name);
             setLoading(true);
-            apiReward.delete(id).then(() => {
-                setLoading(false);
-                setRewards(
-                    rewards.filter((x) => x.id !== id)
-                );
-            });
         }
     }
-
+    const deleteRewardFromUser = (
+        userId : string, id: number) => {
+        apiRewards.delete(userId,id);
+    }
     return (
         <React.Fragment>
             <Grid item xs={12} md={8} lg={5}>
@@ -66,7 +64,7 @@ function RewardList() {
                     <Divider />
 
                     <Typography style={{ marginTop: "10px" }} variant="body2">
-                        Listar Grupos
+                        Listar Logros
                     </Typography>
                 </Paper>
             </Grid>
@@ -84,7 +82,7 @@ function RewardList() {
                     <Divider />
 
                     <Typography style={{ marginTop: "10px" }} variant="body2">
-                        Se encarga de listar todos los grupos
+                        Se encarga de listar todos los 
                     </Typography>
                 </Paper>
             </Grid>
@@ -98,7 +96,7 @@ function RewardList() {
                     }}
                 >
                     <React.Fragment>
-                        <Title>Lista de grupos</Title>
+                        <Title>Lista de Logros</Title>
                         <TableContainer component={Paper}>
                             <Table size="small">
                                 <TableHead>
@@ -106,9 +104,6 @@ function RewardList() {
                                         <TableCell>Nro</TableCell>
                                         <TableCell>Nombre</TableCell>
                                         <TableCell>Descripcion</TableCell>
-                                        <TableCell>Editar</TableCell>
-                                        <TableCell>Detalle</TableCell>
-                                        <TableCell>Eliminar</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -117,51 +112,22 @@ function RewardList() {
                                             <TableCell>{index + 1}</TableCell>
                                             <TableCell>{x.name}</TableCell>
                                             <TableCell> {x.description}</TableCell>
-                                            <TableCell>
+                                            {<TableCell>
                                                 <Button
-                                                    component={Link}
-                                                    to={`/customers/edit/${x.id}`}
-                                                    size={"small"}
-                                                    variant="contained"
-                                                    color="inherit"
-                                                    style={{ width: "100px" }}
-                                                    startIcon={
-                                                        <span className="material-icons">edit</span>
-                                                    }
-                                                >
-                                                    Editar
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell>
-                                                <Button
-                                                    component={Link}
-                                                    to={`/customers/detail/${x.id}`}
+                                                 onClick={() => {
+                                                    deleteRewardFromUser(id,x.id);
+                                                 }}
                                                     size={"small"}
                                                     variant="contained"
                                                     color="default"
                                                     style={{ width: "100px" }}
                                                     startIcon={
-                                                        <span className="material-icons">info</span>
-                                                    }
-                                                >
-                                                    Detalles
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell>
-                                                <Button
-                                                    size={"small"}
-                                                    variant="contained"
-                                                    color="default"
-                                                    style={{ width: "100px" }}
-                                                    startIcon={
-                                                        <span className="material-icons">
-                              delete_outline
-                            </span>
+                                                        <span className="material-icons"></span>
                                                     }
                                                 >
                                                     Eliminar
                                                 </Button>
-                                            </TableCell>
+                                            </TableCell> }
                                         </TableRow>
                                     ))}
                                 </TableBody>

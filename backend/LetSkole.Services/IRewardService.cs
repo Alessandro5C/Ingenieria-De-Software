@@ -10,7 +10,7 @@ namespace LetSkole.Services
     {
         Task <ICollection<RewardDto>> GetCollection(string filter);
         Task<RewardDto> GetItem(int id);
-        Task Delete(int id);
+        Task Delete(int userId,int rewardId);
 
         Task CreateRewardxUser(RewardUserDto entity);
         Task<ICollection<RewardDto>> GetCollectionRewardUser(int userId);
