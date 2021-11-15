@@ -17,6 +17,7 @@ import apiUserGroup from "../../api/api.usergroup";
 import Title from "../../components/dashboard/title";
 import { Group } from "../../models/group";
 import {userGroup} from "../../models/user-groups"
+import apiUsers from "../../api/api.user";
 
 function UserGroupsList() {
     const [initialLoading, setInitialLoading] = useState(true);
@@ -103,7 +104,7 @@ function UserGroupsList() {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Nro</TableCell>
-                                        <TableCell>Nombre</TableCell>
+                                        <TableCell>Id de miembro</TableCell>
                                         <TableCell>Nota</TableCell>
                                         <TableCell>Editar</TableCell>
                                         <TableCell>Eliminar</TableCell>
@@ -118,7 +119,8 @@ function UserGroupsList() {
                                             <TableCell>
                                                 <Button
                                                     component={Link}
-                                                    to={`/customers/edit/${x.groupId}`}
+                                                    to={`/UserGroups/edit/${x.groupId}/${x.userId}`}
+                                                    // to={`/customer/add`}
                                                     size={"small"}
                                                     variant="contained"
                                                     color="inherit"
