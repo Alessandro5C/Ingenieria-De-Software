@@ -14,6 +14,8 @@ namespace LetSkole.DataAccess
         Task Update (User entity);
         Task Delete (int id);
         Task<string> SearchNumTel(int userId);
+        // for IDENTITY
+        Task<User> GetItemByEmail(string email);
 
     }
 }

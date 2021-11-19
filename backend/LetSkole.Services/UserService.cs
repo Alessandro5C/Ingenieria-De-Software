@@ -22,7 +22,8 @@ namespace LetSkole.Services
         {
             var Collection = await _repository.GetCollection(filter ?? string.Empty);
             return Collection.Select(c => new UserDto
-            {   Id = c.Id,
+            {   
+                Id = c.Id,
                 Name = c.Name,
                 Student = c.Student,
                 School = c.School,
@@ -53,7 +54,7 @@ namespace LetSkole.Services
             return userDto;
         }
 
-        public async Task Create (UserDto entity)
+        public async Task<User> Create (User entity)
         {
             if (entity.Birthday == null)
             {
@@ -82,22 +83,15 @@ namespace LetSkole.Services
             try
             {
                 int i = Convert.ToInt32(entity.NumTelf);
-                Console.WriteLine(i);
             }
             catch
             {
                 throw new LetSkoleException("Phone number invalid");
             }
-
-            await _repository.Create(new User
-            {
-                Name = entity.Name,
-                Birthday = entity.Birthday,
-                Student = entity.Student,
-                School = entity.School,
-                Email = entity.Email,
-                NumTelf = entity.NumTelf,
-            });
+            
+            await _repository.Create(entity);
+            
+            return entity;
         }
 
         public async Task Update(UserDto entity)
@@ -142,5 +136,14 @@ namespace LetSkole.Services
             return Numtel;
         }
 
+        public async Task<int> GetItemByEmail(string email)
+        {
+            User user = await _repository.GetItemByEmail(email);
+            if(user == null)
+            {
+                throw new KeyNotFoundException("Todavia no existe 'User' registrado con email: " + email);
+            }
+            return user.Id;
+        }
     }
 }

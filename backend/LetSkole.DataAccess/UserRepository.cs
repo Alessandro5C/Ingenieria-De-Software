@@ -17,14 +17,15 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public async Task<ICollection<User>> GetCollection (string filter)
-        => await _context.Users.Where(c => c.Name.Contains(filter))
+        public async Task<ICollection<User>> GetCollection(string filter)
+        {
+            return await _context.Users.Where(c => c.Name.Contains(filter))
                 .ToListAsync();
+        }
         
         public async Task<User> GetItem(int id)
         {
-            User user = await _context.Users.FindAsync(id);
-            return user;
+            return await _context.Users.FindAsync(id);
         }
 
         public async Task Create(User entity)
@@ -56,5 +57,9 @@ namespace LetSkole.DataAccess
             return NumTel;
         }
 
+        public async Task<User> GetItemByEmail(string email)
+        {
+            return await _context.Users.FirstAsync(c => c.Email.Contains(email));
+        }
     }
 }

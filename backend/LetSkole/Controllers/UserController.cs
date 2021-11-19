@@ -14,30 +14,17 @@ namespace LetSkole.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-
+            
         public UserController(IUserService service)
         {
             _service = service;
         }
-        [HttpPost]
-        public async Task<ActionResult<UserDto>> Post([FromBody] UserDto userDto)
-        {
-            try
-            {
-                await _service.Create(userDto);
-            }
-            catch( LetSkoleException e)
-            {
-                return BadRequest(e.Message + " " + e.value);
-            }
-
-            return CreatedAtAction(nameof(GetItemById), new { id = userDto.Id }, userDto);
-        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetAllByFilter([FromQuery] string filter)
+        [ProducesResponseType(typeof(IEnumerable<UserDto>), 200)]
+        public async Task<ActionResult> GetAllByFilter([FromQuery] string filter)
         {
-            return Accepted(await _service.GetCollection(filter));
+            return Ok(await _service.GetCollection(filter));
         }
         
         [HttpGet]

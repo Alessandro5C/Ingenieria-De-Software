@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.Entities
 {
@@ -21,7 +22,10 @@ namespace LetSkole.Entities
         [Required]
         [StringLength(30)]
         public string School { get; set; }
-
+        // FK for IDENTITY
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        // MANY to MANY
         public ICollection<RewardUser> RewardUsers { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
     }
