@@ -14,6 +14,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 //import moment from 'moment-timezone'
 import RewardRouter from "./router/rewards-router";
+import AuthRouter from "./router/auth-router";
 //let launchMoment = require('moment')
 //require('moment-timezone')
 //moment.tz('America/New_York')
@@ -26,6 +27,8 @@ function App() {
         
         <Switch>
           <Dashboard>
+            <AuthRouter />
+
             <UsersRouter />
             <GroupsRouter/>
             <CustomersRouter />

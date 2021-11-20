@@ -9,6 +9,7 @@ using LetSkole.Dto;
 using LetSkole.Entities;
 using LetSkole.Entities.Indentity;
 using LetSkole.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace LetSkole.Controllers
 {
     [ApiController]
-    [Route("identity")]
+    [Route("api/v1/authenticate")]
     public class IdentityController:ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -41,6 +42,7 @@ namespace LetSkole.Controllers
             _mapper=mapper;
         }
         
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Create(ApplicationUserLoginDto model)
         {
@@ -54,6 +56,7 @@ namespace LetSkole.Controllers
            return Ok();
         }
         
+        [AllowAnonymous]
         [HttpPost("NewUser")]
         [ProducesResponseType(typeof(UserDto), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
@@ -73,6 +76,7 @@ namespace LetSkole.Controllers
             return Ok(usuarioResource);
         }
         
+        [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(typeof(ApplicationUserResponseDto), 200)]
         public async  Task<IActionResult> Login(ApplicationUserLoginDto model)
@@ -82,9 +86,17 @@ namespace LetSkole.Controllers
             var check= await _signInManager.CheckPasswordSignInAsync(appUser, model.Password,false);
             if (check.Succeeded)
             {
-                var userId = await _userService.GetItemByEmail(appUser.Email);
+                int userId;
+                try
+                {
+                    userId = await _userService.GetItemByEmail(appUser.Email);
+                }
+                catch
+                {
+                    userId = 0;
+                }
                 var token = await GenerateToken(appUser);
-                
+
                 return Ok(
                     new ApplicationUserResponseDto
                     {

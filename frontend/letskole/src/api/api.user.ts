@@ -1,12 +1,16 @@
 import { User } from "../models/user";
 import request from "./api";
+import authService from "./auth/auth.service";
 
 const apiUsers = {
-    list: () => request.get<User[]>("User/GetAllByFilter"),//Nose si agregarle el filtro
-    add: (data: User) => request.post("User/Post", data),
+    list: () => request.get<User[]>("User/GetAllByFilter"),
+    add: (data: User) => {
+        data.student=Boolean(data.student);
+        return authService.newUser(data).then((user)=> {return user})
+    },
     edit: (data: User) => request.put(`User/${data.id}`, data), //Pa dsps
     delete: (id: number) => request.delete(`User/Delete?id=${id}`),
-    detail: (id: string) => request.get<User>(`User/GetItemById?id=${id}`), //GetOne
+    detail: (id: string) => request.get<User>(`User/GetItemById?id=${id}`),
 };
 
 export default apiUsers;

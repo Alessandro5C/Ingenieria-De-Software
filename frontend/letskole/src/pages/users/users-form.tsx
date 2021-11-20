@@ -21,7 +21,8 @@ function UsersForm() {
     const [message, setMessage] = useState("");
     const [user, setUser] = useState<User>(new User());
 
-    const { id } = useParams<{ id: string }>();
+    // if ID exists, then its another value than 0
+    const { id, email } = useParams<{ id: string, email: string }>();
 
     function changeValueUser(
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement >
@@ -34,17 +35,10 @@ function UsersForm() {
         event.preventDefault();
         if (id) {
             setLoading(true);
-            apiUsers.edit(user).then(() => {
-                // updatedLoading();
-                //setMessage("Se edito correctamento el cliente");
-                history.push(`/users/detail/${id}`);
-                setUser(user);
-            });
+            apiUsers.edit(user).then(() => { setUser(user) });
         } else {
-            //setLoading(true);
-            apiUsers.add(user).then(() => {
-                //updatedLoading();
-                history.push("/users/list");
+            apiUsers.add(user).then((data) => {
+                history.push(`/users/detail/${data.id}`);
             });
         }
     }
@@ -67,17 +61,9 @@ function UsersForm() {
 
     return (
         <React.Fragment>
-            <CustomBodyName>
-                {id ? "Editar un cliente" : "Agregar un nuevo usuario"}
-            </CustomBodyName>
-            <CustomBodyDescription>
-                {id
-                    ? "Este componenete se encarga de editar un usuario"
-                    : "Este componenete se encarga de agregar un nuevo usuario"}
-            </CustomBodyDescription>
             <CustomBody>
                 <CustomMainForm
-                    title={id ? "Edite su cliente" : "Agregue un nuevo usuario"}
+                    title={id ? "Edita tu perfil" : "Completa la información de tu perfil"}
                 >
                     <form onSubmit={handleSubmit}>
                         <React.Fragment>
@@ -93,11 +79,12 @@ function UsersForm() {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <CustomTextField
-                                        value={user.email}
+                                        value={user.email=email}
                                         onChange={(event) => changeValueUser(event)}
                                         required
                                         name="email"
                                         label="Correo electrónico"
+                                        disabled
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>

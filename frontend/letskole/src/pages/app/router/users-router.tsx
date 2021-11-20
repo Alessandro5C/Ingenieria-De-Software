@@ -9,9 +9,8 @@ function UsersRouter() {
     return (
         <React.Fragment>
             <Route exact path="/users/list" component={UsersList} />
-            <Route exact path="/users/add" component={UsersForm} />
+            {/*<Route exact path="/users/add" component={UsersForm} />*/}
             <Route exact path="/users/edit/:id" component={UsersForm} />
-            <Route exact path="/users/detail/:id" component={CustomersDetails} />
         </React.Fragment>
     );
 }
