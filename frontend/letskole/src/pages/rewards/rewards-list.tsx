@@ -32,7 +32,6 @@ function RewardList() {
           });   
       }, [id]);
 
-
     function changeRemove(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         id: number,userId:number
@@ -82,7 +81,7 @@ function RewardList() {
                     <Divider />
 
                     <Typography style={{ marginTop: "10px" }} variant="body2">
-                        Se encarga de listar todos los 
+                        Se encarga de listar todos los logros
                     </Typography>
                 </Paper>
             </Grid>
@@ -104,6 +103,7 @@ function RewardList() {
                                         <TableCell>Nro</TableCell>
                                         <TableCell>Nombre</TableCell>
                                         <TableCell>Descripcion</TableCell>
+                                        <TableCell>Imagen</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -112,6 +112,7 @@ function RewardList() {
                                             <TableCell>{index + 1}</TableCell>
                                             <TableCell>{x.name}</TableCell>
                                             <TableCell> {x.description}</TableCell>
+                                            {<TableCell> <img src={x.image} style={{width:"100px" }}/></TableCell>}
                                             {<TableCell>
                                                 <Button
                                                  onClick={() => {

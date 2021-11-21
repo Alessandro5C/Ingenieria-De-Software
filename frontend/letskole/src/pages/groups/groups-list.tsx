@@ -42,12 +42,6 @@ function GroupsList() {
             //Delete
             setTarget(event.currentTarget.name);
             setLoading(true);
-            apiGroups.delete(id).then(() => {
-                setLoading(false);
-                setGroups(
-                    groups.filter((x) => x.id !== id)
-                );
-            });
         }
     }
 
@@ -63,7 +57,10 @@ function GroupsList() {
             console.log(data);
         });
     }, []);
-
+    const deleteGroupFromUser = (
+        id: number) => {
+        apiGroups.delete(id);
+    }
     return (
         <React.Fragment>
             <Grid item xs={12} md={8} lg={5}>
@@ -163,6 +160,9 @@ function GroupsList() {
                                             </TableCell>
                                             <TableCell>
                                                 <Button
+                                                onClick={() => {
+                                                deleteGroupFromUser(x.id);
+                                               }}
                                                     disabled={userProfile.student}
                                                     size={"small"}
                                                     variant="contained"
