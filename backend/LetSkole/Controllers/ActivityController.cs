@@ -40,7 +40,14 @@ namespace LetSkole.Controllers
         {
             return Accepted(await _service.GetCollection(filter));
         }
-        
+
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ActivityDto>>> GetAllByUserID([FromQuery] int id)
+        {
+            return Accepted(await _service.GetCollectionUserID(id));
+        }
+
         [HttpGet]
         public async Task<ActionResult<ActivityDto>> GetItemById ([FromQuery] int id)
         {
@@ -52,6 +59,8 @@ namespace LetSkole.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+
 
         [HttpDelete]
         public async Task<IActionResult> Delete ([FromQuery] int id)

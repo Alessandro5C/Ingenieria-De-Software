@@ -20,6 +20,7 @@ import { Customer } from "../../models/customer";
 import { Activity } from "../../models/activity";
 import apiActivities from "../../api/api.activity";
 import { format } from "date-fns";
+import { ApplicationUserResponse } from "../../models/auth/application-user-response";
 
 
 
@@ -37,6 +38,8 @@ function ActivityForm() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [completed, setCompleted] = useState(false);
+  const appUserData:ApplicationUserResponse = Object.assign(new ApplicationUserResponse,
+    JSON.parse(localStorage.getItem('appUserData')));
 
   const { id } = useParams<{ id: string }>();
 
@@ -93,7 +96,7 @@ function ActivityForm() {
         activity.startTime = format(startTime, "yyyy-MM-dd'T'HH:mm:ss");
         activity.endTime = format(endTime, "yyyy-MM-dd'T'HH:mm:ss");
         activity.completed = completed;
-        activity.userId = 1;
+        activity.userId = appUserData.userId;
         console.log(activity);
         /*setLoading(true);*/
         apiActivities.add(activity).then(() => {

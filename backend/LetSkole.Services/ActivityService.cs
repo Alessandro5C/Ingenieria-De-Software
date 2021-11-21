@@ -95,6 +95,30 @@ namespace LetSkole.Services
             }).ToList();
         }
 
+
+        public async Task<ICollection<ActivityDto>> GetCollectionUserID(int id)
+        {
+            var Collection = await _repository.GetCollectionByID(id);
+            return Collection.Select(c => new ActivityDto
+            {
+                Id = c.Id,
+                UserId = c.UserId,
+                Name = c.Name,
+                Description = c.Description,
+                StartDate = c.StartDate,
+                EndDate = c.EndDate,
+                Completed = c.Completed,
+                StartTime = c.StartTime,
+                EndTime = c.EndTime
+            }).ToList();
+        }
+
+
+
+
+
+
+
         public async Task<ActivityDto> GetItem(int id)
         {
             Activity activity = await _repository.GetItem(id);

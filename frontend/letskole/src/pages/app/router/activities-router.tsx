@@ -13,7 +13,7 @@ import ActivityForm from "../../activities/activity-form";
 function UsersRouter() {
     return (
         <React.Fragment>
-            <Route exact path="/activities/list" component={ActivitiesList} />
+            <Route exact path="/activities/list/:id" component={ActivitiesList} />
             <Route exact path="/activities/add" component={ActivityForm} />
             <Route exact path="/activities/edit/:id" component={ActivityForm} />
             <Route exact path="/activities/detail/:id" component={ActivityDetails} />

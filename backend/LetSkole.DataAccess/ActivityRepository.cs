@@ -23,6 +23,12 @@ namespace LetSkole.DataAccess
                    .ToListAsync();
         }
 
+        public async Task<ICollection<Activity>> GetCollectionByID(int userId)
+        {
+            return await _context.Activities.Where(c => c.UserId.Equals(userId))
+                   .ToListAsync();
+        }
+        
         public async Task<Activity> GetItem(int id)=>
             await _context.Activities
             .SingleOrDefaultAsync(c => c.Id.Equals(id));

@@ -6,8 +6,12 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { NavLink } from "react-router-dom";
+import { ApplicationUserResponse } from "../../models/auth/application-user-response";
 
-export const mainListItems = (
+const appUserData:ApplicationUserResponse = Object.assign(new ApplicationUserResponse,
+  JSON.parse(localStorage.getItem('appUserData')));
+
+  export const mainListItems = (
   <div>
     <ListItem
       button
@@ -40,43 +44,6 @@ export const secondaryListItems = (
           <ListItemText primary="Mostrar usuarios" />
       </ListItem>
 
-      <ListItem
-          button
-          component={NavLink}
-          to={"/users/add"}
-          activeClassName="Mui-selected"
-      >
-          <ListItemIcon>
-              <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Agregar usuarios" />
-      </ListItem>
-
-    <ListItem
-      button
-      component={NavLink}
-      to={"/customers/list"}
-      activeClassName="Mui-selected"
-    >
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Mostrar clientes" />
-    </ListItem>
-
-    
-    <ListItem
-      button
-      component={NavLink}
-      to={"/customers/add"}
-      activeClassName="Mui-selected"
-    >
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Agregar Clientes" />
-    </ListItem>
-
     <ListSubheader inset>Grupos</ListSubheader>
       <ListItem
           button
@@ -108,7 +75,7 @@ export const secondaryListItems = (
     <ListItem
       button
       component={NavLink}
-      to={"/activities/list"}
+      to={`/activities/list/${appUserData.userId}`}
       activeClassName="Miu-selected">
       
       <ListItemIcon>

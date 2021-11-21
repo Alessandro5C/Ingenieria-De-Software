@@ -21,6 +21,7 @@ import { Activity } from "../../models/activity";
 import { Customer } from "../../models/customer";
 import { User } from "../../models/user";
 import Button from '@mui/material/Button';
+import { useParams } from "react-router";
 
 
 function ActivitiesList() {
@@ -28,6 +29,8 @@ function ActivitiesList() {
   const [loading, setLoading] = useState(false);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
+  const { id } = useParams<{ id: string }>();
+  
 
   const [users, setUsers] = useState<User[]>([]);
   const [target, setTarget] = useState("");
@@ -49,7 +52,7 @@ function ActivitiesList() {
   }
 
   useEffect(() => {
-    apiActivities.list().then((data) => {
+    apiActivities.listId(id).then((data) => {
       setActivities(data);
       setInitialLoading(false);
     });

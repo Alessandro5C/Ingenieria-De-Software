@@ -9,6 +9,8 @@ namespace LetSkole.Services
     public interface IActivityService
     {
         Task <ICollection<ActivityDto>> GetCollection(string filter);
+
+        Task<ICollection<ActivityDto>> GetCollectionUserID(int id);
         Task <ActivityDto> GetItem(int id);
         Task Create(ActivityDto entity);
         Task Update(ActivityDto entity);
