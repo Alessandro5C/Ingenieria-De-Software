@@ -10,7 +10,7 @@ import { ApplicationUserResponse } from "../../models/auth/application-user-resp
 
 const appUserData:ApplicationUserResponse = Object.assign(new ApplicationUserResponse,
   JSON.parse(localStorage.getItem('appUserData')));
-
+  
   export const mainListItems = (
   <div>
     <ListItem
@@ -56,6 +56,17 @@ export const secondaryListItems = (
           </ListItemIcon>
           <ListItemText primary="Mostrar grupos" />
       </ListItem>
+      {<ListItem
+          button
+          component={NavLink}
+          to={"/groups/create"}
+          activeClassName="Mui-selected"
+      >
+          <ListItemIcon>
+              <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Crear grupo" />
+      </ListItem>}
 
     <ListSubheader inset>Juegos</ListSubheader>
       <ListItem

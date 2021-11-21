@@ -26,7 +26,7 @@ namespace LetSkole.Services
         public async Task Create(int userId, GroupDto entity)
         {
             // Validar que exista el profesor
-            User user = _userRepository.GetItem(userId).Result;
+            User user = await _userRepository.GetItem(userId);
 
             if(user == null)
             {

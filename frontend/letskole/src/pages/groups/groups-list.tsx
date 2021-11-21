@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import apiGroups from "../../api/api.group";
 import Title from "../../components/dashboard/title";
+import { ApplicationUserResponse } from "../../models/auth/application-user-response";
 import { Group } from "../../models/group";
 
 function GroupsList() {
@@ -23,6 +24,10 @@ function GroupsList() {
     const [groups, setGroups] = useState<Group[]>([]);
     const [target, setTarget] = useState("");
 
+    const appUserData:ApplicationUserResponse = Object.assign(new ApplicationUserResponse,
+        JSON.parse(localStorage.getItem('appUserData')));  
+
+        
     function changeRemove(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         id: number
@@ -43,7 +48,8 @@ function GroupsList() {
     }
 
     useEffect(() => {
-        apiGroups.list().then((data) => {
+        
+        apiGroups.teacher(appUserData.userId).then((data) => {
             setGroups(data);
             setInitialLoading(false);
             console.log(data);
