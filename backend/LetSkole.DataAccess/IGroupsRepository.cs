@@ -14,5 +14,6 @@ namespace LetSkole.DataAccess
         Task Create(Group entity);
         Task Update(Group entity);
         Task Delete(int id);
+        Task<ICollection<Group>> GetCollectionByUser(int userId);
     }
 }

@@ -51,6 +51,12 @@ namespace LetSkole.DataAccess
             return query;        
         }
 
+        public Task<ICollection<Group>> GetCollectionByUser(int userId)
+        {
+
+            throw new NotImplementedException();
+        }
+
         public async Task<Group> GetItem(int id)
         {
             return await _context.Groups.FindAsync(id);
@@ -62,5 +68,6 @@ namespace LetSkole.DataAccess
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
     }
 }

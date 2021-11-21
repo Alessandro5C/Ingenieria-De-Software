@@ -8,6 +8,7 @@ const apiUserGroup = {
     edit: (data: userGroup) => request.put(`UserGroup/Put`, data),
     deleteUser: (userId: number,groupId: number) =>
         request.delete(`UserGroup/DeleteUsingUser?userId=${userId}&groupId=${groupId}`),
+    listByUser: (userId:number) =>request.get<userGroup[]>(`UserGroup/GetByUserID?userId=${userId}`),
 };
 
 export default apiUserGroup;

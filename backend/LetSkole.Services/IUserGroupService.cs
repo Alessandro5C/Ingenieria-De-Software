@@ -13,6 +13,6 @@ namespace LetSkole.Services
         Task Update(UserGroupDto entity);
         Task DeleteUsingUser(int userId, int groupId);
         Task DeleteUsingGroup(int GroupId);
-        Task<int> SearchGrade(int userId, int groupId);
+        Task<ICollection<UserGroupDto>> SearchGrade(int userId);
     }
 }

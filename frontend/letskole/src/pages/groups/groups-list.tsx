@@ -17,12 +17,16 @@ import apiGroups from "../../api/api.group";
 import Title from "../../components/dashboard/title";
 import { ApplicationUserResponse } from "../../models/auth/application-user-response";
 import { Group } from "../../models/group";
+import apiUserGroup from "../../api/api.usergroup";
+import { User } from "../../models/user";
+import apiUsers from "../../api/api.user";
 
 function GroupsList() {
     const [initialLoading, setInitialLoading] = useState(true);
     const [loading, setLoading] = useState(false);
     const [groups, setGroups] = useState<Group[]>([]);
     const [target, setTarget] = useState("");
+    const [userProfile,setUserProfile] = useState<User>(new User());
 
     const appUserData:ApplicationUserResponse = Object.assign(new ApplicationUserResponse,
         JSON.parse(localStorage.getItem('appUserData')));  
@@ -48,6 +52,10 @@ function GroupsList() {
     }
 
     useEffect(() => {
+        apiUsers.detail(String(appUserData.userId)).then((data)=>{
+            setUserProfile(data);
+        });
+        console.log(`student boolean ${userProfile.student}`);
         
         apiGroups.teacher(appUserData.userId).then((data) => {
             setGroups(data);
@@ -124,6 +132,7 @@ function GroupsList() {
                                             <TableCell> {x.description}</TableCell>
                                             <TableCell>
                                                 <Button
+                                                    disabled={userProfile.student}
                                                     component={Link}
                                                     to={`/customers/edit/${x.id}`}
                                                     size={"small"}
@@ -154,6 +163,7 @@ function GroupsList() {
                                             </TableCell>
                                             <TableCell>
                                                 <Button
+                                                    disabled={userProfile.student}
                                                     size={"small"}
                                                     variant="contained"
                                                     color="default"

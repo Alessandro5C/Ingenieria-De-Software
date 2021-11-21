@@ -75,10 +75,16 @@ namespace LetSkole.Services
             
             await _repository.Update(userGroup);
         }
-        public async Task<int> SearchGrade(int userId, int groupId)
+        public async Task<ICollection<UserGroupDto>> SearchGrade(int userId)
         {
-            int grade = await _repository.SearchGrade(userId, groupId);
-            return grade;
+            var Collection = await _repository.GetItemsByTeacherId(userId);
+            return Collection.Select(c => new UserGroupDto
+            {
+                UserId = c.UserId,
+                GroupId = c.GroupId,
+                Admin = c.Admin,
+                Grade = c.Grade
+            }).ToList();
         }
     }
 }

@@ -79,10 +79,10 @@ namespace LetSkole.Services
             {
                 throw new Exception("User doesn't exist");
             }
-            if (user.Student == true)
-            {
-                throw new Exception("Students get groups");
-            }
+            //if (user.Student == true)
+            //{
+            //    throw new Exception("Students get groups");
+            //}
 
             var collectionTeacher =  await _repository.GetCollectionByTeacher(userId);
             return collectionTeacher.Select(c => new GroupDto

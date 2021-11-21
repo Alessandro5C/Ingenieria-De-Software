@@ -83,18 +83,18 @@ namespace LetSkole.Controllers
             return NoContent();
         }
         [HttpGet]
-        public async Task<ActionResult<int>> SearchGrade ([FromQuery] int userId, int groupId)
+        public async Task<ActionResult<int>> GetByUserID ([FromQuery] int userId)
         {
-            Int32 grade;
-
-            try
-            {
-                grade = await _service.SearchGrade(userId, groupId);
-            } catch(Exception e)
-            {
-                return NotFound(e.Message);
-            }
-            return Accepted(grade);
+            //Int32 grade;
+            return Accepted(await _service.SearchGrade(userId));
+            //try
+            //{
+            //    grade = await _service.SearchGrade(userId);
+            //} catch(Exception e)
+            //{
+            //    return NotFound(e.Message);
+            //}
+            //return Accepted(grade);
 
         }
     }
