@@ -111,7 +111,7 @@ export const secondaryListItems = (
     <ListItem
       button
       component={NavLink}
-      to={"/logros/list"}
+      to={`/logros/list/${appUserData.userId}`}
       activeClassName="Miu-selected">
       
       <ListItemIcon>
