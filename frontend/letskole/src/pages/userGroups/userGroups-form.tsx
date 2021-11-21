@@ -13,6 +13,7 @@ import CustomSelect from "../../components/custom-select/custom-select";
 import CustomDatePicker from "../../components/custom-datepicker/custom-datepicker";
 import apiUsers from "../../api/api.user";
 import {User} from "../../models/user";
+import {TextField} from "@mui/material";
 
 function UsersGroupForm() {
     const history = useHistory();
@@ -47,8 +48,8 @@ function UsersGroupForm() {
             apiUserGroup.add(usergroup).then(() => {
                 updatedLoading();
             });
-            history.push(`/UserGroups/list/${groupid}`);
-       }
+        }
+        history.push(`/UserGroups/list/${groupid}`);
     }
 
     function updatedLoading() {
@@ -88,6 +89,25 @@ function UsersGroupForm() {
                                 )}
                                 { !userid && (
                                     <>
+                                        <TextField
+                                            fullWidth
+                                            select
+                                            SelectProps={{
+                                                native: true,
+                                            }}
+                                            variant="outlined"
+                                            value={usergroup.userId}
+                                            label="¿Eres estudiante?"
+                                            onChange={(event) => changeValueUser(event)}
+                                            required
+                                            name="userId"
+                                        >
+                                            {users.map((option) => (
+                                                <option key={option.id} value={option.id}>
+                                                    {option.email}
+                                                </option>
+                                            ))}
+                                        </TextField>
                                         <Grid item xs={12} sm={6}>
                                             <CustomTextField
                                                 value={usergroup.groupId=Number(groupid)}
@@ -98,10 +118,8 @@ function UsersGroupForm() {
                                         <Grid item xs={12} sm={6}>
                                             <CustomTextField
                                                 value={usergroup.userId}
-                                                onChange={(event) => changeValueUser(event)}
-                                                required
-                                                name="userId"
                                                 label="ID del alumno"
+                                                disabled
                                             />
                                         </Grid>
                                     </>
