@@ -12,7 +12,7 @@ import {
     Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import apiUserGroup from "../../api/api.usergroup";
 import Title from "../../components/dashboard/title";
 import { Group } from "../../models/group";
@@ -24,6 +24,7 @@ function UserGroupsList() {
     const [loading, setLoading] = useState(false);
     const [userGroups, setUserGroups] = useState<userGroup[]>([]);
     const [target, setTarget] = useState("");
+    const { groupid } = useParams<{ groupid: string}>();
 
     function changeRemove(
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -44,7 +45,7 @@ function UserGroupsList() {
     }
 
     useEffect(() => {
-        apiUserGroup.list(1).then((data) => {
+        apiUserGroup.list(Number(groupid)).then((data) => {
             setUserGroups(data);
             setInitialLoading(false);
             console.log(data);
@@ -53,42 +54,14 @@ function UserGroupsList() {
 
     return (
         <React.Fragment>
-            <Grid item xs={12} md={8} lg={5}>
-                <Paper
-                    style={{
-                        padding: "16px",
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 150,
-                    }}
-                >
-                    <Typography variant="h5">Estas en:</Typography>
-                    <Divider />
-
-                    <Typography style={{ marginTop: "10px" }} variant="body2">
-                        Listar Grupos
-                    </Typography>
-                </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={7}>
-                <Paper
-                    style={{
-                        padding: "16px",
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 150,
-                    }}
-                >
-                    <Typography variant="h5">Descripcion:</Typography>
-                    <Divider />
-
-                    <Typography style={{ marginTop: "10px" }} variant="body2">
-                        Se encarga de listar todos los grupos
-                    </Typography>
-                </Paper>
-            </Grid>
-            {/* Recent Orders */}
+            <Button
+                component={Link}
+                to={`/UserGroups/add/${groupid}`}
+                variant="contained"
+                color={"primary"}
+            >
+                Agregar alumnos
+            </Button>
             <Grid item xs={12}>
                 <Paper
                     style={{
@@ -98,7 +71,7 @@ function UserGroupsList() {
                     }}
                 >
                     <React.Fragment>
-                        <Title>Lista de grupos</Title>
+                        <Title>Lista de alumnnos</Title>
                         <TableContainer component={Paper}>
                             <Table size="small">
                                 <TableHead>

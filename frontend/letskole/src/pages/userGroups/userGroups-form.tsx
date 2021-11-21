@@ -11,6 +11,8 @@ import apiUserGroup from "../../api/api.usergroup";
 import { userGroup } from "../../models/user-groups";
 import CustomSelect from "../../components/custom-select/custom-select";
 import CustomDatePicker from "../../components/custom-datepicker/custom-datepicker";
+import apiUsers from "../../api/api.user";
+import {User} from "../../models/user";
 
 function UsersGroupForm() {
     const history = useHistory();
@@ -20,8 +22,9 @@ function UsersGroupForm() {
     const [initialLoading, setInitialLoading] = useState(true);
     const [message, setMessage] = useState("");
     const [usergroup, setUserGroup] = useState<userGroup>(new userGroup());
+    const [users, setUsers] = useState<User[]>([]);
 
-    const { id , userid} = useParams<{ id: string , userid: string }>();
+    const { groupid , userid } = useParams<{ groupid: string , userid: string }>();
 
     function changeValueUser(
         event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement >
@@ -32,23 +35,20 @@ function UsersGroupForm() {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (id) {
+        if (userid) {
             setLoading(true);
-            usergroup.groupId=Number(id);
+            usergroup.groupId=Number(groupid);
             usergroup.userId=Number(userid);
             apiUserGroup.edit(usergroup).then(() => {
-                // updatedLoading();
-                //setMessage("Se edito correctamento el cliente");
-                history.push(`/usersgroup/detail/${id}`);
                 setUserGroup(usergroup);
             });
-         } //else {
-        //     //setLoading(true);
-        //     //apiUserGroup.add(usergroup).then(() => {
-        //         //updatedLoading();
-        //        // history.push("/users/list");
-        //     });
-       // }
+         } else {
+            setLoading(true);
+            apiUserGroup.add(usergroup).then(() => {
+                updatedLoading();
+            });
+            history.push(`/UserGroups/list/${groupid}`);
+       }
     }
 
     function updatedLoading() {
@@ -56,44 +56,57 @@ function UsersGroupForm() {
         setOpen(true);
     }
 
-    // useEffect(() => {
-    //     if (id) {
-    //         apiUserGroup.detail(id).then((data) => {
-    //             setUser(data);
-    //             setInitialLoading(false);
-    //         });
-    //     } else {
-    //         setInitialLoading(false);
-    //     }
-    // }, [id]);
+    useEffect(() => {
+        if (!userid) {
+            apiUsers.list().then((data) => {
+                setUsers(data);
+                setInitialLoading(false);
+            });
+        } else {
+            setInitialLoading(false);
+        }
+    }, []);
 
     return (
         <React.Fragment>
-            <CustomBodyName>
-                {id ? "Editar un cliente" : "Agregar un nuevo usuario"}
-            </CustomBodyName>
-            <CustomBodyDescription>
-                {id
-                    ? "Este componenete se encarga de editar un usuario"
-                    : "Este componenete se encarga de agregar un nuevo usuario"}
-            </CustomBodyDescription>
             <CustomBody>
                 <CustomMainForm
-                    title={id ? "Edite su cliente" : "Agregue un nuevo usuario"}
+                    title={userid ? "Edite la nota de su alumno" : "Agregue un nuevo alumno"}
                 >
                     <form onSubmit={handleSubmit}>
                         <React.Fragment>
                             <Grid container spacing={3}>
-                                <Grid item xs={12} sm={6}>
-                                    <CustomTextField
-                                        value={usergroup.grade}
-                                        onChange={(event) => changeValueUser(event)}
-                                        required
-                                        name="grade"
-                                        label="Nota"
-                                    />
-                                </Grid>
-                                
+                                { userid && (
+                                    <Grid item xs={12} sm={6}>
+                                        <CustomTextField
+                                            value={usergroup.grade}
+                                            onChange={(event) => changeValueUser(event)}
+                                            required
+                                            name="grade"
+                                            label="Nota"
+                                        /></Grid>
+                                )}
+                                { !userid && (
+                                    <>
+                                        <Grid item xs={12} sm={6}>
+                                            <CustomTextField
+                                                value={usergroup.groupId=Number(groupid)}
+                                                label="ID de tu grupo"
+                                                disabled
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <CustomTextField
+                                                value={usergroup.userId}
+                                                onChange={(event) => changeValueUser(event)}
+                                                required
+                                                name="userId"
+                                                label="ID del alumno"
+                                            />
+                                        </Grid>
+                                    </>
+                                )}
+
                             </Grid>
                             <div
                                 style={{
@@ -109,7 +122,7 @@ function UsersGroupForm() {
                                     startIcon={<span className="material-icons">send</span>}
                                     disabled={loading}
                                 >
-                                    {id ? "Editar" : "Cambiar Nota"}
+                                    { !userid ? "Agregar nuevo alumno" : "Cambiar Nota"}
                                 </Button>
                             </div>
                         </React.Fragment>

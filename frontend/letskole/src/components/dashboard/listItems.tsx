@@ -65,7 +65,7 @@ export const secondaryListItems = (
           <ListItemIcon>
               <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary="Crear grupo" />
+          <ListItemText primary="Agregar grupos" />
       </ListItem>}
 
     <ListSubheader inset>Juegos</ListSubheader>

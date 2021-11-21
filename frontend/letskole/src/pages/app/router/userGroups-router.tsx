@@ -10,10 +10,9 @@ import UserGroupsList from "../../userGroups/userGroups-list";
 function UserGroupsRouter() {
     return (
         <React.Fragment>
-            <Route exact path="/UserGroups/list/:id" component={UserGroupsList} />
-            <Route exact path="/customers/add" component={CustomerForm} />
-            <Route exact path="/UserGroups/edit/:id/:userid" component={UsersGroupForm} />
-            <Route exact path="/customers/detail/:id" component={CustomersDetails} />
+            <Route exact path="/UserGroups/list/:groupid" component={UserGroupsList} />
+            <Route exact path="/UserGroups/add/:groupid" component={UsersGroupForm} />
+            <Route exact path="/UserGroups/edit/:groupid/:userid" component={UsersGroupForm} />
         </React.Fragment>
     );
 }
