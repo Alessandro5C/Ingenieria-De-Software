@@ -1,5 +1,6 @@
 import { Customer } from "../models/customer";
 import { Reward } from "../models/reward";
+import { RewardUser } from "../models/RewardUser";
 import { User } from "../models/user";
 import request from "./api";
 
@@ -9,7 +10,8 @@ const apiRewards= {
     edit: (data: Customer) => request.put(`/Customer/${data.customerId}`, data),
     delete: (userId: string,rewardId:number) => request.delete(`/Reward/Delete?userId=${Number(userId)}&rewardId=${Number(rewardId)}`),
     detail: (id: string) => request.get<Reward[]>(`/Reward/GetAllByFilterRewardsUser?userId=${Number(id)}`),
-//https://localhost:5001/api/v1/Reward/Delete?userId=1&rewardId=2
+    post: (data: RewardUser) => request.post<RewardUser>("/Reward/PostRewardxUser", data),
+    //https://localhost:5001/api/v1/Reward/Delete?userId=1&rewardId=2
 };
 
 export default apiRewards;

@@ -113,7 +113,7 @@ function GamesList() {
                                             <TableCell>
                                                 <Button
                                                     component={Link}
-                                                    to={`/customers/detail/${x.id}`}
+                                                    to={`${x.link}`}
                                                     size={"small"}
                                                     variant="contained"
                                                     color="default"
@@ -122,7 +122,7 @@ function GamesList() {
                                                         <span className="material-icons">info</span>
                                                     }
                                                 >
-                                                    Detalles
+                                                    Jugar
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
