@@ -3,9 +3,9 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import useStyles from './styles/use-styles';
-import Navbar from './navbar';
 import Sidebar from './sidebar';
 import Footer from './footer';
+import NavbarAuthModule from "../../store/navbar-auth-module";
 
 interface Props {
     children?: React.ReactNode;
@@ -20,7 +20,7 @@ export default function Dashboard({ children }: Props) {
 
     return (
         <Box style={{ display: 'flex' }}>
-            <Navbar open={open} toggleDrawer={toggleDrawer} />
+            <NavbarAuthModule open={open} toggleDrawer={toggleDrawer} />
             <Sidebar open={open} toggleDrawer={toggleDrawer} />
             <Box
                 component='main'
