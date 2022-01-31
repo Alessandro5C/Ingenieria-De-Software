@@ -108,7 +108,7 @@ namespace LetSkole
             }
             
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LetSkole v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LetSkole v2"));
 
             app.UseHttpsRedirection();
 
