@@ -47,7 +47,7 @@ const SingUp = () => {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label="Nombre"
                   autoFocus
                 />
               </Grid>
@@ -57,7 +57,7 @@ const SingUp = () => {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Apellido"
                 name="lastName"
                 autoComplete="lname"
               />
@@ -68,7 +68,7 @@ const SingUp = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo Electronico"
                 name="email"
                 autoComplete="email"
               />
@@ -79,16 +79,10 @@ const SingUp = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
@@ -99,12 +93,13 @@ const SingUp = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Registrarse
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
+            ¿Ya tienes una cuenta? 
               <Link href="#" variant="body2">
-                Already have an account? Sign in
+                Ingresa Aqui
               </Link>
             </Grid>
           </Grid>

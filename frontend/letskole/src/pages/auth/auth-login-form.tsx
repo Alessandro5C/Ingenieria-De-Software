@@ -94,7 +94,7 @@ function AuthLoginForm() {
                       to={`/register`}
                       variant="contained"
                       color={"secondary"}
-                      startIcon={<span className="material-icons">send</span>}
+                      startIcon={<span className="material-icons">Send</span>}
                       disabled={loading}
                       >
                         No tengo cuenta

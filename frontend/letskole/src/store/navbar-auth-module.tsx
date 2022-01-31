@@ -9,10 +9,12 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import useStyles from "../components/profile-section/styles/use-styles";
-import {Avatar, Button, ButtonBase} from '@material-ui/core';
+import {Avatar, Button, ButtonBase, Card, CardMedia} from '@material-ui/core';
 import {ApplicationUserResponse} from "../models/auth/application-user-response";
 import {Link, useHistory} from "react-router-dom";
 import authService from "../api/auth/auth.service";
+import logo from "./logo.png";
+import "./alessandro.css";
 
 interface Props {
     open: boolean;
@@ -57,6 +59,11 @@ function NavbarAuthModule({ toggleDrawer, open }: Props) {
                     >
                         <MenuIcon />
                     </IconButton>
+     
+                    {/* <img src={logo} height="64px" width="64px"/> */}
+                    <Card >
+                            <CardMedia component='img' image={logo} height="64px" width="100%" className="AlessandroImg" />
+                        </Card> 
                     <Typography
                         component='h1'
                         variant='h6'
@@ -69,7 +76,9 @@ function NavbarAuthModule({ toggleDrawer, open }: Props) {
                             padding: "20px"
                         }}
                     >
-                        LetSkole
+                        LetSkole 
+
+                        
                     </Typography>
                     { !loggedIn  && (
                         <Button
