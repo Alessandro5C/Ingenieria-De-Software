@@ -1,14 +1,76 @@
-import { Avatar, Box, Button, Checkbox, Container, CssBaseline, FormControlLabel, Grid, Link, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Avatar, 
+  Box, 
+  Button, 
+  Checkbox, 
+  Container, 
+  FormControlLabel, 
+  Grid, 
+  Link, 
+  TextField, 
+  ThemeProvider, 
+  Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import React, { FormEvent } from 'react';
+import React, { MouseEvent, useContext, useState } from 'react';
 import { Copyright } from '@mui/icons-material';
+import { LoginContext } from '../context/context';
+import { addUserLogin } from '../context/reducer';
+import { ApplicationUserLogin } from '../models/aplication-user-login';
+import authService from '../api/api.authservice';
+import { useHistory } from "react-router-dom";
+import apiUsers from '../api/api.user';
 
+const initApplicationUserLogin : ApplicationUserLogin = {
+  email: '',
+  password: ''
+}
 
 export default function SingIn() {
-  const handleSubmit = (event:FormEvent<HTMLFormElement>)=>{}
+  const history = useHistory();
+  const [ userLogin, setUserLogin ] = useState<ApplicationUserLogin>(initApplicationUserLogin);
+
+  function changeValueUserLogin(
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ){
+    const { value, name } = event.target;
+    setUserLogin({...userLogin, [name]: value});
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log(userLogin.email);
+    console.log(userLogin.password);
+   
+    if(!userLogin.email.includes('@')){
+      window.alert("Email must have '@'");
+      return;
+    }
+
+    // const data : FormData = new FormData(event.currentTarget);
+    // const email : FormDataEntryValue | null = data.get('email');
+    // const password : FormDataEntryValue | null = data.get('password');
+
+    await authService.login(userLogin).then(async (data) => {
+      if(data){ // si retorna usuario
+
+        await apiUsers.detail(data.userId.toString()).then((user) => {
+          if(user && user.id && user.name && user.numTelf && user.email && user.birthday && user.school){  // si existe user completo
+            history.push(`/dashboard/${data.userId}`);
+          }
+          else{
+            history.push('/signup');
+          }
+        });// llamar al detalle usuario
+      } 
+      else{
+        window.alert("User not registered");
+      }
+      
+    });
+
+  }
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <form onSubmit={handleSubmit}>
       <Box
         sx={{
             marginTop: 8,
@@ -22,24 +84,28 @@ export default function SingIn() {
           <Typography component="h2" variant="h4">
             Sign In
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt:1 }}>
+          <Box sx={{ mt:1 }}>
             <TextField 
             margin="normal"
             required 
             fullWidth 
-            id ="email" 
             label="Email Address"
             name="email"
             autoComplete="email" 
-            autoFocus/>
+            autoFocus
+            value={userLogin.email}
+            onChange={(event) => changeValueUserLogin(event)}
+            />
            <TextField 
             margin="normal"
             required 
             fullWidth 
-            id ="password" 
-            label="password"
+            label="Password"
             name="password"
+            type="password"
             autoComplete="current-password" 
+            value={userLogin.password}
+            onChange={(event) => changeValueUserLogin(event)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary"/>}
@@ -59,13 +125,14 @@ export default function SingIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
           </Box>
       </Box>
+      </form>
         <Copyright sx={{ mt:8, mb:4}}/>
     </Container>
   );
