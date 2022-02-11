@@ -13,6 +13,9 @@ const authService = {
             }
             return appUserResponse;
         }),
+    register: async (appUserData: ApplicationUserLogin)=>
+        await request.post<ApplicationUserResponse>("authenticate/register", appUserData)
+        
 }
 
 export default authService;
