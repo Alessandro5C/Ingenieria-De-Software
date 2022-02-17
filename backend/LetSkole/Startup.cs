@@ -63,14 +63,16 @@ namespace LetSkole
                 .AddEntityFrameworkStores<LetSkoleDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
-                // Default Password settings.
+                // Password settings.
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 5;
                 options.Password.RequiredUniqueChars = 1;
-
+                // User settings
+                options.User.AllowedUserNameCharacters += "#";
+                options.User.RequireUniqueEmail = true;
             });
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
             services.AddAuthentication(x =>
@@ -95,7 +97,7 @@ namespace LetSkole
             
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetSkole.Api", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "LetSkole.Api", Version = "v2" });
             });
         }
 
@@ -106,9 +108,10 @@ namespace LetSkole
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+            // app.UseAuthentication();
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LetSkole v2"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "LetSkole v2"));
 
             app.UseHttpsRedirection();
 

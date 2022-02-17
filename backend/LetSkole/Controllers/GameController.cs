@@ -9,7 +9,7 @@ using LetSkole.Services;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v1/[controller]/[action]")]
+    [Route("api/v2/[controller]/[action]")]
     [ApiController]
     public class GameController : ControllerBase
     {

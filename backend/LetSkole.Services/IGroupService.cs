@@ -10,11 +10,11 @@ namespace LetSkole.Services
     {
         Task<ICollection<GroupDto>> GetCollection(string filter);
         Task<GroupDto> GetItem(int id);
-        Task<ICollection<GroupDto>> GetCollectionByTeacherId (int userId);
+        Task<ICollection<GroupDto>> GetCollectionByTeacherId (string userId);
 
         //Deberia retornar un GroupDto
-        Task Create (int userId, GroupDto entity);
-        Task Update(GroupDto entity, int userId);
+        Task Create (string userId, GroupDto entity);
+        Task Update(GroupDto entity, string userId);
         Task Delete(int id);
 
     }

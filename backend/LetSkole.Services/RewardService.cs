@@ -26,14 +26,14 @@ namespace LetSkole.Services
 
             await _repository.Create(new RewardUser
             {
-                UserId = entity.UserId,
+                ApplicationUserId = entity.UserId,
                 RewardId = entity.RewardId
             });
         }
 
-        public async Task Delete(int userid,int rewardid)
+        public async Task Delete(string userId, int rewardId)
         {
-            await _repository.Delete(userid,rewardid);
+            await _repository.Delete(userId,rewardId);
         }
 
         public async Task<ICollection<RewardDto>> GetCollection(string filter)
@@ -49,9 +49,9 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public async Task<ICollection<RewardDto>> GetCollectionRewardUser(int UserId)
+        public async Task<ICollection<RewardDto>> GetCollectionRewardUser(string userId)
         {
-            var Collection = await _repository.GetCollectionRewardUser(UserId);
+            var Collection = await _repository.GetCollectionRewardUser(userId);
 
             return Collection.Select(c => new RewardDto
             {

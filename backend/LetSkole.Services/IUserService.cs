@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using LetSkole.Dto;
-using LetSkole.Entities;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.Services
 {
     public interface IUserService
     {
-        Task<ICollection<UserDto>> GetCollection (string filter);
-        Task<UserDto> GetItem (int id);
-        Task<User> Create (User entity);
-        Task Update (UserDto entity);
-        Task Delete (int id);
-        Task<string> SearchNumTel (int userId);
+        Task<ICollection<ApplicationUserDto>> GetCollection (string filter);
+        Task<ApplicationUserDto> GetItem (string id);
+        Task<ApplicationUser> Create (ApplicationUser entity);
+        Task Update (ApplicationUserDto entity);
+        Task Delete (string id);
+        Task<string> SearchNumTel (string id);
 
         Task<int> GetItemByEmail(string email);
     }

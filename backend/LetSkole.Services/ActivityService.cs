@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.Services
 {
@@ -28,7 +29,7 @@ namespace LetSkole.Services
             entity.StartDate = new DateTime(now.Year, now.Month, now.Day);
 
             //Validar user
-            User user = await _userRepository.GetItem(entity.UserId);
+            ApplicationUser user = await _userRepository.GetItem(entity.UserId);
             if (user == null)
             {
                 throw new Exception("User not found");
@@ -62,7 +63,7 @@ namespace LetSkole.Services
 
            await _repository.Create(new Activity
             {
-                UserId = entity.UserId, //validar el user id
+                ApplicationUserId = entity.UserId, //validar el user id
                 Name = entity.Name,
                 Description = entity.Description,
                 StartDate = entity.StartDate, // Tiempo del sistema a las 0:0:0 horas
@@ -84,7 +85,7 @@ namespace LetSkole.Services
             return  Collection.Select(c => new ActivityDto
             {
                 Id = c.Id,
-                UserId = c.UserId,
+                UserId = c.ApplicationUserId,
                 Name = c.Name,
                 Description = c.Description,
                 StartDate = c.StartDate,
@@ -102,7 +103,7 @@ namespace LetSkole.Services
             return Collection.Select(c => new ActivityDto
             {
                 Id = c.Id,
-                UserId = c.UserId,
+                UserId = c.ApplicationUserId,
                 Name = c.Name,
                 Description = c.Description,
                 StartDate = c.StartDate,
@@ -125,7 +126,7 @@ namespace LetSkole.Services
             ActivityDto activityDto = new ActivityDto();
 
             activityDto.Id = activity.Id;
-            activityDto.UserId = activity.UserId;
+            activityDto.UserId = activity.ApplicationUserId;
             activityDto.Name = activity.Name;
             activityDto.Description = activity.Description;
             activityDto.StartDate = activity.StartDate;
@@ -149,7 +150,7 @@ namespace LetSkole.Services
 
 
             // Falta comprobar si el usuario existe
-            User user = await _userRepository.GetItem(entity.UserId);
+            ApplicationUser user = await _userRepository.GetItem(entity.UserId);
             if (user == null)
             {
                 throw new Exception("El id del usuario no existe");
@@ -244,7 +245,7 @@ namespace LetSkole.Services
             activity.Description = entity.Description;
             activity.Id = entity.Id;
             activity.Name = entity.Name;
-            activity.UserId = entity.UserId;
+            activity.ApplicationUserId = entity.UserId;
 
             await _repository.Update(activity);
         }

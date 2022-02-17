@@ -10,12 +10,12 @@ namespace LetSkole.DataAccess
     {
         Task<ICollection<UserGroup>> GetItems(int filter);
 
-        Task<ICollection<UserGroup>> GetItemsByTeacherId(int id);
-        Task<UserGroup> GetItem (int userId, int groupId);
+        Task<ICollection<UserGroup>> GetItemsByTeacherId(string userId);
+        Task<UserGroup> GetItem (string userId, int groupId);
         Task Create(UserGroup entity);
         Task Update (UserGroup entity);
-        Task DeleteUsingUser (int userId, int groupId);
+        Task DeleteUsingUser (string userId, int groupId);
         Task DeleteUsingGroup (int groupId);
-        Task<int> SearchGrade (int userId, int groupId);
+        Task<int> SearchGrade (string userId, int groupId);
     }
 }

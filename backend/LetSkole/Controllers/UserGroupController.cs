@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace LetSkole.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]/[action]")]
+    [Route("api/v2/[controller]/[action]")]
     public class UserGroupController : ControllerBase
     {
         private readonly IUserGroupService _service;
@@ -57,7 +57,7 @@ namespace LetSkole.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteUsingUser([FromQuery] int userId,int groupId)
+        public async Task<IActionResult> DeleteUsingUser([FromQuery] string userId, int groupId)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace LetSkole.Controllers
             return NoContent();
         }
         [HttpGet]
-        public async Task<ActionResult<int>> GetByUserID ([FromQuery] int userId)
+        public async Task<ActionResult<int>> GetByUserID ([FromQuery] string userId)
         {
             //Int32 grade;
             return Accepted(await _service.SearchGrade(userId));

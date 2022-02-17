@@ -6,7 +6,7 @@ namespace LetSkole.Dto
 {
     public class UserGroupDto
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int GroupId { get; set; }
         public short Grade { get; set; }
         public bool Admin { get; set; }

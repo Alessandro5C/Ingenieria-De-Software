@@ -16,7 +16,6 @@ namespace LetSkole.DataAccess
         
         public GroupsRepository(LetSkoleDbContext context)
         {
-            //Representa mi base de datos
             _context = context;
         }
 
@@ -42,16 +41,18 @@ namespace LetSkole.DataAccess
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Group>> GetCollectionByTeacher(int userId)
+        public async Task<ICollection<Group>> GetCollectionByTeacher(string userId)
         {
-            var query = await _context.Groups.Join(_context.UserGroups, group => group.Id, userGroup => userGroup.GroupId, (group, userGroup) => new { PersonId = userGroup.UserId, Id = group.Id, Name = group.Name, Description = group.Description, maxGrade = group.MaxGrade })
-                   .Where(person => person.PersonId == userId)
-                   .Select(g => new Group{ Id = g.Id, Name = g.Name, Description = g.Description, MaxGrade = g.maxGrade }).ToListAsync();
-
-            return query;        
+            throw new NotImplementedException();
+            
+            // var query = await _context.Groups.Join(_context.UserGroups, group => group.Id, userGroup => userGroup.GroupId, (group, userGroup) => new { PersonId = userGroup.UserId, Id = group.Id, Name = group.Name, Description = group.Description, maxGrade = group.MaxGrade })
+            //        .Where(person => person.PersonId == userId)
+            //        .Select(g => new Group{ Id = g.Id, Name = g.Name, Description = g.Description, MaxGrade = g.maxGrade }).ToListAsync();
+            //
+            // return query;        
         }
 
-        public Task<ICollection<Group>> GetCollectionByUser(int userId)
+        public Task<ICollection<Group>> GetCollectionByUser(string userId)
         {
 
             throw new NotImplementedException();

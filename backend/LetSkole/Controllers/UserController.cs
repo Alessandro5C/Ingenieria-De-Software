@@ -9,7 +9,7 @@ using LetSkole.Services;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v1/[controller]/[action]")]
+    [Route("api/v2/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -28,40 +28,42 @@ namespace LetSkole.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<UserDto>> GetItemById ([FromQuery] int id)
+        public async Task<ActionResult<UserDto>> GetItemById ([FromQuery] string id)
         {
-            UserDto userDto;
-            try
-            {
-                userDto =  await _service.GetItem(id);
-            }
-            catch(NullReferenceException e)
-            {
-                return NotFound(e.Message);
-            }
-            catch (LetSkoleException e)
-            {
-                return BadRequest(e.Message + " " + e.value);
-            }
-            return Ok(userDto);
+            throw new NotImplementedException();
+            // UserDto userDto;
+            // try
+            // {
+            //     userDto =  await _service.GetItem(id);
+            // }
+            // catch(NullReferenceException e)
+            // {
+            //     return NotFound(e.Message);
+            // }
+            // catch (LetSkoleException e)
+            // {
+            //     return BadRequest(e.Message + " " + e.value);
+            // }
+            // return Ok(userDto);
         }
 
         [HttpPut]
         public async Task<IActionResult> Put ([FromBody] UserDto userDto)
         {
-            try
-            {
-                await _service.Update(userDto);
-            }
-            catch ( Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-            return Accepted();
+            throw new NotImplementedException();
+            // try
+            // {
+            //     await _service.Update(userDto);
+            // }
+            // catch ( Exception e)
+            // {
+            //     return BadRequest(e.Message);
+            // }
+            // return Accepted();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete ([FromQuery] int id)
+        public async Task<IActionResult> Delete ([FromQuery] string id)
         {
             try
             {
@@ -74,7 +76,7 @@ namespace LetSkole.Controllers
             return Accepted();
         }
         [HttpGet]
-        public async Task<ActionResult<string>> SearchNumTel ([FromQuery] int userId)
+        public async Task<ActionResult<string>> SearchNumTel ([FromQuery] string userId)
         {
             string str;
             try {
