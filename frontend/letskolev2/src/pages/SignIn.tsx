@@ -18,6 +18,7 @@ import { ApplicationUserLogin } from '../models/aplication-user-login';
 import authService from '../api/api.authservice';
 import { useHistory } from "react-router-dom";
 import apiUsers from '../api/api.user';
+import { useTranslation } from 'react-i18next';
 
 const initApplicationUserLogin : ApplicationUserLogin = {
   email: '',
@@ -25,6 +26,7 @@ const initApplicationUserLogin : ApplicationUserLogin = {
 }
 
 export default function SingIn() {
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   const [ userLogin, setUserLogin ] = useState<ApplicationUserLogin>(initApplicationUserLogin);
   const inputEmail = useRef<HTMLInputElement>(null);
@@ -87,7 +89,7 @@ export default function SingIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h2" variant="h4">
-            Sign In
+            {t("sign-in")}
           </Typography>
           <Box sx={{ mt:1 }}>
             <TextField 
