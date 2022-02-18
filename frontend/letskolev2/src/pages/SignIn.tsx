@@ -10,7 +10,7 @@ import { Avatar,
   ThemeProvider, 
   Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import React, { MouseEvent, useContext, useState } from 'react';
+import React, { MouseEvent, useContext, useRef, useState } from 'react';
 import { Copyright } from '@mui/icons-material';
 import { LoginContext } from '../context/context';
 import { addUserLogin } from '../context/reducer';
@@ -27,6 +27,7 @@ const initApplicationUserLogin : ApplicationUserLogin = {
 export default function SingIn() {
   const history = useHistory();
   const [ userLogin, setUserLogin ] = useState<ApplicationUserLogin>(initApplicationUserLogin);
+  const inputEmail = useRef<HTMLInputElement>(null);
 
   function changeValueUserLogin(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -37,37 +38,41 @@ export default function SingIn() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(userLogin.email);
-    console.log(userLogin.password);
-   
+  
     if(!userLogin.email.includes('@')){
       window.alert("Email must have '@'");
       return;
     }
 
-    // const data : FormData = new FormData(event.currentTarget);
-    // const email : FormDataEntryValue | null = data.get('email');
-    // const password : FormDataEntryValue | null = data.get('password');
+    await authService.login(userLogin).then(
+      async (appUserResponse) => {
+        if(appUserResponse){
+          // Reviso su información
+          console.log(appUserResponse.userId);
+          console.log(appUserResponse.token);
+          console.log(appUserResponse.email);
+          inputEmail.current?.focus();
 
-    await authService.login(userLogin).then(async (data) => {
-      if(data){ // si retorna usuario
-
-        await apiUsers.detail(data.userId.toString()).then((user) => {
-          if(user && user.id && user.name && user.numTelf && user.email && user.birthday && user.school){  // si existe user completo
-            history.push(`/dashboard/${data.userId}`);
-          }
-          else{
-            history.push('/signup');
-          }
-        });// llamar al detalle usuario
-      } 
-      else{
-        window.alert("User not registered");
-      }
-      
+          await apiUsers.detail(appUserResponse.userId.toString()).then( 
+            (user) => {
+              if(user && user.id && user.name && user.numTelf && user.email && user.birthday && user.school){  
+                window.alert(`Welcome ${user.name}`);
+                history.push(`/dashboard/${user.id}`);
+              }
+              else {
+                window.alert('Need to complete information, An error ocurred with user information');
+                history.push(`/signup/${appUserResponse.email}`);
+              }
+            });
+        }
+        else {
+          window.alert('User not registered');
+          console.log(inputEmail.current);
+          inputEmail.current?.focus();
+        }
     });
-
   }
+
   return (
     <Container component="main" maxWidth="xs">
       <form onSubmit={handleSubmit}>
@@ -92,9 +97,10 @@ export default function SingIn() {
             label="Email Address"
             name="email"
             autoComplete="email" 
-            autoFocus
             value={userLogin.email}
             onChange={(event) => changeValueUserLogin(event)}
+            autoFocus
+            inputRef={inputEmail}
             />
            <TextField 
             margin="normal"
