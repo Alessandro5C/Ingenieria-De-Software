@@ -21,7 +21,8 @@ using Microsoft.IdentityModel.Tokens;
 namespace LetSkole.Controllers
 {
     [ApiController]
-    [Route("api/v2/authenticate")]
+    [Route("api/v2/[controller]")]
+    [Produces("application/json")]
     public class IdentityController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -45,82 +46,68 @@ namespace LetSkole.Controllers
             _mapper = mapper;
         }
 
-        private string UniqueName(string DisplayedName)
+        private static string UniqueUserName(string displayedName)
         {
-            return DisplayedName + "#" +
-                   DateTime.Now.Ticks + "#" +
-                   Guid.NewGuid().ToString();
-        }
-        
-        private bool IsValidEmail(string email)
-        {
-            var trimmedEmail = email.Trim();
-
-            if (trimmedEmail.EndsWith("."))
-            {
-                return false;
-            }
-
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == trimmedEmail;
-            }
-            catch
-            {
-                return false;
-            }
+            return displayedName + "#" +
+                   DateTime.UtcNow.Ticks + "#" +
+                   Guid.NewGuid();
         }
 
         [AllowAnonymous]
         [HttpPost("sign-up")]
-        [ProducesResponseType(typeof(ApplicationUserResponseDto), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> Create(ApplicationUserRegisterDto model)
+        [ProducesResponseType(typeof(LetSkoleResponse<AppUserProfileDto>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
+        public async Task<IActionResult> Create(AppUserRegisterDto model)
         {
             if (string.IsNullOrEmpty(model.Name))
-            {
-                throw new LetSkoleException("UserName invalid");
-            }
+                return BadRequest(LetSkoleResponse.Error(
+                    "Bad Request: 'name' is empty", 400)
+                );
 
-            var user = new ApplicationUser
+            var appUser = new ApplicationUser
             {
                 Email = model.Email,
                 DisplayedName = model.Name,
-                UserName = UniqueName(model.Name),
+                UserName = UniqueUserName(model.Name),
                 Student = model.Student
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(appUser, model.Password);
             if (!result.Succeeded)
-                throw new Exception("No se pudo crear el 'Application User'" + result.ToString());
-            var userResource = _mapper.Map<ApplicationUser, ApplicationUserDto>(user);
-
+                return BadRequest( LetSkoleResponse.Error(
+                    "Bad Request: " + result, 400)
+                );
+            var userResource = _mapper.Map<ApplicationUser, AppUserProfileDto>(appUser);
             return Ok(userResource);
         }
 
         [AllowAnonymous]
         [HttpPost("sign-in")]
-        [ProducesResponseType(typeof(ApplicationUserResponseDto), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 400)]
-        public async Task<IActionResult> Login(ApplicationUserLoginDto model)
+        [ProducesResponseType(typeof(LetSkoleResponse<AppIdentityResponseDto>), 200)]
+        public async Task<IActionResult> Login(AppIdentityRequestDto model)
         {
+            var appIdentity = new AppIdentityResponseDto();
             var appUser = await _userManager.FindByEmailAsync(model.Email);
-            if (appUser == null) return BadRequest("Acceso no válido al sistema");
+            if (appUser == null)
+                return Ok(
+                    LetSkoleResponse<AppIdentityResponseDto>.Success(appIdentity)
+                );
             var check = await _signInManager
                 .CheckPasswordSignInAsync(appUser, model.Password, false);
-            if (!check.Succeeded) return BadRequest("Acceso no válido al sistema"); 
+            if (!check.Succeeded)
+                return Ok(
+                    LetSkoleResponse<AppIdentityResponseDto>.Success(appIdentity)
+                );
+
             var token = await GenerateToken(appUser);
+            appIdentity = new AppIdentityResponseDto
+            {
+                Id = appUser.Id, Token = token, Valid = true
+            };
 
             return Ok(
-                new ApplicationUserResponseDto
-                {
-                    Id = appUser.Id,
-                    Email = appUser.Email,
-                    Token = token
-                }
+                LetSkoleResponse<AppIdentityResponseDto>.Success(appIdentity)
             );
-
         }
 
         private async Task<string> GenerateToken(ApplicationUser applicationUser)
@@ -146,7 +133,7 @@ namespace LetSkole.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddMinutes(120),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };

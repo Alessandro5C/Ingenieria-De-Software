@@ -19,23 +19,7 @@ namespace LetSkole.Services
             _repository = repository;
         }
         
-        public async Task<ICollection<ApplicationUserDto>> GetCollection(string filter)
-        {
-            throw new NotImplementedException();
-            // var Collection = await _repository.GetCollection(filter ?? string.Empty);
-            // return Collection.Select(c => new UserDto
-            // {   
-            //     Id = c.Id,
-            //     Name = c.UserName,
-            //     Student = c.Student,
-            //     School = c.School,
-            //     Email = c.Email,
-            //     NumTelf = c.PhoneNumber,
-            //     Birthday=c.Birthday
-            // }).ToList();
-        }
-
-        public async Task<ApplicationUserDto> GetItem(string id)
+        public async Task<AppUserProfileDto> GetItem(string id)
         {
             throw new NotImplementedException();
             // User user = await _repository.GetItem(id);
@@ -98,7 +82,7 @@ namespace LetSkole.Services
             // return entity;
         }
 
-        public async Task Update(ApplicationUserDto entity)
+        public async Task Update(AppUserProfileDto entity)
         {
             throw new NotImplementedException();
             //

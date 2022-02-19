@@ -1,16 +1,8 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace LetSkole.Dto
 {
-    public class ApplicationUserLoginDto
-    {
-        public string Password { get; set; }
-        public string Email { get; set; }
-    }
-    
-    public class ApplicationUserRegisterDto
+    public class AppUserRegisterDto
     {
         public string Password { get; set; }
         public string Email { get; set; }
@@ -18,14 +10,7 @@ namespace LetSkole.Dto
         public bool Student { get; set; }
     }
 
-    public class ApplicationUserResponseDto
-    {
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public string Token { get; set; }
-    }
-    
-    public class ApplicationUserDto
+    public class AppUserProfileDto
     {
         public string Id { get; set; }
         public string Name { get; set; }

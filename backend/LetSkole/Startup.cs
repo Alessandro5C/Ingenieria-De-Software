@@ -25,6 +25,7 @@ namespace LetSkole
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,13 +39,13 @@ namespace LetSkole
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://localhost:3000")
-                                      .AllowAnyHeader()
-                                      .AllowAnyMethod()
-                                      .AllowAnyOrigin();
-                                  });
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
+                    });
             });
 
             // NOTE: In case you are in development phase,
@@ -58,7 +59,7 @@ namespace LetSkole
 
             services.AddControllers();
             services.AddInjection();
-            services.AddAutoMapper(typeof(Startup)); 
+            services.AddAutoMapper(typeof(Startup));
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<LetSkoleDbContext>();
             services.Configure<IdentityOptions>(options =>
@@ -91,13 +92,38 @@ namespace LetSkole
                     ValidateAudience = false
                 };
             });
-            
+
             services.AddDbContext<LetSkoleDbContext>(
                 options => options.UseSqlServer(connection));
-            
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v2", new OpenApiInfo { Title = "LetSkole.Api", Version = "v2" });
+                // Include 'SecurityScheme' to use JWT Authentication
+                var jwtSecurityScheme = new OpenApiSecurityScheme
+                {
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Name = "JWT Authentication",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+                
+                
+                c.SwaggerDoc("v2", new OpenApiInfo {Title = "LetSkole.Api", Version = "v2"});
+
+                c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {jwtSecurityScheme, Array.Empty<string>()}
+                });
             });
         }
 
@@ -119,10 +145,7 @@ namespace LetSkole
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

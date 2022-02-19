@@ -10,7 +10,7 @@ namespace LetSkole.Mapping
         // ENTITY to DTO
         public ModelToResourceProfile()
         {
-            CreateMap<ApplicationUser, ApplicationUserDto>();
+            CreateMap<ApplicationUser, AppUserProfileDto>();
             // CreateMap<User, UserDto>();
             // CreateMap<Costo, CostoResource>();
             // CreateMap<CostosOperacion, CostosOperacionResource>();
