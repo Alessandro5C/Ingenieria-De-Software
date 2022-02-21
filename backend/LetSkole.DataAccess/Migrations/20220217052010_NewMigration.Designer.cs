@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LetSkole.DataAccess.Migrations
 {
     [DbContext(typeof(LetSkoleDbContext))]
-    [Migration("20211119002950_SecureMigration")]
-    partial class SecureMigration
+    [Migration("20220217052010_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace LetSkole.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
@@ -53,12 +56,9 @@ namespace LetSkole.DataAccess.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Activities");
                 });
@@ -115,6 +115,86 @@ namespace LetSkole.DataAccess.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisplayedName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("School")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Student")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("LetSkole.Entities.Reward", b =>
                 {
                     b.Property<int>("Id")
@@ -149,69 +229,23 @@ namespace LetSkole.DataAccess.Migrations
 
             modelBuilder.Entity("LetSkole.Entities.RewardUser", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("RewardId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "RewardId");
+                    b.HasKey("ApplicationUserId", "RewardId");
 
                     b.HasIndex("RewardId");
 
                     b.ToTable("RewardUsers");
                 });
 
-            modelBuilder.Entity("LetSkole.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("NumTelf")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("School")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<bool>("Student")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("Email")
-                        .HasName("AlternateKey_Email");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
@@ -222,7 +256,7 @@ namespace LetSkole.DataAccess.Migrations
                     b.Property<short>("Grade")
                         .HasColumnType("smallint");
 
-                    b.HasKey("UserId", "GroupId");
+                    b.HasKey("ApplicationUserId", "GroupId");
 
                     b.HasIndex("GroupId");
 
@@ -284,77 +318,6 @@ namespace LetSkole.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -450,13 +413,6 @@ namespace LetSkole.DataAccess.Migrations
                     b.HasDiscriminator().HasValue("ApplicationRole");
                 });
 
-            modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
             modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUserRole", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
@@ -466,13 +422,11 @@ namespace LetSkole.DataAccess.Migrations
 
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>
                 {
-                    b.HasOne("LetSkole.Entities.User", "User")
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
-                    b.Navigation("User");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.Reward", b =>
@@ -488,49 +442,40 @@ namespace LetSkole.DataAccess.Migrations
 
             modelBuilder.Entity("LetSkole.Entities.RewardUser", b =>
                 {
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "ApplicationUser")
+                        .WithMany("RewardUsers")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LetSkole.Entities.Reward", "Reward")
                         .WithMany("RewardUsers")
                         .HasForeignKey("RewardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LetSkole.Entities.User", "User")
-                        .WithMany("RewardUsers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Reward");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.User", b =>
-                {
-                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.UserGroup", b =>
                 {
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "ApplicationUser")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LetSkole.Entities.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LetSkole.Entities.User", "User")
-                        .WithMany("UserGroups")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Group");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -544,7 +489,7 @@ namespace LetSkole.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -553,7 +498,7 @@ namespace LetSkole.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -567,17 +512,11 @@ namespace LetSkole.DataAccess.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -586,21 +525,30 @@ namespace LetSkole.DataAccess.Migrations
 
             modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUserRole", b =>
                 {
-                    b.HasOne("LetSkole.Entities.Indentity.ApplicationRole", "Role")
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationRole", "ApplicationRole")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "User")
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "ApplicationUser")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("ApplicationRole");
 
-                    b.Navigation("User");
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUser", b =>
+                {
+                    b.Navigation("RewardUsers");
+
+                    b.Navigation("UserGroups");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("LetSkole.Entities.Reward", b =>
@@ -608,19 +556,7 @@ namespace LetSkole.DataAccess.Migrations
                     b.Navigation("RewardUsers");
                 });
 
-            modelBuilder.Entity("LetSkole.Entities.User", b =>
-                {
-                    b.Navigation("RewardUsers");
-
-                    b.Navigation("UserGroups");
-                });
-
             modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationRole", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUser", b =>
                 {
                     b.Navigation("UserRoles");
                 });

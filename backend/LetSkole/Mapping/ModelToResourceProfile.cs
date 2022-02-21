@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LetSkole.Dto;
 using LetSkole.Entities;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.Mapping
 {
@@ -9,7 +10,8 @@ namespace LetSkole.Mapping
         // ENTITY to DTO
         public ModelToResourceProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<ApplicationUser, AppUserProfileDto>();
+            // CreateMap<User, UserDto>();
             // CreateMap<Costo, CostoResource>();
             // CreateMap<CostosOperacion, CostosOperacionResource>();
             // CreateMap<Letra, LetraResource>();

@@ -25,7 +25,7 @@ namespace LetSkole.DataAccess
 
         public async Task<ICollection<Activity>> GetCollectionByID(int userId)
         {
-            return await _context.Activities.Where(c => c.UserId.Equals(userId))
+            return await _context.Activities.Where(c => c.ApplicationUserId.Equals(userId))
                    .ToListAsync();
         }
         

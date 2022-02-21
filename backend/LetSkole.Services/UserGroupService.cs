@@ -25,7 +25,7 @@ namespace LetSkole.Services
                 //Aqui debemos ver quien cree el grupo sea un profesor
                 await _repository.Create(new UserGroup
                 {
-                    UserId = entity.UserId,
+                    ApplicationUserId = entity.UserId,
                     GroupId = entity.GroupId,
                     Grade = -1,
                     Admin = false,
@@ -42,7 +42,7 @@ namespace LetSkole.Services
             throw new NotImplementedException();
         }
 
-        public async Task DeleteUsingUser(int userId, int groupId)
+        public async Task DeleteUsingUser(string userId, int groupId)
         {
             _repository.DeleteUsingUser(userId, groupId);
         }
@@ -53,7 +53,7 @@ namespace LetSkole.Services
 
             return Collection.Select(c => new UserGroupDto
             {
-                UserId = c.UserId,
+                UserId = c.ApplicationUserId,
                 GroupId = c.GroupId,
                 Admin = c.Admin,
                 Grade = c.Grade
@@ -75,12 +75,12 @@ namespace LetSkole.Services
             
             await _repository.Update(userGroup);
         }
-        public async Task<ICollection<UserGroupDto>> SearchGrade(int userId)
+        public async Task<ICollection<UserGroupDto>> SearchGrade(string userId)
         {
             var Collection = await _repository.GetItemsByTeacherId(userId);
             return Collection.Select(c => new UserGroupDto
             {
-                UserId = c.UserId,
+                UserId = c.ApplicationUserId,
                 GroupId = c.GroupId,
                 Admin = c.Admin,
                 Grade = c.Grade

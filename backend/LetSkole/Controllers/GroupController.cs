@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v2/[controller]")]
     [ApiController]
     public class GroupController : Controller
     {
@@ -20,7 +20,7 @@ namespace LetSkole.Controllers
 
         [Route("Create")]
         [HttpPost]
-        public async Task<ActionResult<GroupDto>> Post([FromQuery] int userId, [FromBody] GroupDto GroupDto)
+        public async Task<ActionResult<GroupDto>> Post([FromQuery] string userId, [FromBody] GroupDto GroupDto)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace LetSkole.Controllers
 
         [Route("GetAllByTeacherId")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] int userId)
+        public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] string userId)
         {
             IEnumerable<GroupDto> collection;
             try
@@ -59,7 +59,7 @@ namespace LetSkole.Controllers
 
         [Route("Update")]
         [HttpPut]
-        public async Task<IActionResult> Put([FromQuery] GroupDto groupDto, [FromQuery] int userId)
+        public async Task<IActionResult> Put([FromQuery] GroupDto groupDto, [FromQuery] string userId)
         {
             try
             {

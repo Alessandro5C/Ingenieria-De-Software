@@ -9,7 +9,7 @@ using LetSkole.Services;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v1/[controller]/[action]")]
+    [Route("api/v2/[controller]/[action]")]
     [ApiController]
     public class RewardController : ControllerBase
     {
@@ -40,7 +40,7 @@ namespace LetSkole.Controllers
             return Accepted(await _service.GetCollection(filter));
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RewardDto>>> GetAllByFilterRewardsUser([FromQuery] int userId)
+        public async Task<ActionResult<IEnumerable<RewardDto>>> GetAllByFilterRewardsUser([FromQuery] string userId)
         {
             return Accepted(await _service.GetCollectionRewardUser(userId));
         }
@@ -59,7 +59,7 @@ namespace LetSkole.Controllers
 
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery] int userId,int rewardId)
+        public async Task<IActionResult> Delete([FromQuery] string userId, int rewardId)
         {
             try
             {

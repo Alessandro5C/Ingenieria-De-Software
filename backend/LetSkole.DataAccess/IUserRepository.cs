@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using LetSkole.Entities;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.DataAccess
 {
     public interface IUserRepository
     {
-        Task<ICollection<User>> GetCollection (string filter);
-        Task<User> GetItem (int id);
-        Task Create (User entity);
-        Task Update (User entity);
+        Task<ICollection<ApplicationUser>> GetCollection (string filter);
+        Task<ApplicationUser> GetItem (string id);
+        Task Create (ApplicationUser entity, string password);
+        Task Update (ApplicationUser entity);
         Task Delete (int id);
         Task<string> SearchNumTel(int userId);
         // for IDENTITY
-        Task<User> GetItemByEmail(string email);
+        Task<ApplicationUser> GetItemByEmail(string email);
 
     }
 }

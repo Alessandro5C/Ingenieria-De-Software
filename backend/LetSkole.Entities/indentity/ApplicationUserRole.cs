@@ -4,7 +4,7 @@ namespace LetSkole.Entities.Indentity
 {
     public class ApplicationUserRole: IdentityUserRole<string>
     {
-        public ApplicationUser User { get; set; }
-        public ApplicationRole Role { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationRole ApplicationRole { get; set; }
     }
 }

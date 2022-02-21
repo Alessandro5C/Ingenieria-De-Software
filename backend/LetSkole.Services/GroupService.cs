@@ -7,6 +7,7 @@ using System.Text;
 using System.Linq;
 using System.Collections;
 using System.Threading.Tasks;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.Services
 {
@@ -23,10 +24,10 @@ namespace LetSkole.Services
             _userGroupRepository = userGroupRepository;
         }
 
-        public async Task Create(int userId, GroupDto entity)
+        public async Task Create(string userId, GroupDto entity)
         {
             // Validar que exista el profesor
-            User user = await _userRepository.GetItem(userId);
+            ApplicationUser user = await _userRepository.GetItem(userId);
 
             if(user == null)
             {
@@ -47,7 +48,7 @@ namespace LetSkole.Services
 
             UserGroup userGroup = new UserGroup {
                 GroupId = group.Id,
-                UserId = user.Id,
+                ApplicationUserId = user.Id,
                 Grade = -1,
                 Admin = true
             };
@@ -71,9 +72,9 @@ namespace LetSkole.Services
             }).ToList();
         }
 
-        public async Task<ICollection<GroupDto>> GetCollectionByTeacherId (int userId)
+        public async Task<ICollection<GroupDto>> GetCollectionByTeacherId (string userId)
         {
-            User user = await _userRepository.GetItem(userId);
+            ApplicationUser user = await _userRepository.GetItem(userId);
 
             if (user == null)
             {
@@ -104,12 +105,12 @@ namespace LetSkole.Services
             return groupDto;
         }
 
-        public async Task Update(GroupDto entity, int userId)
+        public async Task Update(GroupDto entity, string userId)
         {
             
             Group group = await _repository.GetItem(entity.Id);
 
-            User auxUser = _userRepository.GetItem(userId).Result;
+            ApplicationUser auxUser = _userRepository.GetItem(userId).Result;
             var auxGroupsTeacher = await _repository.GetCollectionByTeacher(userId);
            
             Group auxGroup = new Group { Id = entity.Id };

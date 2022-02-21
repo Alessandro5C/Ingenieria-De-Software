@@ -5,23 +5,28 @@ using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using LetSkole.Entities.Indentity;
+using Microsoft.AspNetCore.Identity;
 
 namespace LetSkole.DataAccess
 {
     public class UserGroupRepository : IUserGroupRepository
     {
         private readonly LetSkoleDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserGroupRepository(LetSkoleDbContext context)
+        public UserGroupRepository(LetSkoleDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public async Task<UserGroup> GetItem(int userId, int groupId)
+        public async Task<UserGroup> GetItem(string userId, int groupId)
         {
-            UserGroup userGroup = await _context.UserGroups.
+            var userGroup = await _context.UserGroups.
                 FindAsync(userId, groupId);
-            userGroup.User = await  _context.Users.FindAsync(userId);
+            // userGroup.ApplicationUser = await _context.Users.FindAsync(userId);
+            userGroup.ApplicationUser = await _userManager.FindByIdAsync(userId);
             userGroup.Group = await _context.Groups.FindAsync(groupId);
             return userGroup; 
         }
@@ -38,11 +43,11 @@ namespace LetSkole.DataAccess
             throw new NotImplementedException();
         }
 
-        public async Task DeleteUsingUser(int userId, int groupId)
+        public async Task DeleteUsingUser(string userId, int groupId)
         {
             _context.Entry(new UserGroup
             {
-                UserId = userId,
+                ApplicationUserId = userId,
                 GroupId = groupId
             }).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
@@ -61,16 +66,17 @@ namespace LetSkole.DataAccess
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICollection<UserGroup>> GetItemsByTeacherId(int userId)
+        public async Task<ICollection<UserGroup>> GetItemsByTeacherId(string userId)
         {
-            return await _context.UserGroups.Where(c => c.UserId.Equals(userId))
+            return await _context.UserGroups.Where(c => c.ApplicationUserId.Equals(userId))
                 .ToListAsync();
         }
-        public async Task<int> SearchGrade(int userId, int groupId)
+        public async Task<int> SearchGrade(string userId, int groupId)
         {
             UserGroup userGroup = await _context.UserGroups.
                FindAsync(userId, groupId);
-            userGroup.User = await _context.Users.FindAsync(userId);
+            // userGroup.ApplicationUser = await _context.Users.FindAsync(userId);
+            userGroup.ApplicationUser = await _userManager.FindByIdAsync(userId);
             userGroup.Group = await _context.Groups.FindAsync(groupId);
             int grade = userGroup.Grade;
             return grade;

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.Entities
 {
 
     public class Activity:EntityBase
     {
-        public int UserId { get; set; }
-        public User User { get; set; }
-
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         [Required]
         [StringLength(20)]

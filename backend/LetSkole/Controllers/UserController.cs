@@ -4,64 +4,74 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using LetSkole.Dto;
+using LetSkole.Entities.Indentity;
 using LetSkole.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v1/[controller]/[action]")]
     [ApiController]
+    [Route("api/v2/[controller]/[action]")]
+    [Produces("application/json")]
+    [Authorize(AuthenticationSchemes =
+        Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-            
-        public UserController(IUserService service)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMapper _mapper;
+
+        public UserController(IUserService service, UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _service = service;
+            _userManager = userManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<UserDto>), 200)]
-        public async Task<ActionResult> GetAllByFilter([FromQuery] string filter)
+        [ProducesResponseType(typeof(LetSkoleResponse<AppUserProfileDto>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
+        public async Task<ActionResult> GetItemById([FromQuery] string id)
         {
-            return Ok(await _service.GetCollection(filter));
-        }
-        
-        [HttpGet]
-        public async Task<ActionResult<UserDto>> GetItemById ([FromQuery] int id)
-        {
-            UserDto userDto;
-            try
-            {
-                userDto =  await _service.GetItem(id);
-            }
-            catch(NullReferenceException e)
-            {
-                return NotFound(e.Message);
-            }
-            catch (LetSkoleException e)
-            {
-                return BadRequest(e.Message + " " + e.value);
-            }
-            return Ok(userDto);
+            var appUser = await _userManager.FindByIdAsync(id);
+            if (appUser == null)
+                return NotFound(LetSkoleResponse
+                    .Error("Not Found: 'id' doesn't exist", 404)
+                );
+
+            var userResource = _mapper.Map<ApplicationUser, AppUserProfileDto>(appUser);
+            return Ok(LetSkoleResponse<AppUserProfileDto>.Success(userResource));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put ([FromBody] UserDto userDto)
+        [ProducesResponseType(typeof(LetSkoleResponse<AppUserProfileDto>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
+        public async Task<IActionResult> Put([FromBody] AppUserProfileDto model)
         {
-            try
-            {
-                await _service.Update(userDto);
-            }
-            catch ( Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-            return Accepted();
+            var appUser = await _userManager.FindByIdAsync(model.Id);
+            if (appUser == null)
+                return NotFound(LetSkoleResponse
+                    .Error("Not Found: 'id' doesn't exist", 404)
+                );
+
+            appUser.DisplayedName = model.Name;
+            appUser.School = model.School;
+            appUser.PhoneNumber = model.PhoneNumber;
+            appUser.Birthday = model.Birthday;
+
+            await _userManager.UpdateAsync(appUser);
+            var userResource = _mapper.Map<ApplicationUser, AppUserProfileDto>(appUser);
+            return Ok(
+                LetSkoleResponse<AppUserProfileDto>.Success(userResource)
+            );
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete ([FromQuery] int id)
+        public async Task<IActionResult> Delete([FromQuery] string id)
         {
             try
             {
@@ -71,13 +81,16 @@ namespace LetSkole.Controllers
             {
                 return BadRequest(e.Message);
             }
+
             return Accepted();
         }
+
         [HttpGet]
-        public async Task<ActionResult<string>> SearchNumTel ([FromQuery] int userId)
+        public async Task<ActionResult<string>> SearchNumTel([FromQuery] string userId)
         {
             string str;
-            try {
+            try
+            {
                 str = await _service.SearchNumTel(userId);
             }
             catch (Exception e)
@@ -87,7 +100,5 @@ namespace LetSkole.Controllers
 
             return Accepted(str);
         }
-
-
     }
 }
