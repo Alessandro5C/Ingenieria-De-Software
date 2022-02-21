@@ -1,0 +1,10 @@
+{ 
+  "signin": "Inicio de sesión",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "rememberme": "Recordar sesión",
+  "bsignin": "Iniciar sesión",
+  "forgotPassword": "¿Olvidé la contraseña?",
+  "donthaveaccount": "No tengo cuenta"
+
+}

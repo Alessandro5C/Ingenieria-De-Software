@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-  import './i18n.d';
+import './i18next/i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <React.Suspense fallback={<>Loading...</>}>
+      <App />
+    </React.Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

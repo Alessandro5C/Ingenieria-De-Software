@@ -19,6 +19,7 @@ import authService from '../api/api.authservice';
 import { useHistory } from "react-router-dom";
 import apiUsers from '../api/api.user';
 import { useTranslation } from 'react-i18next';
+import { namespaces } from '../i18next/i18n.constants';
 
 const initApplicationUserLogin : ApplicationUserLogin = {
   email: '',
@@ -26,10 +27,10 @@ const initApplicationUserLogin : ApplicationUserLogin = {
 }
 
 export default function SingIn() {
-  const { t, i18n } = useTranslation();
   const history = useHistory();
   const [ userLogin, setUserLogin ] = useState<ApplicationUserLogin>(initApplicationUserLogin);
   const inputEmail = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation(namespaces.pages.signin);
 
   function changeValueUserLogin(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -50,9 +51,6 @@ export default function SingIn() {
       async (appUserResponse) => {
         if(appUserResponse){
           // Reviso su información
-          console.log(appUserResponse.userId);
-          console.log(appUserResponse.token);
-          console.log(appUserResponse.email);
           inputEmail.current?.focus();
 
           await apiUsers.detail(appUserResponse.userId.toString()).then( 
@@ -89,14 +87,14 @@ export default function SingIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h2" variant="h4">
-            {t("sign-in")}
+            {t('signin')}
           </Typography>
           <Box sx={{ mt:1 }}>
             <TextField 
             margin="normal"
             required 
             fullWidth 
-            label="Email Address"
+            label={t('email')}
             name="email"
             autoComplete="email" 
             value={userLogin.email}
@@ -108,7 +106,7 @@ export default function SingIn() {
             margin="normal"
             required 
             fullWidth 
-            label="Password"
+            label={t("password")}
             name="password"
             type="password"
             autoComplete="current-password" 
@@ -117,24 +115,24 @@ export default function SingIn() {
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary"/>}
-              label = "remember me"/>
+              label={t("rememberme").toString()} />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{mt: 3, mb: 2 }}
               >
-                Sign In
+                {t('signin')}
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  {t("forgotPassword")}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  Don't have an account? Sign Up
+                  {t("donthaveaccount")}
                 </Link>
               </Grid>
             </Grid>

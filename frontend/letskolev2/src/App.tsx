@@ -8,7 +8,8 @@ import { InitialLoginState } from './context/state';
 import { LoginContext } from './context/context';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import AuthRouter from './router/auth-router';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { namespaces } from './i18next/i18n.constants';
 
 const theme = createTheme({
   palette: {
@@ -25,18 +26,18 @@ const theme = createTheme({
 //   "de": { nativeName: 'Deutsch' }
 // };
 function App() {
-  // const [state, dispatch] = useReducer(loginReducer, InitialLoginState);
-  // const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation(namespaces.pages.signin);
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <div>
-        { Object.keys(lngs).map((lng) => (
-          <button key={lng} style={{ fontWeight: i18n.resolvedLanguage == lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>      
-            {lngs[lng].nativeName}
-            </button>
-        ))}
-      </div> */}
+      <button onClick={() => changeLanguage("en")}>English</button>
+      <button onClick={() => changeLanguage("es")}>Español</button>
+
+
       {/* <LoginContext.Provider value = {{ state, dispatch}}> */}
       <BrowserRouter>
         <Switch>
