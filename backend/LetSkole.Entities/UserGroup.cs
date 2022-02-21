@@ -13,8 +13,7 @@ namespace LetSkole.Entities
         public int GroupId { get; set; }
         public Group Group { get; set; }
         
+        // PROPERTIES
         public short Grade { get; set; }
-        public bool Admin { get; set; }
-
     }
 }

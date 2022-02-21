@@ -11,18 +11,8 @@ namespace LetSkole.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<ApplicationUser, AppUserProfileDto>();
-            // CreateMap<User, UserDto>();
-            // CreateMap<Costo, CostoResource>();
-            // CreateMap<CostosOperacion, CostosOperacionResource>();
-            // CreateMap<Letra, LetraResource>();
-            // CreateMap<OperacionCartera, OperacionCarteraResource>();
-            // CreateMap<OperacionLetra, OperacionLetraResource>();
-            // CreateMap<Operacion, OperacionResource>();
-            // CreateMap<Perfil, PerfilResource>();
-            // CreateMap<Periodo, PeriodoResource>();
-            // CreateMap<Tasa, TasaResource>();
-            // CreateMap<Usuario, AuthenticationResponse>();
-            // CreateMap<Usuario, UsuarioResource>();
+            CreateMap<Group, GroupRequest>();
+            CreateMap<Group, GroupResponse>();
         }
     }
 }

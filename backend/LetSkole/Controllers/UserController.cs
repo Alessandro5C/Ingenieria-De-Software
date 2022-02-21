@@ -14,12 +14,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LetSkole.Controllers
 {
-    [ApiController]
-    [Route("api/v2/[controller]/[action]")]
-    [Produces("application/json")]
+    // [ApiController]
+    // [Route("api/v2/[controller]/[action]")]
+    // [Produces("application/json")]
     [Authorize(AuthenticationSchemes =
         Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-    public class UserController : ControllerBase
+    public class UserController : LetSkoleController
     {
         private readonly IUserService _service;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -58,7 +58,7 @@ namespace LetSkole.Controllers
                     .Error("Not Found: 'id' doesn't exist", 404)
                 );
 
-            appUser.DisplayedName = model.Name;
+            appUser.DisplayedName = model.DisplayedName;
             appUser.School = model.School;
             appUser.PhoneNumber = model.PhoneNumber;
             appUser.Birthday = model.Birthday;

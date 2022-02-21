@@ -6,14 +6,14 @@ namespace LetSkole.Dto
     {
         public string Password { get; set; }
         public string Email { get; set; }
-        public string Name { get; set; }
+        public string DisplayedName { get; set; }
         public bool Student { get; set; }
     }
 
     public class AppUserProfileDto
     {
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string DisplayedName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public bool Student { get; set; }

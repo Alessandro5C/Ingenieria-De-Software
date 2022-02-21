@@ -8,14 +8,16 @@ namespace LetSkole.Services
 {
     public interface IGroupService
     {
-        Task<ICollection<GroupDto>> GetCollection(string filter);
-        Task<GroupDto> GetItem(int id);
-        Task<ICollection<GroupDto>> GetCollectionByTeacherId (string userId);
-
+        // Task<ICollection<GroupDto>> GetCollection(string filter);
+        //
         //Deberia retornar un GroupDto
-        Task Create (string userId, GroupDto entity);
-        Task Update(GroupDto entity, string userId);
+
+        // Task<GroupDto> GetItem(int id);
+        Task<GroupResponse> Create(GroupRequest model, string ownerId);
+        Task Update(GroupRequest model, int id, string ownerId);
         Task Delete(int id);
 
+        Task<IEnumerable<GroupResponse>> GetEnumerableByUserId(string userId);
+        Task<IEnumerable<GroupResponse>> GetEnumerableByOwnerId(string ownerId);
     }
 }

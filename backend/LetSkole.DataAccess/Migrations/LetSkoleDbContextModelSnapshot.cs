@@ -108,7 +108,12 @@ namespace LetSkole.DataAccess.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Groups");
                 });
@@ -247,9 +252,6 @@ namespace LetSkole.DataAccess.Migrations
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Admin")
-                        .HasColumnType("bit");
 
                     b.Property<short>("Grade")
                         .HasColumnType("smallint");
@@ -421,16 +423,25 @@ namespace LetSkole.DataAccess.Migrations
             modelBuilder.Entity("LetSkole.Entities.Activity", b =>
                 {
                     b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("LetSkole.Entities.Group", b =>
+                {
+                    b.HasOne("LetSkole.Entities.Indentity.ApplicationUser", "Owner")
+                        .WithMany("Groups")
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("LetSkole.Entities.Reward", b =>
                 {
                     b.HasOne("LetSkole.Entities.Game", "Game")
-                        .WithMany()
+                        .WithMany("Rewards")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -466,7 +477,7 @@ namespace LetSkole.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("LetSkole.Entities.Group", "Group")
-                        .WithMany()
+                        .WithMany("UserGroups")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -540,8 +551,22 @@ namespace LetSkole.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("LetSkole.Entities.Game", b =>
+                {
+                    b.Navigation("Rewards");
+                });
+
+            modelBuilder.Entity("LetSkole.Entities.Group", b =>
+                {
+                    b.Navigation("UserGroups");
+                });
+
             modelBuilder.Entity("LetSkole.Entities.Indentity.ApplicationUser", b =>
                 {
+                    b.Navigation("Activities");
+
+                    b.Navigation("Groups");
+
                     b.Navigation("RewardUsers");
 
                     b.Navigation("UserGroups");

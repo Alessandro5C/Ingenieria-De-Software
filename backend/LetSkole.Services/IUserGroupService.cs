@@ -8,11 +8,13 @@ namespace LetSkole.Services
 {
     public interface IUserGroupService
     {
-        Task<ICollection<UserGroupDto>> GetItems(int groupId);
+        // Task<ICollection<UserGroupDto>> GetItems(int groupId);
         Task Create(UserGroupDto entity);
         Task Update(UserGroupDto entity);
-        Task DeleteUsingUser(string userId, int groupId);
-        Task DeleteUsingGroup(int GroupId);
-        Task<ICollection<UserGroupDto>> SearchGrade(string userId);
+        Task DeleteByUserId(int id, string userId);
+        
+        Task<ICollection<UserGroupDto>> GetColletionByGroupId(int groupId);
+        // Task DeleteUsingGroup(int GroupId);
+        // Task<ICollection<UserGroupDto>> SearchGrade(string userId);
     }
 }

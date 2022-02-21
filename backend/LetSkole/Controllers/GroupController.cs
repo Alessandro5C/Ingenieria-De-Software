@@ -3,101 +3,170 @@ using LetSkole.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v2/[controller]")]
     [ApiController]
+    [Produces("application/json")]
+    [Route("api/v2/[controller]/[action]")]
+    [Authorize(AuthenticationSchemes =
+        Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class GroupController : Controller
     {
         private readonly IGroupService _service;
-        public GroupController(IGroupService service)
+        private readonly IMapper _mapper;
+
+        public GroupController(IGroupService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
-        [Route("Create")]
         [HttpPost]
-        public async Task<ActionResult<GroupDto>> Post([FromQuery] string userId, [FromBody] GroupDto GroupDto)
+        [ProducesResponseType(typeof(LetSkoleResponse<GroupResponse>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
+        public async Task<ActionResult> Post([FromBody] GroupRequest model)
         {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var jwt = tokenHandler.ReadJwtToken(accessToken);
+            var jwtId = jwt.Payload["AppUserId"];
+            // GroupDto response;
             try
             {
-                await _service.Create(userId, GroupDto);
-            } catch(LetSkoleException e)
-            {
-                return BadRequest(e.Message + " " + e.value);
+                // response = await _service.Create(model);
+                var response = await _service.Create(model, jwtId.ToString());
+                return Ok(LetSkoleResponse<GroupResponse>.Success(response));
             }
-            return CreatedAtAction(nameof(GetItemById), new { id = GroupDto.Id }, GroupDto);
-        }
-
-        [Route("GetAllByFilter")]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByFilter([FromQuery] string filter)
-        {
-            return Accepted(await _service.GetCollection(filter));
-        }
-
-        [Route("GetAllByTeacherId")]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] string userId)
-        {
-            IEnumerable<GroupDto> collection;
-            try
+            catch (LetSkoleException e)
             {
-                collection = await _service.GetCollectionByTeacherId(userId);
-            } catch(NullReferenceException e)
-            {
-                return NotFound(e.Message);
-            } catch(LetSkoleException e)
-            {
-                return BadRequest(e.Message + " " + e.value);
+                return BadRequest(e.Message + " " + e.Code);
             }
-            return Ok(collection);
         }
 
-        [Route("Update")]
+        // [Route("GetAllByFilter")]
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByFilter([FromQuery] string filter)
+        // {
+        //     return Accepted(await _service.GetCollection(filter));
+        // }
+
+//         [Route("GetAllByTeacherId")]
+//         [HttpGet]
+//         public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] int userId)
+//         {
+//             IEnumerable<GroupDto> collection;
+//             try
+// =======
+//             catch (LetSkoleException e)
+// >>>>>>> Stashed changes
+//             {
+//                 return BadRequest(e.Message + " " + e.Code);
+//             }
+//
+//             // return Ok(LetSkoleResponse<GroupDto>.Success(response));
+//         }
+
         [HttpPut]
-        public async Task<IActionResult> Put([FromQuery] GroupDto groupDto, [FromQuery] string userId)
+        [ProducesResponseType(typeof(LetSkoleResponse), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
+        public async Task<IActionResult> Put([FromBody] GroupRequest model, [FromQuery] int id)
         {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var jwt = tokenHandler.ReadJwtToken(accessToken);
+            var jwtId = jwt.Payload["AppUserId"];
             try
             {
-                await _service.Update(groupDto, userId);
-            } catch (Exception e)
+                await _service.Update(model, id, jwtId.ToString());
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-            return Accepted();
+
+            return Ok(
+                LetSkoleResponse.Success("Ok: Group has been updated")
+            );
         }
 
-        [Route("Delete")]
         [HttpDelete]
+        [ProducesResponseType(typeof(LetSkoleResponse), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
             try
             {
                 await _service.Delete(id);
-            } catch(Exception e)
-            {
-                return BadRequest(e.Message);
             }
-            return Accepted();
+            catch (Exception e)
+            {
+                return NotFound(LetSkoleResponse.Error(e.Message, 404));
+            }
+
+            return Ok(LetSkoleResponse
+                .Success("Ok: Group has been deleted")
+            );
         }
 
-        [Route("GetById")]
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByFilter([FromQuery] string filter)
+        // {
+        //     return Accepted(await _service.GetCollection(filter));
+        // }
+        //
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] string userId)
+        // {
+        //     IEnumerable<GroupDto> collection;
+        //     try
+        //     {
+        //         collection = await _service.GetEnumerableByUserId(userId);
+        //     } catch(NullReferenceException e)
+        //     {
+        //         return NotFound(e.Message);
+        //     } catch(LetSkoleException e)
+        //     {
+        //         return BadRequest(e.Message + " " + e.value);
+        //     }
+        //     return Ok(collection);
+        // }
+
         [HttpGet]
-        public async Task<ActionResult<GroupDto>> GetItemById ([FromQuery] int id)
+        [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GroupResponse>>), 200)]
+        public async Task<ActionResult> GetAllByUserId([FromQuery] string userId)
         {
-            GroupDto group;
-            try {
-                group = await _service.GetItem(id);
-            } catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-            return Accepted(group);
+            var response = await _service.GetEnumerableByUserId(userId);
+            return Ok(LetSkoleResponse<IEnumerable<GroupResponse>>.Success(response));
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GroupResponse>>), 200)]
+        public async Task<ActionResult> GetAllByOwnerId([FromQuery] string ownerId)
+        {
+            var response = await _service.GetEnumerableByOwnerId(ownerId);
+            return Ok(LetSkoleResponse<IEnumerable<GroupResponse>>.Success(response));
+        }
+
+
+        // [HttpGet]
+        // public async Task<ActionResult<GroupDto>> GetItemById ([FromQuery] int id)
+        // {
+        //     GroupDto group;
+        //     try {
+        //         group = await _service.GetItem(id);
+        //     } catch(Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
+        //     return Accepted(group);
+        // }
+        //
     }
 }

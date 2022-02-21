@@ -16,5 +16,8 @@ namespace LetSkole.Entities
         [Required]
         [StringLength(256)]
         public string Link { get; set; }
+        
+        // ONE TO MANY
+        public ICollection<Reward> Rewards { get; set; }
     }
 }

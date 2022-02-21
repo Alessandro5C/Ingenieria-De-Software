@@ -23,6 +23,11 @@
     {
         public string Message { get; set; } = string.Empty;
 
+        public static LetSkoleResponseBase Success(string message) => new LetSkoleResponse
+        {
+            Status = StatusSuccess, Code = 200, Message = message
+        };
+        
         public static LetSkoleResponseBase Error(string message) => new LetSkoleResponse
         {
             Status = StatusError, Message = message
@@ -30,7 +35,7 @@
 
         public static LetSkoleResponseBase Error(string message, int code) => new LetSkoleResponse
         {
-            Status = StatusError, Message = message, Code = code
+            Status = StatusError, Code = code, Message = message
         };
     }
 

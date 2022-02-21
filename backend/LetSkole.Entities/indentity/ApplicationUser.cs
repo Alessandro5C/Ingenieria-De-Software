@@ -14,17 +14,17 @@ namespace LetSkole.Entities.Indentity
         [Required]
         [DefaultValue(true)]
         public bool Student { get; set; }
-        // [Required]
-        // [StringLength(15)]
-        // public string NumTelf { get; set; }
         public DateTime Birthday { get; set; }
         [StringLength(30)]
         public string School { get; set; }
         
-        // MANY to MANY
+        // ONE TO MANY
+        public ICollection<Activity> Activities { get; set; }
+        public ICollection<Group> Groups { get; set; }
+        // MANY TO MANY
         public ICollection<RewardUser> RewardUsers { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
-        // MANY to MANY required
+        // REQUIRED BY IDENTITY
         public List<ApplicationUserRole> UserRoles { get; set; }
     }
 }

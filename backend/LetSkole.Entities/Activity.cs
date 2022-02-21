@@ -9,9 +9,6 @@ namespace LetSkole.Entities
 
     public class Activity:EntityBase
     {
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
@@ -23,5 +20,9 @@ namespace LetSkole.Entities
         public bool Completed { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        
+        // MANY TO ONE (FK)
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

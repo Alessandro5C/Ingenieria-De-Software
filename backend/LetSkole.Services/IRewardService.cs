@@ -8,12 +8,13 @@ namespace LetSkole.Services
 {
     public interface IRewardService
     {
-        Task <ICollection<RewardDto>> GetCollection(string filter);
+        // Task <ICollection<RewardDto>> GetCollection(string filter);
         Task<RewardDto> GetItem(int id);
-        Task Delete(string userId,int rewardId);
+        Task Delete(int userId, int rewardId);
 
-        Task CreateRewardxUser(RewardUserDto entity);
-        Task<ICollection<RewardDto>> GetCollectionRewardUser(string userId);
-
+        // Task CreateRewardxUser(RewardUserDto entity);
+        // Task<ICollection<RewardDto>> GetCollectionRewardUser(int userId);
+        Task<IEnumerable<RewardDto>> GetEnumerableByUserId(string userId);
+        Task<IEnumerable<RewardDto>> GetEnumerableByGameId(int gameId);
     }
 }
