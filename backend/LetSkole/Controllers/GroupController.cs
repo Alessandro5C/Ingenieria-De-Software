@@ -3,170 +3,129 @@ using LetSkole.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace LetSkole.Controllers
 {
-    [ApiController]
-    [Produces("application/json")]
-    [Route("api/v2/[controller]/[action]")]
     [Authorize(AuthenticationSchemes =
         Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-    public class GroupController : Controller
+    public class GroupController : LetSkoleController
     {
         private readonly IGroupService _service;
-        private readonly IMapper _mapper;
 
-        public GroupController(IGroupService service, IMapper mapper)
+        public GroupController(IGroupService service)
         {
             _service = service;
-            _mapper = mapper;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(LetSkoleResponse<GroupResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 400)]
-        public async Task<ActionResult> Post([FromBody] GroupRequest model)
+        public async Task<ActionResult> Post([FromBody] GroupRequestForPost model)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var jwt = tokenHandler.ReadJwtToken(accessToken);
-            var jwtId = jwt.Payload["AppUserId"];
-            // GroupDto response;
+            // TO DO: Verify the Rol of the owner
+            var response = new GroupResponse();
             try
             {
-                // response = await _service.Create(model);
-                var response = await _service.Create(model, jwtId.ToString());
-                return Ok(LetSkoleResponse<GroupResponse>.Success(response));
+                var ownerId = await GetJwtPayloadData("AppUserId");
+                response = await _service.Create(ownerId, model);
             }
             catch (LetSkoleException e)
             {
-                return BadRequest(e.Message + " " + e.Code);
+                switch (e.Code)
+                {
+                    case 400:
+                        return BadRequest(
+                            LetSkoleResponse.Error(e.Message, e.Code));
+                }
             }
+
+            return Ok(LetSkoleResponse<GroupResponse>.Success(response));
         }
-
-        // [Route("GetAllByFilter")]
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByFilter([FromQuery] string filter)
-        // {
-        //     return Accepted(await _service.GetCollection(filter));
-        // }
-
-//         [Route("GetAllByTeacherId")]
-//         [HttpGet]
-//         public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] int userId)
-//         {
-//             IEnumerable<GroupDto> collection;
-//             try
-// =======
-//             catch (LetSkoleException e)
-// >>>>>>> Stashed changes
-//             {
-//                 return BadRequest(e.Message + " " + e.Code);
-//             }
-//
-//             // return Ok(LetSkoleResponse<GroupDto>.Success(response));
-//         }
 
         [HttpPut]
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 400)]
-        public async Task<IActionResult> Put([FromBody] GroupRequest model, [FromQuery] int id)
+        [ProducesResponseType(typeof(LetSkoleResponse), 403)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
+        public async Task<IActionResult> Put([FromBody] GroupRequestForPut model, [FromQuery] int id)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var jwt = tokenHandler.ReadJwtToken(accessToken);
-            var jwtId = jwt.Payload["AppUserId"];
             try
             {
-                await _service.Update(model, id, jwtId.ToString());
+                var ownerId = await GetJwtPayloadData("AppUserId");
+                await _service.Update(ownerId, model, id);
             }
-            catch (Exception e)
+            catch (LetSkoleException e)
             {
-                return BadRequest(e.Message);
+                switch (e.Code)
+                {
+                    case 400:
+                        return BadRequest(
+                            LetSkoleResponse.Error(e.Message, e.Code));
+                    case 403:
+                        return StatusCode(StatusCodes.Status403Forbidden,
+                            LetSkoleResponse.Error("Forbidden", e.Code));
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found", e.Code));
+                }
             }
 
-            return Ok(
-                LetSkoleResponse.Success("Ok: Group has been updated")
-            );
+            return Ok(LetSkoleResponse
+                .Success("Ok: Group has been updated"));
         }
 
         [HttpDelete]
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 403)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
             try
             {
-                await _service.Delete(id);
+                var ownerId = await GetJwtPayloadData("AppUserId");
+                await _service.Delete(ownerId, id);
             }
-            catch (Exception e)
+            catch (LetSkoleException e)
             {
-                return NotFound(LetSkoleResponse.Error(e.Message, 404));
+                switch (e.Code)
+                {
+                    case 403:
+                        return StatusCode(StatusCodes.Status403Forbidden,
+                            LetSkoleResponse.Error("Forbidden", e.Code));
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found", e.Code));
+                }
             }
 
             return Ok(LetSkoleResponse
-                .Success("Ok: Group has been deleted")
-            );
+                .Success("Ok: Group has been deleted"));
         }
-
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByFilter([FromQuery] string filter)
-        // {
-        //     return Accepted(await _service.GetCollection(filter));
-        // }
-        //
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<GroupDto>>> GetAllByTeacherId ([FromQuery] string userId)
-        // {
-        //     IEnumerable<GroupDto> collection;
-        //     try
-        //     {
-        //         collection = await _service.GetEnumerableByUserId(userId);
-        //     } catch(NullReferenceException e)
-        //     {
-        //         return NotFound(e.Message);
-        //     } catch(LetSkoleException e)
-        //     {
-        //         return BadRequest(e.Message + " " + e.value);
-        //     }
-        //     return Ok(collection);
-        // }
 
         [HttpGet]
         [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GroupResponse>>), 200)]
-        public async Task<ActionResult> GetAllByUserId([FromQuery] string userId)
+        public async Task<ActionResult> GetAllAsUser()
         {
+            var userId = await GetJwtPayloadData("AppUserId");
             var response = await _service.GetEnumerableByUserId(userId);
             return Ok(LetSkoleResponse<IEnumerable<GroupResponse>>.Success(response));
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GroupResponse>>), 200)]
-        public async Task<ActionResult> GetAllByOwnerId([FromQuery] string ownerId)
+        public async Task<ActionResult> GetAllAsOwner()
         {
+            var ownerId = await GetJwtPayloadData("AppUserId");
             var response = await _service.GetEnumerableByOwnerId(ownerId);
             return Ok(LetSkoleResponse<IEnumerable<GroupResponse>>.Success(response));
         }
-
-
-        // [HttpGet]
-        // public async Task<ActionResult<GroupDto>> GetItemById ([FromQuery] int id)
-        // {
-        //     GroupDto group;
-        //     try {
-        //         group = await _service.GetItem(id);
-        //     } catch(Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        //     return Accepted(group);
-        // }
-        //
     }
 }

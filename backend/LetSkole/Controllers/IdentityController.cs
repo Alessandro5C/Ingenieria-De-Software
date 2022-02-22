@@ -71,9 +71,9 @@ namespace LetSkole.Controllers
         // [AllowAnonymous]
         // [HttpPost("sign-up")]
         [HttpPost]
-        [ProducesResponseType(typeof(LetSkoleResponse<AppUserProfileDto>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 400)]
-        public async Task<IActionResult> SignUp(AppUserRegisterDto model)
+        public async Task<IActionResult> SignUp(AppUserRequestForPost model)
         {
             // Service validation
             if (string.IsNullOrEmpty(model.DisplayedName))
@@ -97,7 +97,7 @@ namespace LetSkole.Controllers
                     "Bad Request: " + result, 400)
                 );
 
-            var userResource = _mapper.Map<ApplicationUser, AppUserProfileDto>(appUser);
+            var userResource = _mapper.Map<ApplicationUser, AppUserResponse>(appUser);
             return Ok(userResource);
         }
 

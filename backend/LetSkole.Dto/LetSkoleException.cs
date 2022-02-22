@@ -4,13 +4,13 @@ using System.Text;
 
 namespace LetSkole.Dto
 {
-    public class LetSkoleException : SystemException
+    public class LetSkoleException : Exception
     {
         public int Code { get; set; }
 
-        public LetSkoleException()
-        {
-        }
+        // public LetSkoleException()
+        // {
+        // }
 
         public LetSkoleException(int code)
         {
@@ -22,10 +22,10 @@ namespace LetSkole.Dto
         {
         }
 
-        public LetSkoleException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+        // public LetSkoleException(string message, Exception inner)
+        //     : base(message, inner)
+        // {
+        // }
 
         public LetSkoleException(string message, int code)
             : this(message)

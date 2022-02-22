@@ -8,15 +8,11 @@ namespace LetSkole.DataAccess
 {
     public interface IGroupRepository
     {
-        // Task<ICollection<Group>> GetCollection(string filter);
-        // Task<ICollection<Group>> GetCollectionByTeacher(string userId);
-        
-        Task<Group> GetItem(int id); 
+        Task<Group> GetItemById(int id); 
         Task Create(Group entity);
         Task Update(Group entity);
-        Task Delete(int id);
+        Task Delete(Group entity);
         
-        // Task<ICollection<Group>> GetCollectionByUser(string userId);
         Task<ICollection<Group>> GetCollectionByUserId(string userId);
         Task<ICollection<Group>> GetCollectionByOwnerId(string ownerId);
     }

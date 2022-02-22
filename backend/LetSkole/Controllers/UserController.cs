@@ -33,7 +33,7 @@ namespace LetSkole.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(LetSkoleResponse<AppUserProfileDto>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
         public async Task<ActionResult> GetItemById([FromQuery] string id)
         {
@@ -43,20 +43,22 @@ namespace LetSkole.Controllers
                     .Error("Not Found: 'id' doesn't exist", 404)
                 );
 
-            var userResource = _mapper.Map<ApplicationUser, AppUserProfileDto>(appUser);
-            return Ok(LetSkoleResponse<AppUserProfileDto>.Success(userResource));
+            var userResource = _mapper.Map<ApplicationUser, AppUserResponse>(appUser);
+            return Ok(LetSkoleResponse<AppUserResponse>.Success(userResource));
         }
 
         [HttpPut]
-        [ProducesResponseType(typeof(LetSkoleResponse<AppUserProfileDto>), 200)]
+        // [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
-        public async Task<IActionResult> Put([FromBody] AppUserProfileDto model)
+        public async Task<IActionResult> Put([FromBody] AppUserRequestForPut model)
         {
-            var appUser = await _userManager.FindByIdAsync(model.Id);
-            if (appUser == null)
-                return NotFound(LetSkoleResponse
-                    .Error("Not Found: 'id' doesn't exist", 404)
-                );
+            var id = await GetJwtPayloadData("AppUserId");
+            var appUser = await _userManager.FindByIdAsync(id);
+            // if (appUser == null)
+            //     return NotFound(LetSkoleResponse
+            //         .Error("Not Found: 'id' doesn't exist", 404)
+            //     );
 
             appUser.DisplayedName = model.DisplayedName;
             appUser.School = model.School;
@@ -64,41 +66,44 @@ namespace LetSkole.Controllers
             appUser.Birthday = model.Birthday;
 
             await _userManager.UpdateAsync(appUser);
-            var userResource = _mapper.Map<ApplicationUser, AppUserProfileDto>(appUser);
+            // var userResource = _mapper.Map<ApplicationUser, AppUserResponse>(appUser);
+            // return Ok(
+            //     LetSkoleResponse<AppUserResponse>.Success(userResource)
+            // );
             return Ok(
-                LetSkoleResponse<AppUserProfileDto>.Success(userResource)
+                LetSkoleResponse.Success("Ok: User has been updated")
             );
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery] string id)
-        {
-            try
-            {
-                await _service.Delete(id);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+        // [HttpDelete]
+        // public async Task<IActionResult> Delete([FromQuery] string id)
+        // {
+        //     try
+        //     {
+        //         await _service.Delete(id);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
+        //
+        //     return Accepted();
+        // }
 
-            return Accepted();
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<string>> SearchNumTel([FromQuery] string userId)
-        {
-            string str;
-            try
-            {
-                str = await _service.SearchNumTel(userId);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-
-            return Accepted(str);
-        }
+        // [HttpGet]
+        // public async Task<ActionResult<string>> SearchNumTel([FromQuery] string userId)
+        // {
+        //     string str;
+        //     try
+        //     {
+        //         str = await _service.SearchNumTel(userId);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
+        //
+        //     return Accepted(str);
+        // }
     }
 }

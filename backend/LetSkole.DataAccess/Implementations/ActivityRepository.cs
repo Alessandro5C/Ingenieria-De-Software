@@ -31,7 +31,7 @@ namespace LetSkole.DataAccess
         
         public async Task<Activity> GetItem(int id)=>
             await _context.Activities
-            .SingleOrDefaultAsync(c => c.Id.Equals(id));
+            .SingleOrDefaultAsync(e => e.Id.Equals(id));
         
 
         public async Task Create(Activity entity)

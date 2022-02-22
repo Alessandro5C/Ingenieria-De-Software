@@ -17,4 +17,8 @@
     <ProjectReference Include="..\LetSkole.Services\LetSkole.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tools" />
+  </ItemGroup>
+
 </Project>

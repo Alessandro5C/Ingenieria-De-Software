@@ -1,4 +1,6 @@
 ﻿using LetSkole.DataAccess;
+using LetSkole.DataAccess.Implementations;
+using LetSkole.Services.Implementations;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LetSkole.Services

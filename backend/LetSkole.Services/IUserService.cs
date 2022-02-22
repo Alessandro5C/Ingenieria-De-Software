@@ -7,9 +7,9 @@ namespace LetSkole.Services
 {
     public interface IUserService
     {
-        Task<AppUserProfileDto> GetItem (string id);
+        Task<AppUserResponse> GetItem (string id);
         Task<ApplicationUser> Create (ApplicationUser entity);
-        Task Update (AppUserProfileDto entity);
+        Task Update (AppUserResponse entity);
         Task Delete (string id);
         Task<string> SearchNumTel (string id);
 

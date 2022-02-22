@@ -10,8 +10,8 @@ namespace LetSkole.Mapping
         // ENTITY to DTO
         public ModelToResourceProfile()
         {
-            CreateMap<ApplicationUser, AppUserProfileDto>();
-            CreateMap<Group, GroupRequest>();
+            CreateMap<ApplicationUser, AppUserResponse>();
+            CreateMap<Group, GroupRequestForPost>();
             CreateMap<Group, GroupResponse>();
         }
     }

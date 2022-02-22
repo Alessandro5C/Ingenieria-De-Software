@@ -19,7 +19,7 @@ namespace LetSkole.Services
             _repository = repository;
         }
         
-        public async Task<AppUserProfileDto> GetItem(string id)
+        public async Task<AppUserResponse> GetItem(string id)
         {
             throw new NotImplementedException();
             // User user = await _repository.GetItem(id);
@@ -82,7 +82,7 @@ namespace LetSkole.Services
             // return entity;
         }
 
-        public async Task Update(AppUserProfileDto entity)
+        public async Task Update(AppUserResponse entity)
         {
             throw new NotImplementedException();
             //
