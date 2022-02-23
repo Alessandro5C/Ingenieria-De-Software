@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace LetSkole.Dto
 {
@@ -7,7 +8,7 @@ namespace LetSkole.Dto
         public string Password { get; set; }
         public string Email { get; set; }
         public string DisplayedName { get; set; }
-        public bool Student { get; set; }
+        public string Role { get; set; }
     }
 
     public class AppUserRequestForPut
@@ -24,7 +25,6 @@ namespace LetSkole.Dto
         public string DisplayedName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public bool Student { get; set; }
         public DateTime Birthday { get; set; }
         public string School { get; set; }
     }

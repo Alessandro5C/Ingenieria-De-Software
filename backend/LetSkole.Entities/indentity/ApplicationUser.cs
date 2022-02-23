@@ -11,9 +11,6 @@ namespace LetSkole.Entities.Indentity
         [Required]
         [StringLength(50)]
         public string DisplayedName { get; set; }
-        [Required]
-        [DefaultValue(true)]
-        public bool Student { get; set; }
         public DateTime Birthday { get; set; }
         [StringLength(30)]
         public string School { get; set; }

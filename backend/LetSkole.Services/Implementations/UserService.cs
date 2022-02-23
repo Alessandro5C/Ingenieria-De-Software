@@ -1,142 +1,104 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Threading.Tasks;
+using AutoMapper;
 using LetSkole.DataAccess;
 using LetSkole.Dto;
-using LetSkole.Entities;
 using LetSkole.Entities.Indentity;
+using Microsoft.AspNetCore.Identity;
 
-namespace LetSkole.Services
+namespace LetSkole.Services.Implementations
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _repository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository repository)
+
+        public UserService(IUserRepository repository, UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _repository = repository;
-        }
-        
-        public async Task<AppUserResponse> GetItem(string id)
-        {
-            throw new NotImplementedException();
-            // User user = await _repository.GetItem(id);
-            // if(user == null)
-            // {
-            //     throw new NullReferenceException("No User exist with id " + id.ToString());
-            // }
-            //
-            // UserDto userDto = new UserDto();
-            //
-            // userDto.Id = user.Id;
-            // userDto.Name = user.Name;
-            // userDto.Student = user.Student;
-            // userDto.School = user.School;
-            // userDto.Email = user.Email;
-            // userDto.NumTelf = user.NumTelf;
-            // userDto.Birthday = user.Birthday;
-            //
-            // return userDto;
+            _userManager = userManager;
+            _mapper = mapper;
         }
 
-        public async Task<ApplicationUser> Create (ApplicationUser entity)
+        public async Task<AppUserResponse> GetItemById(string id)
         {
-            throw new NotImplementedException();
-            // if (entity.Birthday == null)
-            // {
-            //     throw new LetSkoleException("It is neccesary to add a birthday");
-            // }
-            //
-            // if (entity.Name == "" || entity.Name == null)
-            // {
-            //     throw new LetSkoleException("It is neccesary to add a name");
-            // }
-            //
-            // if (string.IsNullOrEmpty(entity.Email))
-            // {
-            //     throw new LetSkoleException("It is neccesary to add email");
-            // }
-            // try
-            // {
-            //     var correo = new MailAddress(entity.Email);
-            //     entity.Email = correo.Address;
-            // }
-            // catch
-            // {
-            //     throw new LetSkoleException("Email invalid");
-            // }
-            //
-            // try
-            // {
-            //     int i = Convert.ToInt32(entity.PhoneNumber);
-            // }
-            // catch
-            // {
-            //     throw new LetSkoleException("Phone number invalid");
-            // }
-            //
-            // await _repository.Create(entity);
-            //
-            // return entity;
+            var entity = await _userManager.FindByIdAsync(id);
+            if (entity == null) throw new LetSkoleException(404);
+            return _mapper.Map<ApplicationUser, AppUserResponse>(entity);
         }
 
-        public async Task Update(AppUserResponse entity)
+        public async Task<AppUserResponse> Create(AppUserRequestForPost model)
         {
-            throw new NotImplementedException();
-            //
-            // ApplicationUser user = await _repository.GetItem(entity.Id);
-            //
-            // if(user == null)
-            // {
-            //     throw new NullReferenceException("No User exist with id " + entity.Id.ToString());
-            // }
-            //
-            // user.Name = entity.Name;
-            // user.Student = entity.Student;
-            // user.School = entity.School;
-            // user.Email = entity.Email;
-            // user.NumTelf = entity.NumTelf;
-            //
-            // await _repository.Update(user);
+            // VALIDATE DATA HERE
+            const string message = "Bad Request: 'name' is empty";
+            if (string.IsNullOrEmpty(model.DisplayedName))
+                throw new LetSkoleException(message, 400);
+
+            // CREATE OBJECT HERE
+            var entity = new ApplicationUser
+            {
+                Email = model.Email,
+                DisplayedName = model.DisplayedName,
+                UserName = UniqueUserName(model.DisplayedName),
+            };
+
+            // REPOSITORY CALLS HERE
+            try
+            {
+                await _repository.Create(
+                    entity, _userManager, model.Password, model.Role
+                );
+            }
+            catch (Exception e)
+            {
+                throw new LetSkoleException(e.Message, 400);
+            }
+
+            return _mapper.Map<ApplicationUser, AppUserResponse>(entity);
         }
 
-        public async Task Delete(string id)
+        public async Task Update(string id, AppUserRequestForPut model)
         {
-            throw new NotImplementedException();
-            // try
-            // {
-            //     await _repository.Delete(id);
-            //  
-            // } catch (Exception e)
-            // {
-            //     throw new NullReferenceException("Error deleting user id " + id.ToString());
-            // }
+            // VALIDATE DATA HERE
+            const string message = "Bad Request: Name(lenght 1-20), Description(lenght 1-256)";
+            if (string.IsNullOrEmpty(model.DisplayedName) ||
+                string.IsNullOrEmpty(model.School) ||
+                string.IsNullOrEmpty(model.PhoneNumber))
+                throw new LetSkoleException(message, 400);
+
+            var entity = await _userManager.FindByIdAsync(id);
+            if (entity == null) throw new LetSkoleException(404);
+
+            // MODIFY DATA HERE
+            entity.DisplayedName = model.DisplayedName;
+            entity.School = model.School;
+            entity.PhoneNumber = model.PhoneNumber;
+            entity.Birthday = model.Birthday;
+
+            // REPOSITORY CALLS HERE
+            var result = await _userManager.UpdateAsync(entity);
+            if (!result.Succeeded)
+                throw new LetSkoleException(result.ToString(), 400);
+
+            try
+            {
+                await _repository.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new LetSkoleException(e.Message, 400);
+            }
         }
 
-        public async Task<string> SearchNumTel(string id)
-        {
-            throw new NotImplementedException();
-            //
-            // string Numtel = await _repository.SearchNumTel(id);
-            // if (Numtel == null){
-            //     throw new NullReferenceException("Phone number invalid, user id " + id.ToString());
-            // }
-            //
-            // return Numtel;
-        }
+        // NOTE: Below here are defined **private** methods
 
-        public async Task<int> GetItemByEmail(string email)
+        private static string UniqueUserName(string displayedName)
         {
-            throw new NotImplementedException();
-            //
-            // User user = await _repository.GetItemByEmail(email);
-            // if(user == null)
-            // {
-            //     throw new KeyNotFoundException("Todavia no existe 'User' registrado con email: " + email);
-            // }
-            // return user.Id;
+            return displayedName + "#" +
+                   DateTime.UtcNow.Ticks + "#" +
+                   Guid.NewGuid();
         }
     }
 }

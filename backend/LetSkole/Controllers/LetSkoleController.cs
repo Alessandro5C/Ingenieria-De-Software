@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetSkole.Controllers
@@ -8,6 +9,8 @@ namespace LetSkole.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/v2/[controller]/[action]")]
+    [Authorize(AuthenticationSchemes =
+        Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class LetSkoleController : ControllerBase
     {
         [NonAction]

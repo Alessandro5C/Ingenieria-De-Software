@@ -14,8 +14,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace LetSkole.Controllers
 {
-    [Authorize(AuthenticationSchemes =
-        Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class GroupController : LetSkoleController
     {
         private readonly IGroupService _service;
@@ -26,11 +24,11 @@ namespace LetSkole.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         [ProducesResponseType(typeof(LetSkoleResponse<GroupResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 400)]
         public async Task<ActionResult> Post([FromBody] GroupRequestForPost model)
         {
-            // TO DO: Verify the Rol of the owner
             var response = new GroupResponse();
             try
             {
@@ -120,6 +118,7 @@ namespace LetSkole.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Teacher")]
         [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GroupResponse>>), 200)]
         public async Task<ActionResult> GetAllAsOwner()
         {

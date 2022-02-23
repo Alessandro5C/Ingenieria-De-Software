@@ -7,12 +7,12 @@ namespace LetSkole.Services
 {
     public interface IUserService
     {
-        Task<AppUserResponse> GetItem (string id);
-        Task<ApplicationUser> Create (ApplicationUser entity);
-        Task Update (AppUserResponse entity);
-        Task Delete (string id);
-        Task<string> SearchNumTel (string id);
-
-        Task<int> GetItemByEmail(string email);
+        /// <param name="id">AppUserId of the row you're attempting to retrieve.</param>
+        Task<AppUserResponse> GetItemById (string id);
+        
+        Task<AppUserResponse> Create (AppUserRequestForPost model);
+        
+        /// <param name="id">Alias for AppUserId, should be handled by the server.</param>
+        Task Update (string id, AppUserRequestForPut model);
     }
 }

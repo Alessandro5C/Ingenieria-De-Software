@@ -28,7 +28,6 @@ namespace LetSkole.DataAccess.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DisplayedName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Student = table.Column<bool>(type: "bit", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     School = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

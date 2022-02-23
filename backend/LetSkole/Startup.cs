@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LetSkole.Entities.Indentity;
 using LetSkole.Services;
+using LetSkole.StartupConf;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -59,6 +60,7 @@ namespace LetSkole
 
             services.AddControllers();
             services.AddInjection();
+            services.AddScoped<IUserStore<ApplicationUser>, CustomUserStore>();
             services.AddAutoMapper(typeof(Startup));
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<LetSkoleDbContext>();
@@ -114,8 +116,8 @@ namespace LetSkole
                         Type = ReferenceType.SecurityScheme
                     }
                 };
-                
-                
+
+
                 c.SwaggerDoc("v2", new OpenApiInfo {Title = "LetSkole.Api", Version = "v2"});
 
                 c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
@@ -128,7 +130,7 @@ namespace LetSkole
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -146,6 +148,8 @@ namespace LetSkole
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            CustomRoles.CreateRoles(serviceProvider);
         }
     }
 }

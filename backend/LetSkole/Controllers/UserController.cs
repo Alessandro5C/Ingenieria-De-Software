@@ -14,11 +14,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LetSkole.Controllers
 {
-    // [ApiController]
-    // [Route("api/v2/[controller]/[action]")]
-    // [Produces("application/json")]
-    [Authorize(AuthenticationSchemes =
-        Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class UserController : LetSkoleController
     {
         private readonly IUserService _service;
@@ -32,78 +27,77 @@ namespace LetSkole.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
+        public async Task<IActionResult> SignUp(AppUserRequestForPost model)
+        {
+            var response = new AppUserResponse();
+            try
+            {
+                response = await _service.Create(model);
+            }
+            catch (LetSkoleException e)
+            {
+                switch (e.Code)
+                {
+                    case 400:
+                        return BadRequest(
+                            LetSkoleResponse.Error(e.Message, e.Code));
+                }
+            }
+
+            return Ok(LetSkoleResponse<AppUserResponse>.Success(response));
+        }
+
         [HttpGet]
         [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
         public async Task<ActionResult> GetItemById([FromQuery] string id)
         {
-            var appUser = await _userManager.FindByIdAsync(id);
-            if (appUser == null)
-                return NotFound(LetSkoleResponse
-                    .Error("Not Found: 'id' doesn't exist", 404)
-                );
+            var response = new AppUserResponse();
+            try
+            {
+                response = await _service.GetItemById(id);
+            }
+            catch (LetSkoleException e)
+            {
+                switch (e.Code)
+                {
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found: User doesn't exist", e.Code));
+                }
+            }
 
-            var userResource = _mapper.Map<ApplicationUser, AppUserResponse>(appUser);
-            return Ok(LetSkoleResponse<AppUserResponse>.Success(userResource));
+            return Ok(LetSkoleResponse<AppUserResponse>.Success(response));
         }
 
         [HttpPut]
-        // [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
         public async Task<IActionResult> Put([FromBody] AppUserRequestForPut model)
         {
-            var id = await GetJwtPayloadData("AppUserId");
-            var appUser = await _userManager.FindByIdAsync(id);
-            // if (appUser == null)
-            //     return NotFound(LetSkoleResponse
-            //         .Error("Not Found: 'id' doesn't exist", 404)
-            //     );
+            try
+            {
+                var id = await GetJwtPayloadData("AppUserId");
+                await _service.Update(id, model);
+            }
+            catch (LetSkoleException e)
+            {
+                switch (e.Code)
+                {
+                    case 400:
+                        return BadRequest(
+                            LetSkoleResponse.Error(e.Message, e.Code));
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found: User doesn't exist", e.Code));
+                }
+            }
 
-            appUser.DisplayedName = model.DisplayedName;
-            appUser.School = model.School;
-            appUser.PhoneNumber = model.PhoneNumber;
-            appUser.Birthday = model.Birthday;
-
-            await _userManager.UpdateAsync(appUser);
-            // var userResource = _mapper.Map<ApplicationUser, AppUserResponse>(appUser);
-            // return Ok(
-            //     LetSkoleResponse<AppUserResponse>.Success(userResource)
-            // );
-            return Ok(
-                LetSkoleResponse.Success("Ok: User has been updated")
-            );
+            return Ok(LetSkoleResponse.Success("Ok: User has been updated"));
         }
-
-        // [HttpDelete]
-        // public async Task<IActionResult> Delete([FromQuery] string id)
-        // {
-        //     try
-        //     {
-        //         await _service.Delete(id);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        //
-        //     return Accepted();
-        // }
-
-        // [HttpGet]
-        // public async Task<ActionResult<string>> SearchNumTel([FromQuery] string userId)
-        // {
-        //     string str;
-        //     try
-        //     {
-        //         str = await _service.SearchNumTel(userId);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        //
-        //     return Accepted(str);
-        // }
     }
 }

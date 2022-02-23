@@ -21,13 +21,11 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace LetSkole.Controllers
 {
-    // [Route("api/v2/[controller]/[action]")]
-    // [Produces("application/json")]
     [AllowAnonymous]
     public class IdentityController : LetSkoleController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
@@ -45,60 +43,6 @@ namespace LetSkole.Controllers
             _configuration = configuration;
             _userService = userService;
             _mapper = mapper;
-        }
-
-        // [AllowAnonymous]
-        // [HttpPost("sign-up")]
-//         public async Task<IActionResult> SignUp(ApplicationUserLoginDto model)
-//         {
-//             var result = await _userManager.CreateAsync(new ApplicationUser
-//             {
-//                 Email = model.Email,
-//                 UserName = model.Email,
-//             }, model.Password);
-//            if (!result.Succeeded)
-//                throw new Exception("No se pudo crear el 'Application User'" + result.ToString());
-//            return Ok();
-//         }
-//         
-//         [AllowAnonymous]
-//         [HttpPost("NewUser")]
-//         [ProducesResponseType(typeof(UserDto), 200)]
-//         [ProducesResponseType(typeof(BadRequestResult), 404)]
-//         public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
-// =======
-
-        // [AllowAnonymous]
-        // [HttpPost("sign-up")]
-        [HttpPost]
-        [ProducesResponseType(typeof(LetSkoleResponse<AppUserResponse>), 200)]
-        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
-        public async Task<IActionResult> SignUp(AppUserRequestForPost model)
-        {
-            // Service validation
-            if (string.IsNullOrEmpty(model.DisplayedName))
-                return BadRequest(LetSkoleResponse.Error(
-                    "Bad Request: 'name' is empty", 400)
-                );
-
-            // Generate and entity to pass to Repository
-            var appUser = new ApplicationUser
-            {
-                Email = model.Email,
-                DisplayedName = model.DisplayedName,
-                UserName = UniqueUserName(model.DisplayedName),
-                Student = model.Student
-            };
-
-            // repository created
-            var result = await _userManager.CreateAsync(appUser, model.Password);
-            if (!result.Succeeded)
-                return BadRequest(LetSkoleResponse.Error(
-                    "Bad Request: " + result, 400)
-                );
-
-            var userResource = _mapper.Map<ApplicationUser, AppUserResponse>(appUser);
-            return Ok(userResource);
         }
 
         [HttpPost]
@@ -131,27 +75,25 @@ namespace LetSkole.Controllers
 
         // NOTE: Below here are defined **private** methods
 
+        [NonAction]
         private async Task<string> GenerateToken(ApplicationUser applicationUser)
         {
             var secretKey = _configuration.GetValue<string>("SecretKey");
             var key = Encoding.ASCII.GetBytes(secretKey);
 
-            var claims = new List<Claim>()
+            var claims = new List<Claim>
             {
-                new Claim("AppUserId", applicationUser.Id),
-                // new Claim(ClaimTypes.Sid, applicationUser.Id),
-                // new Claim(ClaimTypes.Email, applicationUser.Email),
-                // new Claim(ClaimTypes.Role, applicationUser.Student.ToString()),
+                new("AppUserId", applicationUser.Id),
             };
 
             var roles = await _userManager.GetRolesAsync(applicationUser);
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddMinutes(120),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
@@ -162,6 +104,7 @@ namespace LetSkole.Controllers
             return tokenHandler.WriteToken(createdToken);
         }
 
+        [NonAction]
         private static string UniqueUserName(string displayedName)
         {
             return displayedName + "#" +

@@ -29,6 +29,7 @@ namespace LetSkole.Services.Implementations
                 model.MaxGrade <= 0)
                 throw new LetSkoleException(message, 400);
 
+            // CREATE OBJECT HERE
             var entity = new Group
             {
                 OwnerId = ownerId,
@@ -37,6 +38,7 @@ namespace LetSkole.Services.Implementations
                 MaxGrade = model.MaxGrade
             };
 
+            // REPOSITORY CALLS HERE
             try
             {
                 await _repository.Create(entity);
@@ -57,6 +59,7 @@ namespace LetSkole.Services.Implementations
                 string.IsNullOrEmpty(model.Description))
                 throw new LetSkoleException(message, 400);
 
+            // RETREIVE OBJECT HERE
             var entity = await _repository.GetItemById(id);
             if (entity == null) throw new LetSkoleException(404);
             if (entity.OwnerId != ownerId) throw new LetSkoleException(403);
@@ -65,6 +68,7 @@ namespace LetSkole.Services.Implementations
             entity.Name = model.Name;
             entity.Description = model.Description;
 
+            // REPOSITORY CALLS HERE
             try
             {
                 await _repository.Update(entity);
@@ -77,10 +81,12 @@ namespace LetSkole.Services.Implementations
 
         public async Task Delete(string ownerId, int id)
         {
+            // RETREIVE OBJECT HERE
             var entity = await _repository.GetItemById(id);
             if (entity == null) throw new LetSkoleException(404);
             if (entity.OwnerId != ownerId) throw new LetSkoleException(403);
 
+            // REPOSITORY CALLS HERE
             await _repository.Delete(entity);
         }
 

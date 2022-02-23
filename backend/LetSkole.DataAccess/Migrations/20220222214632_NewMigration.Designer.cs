@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LetSkole.DataAccess.Migrations
 {
     [DbContext(typeof(LetSkoleDbContext))]
-    [Migration("20220221065307_NewMigration")]
+    [Migration("20220222214632_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,9 +176,6 @@ namespace LetSkole.DataAccess.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Student")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");

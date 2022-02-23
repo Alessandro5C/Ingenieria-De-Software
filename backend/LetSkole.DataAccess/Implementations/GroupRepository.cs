@@ -23,7 +23,6 @@ namespace LetSkole.DataAccess.Implementations
 
         public async Task Create(Group entity)
         {
-            // _context.Set<Group>().Add(entity);
             _context.Groups.Add(entity);
             await _context.SaveChangesAsync();
         }
