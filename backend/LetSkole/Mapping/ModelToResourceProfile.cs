@@ -13,6 +13,7 @@ namespace LetSkole.Mapping
             CreateMap<ApplicationUser, AppUserResponse>();
             CreateMap<Group, GroupRequestForPost>();
             CreateMap<Group, GroupResponse>();
+            CreateMap<UserGroup, UxgResponse>();
         }
     }
 }

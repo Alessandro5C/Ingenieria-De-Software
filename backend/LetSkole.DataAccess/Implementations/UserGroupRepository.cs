@@ -1,85 +1,76 @@
-﻿using LetSkole.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using LetSkole.Entities;
 using LetSkole.Entities.Indentity;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace LetSkole.DataAccess
+namespace LetSkole.DataAccess.Implementations
 {
     public class UserGroupRepository : IUserGroupRepository
     {
         private readonly LetSkoleDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserGroupRepository(LetSkoleDbContext context, UserManager<ApplicationUser> userManager)
+        public UserGroupRepository(LetSkoleDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        public async Task<UserGroup> GetItem(string userId, int groupId)
+        public async Task<UserGroup> GetItemByIds(string userId, int groupId)
         {
-            var userGroup = await _context.UserGroups.
-                FindAsync(userId, groupId);
-            // userGroup.ApplicationUser = await _context.Users.FindAsync(userId);
-            userGroup.ApplicationUser = await _userManager.FindByIdAsync(userId);
-            userGroup.Group = await _context.Groups.FindAsync(groupId);
-            return userGroup; 
+            var entity = await _context.UserGroups
+                .FindAsync(userId, groupId);
+            if (entity == null) return null;
+            entity.Group = await _context.Groups.FindAsync(groupId);
+            return entity;
         }
 
         public async Task Create(UserGroup entity)
         {
-            _context.Set<UserGroup>().Add(entity);
+            _context.UserGroups.Add(entity);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteUsingGroup(int groupId)
-        {
-            //Este todavía no lo voy a implementar
-            throw new NotImplementedException();
-        }
-
-        public async Task DeleteUsingUser(string userId, int groupId)
-        {
-            _context.Entry(new UserGroup
-            {
-                ApplicationUserId = userId,
-                GroupId = groupId
-            }).State = EntityState.Deleted;
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<ICollection<UserGroup>> GetItems(int filter)
-        {
-            return  await _context.UserGroups.Where(c => c.GroupId.Equals(filter))
-                .ToListAsync();
         }
 
         public async Task Update(UserGroup entity)
         {
-            _context.Set<UserGroup>().Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            _context.UserGroups.Update(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICollection<UserGroup>> GetItemsByTeacherId(string userId)
+        public async Task Delete(UserGroup entity)
         {
-            return await _context.UserGroups.Where(c => c.ApplicationUserId.Equals(userId))
-                .ToListAsync();
+            _context.UserGroups.Remove(entity);
+            await _context.SaveChangesAsync();
         }
-        public async Task<int> SearchGrade(string userId, int groupId)
+
+        public async Task<ICollection<UserGroup>> GetCollectionByGroupId(int groupId)
         {
-            UserGroup userGroup = await _context.UserGroups.
-               FindAsync(userId, groupId);
-            // userGroup.ApplicationUser = await _context.Users.FindAsync(userId);
-            userGroup.ApplicationUser = await _userManager.FindByIdAsync(userId);
-            userGroup.Group = await _context.Groups.FindAsync(groupId);
-            int grade = userGroup.Grade;
-            return grade;
+            return await (
+                from u in _context.Users
+                join uxg in _context.UserGroups on u.Id equals uxg.UserId
+                join g in _context.Groups on uxg.GroupId equals g.Id
+                where g.Id == groupId
+                select new UserGroup
+                {
+                    Grade = uxg.Grade,
+                    GroupId = uxg.GroupId,
+                    UserId = uxg.UserId,
+                    User = u
+                }
+            ).ToListAsync();
+        }
+
+        // NOTE: Below her are defined **special** methods 
+
+        public async Task<ApplicationUser> GetUserByEmail(string email)
+        {
+            return await _context.Users
+                .SingleOrDefaultAsync(e => e.Email.Equals(email));
+        }
+
+        public async Task<Group> GetGroupById(int groupId)
+        {
+            return await _context.Groups.FindAsync(groupId);
         }
     }
 }

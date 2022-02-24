@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LetSkole.Dto
+﻿namespace LetSkole.Dto
 {
-    public class UserGroupDto
+    public class UxgRequestForPost
+    {
+        public string UserEmail { get; set; }
+        public int GroupId { get; set; }
+    }
+
+    public class UxgRequestForPut
     {
         public string UserId { get; set; }
-        public AppUserResponse UserDto { get; set; }
         public int GroupId { get; set; }
-        public GroupRequestForPost GroupRequestForPost { get; set; }
+
         public short Grade { get; set; }
+    }
+
+    public class UxgResponse
+    {
+        public string UserId { get; set; }
+        public AppUserResponse User { get; set; }
+        public int GroupId { get; set; }
+        public short? Grade { get; set; }
     }
 }

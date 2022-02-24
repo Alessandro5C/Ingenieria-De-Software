@@ -1,30 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using LetSkole.Dto;
 using LetSkole.Entities.Indentity;
 using LetSkole.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace LetSkole.Controllers
 {
     public class UserController : LetSkoleController
     {
         private readonly IUserService _service;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IMapper _mapper;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IConfiguration _configuration;
 
-        public UserController(IUserService service, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public UserController(IUserService service, SignInManager<ApplicationUser> signInManager,
+            IConfiguration configuration)
         {
             _service = service;
-            _userManager = userManager;
-            _mapper = mapper;
+            _signInManager = signInManager;
+            _configuration = configuration;
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(LetSkoleResponse<AppIdentityResponse>), 200)]
+        public async Task<IActionResult> SignIn(AppIdentityRequest model)
+        {
+            var secretKey = _configuration.GetValue<string>("SecretKey");
+            var response = await _service.IdentitySignIn(
+                model, _signInManager.CheckPasswordSignInAsync, secretKey);
+            return Ok(LetSkoleResponse<AppIdentityResponse>.Success(response));
         }
 
         [HttpPost]

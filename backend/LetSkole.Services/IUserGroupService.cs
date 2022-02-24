@@ -1,20 +1,21 @@
 ﻿using LetSkole.Dto;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
     public interface IUserGroupService
     {
-        // Task<ICollection<UserGroupDto>> GetItems(int groupId);
-        Task Create(UserGroupDto entity);
-        Task Update(UserGroupDto entity);
-        Task DeleteByUserId(int id, string userId);
-        
-        Task<ICollection<UserGroupDto>> GetColletionByGroupId(int groupId);
-        // Task DeleteUsingGroup(int GroupId);
-        // Task<ICollection<UserGroupDto>> SearchGrade(string userId);
+        /// <param name="ownerId">Alias for AppUserId, should be handled by the server.</param>
+        Task<UxgResponse> Create(
+            string ownerId, UxgRequestForPost model);
+
+        /// <param name="ownerId">Alias for AppUserId, should be handled by the server.</param>
+        Task Update(string ownerId, UxgRequestForPut model);
+
+        /// <param name="ownerId">Alias for AppUserId, should be handled by the server.</param>
+        Task Delete(string ownerId, string userId, int groupId);
+
+        Task<IEnumerable<UxgResponse>> GetEnumerableByGroupId(int groupId);
     }
 }

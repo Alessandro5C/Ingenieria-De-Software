@@ -17,8 +17,7 @@ namespace LetSkole.DataAccess.Implementations
 
         public async Task<Group> GetItemById(int id)
         {
-            return await _context.Groups
-                .SingleOrDefaultAsync(e => e.Id.Equals(id));
+            return await _context.Groups.FindAsync(id);
         }
 
         public async Task Create(Group entity)
@@ -44,7 +43,7 @@ namespace LetSkole.DataAccess.Implementations
             return await (
                 from uxg in _context.UserGroups
                 join g in _context.Groups on uxg.GroupId equals g.Id
-                where uxg.ApplicationUserId == userId
+                where uxg.UserId == userId
                 select g
             ).ToListAsync();
         }

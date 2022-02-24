@@ -1,14 +1,8 @@
 ﻿using LetSkole.Dto;
 using LetSkole.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
@@ -49,6 +43,7 @@ namespace LetSkole.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Teacher")]
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 400)]
         [ProducesResponseType(typeof(LetSkoleResponse), 403)]
@@ -76,11 +71,11 @@ namespace LetSkole.Controllers
                 }
             }
 
-            return Ok(LetSkoleResponse
-                .Success("Ok: Group has been updated"));
+            return Ok(LetSkoleResponse.Success("Ok: Group has been updated"));
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Teacher")]
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 403)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
@@ -104,11 +99,11 @@ namespace LetSkole.Controllers
                 }
             }
 
-            return Ok(LetSkoleResponse
-                .Success("Ok: Group has been deleted"));
+            return Ok(LetSkoleResponse.Success("Ok: Group has been deleted"));
         }
 
         [HttpGet]
+        [Authorize(Roles = "Student,Teacher")]
         [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GroupResponse>>), 200)]
         public async Task<ActionResult> GetAllAsUser()
         {

@@ -1,21 +1,21 @@
 ﻿using LetSkole.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using LetSkole.Entities.Indentity;
 
 namespace LetSkole.DataAccess
 {
-    public interface IUserGroupRepository 
+    public interface IUserGroupRepository
     {
-        Task<ICollection<UserGroup>> GetItems(int filter);
+        Task<UserGroup> GetItemByIds(string userId, int groupId);
 
-        Task<ICollection<UserGroup>> GetItemsByTeacherId(string userId);
-        Task<UserGroup> GetItem (string userId, int groupId);
         Task Create(UserGroup entity);
-        Task Update (UserGroup entity);
-        Task DeleteUsingUser (string userId, int groupId);
-        Task DeleteUsingGroup (int groupId);
-        Task<int> SearchGrade (string userId, int groupId);
+        Task Update(UserGroup entity);
+        Task Delete(UserGroup entity);
+
+        Task<ICollection<UserGroup>> GetCollectionByGroupId(int groupId);
+
+        Task<ApplicationUser> GetUserByEmail(string email);
+        Task<Group> GetGroupById(int groupId);
     }
 }

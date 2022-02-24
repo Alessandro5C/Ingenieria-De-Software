@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using LetSkole.DataAccess;
 using LetSkole.Dto;
 using LetSkole.Entities.Indentity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LetSkole.Services.Implementations
 {
@@ -15,7 +21,11 @@ namespace LetSkole.Services.Implementations
         private readonly IMapper _mapper;
 
 
-        public UserService(IUserRepository repository, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public UserService(
+            IUserRepository repository,
+            UserManager<ApplicationUser> userManager,
+            IMapper mapper
+        )
         {
             _repository = repository;
             _userManager = userManager;
@@ -68,6 +78,7 @@ namespace LetSkole.Services.Implementations
                 string.IsNullOrEmpty(model.PhoneNumber))
                 throw new LetSkoleException(message, 400);
 
+            // RETRIEVE OBJECT HERE
             var entity = await _userManager.FindByIdAsync(id);
             if (entity == null) throw new LetSkoleException(404);
 
@@ -92,6 +103,31 @@ namespace LetSkole.Services.Implementations
             }
         }
 
+        public async Task<AppIdentityResponse> IdentitySignIn(
+            AppIdentityRequest model,
+            Func<ApplicationUser, string, bool, Task<SignInResult>> checkFunc,
+            string secretKey
+        )
+        {
+            var response = new AppIdentityResponse();
+            // RETRIEVE OBJECT HERE
+            var entity = await _userManager.FindByEmailAsync(model.Email);
+            if (entity == null) return response;
+
+            // CHECK IF PASSWORD IS CORRECT
+            var check = await checkFunc(entity, model.Password, false);
+            if (!check.Succeeded) return response;
+
+            // GENERATE THE TOKEN AND ASSIGN IT
+            var token = await GenerateToken(entity, secretKey);
+            response = new AppIdentityResponse
+            {
+                Id = entity.Id, Token = token, Valid = true
+            };
+
+            return response;
+        }
+
         // NOTE: Below here are defined **private** methods
 
         private static string UniqueUserName(string displayedName)
@@ -99,6 +135,31 @@ namespace LetSkole.Services.Implementations
             return displayedName + "#" +
                    DateTime.UtcNow.Ticks + "#" +
                    Guid.NewGuid();
+        }
+
+        private async Task<string> GenerateToken(ApplicationUser entity, string secretKey)
+        {
+            var secretKeyEncoded = Encoding.ASCII.GetBytes(secretKey);
+
+            var claims = new List<Claim> {new Claim("AppUserId", entity.Id)};
+            var roles = await _userManager.GetRolesAsync(entity);
+            claims.AddRange(roles
+                .Select(role => new Claim(ClaimTypes.Role, role)));
+
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(120),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(secretKeyEncoded),
+                    SecurityAlgorithms.HmacSha256Signature
+                )
+            };
+
+            var handler = new JwtSecurityTokenHandler();
+            var createdToken = handler.CreateToken(descriptor);
+
+            return handler.WriteToken(createdToken);
         }
     }
 }

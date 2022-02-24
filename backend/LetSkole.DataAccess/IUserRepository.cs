@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using LetSkole.Entities;
+﻿using System.Threading.Tasks;
 using LetSkole.Entities.Indentity;
 using Microsoft.AspNetCore.Identity;
 

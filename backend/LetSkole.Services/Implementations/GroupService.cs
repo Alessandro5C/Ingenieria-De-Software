@@ -59,7 +59,7 @@ namespace LetSkole.Services.Implementations
                 string.IsNullOrEmpty(model.Description))
                 throw new LetSkoleException(message, 400);
 
-            // RETREIVE OBJECT HERE
+            // RETRIEVE OBJECT HERE
             var entity = await _repository.GetItemById(id);
             if (entity == null) throw new LetSkoleException(404);
             if (entity.OwnerId != ownerId) throw new LetSkoleException(403);
@@ -81,7 +81,7 @@ namespace LetSkole.Services.Implementations
 
         public async Task Delete(string ownerId, int id)
         {
-            // RETREIVE OBJECT HERE
+            // RETRIEVE OBJECT HERE
             var entity = await _repository.GetItemById(id);
             if (entity == null) throw new LetSkoleException(404);
             if (entity.OwnerId != ownerId) throw new LetSkoleException(403);

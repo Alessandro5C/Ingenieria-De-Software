@@ -1,17 +1,14 @@
 ﻿using LetSkole.Dto;
 using LetSkole.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace LetSkole.Controllers
 {
-    [ApiController]
-    [Route("api/v2/[controller]/[action]")]
-    public class UserGroupController : ControllerBase
+    public class UserGroupController : LetSkoleController
     {
         private readonly IUserGroupService _service;
 
@@ -21,82 +18,105 @@ namespace LetSkole.Controllers
         }
 
         [HttpPost]
-        // public async Task<ActionResult<UserGroupDto>> Post([FromBody] UserGroupDto userGroupDto)
-        // {
-        //     try
-        //     {
-        //         await _service.Create(userGroupDto);
-        //     }
-        //     catch(LetSkoleException e)
-        //     {
-        //         return BadRequest(e.Message + " " + e.Code);
-        //     }
-        //
-        //     return CreatedAtAction(nameof(GetItemById), new { userId = userGroupDto.UserId, groupId = userGroupDto.GroupId }, userGroupDto);
-        // }
+        [Authorize(Roles = "Teacher")]
+        [ProducesResponseType(typeof(LetSkoleResponse<UxgResponse>), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 403)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
+        public async Task<ActionResult> Post([FromBody] UxgRequestForPost model)
+        {
+            var response = new UxgResponse();
+            try
+            {
+                var ownerId = await GetJwtPayloadData("AppUserId");
+                response = await _service.Create(ownerId, model);
+            }
+            catch (LetSkoleException e)
+            {
+                switch (e.Code)
+                {
+                    case 400:
+                        return BadRequest(
+                            LetSkoleResponse.Error(e.Message, e.Code));
+                    case 403:
+                        return StatusCode(StatusCodes.Status403Forbidden,
+                            LetSkoleResponse.Error("Forbidden", e.Code));
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found: " + e.Message, e.Code));
+                }
+            }
 
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<UserGroupDto>>> GetItemById ([FromQuery] int groupId)
-        // {
-        //
-        //     return Accepted(await _service.GetItems(groupId));
-        // }
-
-        
-        // [HttpDelete]
-        // public async Task<IActionResult> DeleteUsingGroup([FromQuery] int groupId)
-        // {
-        //     try
-        //     {
-        //        await _service.DeleteUsingGroup(groupId);
-        //     } catch(Exception e)
-        //     {
-        //         return NotFound(e.Message);
-        //     }
-        //     return NoContent();
-        // }
-
-        // [HttpDelete]
-        // public async Task<IActionResult> DeleteUsingUser([FromQuery] int userId,int groupId)
-        // {
-        //     try
-        //     {
-        //         await _service.DeleteUsingUser(userId,groupId);
-        //     } catch (Exception e)
-        //     {
-        //         return NotFound(e.Message);
-        //     }
-        //
-        //     return NoContent();
-        // }
+            return Ok(LetSkoleResponse<UxgResponse>.Success(response));
+        }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UserGroupDto userGroupDto)
+        [Authorize(Roles = "Teacher")]
+        [ProducesResponseType(typeof(LetSkoleResponse), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 403)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
+        public async Task<IActionResult> Put([FromBody] UxgRequestForPut model)
         {
             try
             {
-                await _service.Update(userGroupDto);
-            } catch(NullReferenceException e)
-            {
-                return NotFound(e.Message);
+                var ownerId = await GetJwtPayloadData("AppUserId");
+                await _service.Update(ownerId, model);
             }
-            return NoContent();
+            catch (LetSkoleException e)
+            {
+                switch (e.Code)
+                {
+                    case 400:
+                        return BadRequest(
+                            LetSkoleResponse.Error(e.Message, e.Code));
+                    case 403:
+                        return StatusCode(StatusCodes.Status403Forbidden,
+                            LetSkoleResponse.Error("Forbidden", e.Code));
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found: " + e.Message, e.Code));
+                }
+            }
+
+            return Ok(LetSkoleResponse.Success("Ok: Group has been updated"));
         }
-        
-        // [HttpGet]
-        // public async Task<ActionResult<int>> GetByUserID ([FromQuery] int userId)
-        // {
-        //     //Int32 grade;
-        //     return Accepted(await _service.SearchGrade(userId));
-        //     //try
-        //     //{
-        //     //    grade = await _service.SearchGrade(userId);
-        //     //} catch(Exception e)
-        //     //{
-        //     //    return NotFound(e.Message);
-        //     //}
-        //     //return Accepted(grade);
-        //
-        // }
+
+        [HttpDelete]
+        [Authorize(Roles = "Teacher")]
+        [ProducesResponseType(typeof(LetSkoleResponse), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 403)]
+        [ProducesResponseType(typeof(LetSkoleResponse), 404)]
+        public async Task<IActionResult> Delete([FromQuery] string userId, int groupId)
+        {
+            try
+            {
+                var ownerId = await GetJwtPayloadData("AppUserId");
+                await _service.Delete(ownerId, userId, groupId);
+            }
+            catch (LetSkoleException e)
+            {
+                switch (e.Code)
+                {
+                    case 403:
+                        return StatusCode(StatusCodes.Status403Forbidden,
+                            LetSkoleResponse.Error("Forbidden", e.Code));
+                    case 404:
+                        return NotFound(
+                            LetSkoleResponse.Error("Not Found: " + e.Message, e.Code));
+                }
+            }
+
+            return Ok(LetSkoleResponse.Success("Ok: Group has been deleted"));
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Student,Teacher")]
+        [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<UxgResponse>>), 200)]
+        public async Task<ActionResult> GetAllByGroupId([FromQuery] int groupId)
+        {
+            var response = await _service.GetEnumerableByGroupId(groupId);
+            return Ok(LetSkoleResponse<IEnumerable<UxgResponse>>.Success(response));
+        }
     }
 }
