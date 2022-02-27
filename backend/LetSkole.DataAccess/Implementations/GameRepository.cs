@@ -1,12 +1,10 @@
-﻿using LetSkole.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using LetSkole.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace LetSkole.DataAccess
+namespace LetSkole.DataAccess.Implementations
 {
     public class GameRepository : IGameRepository
     {
@@ -17,14 +15,12 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public async Task<ICollection<Game>> GetCollection(string filter)
+        public async Task<ICollection<Game>> GetCollection()
         {
-            return await _context.Games.Where(c => c.Name.Contains(filter))
-                 .ToListAsync();
+            return await (
+                from g in _context.Games
+                select g
+            ).ToListAsync();
         }
-
-        public async Task<Game> GetItem(int id) =>
-            await _context.Games
-            .SingleOrDefaultAsync(c => c.Id.Equals(id));
     }
 }

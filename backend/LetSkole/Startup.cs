@@ -1,19 +1,13 @@
 using LetSkole.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using LetSkole.Entities.Indentity;
 using LetSkole.Services;
 using LetSkole.StartupConf;
@@ -49,14 +43,13 @@ namespace LetSkole
                     });
             });
 
-            // NOTE: In case you are in development phase,
-            //      you should put an attribute on appsettings.Development.json
-            var connection = Configuration.GetValue<string>("DbConnString");
-            if (connection == null)
-            {
-                // NOTE: Search for a environment variable, compatible with Heroku
-                connection = Environment.GetEnvironmentVariable("ConnString");
-            }
+            // NOTE: In case you are in development phase, you should put
+            //       an attribute on appsettings.Development.json
+            // Search for a environment variable, compatible with Heroku
+            var secretKey = Configuration.GetValue<string>("SecretKey") ??
+                            Environment.GetEnvironmentVariable("HerokuSecretKey");
+            var connection = Configuration.GetValue<string>("DbConnString") ??
+                             Environment.GetEnvironmentVariable("HerokuDbConnString");
 
             services.AddControllers();
             services.AddInjection();
@@ -77,7 +70,10 @@ namespace LetSkole
                 options.User.AllowedUserNameCharacters += "#";
                 options.User.RequireUniqueEmail = true;
             });
-            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
+
+            var key = Encoding.ASCII
+                .GetBytes(Configuration.GetValue<string>(secretKey));
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

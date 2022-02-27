@@ -8,8 +8,6 @@ namespace LetSkole.Services
 {
     public interface IGameService
     {
-        Task <ICollection<GameDto>> GetCollection(string filter);
-        Task <GameDto> GetItem(int id);
-     
+        Task<IEnumerable<GameResponse>> GetEnumerable();
     }
 }

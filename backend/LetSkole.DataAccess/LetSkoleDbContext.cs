@@ -34,7 +34,7 @@ namespace LetSkole.DataAccess
             //     .HasName("AlternateKey_Email");
             // Many to many Keys Configuration
             modelBuilder.Entity<UserGroup>().HasKey(x => new {ApplicationUserId = x.UserId, x.GroupId});
-            modelBuilder.Entity<RewardUser>().HasKey(x => new {x.ApplicationUserId, x.RewardId});
+            modelBuilder.Entity<RewardUser>().HasKey(x => new {ApplicationUserId = x.UserId, x.RewardId});
             // Identity Configuration
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.UserRoles)

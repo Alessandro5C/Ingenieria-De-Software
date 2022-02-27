@@ -1,17 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using LetSkole.Dto;
 using LetSkole.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LetSkole.Controllers
 {
-    [Route("api/v2/[controller]/[action]")]
-    [ApiController]
-    public class GameController : ControllerBase
+    public class GameController : LetSkoleController
     {
         private readonly IGameService _service;
 
@@ -21,22 +17,12 @@ namespace LetSkole.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameDto>>> GetAllByFilter([FromQuery] string filter)
+        [Authorize(Roles = "Student")]
+        [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<GameResponse>>), 200)]
+        public async Task<ActionResult> GetAll()
         {
-            return Accepted(await _service.GetCollection(filter));
+            var response = await _service.GetEnumerable();
+            return Ok(LetSkoleResponse<IEnumerable<GameResponse>>.Success(response));
         }
-
-        [HttpGet]
-        public async Task<ActionResult<GameDto>> GetItemById([FromQuery] int id)
-        {
-            try
-            {
-                return Accepted(await _service.GetItem(id));
-            } catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
     }
 }

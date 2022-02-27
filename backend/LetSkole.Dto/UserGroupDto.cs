@@ -10,7 +10,6 @@
     {
         public string UserId { get; set; }
         public int GroupId { get; set; }
-
         public short Grade { get; set; }
     }
 

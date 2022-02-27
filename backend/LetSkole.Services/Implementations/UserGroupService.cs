@@ -42,6 +42,8 @@ namespace LetSkole.Services.Implementations
             if (group == null)
                 throw new LetSkoleException(
                     "GroupId does not match any group", 404);
+            if (group.OwnerId != ownerId)
+                throw new LetSkoleException(403);
 
             // CREATE OBJECT HERE
             entity = new UserGroup

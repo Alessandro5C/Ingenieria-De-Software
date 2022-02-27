@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using LetSkole.Dto;
 using LetSkole.Entities.Indentity;
@@ -28,7 +29,8 @@ namespace LetSkole.Controllers
         [ProducesResponseType(typeof(LetSkoleResponse<AppIdentityResponse>), 200)]
         public async Task<IActionResult> SignIn(AppIdentityRequest model)
         {
-            var secretKey = _configuration.GetValue<string>("SecretKey");
+            var secretKey = _configuration.GetValue<string>("SecretKey") ??
+                            Environment.GetEnvironmentVariable("HerokuSecretKey");
             var response = await _service.IdentitySignIn(
                 model, _signInManager.CheckPasswordSignInAsync, secretKey);
             return Ok(LetSkoleResponse<AppIdentityResponse>.Success(response));

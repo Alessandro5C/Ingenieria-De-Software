@@ -1,12 +1,10 @@
-﻿using LetSkole.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using LetSkole.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace LetSkole.DataAccess
+namespace LetSkole.DataAccess.Implementations
 {
     public class ActivityRepository : IActivityRepository
     {
@@ -17,43 +15,36 @@ namespace LetSkole.DataAccess
             _context = context;
         }
 
-        public async Task<ICollection<Activity>> GetActivities(string filter)
+        public async Task<Activity> GetItemById(int id)
         {
-            return await _context.Activities.Where(c => c.Name.Contains(filter))
-                   .ToListAsync();
+            return await _context.Activities.FindAsync(id);
         }
-
-        public async Task<ICollection<Activity>> GetCollectionByID(int userId)
-        {
-            return await _context.Activities.Where(c => c.ApplicationUserId.Equals(userId))
-                   .ToListAsync();
-        }
-        
-        public async Task<Activity> GetItem(int id)=>
-            await _context.Activities
-            .SingleOrDefaultAsync(e => e.Id.Equals(id));
-        
 
         public async Task Create(Activity entity)
         {
-            _context.Add(entity);
+            _context.Activities.Add(entity);
             await _context.SaveChangesAsync();
         }
 
         public async Task Update(Activity entity)
         {
-            _context.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            _context.Activities.Update(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Activity entity)
         {
-            _context.Entry(new Activity
-            {
-               Id = id
-             }).State = EntityState.Deleted;
+            _context.Activities.Remove(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<Activity>> GetCollectionByUserId(string userId)
+        {
+            return await (
+                from a in _context.Activities
+                where a.UserId == userId
+                select a
+            ).ToListAsync();
         }
     }
 }

@@ -1,255 +1,158 @@
-﻿using LetSkole.DataAccess;
-using LetSkole.Dto;
-using LetSkole.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using LetSkole.Entities.Indentity;
+using AutoMapper;
+using LetSkole.DataAccess;
+using LetSkole.Dto;
+using LetSkole.Entities;
 
-namespace LetSkole.Services
+namespace LetSkole.Services.Implementations
 {
     public class ActivityService : IActivityService
     {
-
         private readonly IActivityRepository _repository;
-        private readonly IUserRepository _userRepository;
-        
-        public ActivityService(IActivityRepository repository, IUserRepository userRepository)
+        private readonly IMapper _mapper;
+
+        public ActivityService(IActivityRepository repository, IMapper mapper)
         {
             _repository = repository;
-            _userRepository = userRepository;
+            _mapper = mapper;
         }
-        //
-        // public async Task Create(ActivityDto entity)
-        // {
-        //     DateTime now = DateTime.Now;
-        //     DateTime inicio = DateTime.MinValue;
-        //     entity.StartDate = new DateTime(now.Year, now.Month, now.Day);
-        //
-        //     //Validar user
-        //     ApplicationUser user = await _userRepository.GetItem(entity.UserId);
-        //     if (user == null)
-        //     {
-        //         throw new Exception("User not found");
-        //     }
-        //
-        //     //Buscamos errores
-        //         int res = DateTime.Compare(entity.StartDate, entity.EndDate);
-        //     if (res >= 0)
-        //     {
-        //         throw new Exception("Date invalid");
-        //     }
-        //
-        //     if (entity.StartTime != inicio && entity.EndTime != inicio)
-        //     {
-        //         //Puedo comparar
-        //             if (DateTime.Compare(entity.StartTime, entity.EndTime) >= 0)
-        //         {
-        //             throw new Exception("Date invalid");
-        //         }
-        //
-        //         if (DateTime.Compare(entity.StartDate, entity.StartTime) > 0)
-        //         {
-        //             throw new Exception("Date invalid");
-        //         }
-        //     }
-        //
-        //     if (entity.Name == "" || entity.Name == null)
-        //     {
-        //         throw new Exception("A name is necessary");
-        //     }
-        //
-        //    await _repository.Create(new Activity
-        //     {
-        //         ApplicationUserId = entity.UserId, //validar el user id
-        //         Name = entity.Name,
-        //         Description = entity.Description,
-        //         StartDate = entity.StartDate, // Tiempo del sistema a las 0:0:0 horas
-        //         EndDate = entity.EndDate,
-        //         Completed = false, // Siempre inicia en falso
-        //         StartTime = entity.StartTime,
-        //         EndTime = entity.EndTime,
-        //     });
-        // }
-        //
-        // public async Task Delete(int id)
-        // {
-        //     await _repository.Delete(id);
-        // }
-        //
-        // public async Task<ICollection<ActivityDto>> GetCollection(string filter)
-        // {
-        //     var Collection = await _repository.GetActivities(filter ?? string.Empty);
-        //     return  Collection.Select(c => new ActivityDto
-        //     {
-        //         Id = c.Id,
-        //         UserId = c.ApplicationUserId,
-        //         Name = c.Name,
-        //         Description = c.Description,
-        //         StartDate = c.StartDate,
-        //         EndDate = c.EndDate,
-        //         Completed = c.Completed,
-        //         StartTime = c.StartTime,
-        //         EndTime = c.EndTime
-        //     }).ToList();
-        // }
-        //
-        //
-        // public async Task<ICollection<ActivityDto>> GetCollectionUserID(int id)
-        // {
-        //     var Collection = await _repository.GetCollectionByID(id);
-        //     return Collection.Select(c => new ActivityDto
-        //     {
-        //         Id = c.Id,
-        //         UserId = c.ApplicationUserId,
-        //         Name = c.Name,
-        //         Description = c.Description,
-        //         StartDate = c.StartDate,
-        //         EndDate = c.EndDate,
-        //         Completed = c.Completed,
-        //         StartTime = c.StartTime,
-        //         EndTime = c.EndTime
-        //     }).ToList();
-        // }
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        // public async Task<ActivityDto> GetItem(int id)
-        // {
-        //     Activity activity = await _repository.GetItem(id);
-        //     ActivityDto activityDto = new ActivityDto();
-        //
-        //     activityDto.Id = activity.Id;
-        //     activityDto.UserId = activity.ApplicationUserId;
-        //     activityDto.Name = activity.Name;
-        //     activityDto.Description = activity.Description;
-        //     activityDto.StartDate = activity.StartDate;
-        //     activityDto.EndDate = activity.EndDate;
-        //     activityDto.Completed = activity.Completed;
-        //     activityDto.StartTime = activity.StartTime;
-        //     activityDto.EndTime = activity.EndTime;
-        //     return activityDto;
-        // }
-        //
-        // public async Task Update(ActivityDto entity)
-        // {
-        //     
-        //     Activity activity = await _repository.GetItem(entity.Id);
-        //     DateTime inicio = DateTime.MinValue;
-        //     
-        //     if (activity == null)
-        //     {
-        //         throw new Exception("Id activity doesn't exists");
-        //     }
-        //
-        //
-        //     // Falta comprobar si el usuario existe
-        //     ApplicationUser user = await _userRepository.GetItem(entity.UserId);
-        //     if (user == null)
-        //     {
-        //         throw new Exception("El id del usuario no existe");
-        //     }
-        //     
-        //
-        //
-        //     // Nombre
-        //     if (entity.Name == "" || entity.Name == null)
-        //     {
-        //         activity.Name = activity.Name;
-        //     }
-        //     else
-        //     {
-        //         activity.Name = entity.Name;
-        //     }
-        //
-        //     //Description
-        //         if (entity.Description == "" || entity.Description == null)
-        //     {
-        //         activity.Description = activity.Description;
-        //     }
-        //     else
-        //     {
-        //         activity.Description = entity.Description;
-        //     }
-        //
-        //
-        //     if (entity.EndDate == inicio)
-        //     {
-        //         activity.EndDate = activity.EndDate;
-        //     }
-        //     else
-        //     {
-        //         DateTime auxEndDate = entity.EndDate;
-        //         int resCom = DateTime.Compare(activity.StartDate, auxEndDate);
-        //         if (resCom < 0)
-        //         {
-        //             //Modifico
-        //                 activity.EndDate = entity.EndDate;
-        //         }
-        //         else
-        //         {
-        //             throw new Exception("Invalid date");
-        //         }
-        //
-        //
-        //
-        //     }
-        //
-        //     activity.Completed = entity.Completed;
-        //
-        //
-        //     DateTime auxStartDate = entity.StartDate;
-        //     DateTime auxStarTime = entity.StartTime;
-        //
-        //     int res3 = DateTime.Compare(auxStartDate, entity.StartTime);
-        //     if (res3 >= 0)
-        //     {
-        //         throw new Exception("Invalid date");
-        //     }
-        //
-        //     DateTime auxEndDate2 = entity.EndDate;
-        //     res3 = DateTime.Compare(entity.StartTime, auxEndDate2);
-        //     if (res3 >= 0)
-        //     {
-        //         throw new Exception("Invalid date");
-        //     }
-        //
-        //     res3 = DateTime.Compare(auxStartDate, entity.EndTime);
-        //     if (res3 >= 0)
-        //     {
-        //         throw new Exception("Invalid date");
-        //     }
-        //
-        //     res3 = DateTime.Compare(entity.EndTime, auxEndDate2);
-        //     if (res3 >= 0)
-        //     {
-        //         throw new Exception("Invalid date");
-        //     }
-        //
-        //     res3 = DateTime.Compare(entity.StartTime, entity.EndTime);
-        //     if (res3 >= 0)
-        //     {
-        //         throw new Exception("Invalid date");
-        //     }
-        //
-        //     activity.StartDate = entity.StartDate;
-        //     activity.StartTime = entity.StartTime;
-        //     activity.EndDate = entity.EndDate;
-        //     activity.EndTime = entity.EndTime;
-        //     activity.Description = entity.Description;
-        //     activity.Id = entity.Id;
-        //     activity.Name = entity.Name;
-        //     activity.ApplicationUserId = entity.UserId;
-        //
-        //     await _repository.Update(activity);
-        // }
-        //
-        //
+
+        public async Task<ActivityResponse> Create(string userId, ActivityRequestForPost model)
+        {
+            // VALIDATE DATA HERE
+            const string message = "Bad Request: Name(from 1-20), Description(from 1-256)";
+            if (string.IsNullOrEmpty(model.Name) ||
+                string.IsNullOrEmpty(model.Description))
+                throw new LetSkoleException(message, 400);
+
+            var startDate = IsStartDateCorrect(model.StartDate);
+            var endDate = IsEndDateCorrect(startDate, model.EndDate);
+
+            // CREATE OBJECT HERE
+            var entity = new Activity
+            {
+                UserId = userId,
+                Name = model.Name,
+                Description = model.Description,
+                StartDate = startDate,
+                EndDate = endDate,
+                Completed = false,
+                StartTime = null,
+                EndTime = null
+            };
+
+            // REPOSITORY CALLS HERE
+            try
+            {
+                await _repository.Create(entity);
+            }
+            catch (Exception e)
+            {
+                throw new LetSkoleException(e.Message, 400);
+            }
+
+            return _mapper.Map<Activity, ActivityResponse>(entity);
+        }
+
+        public async Task Update(string userId, ActivityRequestForPut model, int id)
+        {
+            // VALIDATE DATA HERE
+            const string message = "Bad Request: Description(from 1-256)";
+            if (string.IsNullOrEmpty(model.Description))
+                throw new LetSkoleException(message, 400);
+
+            // RETRIEVE OBJECT HERE
+            var entity = await _repository.GetItemById(id);
+            if (entity == null) throw new LetSkoleException(404);
+            if (entity.UserId != userId) throw new LetSkoleException(403);
+
+            // MODIFY (AND VALIDATE) DATA HERE
+            entity.Description = model.Description;
+            entity.EndDate = IsEndDateCorrect(
+                entity.StartDate, model.EndDate);
+            entity.Completed = model.Completed;
+            entity.StartTime = IsStartTimeCorrect(
+                entity.StartDate, entity.EndDate, model.StartTime);
+            entity.EndTime = IsEndTimeCorrect(
+                model.StartTime, entity.EndDate, model.EndTime);
+
+            // REPOSITORY CALLS HERE
+            try
+            {
+                await _repository.Update(entity);
+            }
+            catch (Exception e)
+            {
+                throw new LetSkoleException(e.Message, 400);
+            }
+        }
+
+        public async Task Delete(string userId, int id)
+        {
+            // RETRIEVE OBJECT HERE
+            var entity = await _repository.GetItemById(id);
+            if (entity == null) throw new LetSkoleException(404);
+            if (entity.UserId != userId) throw new LetSkoleException(403);
+
+            // REPOSITORY CALLS HERE
+            await _repository.Delete(entity);
+        }
+
+        public async Task<IEnumerable<ActivityResponse>> GetEnumerableByUserId(string userId)
+        {
+            var collection = await _repository.GetCollectionByUserId(userId);
+
+            return collection.Select(
+                e => _mapper.Map<Activity, ActivityResponse>(e)
+            ).ToList();
+        }
+
+        // NOTE: Below here are defined **private** methods
+
+        private static DateTime IsStartDateCorrect(DateTime? startDate)
+        {
+            var today = DateTime.Today;
+            var date = startDate ?? today;
+            if (today.CompareTo(date) >= 0)
+                return today;
+            return date - date.TimeOfDay;
+        }
+
+        private static DateTime? IsEndDateCorrect(DateTime startDate, DateTime? endDate)
+        {
+            if (endDate == null) return null;
+            var date = endDate ?? startDate;
+            date -= date.TimeOfDay;
+            if (startDate.CompareTo(date) < 0) return date;
+            const string message = "Bad Request: EndDate cannot be earlier than StartDate";
+            throw new LetSkoleException(message, 400);
+        }
+
+        private static DateTime IsStartTimeCorrect(
+            DateTime startDate, DateTime? endDate, DateTime startTime)
+        {
+            var auxEndDate = endDate ?? DateTime.MaxValue;
+            if (startDate.CompareTo(startTime) < 0 &&
+                startTime.CompareTo(auxEndDate) < 0)
+                return startTime;
+            const string message =
+                "Bad Request: StartTime should be between StartDate and EndDate";
+            throw new LetSkoleException(message, 400);
+        }
+
+        private static DateTime IsEndTimeCorrect(
+            DateTime startTime, DateTime? endDate, DateTime endTime)
+        {
+            var auxEndDate = endDate ?? DateTime.MaxValue;
+            if (startTime.CompareTo(endTime) < 0 &&
+                endTime.CompareTo(auxEndDate) < 0)
+                return endTime;
+            const string message =
+                "Bad Request: EndTime should be between StartTime and EndDate";
+            throw new LetSkoleException(message, 400);
+        }
     }
 }

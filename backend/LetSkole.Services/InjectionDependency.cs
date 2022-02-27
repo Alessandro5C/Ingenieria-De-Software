@@ -18,8 +18,8 @@ namespace LetSkole.Services
                 .AddTransient<IGroupService, GroupService>()
                 .AddScoped<IUserGroupRepository, UserGroupRepository>()
                 .AddTransient<IUserGroupService, UserGroupService>()
-                .AddTransient<IRewardService, RewardService>()
-                .AddScoped<IRewardRepository, RewardRepository>()
+                .AddTransient<IRewardUserService, RewardUserService>()
+                .AddScoped<IRewardUserRepository, RewardUserRepository>()
                 .AddTransient<IGameService, GameService>()
                 .AddScoped<IGameRepository, GameRepository>();
         }

@@ -11,9 +11,12 @@ namespace LetSkole.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<ApplicationUser, AppUserResponse>();
-            CreateMap<Group, GroupRequestForPost>();
             CreateMap<Group, GroupResponse>();
             CreateMap<UserGroup, UxgResponse>();
+            CreateMap<Game, GameResponse>();
+            CreateMap<Reward, RewardResponse>();
+            CreateMap<RewardUser, RxuResponse>();
+            CreateMap<Activity, ActivityResponse>();
         }
     }
 }

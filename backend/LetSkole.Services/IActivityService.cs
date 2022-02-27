@@ -1,20 +1,20 @@
 ﻿using LetSkole.Dto;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LetSkole.Services
 {
     public interface IActivityService
     {
-        // Task <ICollection<ActivityDto>> GetCollection(string filter);
-        //
-        // Task<ICollection<ActivityDto>> GetCollectionUserID(int id);
-        // Task <ActivityDto> GetItem(int id);
-        // Task Create(ActivityDto entity);
-        // Task Update(ActivityDto entity);
-        // Task Delete(int id);
+        /// <param name="userId">Alias for AppUserId, should be handled by the server.</param>
+        Task<ActivityResponse> Create (string userId, ActivityRequestForPost model);
+        /// <param name="userId">Alias for AppUserId, should be handled by the server.</param>
+        Task Update(string userId, ActivityRequestForPut model, int id);
+        /// <param name="userId">Alias for AppUserId, should be handled by the server.</param>
+        /// <param name="id">ActivityId of the row you're attempting to delete.</param>
+        Task Delete(string userId, int id);
+
+        Task<IEnumerable<ActivityResponse>> GetEnumerableByUserId(string userId);
     }
 }
 

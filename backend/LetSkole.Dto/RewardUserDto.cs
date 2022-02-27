@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LetSkole.Dto
+﻿namespace LetSkole.Dto
 {
-    public class RewardUserDto
+    public class RxuResponse
     {
-        public string UserId { get; set; }
         public int RewardId { get; set; }
+        public RewardResponse Reward { get; set; }
+        public string UserId { get; set; }
     }
 }

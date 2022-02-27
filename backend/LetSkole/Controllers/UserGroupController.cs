@@ -79,7 +79,7 @@ namespace LetSkole.Controllers
                 }
             }
 
-            return Ok(LetSkoleResponse.Success("Ok: Group has been updated"));
+            return Ok(LetSkoleResponse.Success("Ok: UserGroup has been updated"));
         }
 
         [HttpDelete]
@@ -87,7 +87,7 @@ namespace LetSkole.Controllers
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 403)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
-        public async Task<IActionResult> Delete([FromQuery] string userId, int groupId)
+        public async Task<IActionResult> Delete([FromQuery] string userId, [FromQuery] int groupId)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace LetSkole.Controllers
                 }
             }
 
-            return Ok(LetSkoleResponse.Success("Ok: Group has been deleted"));
+            return Ok(LetSkoleResponse.Success("Ok: UserGroup has been deleted"));
         }
 
         [HttpGet]

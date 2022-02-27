@@ -7,18 +7,18 @@ namespace LetSkole.Entities
     public class Group : EntityBase
     {
         [Required]
-        [StringLength(20,
-            ErrorMessage = "Name should be between 5 to 20")]
+        [StringLength(20, MinimumLength = 5,
+            ErrorMessage = "Name should be between 5 and 20")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(256,
-            ErrorMessage = "Description cannot be longer than 256")]
+            ErrorMessage = "Description cannot be longer and 256")]
         public string Description { get; set; }
 
         [Required]
         [Range(1, short.MaxValue,
-            ErrorMessage = "MaxGrade should be between 1 to 32767")]
+            ErrorMessage = "MaxGrade should be between 1 and 32767")]
         public short MaxGrade { get; set; }
 
         // MANY TO ONE (FK)

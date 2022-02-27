@@ -1,49 +1,31 @@
-﻿using LetSkole.DataAccess;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using LetSkole.DataAccess;
 using LetSkole.Dto;
 using LetSkole.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LetSkole.Services
+namespace LetSkole.Services.Implementations
 {
     public class GameService : IGameService
     {
         private readonly IGameRepository _repository;
+        private readonly IMapper _mapper;
 
-        public GameService(IGameRepository repository)
+        public GameService(IGameRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<ICollection<GameDto>> GetCollection(string filter)
+        public async Task<IEnumerable<GameResponse>> GetEnumerable()
         {
-            var Collection =  await _repository.GetCollection(filter ?? string.Empty);
-            return Collection.Select(c => new GameDto
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                Link = c.Link,
+            var collection = await _repository.GetCollection();
 
-            }).ToList();
+            return collection.Select(
+                e => _mapper.Map<Game, GameResponse>(e)
+            ).ToList();
         }
-
-        public async Task<GameDto> GetItem(int id)
-        {
-            Game game = await _repository.GetItem(id);
-            GameDto gameDto = new GameDto();
-
-            gameDto.Id = game.Id;
-            gameDto.Name = game.Name;
-            gameDto.Description = game.Description;
-            gameDto.Link = game.Link;
-
-
-            return gameDto;
-        }
-
     }
 }

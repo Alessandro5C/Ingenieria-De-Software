@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace LetSkole.Entities
 {
-    public class Reward:EntityBase
+    public class Reward : EntityBase
     {
-
         [Required]
-        [StringLength(15)]
+        [StringLength(15, MinimumLength = 5)]
         public string Name { get; set; }
-        [Required]
         [StringLength(256)]
         public string Description { get; set; }
         [Required]

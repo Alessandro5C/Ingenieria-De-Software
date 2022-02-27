@@ -1,56 +1,35 @@
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LetSkole.Dto;
 using LetSkole.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace LetSkole.Controllers
 {
-    public class ActivityController : LetSkoleController
+    [Authorize(Roles = "Student")]
+    public class RewardUserController : LetSkoleController
     {
-        private readonly IActivityService _service;
+        private readonly IRewardUserService _service;
 
-        public ActivityController(IActivityService service)
+        public RewardUserController(IRewardUserService service)
         {
             _service = service;
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(LetSkoleResponse<ActivityResponse>), 200)]
-        [ProducesResponseType(typeof(LetSkoleResponse), 400)]
-        public async Task<ActionResult> Post([FromBody] ActivityRequestForPost model)
-        {
-            var response = new ActivityResponse();
-            try
-            {
-                var userId = await GetJwtPayloadData("AppUserId");
-                response = await _service.Create(userId, model);
-            }
-            catch (LetSkoleException e)
-            {
-                switch (e.Code)
-                {
-                    case 400:
-                        return BadRequest(
-                            LetSkoleResponse.Error(e.Message, e.Code));
-                }
-            }
-
-            return Ok(LetSkoleResponse<ActivityResponse>.Success(response));
-        }
-
-        [HttpPut]
-        [ProducesResponseType(typeof(LetSkoleResponse), 200)]
+        [ProducesResponseType(typeof(LetSkoleResponse<RxuResponse>), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 400)]
         [ProducesResponseType(typeof(LetSkoleResponse), 403)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
-        public async Task<IActionResult> Put([FromBody] ActivityRequestForPut model, [FromQuery] int id)
+        public async Task<ActionResult> Post([FromQuery] int rewardId)
         {
+            var response = new RxuResponse();
             try
             {
                 var userId = await GetJwtPayloadData("AppUserId");
-                await _service.Update(userId, model, id);
+                response = await _service.Create(userId, rewardId);
             }
             catch (LetSkoleException e)
             {
@@ -64,23 +43,23 @@ namespace LetSkole.Controllers
                             LetSkoleResponse.Error("Forbidden", e.Code));
                     case 404:
                         return NotFound(
-                            LetSkoleResponse.Error("Not Found", e.Code));
+                            LetSkoleResponse.Error("Not Found: " + e.Message, e.Code));
                 }
             }
 
-            return Ok(LetSkoleResponse.Success("Ok: Activity has been updated"));
+            return Ok(LetSkoleResponse<RxuResponse>.Success(response));
         }
 
         [HttpDelete]
         [ProducesResponseType(typeof(LetSkoleResponse), 200)]
         [ProducesResponseType(typeof(LetSkoleResponse), 403)]
         [ProducesResponseType(typeof(LetSkoleResponse), 404)]
-        public async Task<IActionResult> Delete([FromQuery] int id)
+        public async Task<IActionResult> Delete([FromQuery] int rewardId)
         {
             try
             {
                 var userId = await GetJwtPayloadData("AppUserId");
-                await _service.Delete(userId, id);
+                await _service.Delete(userId, rewardId);
             }
             catch (LetSkoleException e)
             {
@@ -95,16 +74,17 @@ namespace LetSkole.Controllers
                 }
             }
 
-            return Ok(LetSkoleResponse.Success("Ok: Activity has been deleted"));
+            return Ok(LetSkoleResponse.Success("Ok: RewardUser has been deleted"));
         }
-        
+
         [HttpGet]
-        [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<ActivityResponse>>), 200)]
-        public async Task<ActionResult> GetAllAsOwner()
+        [ProducesResponseType(typeof(LetSkoleResponse<IEnumerable<RxuResponse>>), 200)]
+        public async Task<ActionResult> GetAllByGameId([FromQuery] int gameId)
         {
             var userId = await GetJwtPayloadData("AppUserId");
-            var response = await _service.GetEnumerableByUserId(userId);
-            return Ok(LetSkoleResponse<IEnumerable<ActivityResponse>>.Success(response));
+            var response = await _service
+                .GetEnumerableByGameId(userId, gameId);
+            return Ok(LetSkoleResponse<IEnumerable<RxuResponse>>.Success(response));
         }
     }
 }
