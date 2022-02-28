@@ -20,17 +20,30 @@ import { useHistory } from "react-router-dom";
 import apiUsers from '../api/api.user';
 import { useTranslation } from 'react-i18next';
 import { namespaces } from '../i18next/i18n.constants';
+import request  from '../api/api';
 
 const initApplicationUserLogin : ApplicationUserLogin = {
   email: '',
   password: ''
 }
 
-export default function SingIn() {
+interface Props {
+  changeLanguage: (language: string) => void
+}
+
+export default function SingIn(props: Props) {
   const history = useHistory();
   const [ userLogin, setUserLogin ] = useState<ApplicationUserLogin>(initApplicationUserLogin);
   const inputEmail = useRef<HTMLInputElement>(null);
   const { t } = useTranslation(namespaces.pages.signin);
+
+  React.useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    
+    if(token){
+      history.push('/dashboard');
+    } 
+  }, []);
 
   function changeValueUserLogin(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -48,32 +61,29 @@ export default function SingIn() {
     }
 
     await authService.login(userLogin).then(
-      async (appUserResponse) => {
-        if(appUserResponse){
+      (appUserResponse) => {
+        if (appUserResponse){
           // Reviso su información
           inputEmail.current?.focus();
-
-          await apiUsers.detail(appUserResponse.userId.toString()).then( 
-            (user) => {
-              if(user && user.id && user.name && user.numTelf && user.email && user.birthday && user.school){  
-                window.alert(`Welcome ${user.name}`);
-                history.push(`/dashboard/${user.id}`);
-              }
-              else {
-                window.alert('Need to complete information, An error ocurred with user information');
-                history.push(`/signup/${appUserResponse.email}`);
-              }
-            });
+          if (appUserResponse.token){
+            window.localStorage.setItem('token', appUserResponse.token);
+            history.push('/dashboard');
+          } else{
+            window.alert('User not registered'); // This because token empty
+          }
         }
         else {
-          window.alert('User not registered');
-          console.log(inputEmail.current);
+          window.alert('Unexpected error ocurred');
           inputEmail.current?.focus();
         }
     });
   }
 
   return (
+    <React.Fragment>
+    <button onClick={() => props.changeLanguage("en")}>English</button>
+    <button onClick={() => props.changeLanguage("es")}>Español</button>
+      
     <Container component="main" maxWidth="xs">
       <form onSubmit={handleSubmit}>
       <Box
@@ -113,9 +123,9 @@ export default function SingIn() {
             value={userLogin.password}
             onChange={(event) => changeValueUserLogin(event)}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary"/>}
-              label={t("rememberme").toString()} />
+              label={t("rememberme").toString()} /> */}
             <Button
               type="submit"
               fullWidth
@@ -126,9 +136,9 @@ export default function SingIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                {/* <Link href="#" variant="body2">
                   {t("forgotPassword")}
-                </Link>
+                </Link> */}
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
@@ -141,5 +151,6 @@ export default function SingIn() {
       </form>
         <Copyright sx={{ mt:8, mb:4}}/>
     </Container>
+    </React.Fragment>
   );
 }
