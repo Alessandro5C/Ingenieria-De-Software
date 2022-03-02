@@ -47,9 +47,9 @@ namespace LetSkole
             //       an attribute on appsettings.Development.json
             // Search for a environment variable, compatible with Heroku
             var secretKey = Configuration.GetValue<string>("SecretKey") ??
-                            Environment.GetEnvironmentVariable("HerokuSecretKey");
+                            Environment.GetEnvironmentVariable("HerokuSecretKey") ?? string.Empty;
             var connection = Configuration.GetValue<string>("DbConnString") ??
-                             Environment.GetEnvironmentVariable("HerokuDbConnString");
+                             Environment.GetEnvironmentVariable("HerokuDbConnString") ?? string.Empty;
 
             services.AddControllers();
             services.AddInjection();
@@ -71,8 +71,7 @@ namespace LetSkole
                 options.User.RequireUniqueEmail = true;
             });
 
-            var key = Encoding.ASCII
-                .GetBytes(Configuration.GetValue<string>(secretKey));
+            var key = Encoding.ASCII.GetBytes(secretKey);
 
             services.AddAuthentication(x =>
             {
