@@ -29,18 +29,18 @@ function Register(){
           return;
         }
 
-        await authService.register(userLogin)
-        .then(data => {
-          if(data){
-            window.alert("Primera parte finalizada");
-            history.push(`/signup/${userLogin.email}`);
-          } else{
-            window.alert("Cannot register because there is duplicated " + 
-            "email in the system or the password is too short, try setting" +
-            "a new email or set a longer password or signin with your last account");
-            inputEmail.current?.focus();
-          }
-        });
+        // await authService.register(userLogin)
+        // .then(data => {
+        //   if(data){
+        //     window.alert("Primera parte finalizada");
+        //     history.push(`/signup/${userLogin.email}`);
+        //   } else{
+        //     window.alert("Cannot register because there is duplicated " + 
+        //     "email in the system or the password is too short, try setting" +
+        //     "a new email or set a longer password or signin with your last account");
+        //     inputEmail.current?.focus();
+        //   }
+        // });
 
     });
 

@@ -32,18 +32,18 @@ function Detail({email}: Props) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault();
 
-    apiUsers.add(user).then(
-      (appUserResponse) => {
-        if (appUserResponse) {
-          window.alert("Perfect, you are there");
-          history.push(`/dashboard/${appUserResponse.id}`);
-          return;
-        }
-        else {
-          window.alert("Something went wrong, try again");
-        }
-      }
-    )
+    // apiUsers.add(user).then(
+    //   (appUserResponse) => {
+    //     if (appUserResponse) {
+    //       window.alert("Perfect, you are there");
+    //       history.push(`/dashboard/${appUserResponse.id}`);
+    //       return;
+    //     }
+    //     else {
+    //       window.alert("Something went wrong, try again");
+    //     }
+    //   }
+    // )
   }
 
   function changeValueUserLogin(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>){
