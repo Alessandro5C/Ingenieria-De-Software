@@ -58,7 +58,7 @@ const AppBar = styled(MuiAppBar,{
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
         ({theme, open}) =>({
-            '& .MuiDrawer-papper':{
+            '& .MuiDrawer-paper':{
                 position: 'relative',
                 whiteSpace: 'nowrap',
                 width: drawerWidth,
@@ -67,7 +67,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
                     duration: theme.transitions.duration.enteringScreen,
                 }),
                 boxSizing: 'border-box',
-                ...(!open && {
+                ...(! open && {
                     overflowX: 'hidden',
                     transition: theme.transitions.create('width', {
                       easing: theme.transitions.easing.sharp,
@@ -92,6 +92,7 @@ export default function Dashboard({ children }: Props) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
       setOpen(!open);
+      console.log(open);
   };  
 
   React.useEffect(() => {
@@ -100,6 +101,7 @@ export default function Dashboard({ children }: Props) {
           window.alert('Need to login before using this app');
           history.push('/');
       }
+
   }, []);  
 
   function handleLogout(e: React.MouseEvent<HTMLButtonElement>) {
@@ -154,7 +156,6 @@ export default function Dashboard({ children }: Props) {
       <List component="nav">
         {mainListItems}
         <Divider sx={{my:1}}/>
-        asd
         {secondaryListItems} 
       </List>
     </Drawer>

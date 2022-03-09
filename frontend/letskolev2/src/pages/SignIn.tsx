@@ -10,19 +10,16 @@ import { Avatar,
   ThemeProvider, 
   Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import React, { MouseEvent, useContext, useRef, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useRef, useState } from 'react';
 import { Copyright } from '@mui/icons-material';
-import { LoginContext } from '../context/context';
-import { addUserLogin } from '../context/reducer';
-import { ApplicationUserLogin } from '../models/aplication-user-login';
 import authService from '../api/api.authservice';
 import { useHistory } from "react-router-dom";
-import apiUsers from '../api/api.user';
 import { useTranslation } from 'react-i18next';
 import { namespaces } from '../i18next/i18n.constants';
-import request  from '../api/api';
+import { SignIn } from '../models/signin';
+import { SignInResponse } from '../models/signin-response';
 
-const initApplicationUserLogin : ApplicationUserLogin = {
+const initSignIn : SignIn = {
   email: '',
   password: ''
 }
@@ -33,11 +30,11 @@ interface Props {
 
 export default function SingIn(props: Props) {
   const history = useHistory();
-  const [ userLogin, setUserLogin ] = useState<ApplicationUserLogin>(initApplicationUserLogin);
+  const [ signin, setSignIn ] = useState<SignIn>(initSignIn);
   const inputEmail = useRef<HTMLInputElement>(null);
   const { t } = useTranslation(namespaces.pages.signin);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const token = window.localStorage.getItem('token');
     
     if(token){
@@ -45,38 +42,41 @@ export default function SingIn(props: Props) {
     } 
   }, []);
 
-  function changeValueUserLogin(
+  function changeValueSignIn(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ){
     const { value, name } = event.target;
-    setUserLogin({...userLogin, [name]: value});
+    setSignIn({...signin, [name]: value});
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
   
-    if(!userLogin.email.includes('@')){
+    if(!signin.email.includes('@')){
       window.alert("Email must have '@'");
       return;
     }
 
-    await authService.login(userLogin).then(
-      (appUserResponse) => {
-        if (appUserResponse){
+    await authService.login(signin).then(
+      (signinresponse) => {
+        if (signinresponse && isSignInResponse(signinresponse)){
           // Reviso su información
-          inputEmail.current?.focus();
-          if (appUserResponse.token){
-            window.localStorage.setItem('token', appUserResponse.token);
+          if (signinresponse.token){
+            window.localStorage.setItem('token', signinresponse.token);
             history.push('/dashboard');
           } else{
             window.alert('User not registered'); // This because token empty
           }
         }
         else {
-          window.alert('Unexpected error ocurred');
           inputEmail.current?.focus();
         }
     });
+  }
+
+  // Custom Type Guards
+  function isSignInResponse(object: any): object is SignInResponse {
+    return 'token' in object; 
   }
 
   return (
@@ -85,7 +85,6 @@ export default function SingIn(props: Props) {
     <button onClick={() => props.changeLanguage("es")}>Español</button>
       
     <Container component="main" maxWidth="xs">
-      <form onSubmit={handleSubmit}>
       <Box
         sx={{
             marginTop: 8,
@@ -99,7 +98,7 @@ export default function SingIn(props: Props) {
           <Typography component="h2" variant="h4">
             {t('signin')}
           </Typography>
-          <Box sx={{ mt:1 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt:1 }}>
             <TextField 
             margin="normal"
             required 
@@ -107,8 +106,8 @@ export default function SingIn(props: Props) {
             label={t('email')}
             name="email"
             autoComplete="email" 
-            value={userLogin.email}
-            onChange={(event) => changeValueUserLogin(event)}
+            value={signin.email}
+            onChange={(event) => changeValueSignIn(event)}
             autoFocus
             inputRef={inputEmail}
             />
@@ -120,8 +119,8 @@ export default function SingIn(props: Props) {
             name="password"
             type="password"
             autoComplete="current-password" 
-            value={userLogin.password}
-            onChange={(event) => changeValueUserLogin(event)}
+            value={signin.password}
+            onChange={(event) => changeValueSignIn(event)}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary"/>}
@@ -137,7 +136,7 @@ export default function SingIn(props: Props) {
             <Grid container>
               <Grid item xs>
                 {/* <Link href="#" variant="body2">
-                  {t("forgotPassword")}
+                  {t("forgotpassword")}
                 </Link> */}
               </Grid>
               <Grid item>
@@ -148,8 +147,7 @@ export default function SingIn(props: Props) {
             </Grid>
           </Box>
       </Box>
-      </form>
-        <Copyright sx={{ mt:8, mb:4}}/>
+      <Copyright sx={{ mt:8, mb:4}}/>
     </Container>
     </React.Fragment>
   );

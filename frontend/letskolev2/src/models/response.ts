@@ -1,7 +1,8 @@
-import { ApplicationUserResponse } from "./aplication-user-response";
+import { SignInResponse } from "./signin-response";
+import { User } from "./user";
 
 export interface ResponseL {
-    data: ApplicationUserResponse | null,
+    data?:  SignInResponse | User | null,
     status: string,
     code: number,
     message?: string,

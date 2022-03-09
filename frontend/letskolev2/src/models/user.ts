@@ -1,9 +1,9 @@
 export interface User {
     id: number,
-    name: string,
+    displayedName: string,
     student: boolean,
-    numTelf: string,
+    phoneNumber: string | null,
     email: string,
     birthday: Date,
-    school: string,
+    school: string | null,
 }

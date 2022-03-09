@@ -1,0 +1,11 @@
+{
+  "signup": "Registrar",
+  "name": "Nombre",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "register": "Registrar",
+  "signin": "Iniciar sesión",
+  "iam": "Soy ",
+  "student": "Estudiante",
+  "teacher": "Profesor"
+}

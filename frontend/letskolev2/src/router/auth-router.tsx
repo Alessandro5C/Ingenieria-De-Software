@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp/SignUp';
+import SignUp from '../pages/SignUp';
 
 interface Props {
   changeLanguage: (language: string) => void
@@ -11,8 +11,9 @@ interface Props {
 function AuthRouter(props: Props) {
   return (
       <React.Fragment>
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/signup/:email" component={SignUp} />
+          <Route exact path="/signup">
+            <SignUp changeLanguage={props.changeLanguage} />
+          </Route>
           <Route exact path="/dashboard">
             <Dashboard changeLanguage={props.changeLanguage}/>
           </Route> 
