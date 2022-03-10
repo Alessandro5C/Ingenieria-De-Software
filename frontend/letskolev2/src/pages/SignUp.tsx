@@ -22,10 +22,15 @@ const initSignUp : SignUp = {
   displayedName: '',
   email: '',
   password: '',
-  role: ''
+  role: 'student'
 }
 
-export default function SingUp(props: Props) { 
+// Custom Type Guards
+export function isUser(object: any): object is User {
+  return 'school' in object; 
+}
+
+export function SignUpPage(props: Props) { 
   const history = useHistory();
   const [signup, setSignUp] = useState(initSignUp);
   const inputEmail = useRef<HTMLInputElement>(null);
@@ -52,10 +57,6 @@ export default function SingUp(props: Props) {
     });
   }
 
-  // Custom Type Guards
-  function isUser(object: any): object is User {
-    return 'displayedName' in object; 
-  }
   
 
   function changeValueSignUp (event: React.ChangeEvent<HTMLInputElement>) {

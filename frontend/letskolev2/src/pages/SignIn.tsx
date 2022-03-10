@@ -18,6 +18,8 @@ import { useTranslation } from 'react-i18next';
 import { namespaces } from '../i18next/i18n.constants';
 import { SignIn } from '../models/signin';
 import { SignInResponse } from '../models/signin-response';
+import { setHeaderToken } from '../api/api';
+import { isUser } from './SignUp';
 
 const initSignIn : SignIn = {
   email: '',
@@ -28,19 +30,11 @@ interface Props {
   changeLanguage: (language: string) => void
 }
 
-export default function SingIn(props: Props) {
+export default function SignInPage(props: Props) {
   const history = useHistory();
   const [ signin, setSignIn ] = useState<SignIn>(initSignIn);
   const inputEmail = useRef<HTMLInputElement>(null);
   const { t } = useTranslation(namespaces.pages.signin);
-
-  useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    
-    if(token){
-      history.push('/dashboard');
-    } 
-  }, []);
 
   function changeValueSignIn(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -63,7 +57,8 @@ export default function SingIn(props: Props) {
           // Reviso su información
           if (signinresponse.token){
             window.localStorage.setItem('token', signinresponse.token);
-            history.push('/dashboard');
+            history.push(`/dashboard/${signinresponse.id}`);
+            setHeaderToken();
           } else{
             window.alert('User not registered'); // This because token empty
           }

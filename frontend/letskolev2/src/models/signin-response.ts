@@ -1,5 +1,5 @@
 export interface SignInResponse {
-    userId: number;
-    email: string;
-    token: string;
+    id: string,
+    token: string,
+    valid: boolean,
 }

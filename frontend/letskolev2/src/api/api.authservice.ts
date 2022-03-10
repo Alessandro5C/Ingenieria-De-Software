@@ -1,6 +1,6 @@
 import { ResponseL } from "../models/response";
 import { User } from "../models/user";
-import request from './api';
+import { request } from './api';
 import { SignIn } from "../models/signin";
 import { SignUp } from "../models/signup";
 
@@ -17,7 +17,12 @@ const authService = {
             }
         })
         .catch(err => {
-            window.alert("An unexpected error ocurred");
+            if(err.response){
+                window.alert(err.response.data);
+            }
+            else { 
+                window.alert("An unexpected error ocurred");
+            }
             return null;
         }),
 
@@ -33,8 +38,12 @@ const authService = {
             }
         })
         .catch(err => {
-            console.log(err);
-            window.alert("An unexpected error ocurred");
+            if(err.response){
+                console.log(err.response.data);
+            }
+            else { 
+                window.alert("An unexpected error ocurred");
+            }
             return null;
         }),
     // newUser: async (appUserData: User) => await request.post<User>("authenticate/NewUser", appUserData),

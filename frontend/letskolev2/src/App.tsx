@@ -7,7 +7,7 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import AuthRouter from './router/auth-router';
 import { useTranslation } from 'react-i18next';
 import { namespaces } from './i18next/i18n.constants';
-import Dashboard from './pages/Dashboard/Dashboard';
+
 const theme = createTheme({
   palette: {
     primary: {
