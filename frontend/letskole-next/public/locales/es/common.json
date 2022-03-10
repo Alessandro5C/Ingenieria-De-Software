@@ -1,0 +1,16 @@
+{
+  "txt-name": "Nombre Completo",
+  "txt-email": "Correo Electrónico",
+  "txt-password": "Contraseña",
+  "txt-language": "Idioma",
+  "txt-school": "Colegio",
+  "txt-birthday": "Fecha de Nacimiento",
+  "txt-phone": "Número de Celular",
+  "txt-role": "Rol",
+  "txt-roleStudent": "Estudiante",
+  "txt-roleTeacher": "Profesor",
+  "ui-ok": "Aceptar",
+  "ui-next": "Siguiente",
+  "ui-previous": "Anterior",
+  "ui-loading": "Cargando"
+}

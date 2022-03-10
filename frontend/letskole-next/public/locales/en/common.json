@@ -1,0 +1,16 @@
+{
+  "txt-name": "Full Name",
+  "txt-email": "Email Address",
+  "txt-password": "Password",
+  "txt-language": "Language",
+  "txt-school": "School",
+  "txt-birthday": "Birthday",
+  "txt-phone": "Phone Number",
+  "txt-role": "Role",
+  "txt-roleStudent": "Student",
+  "txt-roleTeacher": "Teacher",
+  "ui-ok": "Ok",
+  "ui-next": "Next",
+  "ui-previous": "Previous",
+  "ui-loading": "Loading"
+}

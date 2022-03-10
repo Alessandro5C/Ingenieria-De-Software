@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "baseUrl": "./",
+    "paths": {
+      "@/api/*": ["src/lib/api/*"],
+      "@/components/*": ["src/lib/components/*"],
+      "@/contexts/*": ["src/lib/contexts/*"],
+      "@/models/*": ["src/lib/models/*"],
+      "@/styles/*": ["styles/*"]
+    },
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
