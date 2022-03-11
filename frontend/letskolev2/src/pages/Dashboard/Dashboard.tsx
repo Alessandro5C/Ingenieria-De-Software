@@ -4,15 +4,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import { useHistory } from "react-router-dom";
+import { Route, useHistory, useRouteMatch } from "react-router-dom";
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 import MainContent from './MainContent';
 import { useParams } from "react-router-dom";
 import { User } from '../../models/user';
-import { isUser } from '../SignUp';
+import { isUser } from '../SignUpPage';
 import apiUsers from '../../api/api.user';
 import { setHeaderToken } from '../../api/api';
+import { Switch } from 'react-router-dom';
+import UserRouter from '../../router/user-router';
+import WelcomePage1  from '../WelcomePage';
+import UserPage from '../UserPage';
+import UserContext from '../../context/usercontext';
 
 
 function copyright(props:any) {
@@ -30,7 +35,7 @@ function copyright(props:any) {
 export const drawerWidth: number = 240;
 
 interface Props {
-    changeLanguage: (language: string) => void;
+    changeLanguage?: (language: string) => void;
     children?: React.ReactNode;
 }
 
@@ -44,16 +49,19 @@ export const InitUser = {
 }
 
 export function Dashboard({ children }: Props) {
+  const ctx = React.useContext(UserContext);
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const { id } = useParams<{ id: string}>();
   const [user, setUser] = React.useState<User>(InitUser);
+  let match = useRouteMatch();
 
   const toggleDrawer = () => {
       setOpen(!open);
       console.log(open);
   };  
   React.useEffect(() => {
+
       const token = window.localStorage.getItem('token');
       if(token == null) {
           window.alert('Need to login before using this app');
@@ -77,16 +85,28 @@ export function Dashboard({ children }: Props) {
   
   const mdTheme = createTheme();
 
-  return(
-  <ThemeProvider theme={mdTheme}>
-  <CssBaseline />
-  <Box sx={{display: 'flex'}}>
-    <NavBar open={open} toggleDrawer={toggleDrawer}/>
-    <SideBar open={open} toggleDrawer={toggleDrawer}/>
-    <MainContent children={children} />
+  if(ctx.logged) {
+    return(
     
-  </Box>
-  </ThemeProvider>
-  )
+      <ThemeProvider theme={mdTheme}>
+      <CssBaseline />
+      <Box sx={{display: 'flex'}}>
+    
+        <NavBar open={open} toggleDrawer={toggleDrawer}/>
+        <SideBar open={open} toggleDrawer={toggleDrawer}/>
+        <MainContent children={children} />
+      
+      </Box>
+      </ThemeProvider>
+    )
+  }
+  else {
+    return (
+      <div>
+        {children}
+      </div>
+    );
+  }
+
 }
 

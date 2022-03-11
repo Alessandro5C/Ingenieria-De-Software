@@ -1,12 +1,15 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Dashboard  } from '../pages/Dashboard/Dashboard';
-import SignInPage from '../pages/SignIn';
-import { SignUpPage } from '../pages/SignUp';
-import { Welcome } from '../pages/Welcome';
+import SignInPage from '../pages/SignInPage';
+import { SignUpPage } from '../pages/SignUpPage';
+import UserRouter from './user-router';
+import WelcomePage1  from '../pages/WelcomePage';
+import UserPage from '../pages/UserPage';
+
 
 interface Props {
-  changeLanguage: (language: string) => void
+  changeLanguage?: (language: string) => void
 }
 
 function AuthRouter(props: Props) {
@@ -18,11 +21,7 @@ function AuthRouter(props: Props) {
           <Route exact path="/dashboard">
             <SignInPage changeLanguage={props.changeLanguage} />
           </Route>
-          <Route exact path="/dashboard/:id">
-            <Dashboard changeLanguage={props.changeLanguage}>
-              <Welcome />
-            </Dashboard>
-          </Route> 
+          <Route exact path="/dashboard/:id" component={WelcomePage1} /> 
           <Route exact path="/">
             <SignInPage changeLanguage={props.changeLanguage} />
           </Route>

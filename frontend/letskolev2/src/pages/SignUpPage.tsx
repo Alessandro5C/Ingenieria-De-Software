@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 
 
 interface Props {
-  changeLanguage: (language: string) => void
+  changeLanguage?: (language: string) => void
 }
 
 const initSignUp : SignUp = {
@@ -70,8 +70,8 @@ export function SignUpPage(props: Props) {
 
   return (
     <Container component="main" maxWidth="xs" >
-      <button onClick={() => props.changeLanguage("en")}>English</button>
-      <button onClick={() => props.changeLanguage("es")}>Español</button>
+      {/* <button onClick={() => props.changeLanguage("en")}>English</button>
+      <button onClick={() => props.changeLanguage("es")}>Español</button> */}
       <Box
         sx = {{
           marginTop: 8,

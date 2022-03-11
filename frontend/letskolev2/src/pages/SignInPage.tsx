@@ -19,7 +19,8 @@ import { namespaces } from '../i18next/i18n.constants';
 import { SignIn } from '../models/signin';
 import { SignInResponse } from '../models/signin-response';
 import { setHeaderToken } from '../api/api';
-import { isUser } from './SignUp';
+import { isUser } from './SignUpPage';
+import UserContext from '../context/usercontext';
 
 const initSignIn : SignIn = {
   email: '',
@@ -27,7 +28,7 @@ const initSignIn : SignIn = {
 }
 
 interface Props {
-  changeLanguage: (language: string) => void
+  changeLanguage?: (language: string) => void
 }
 
 export default function SignInPage(props: Props) {
@@ -35,6 +36,7 @@ export default function SignInPage(props: Props) {
   const [ signin, setSignIn ] = useState<SignIn>(initSignIn);
   const inputEmail = useRef<HTMLInputElement>(null);
   const { t } = useTranslation(namespaces.pages.signin);
+  const ctx = React.useContext(UserContext);
 
   function changeValueSignIn(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -59,6 +61,7 @@ export default function SignInPage(props: Props) {
             window.localStorage.setItem('token', signinresponse.token);
             history.push(`/dashboard/${signinresponse.id}`);
             setHeaderToken();
+            ctx.setlogged.TRUE();
           } else{
             window.alert('User not registered'); // This because token empty
           }
@@ -76,8 +79,8 @@ export default function SignInPage(props: Props) {
 
   return (
     <React.Fragment>
-    <button onClick={() => props.changeLanguage("en")}>English</button>
-    <button onClick={() => props.changeLanguage("es")}>Español</button>
+    {/* <button onClick={() => props.changeLanguage("en")}>English</button>
+    <button onClick={() => props.changeLanguage("es")}>Español</button> */}
       
     <Container component="main" maxWidth="xs">
       <Box

@@ -1,12 +1,14 @@
 import React, { useReducer } from 'react';
 import logo from './logo.svg';
-import SignIn from './pages/SignIn';
+import SignIn from './pages/SignInPage';
 import './App.css';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import AuthRouter from './router/auth-router';
 import { useTranslation } from 'react-i18next';
 import { namespaces } from './i18next/i18n.constants';
+import { Dashboard } from './pages/Dashboard/Dashboard';
+import UserProvider from './context/userprovider';
 
 const theme = createTheme({
   palette: {
@@ -32,7 +34,11 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Switch>
-          <AuthRouter changeLanguage={changeLanguage}/>
+          <UserProvider>
+            <Dashboard changeLanguage={changeLanguage}>
+              <AuthRouter/>
+            </Dashboard>
+          </UserProvider>
         </Switch>
       </BrowserRouter>
       </ThemeProvider>
