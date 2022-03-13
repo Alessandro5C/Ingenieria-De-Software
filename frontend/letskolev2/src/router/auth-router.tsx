@@ -6,6 +6,7 @@ import { SignUpPage } from '../pages/SignUpPage';
 import UserRouter from './user-router';
 import WelcomePage1  from '../pages/WelcomePage';
 import UserPage from '../pages/UserPage';
+import WelcomePage from '../pages/WelcomePage';
 
 
 interface Props {
@@ -19,9 +20,8 @@ function AuthRouter(props: Props) {
             <SignUpPage changeLanguage={props.changeLanguage} />
           </Route>
           <Route exact path="/dashboard">
-            <SignInPage changeLanguage={props.changeLanguage} />
+            <WelcomePage />
           </Route>
-          <Route exact path="/dashboard/:id" component={WelcomePage1} /> 
           <Route exact path="/">
             <SignInPage changeLanguage={props.changeLanguage} />
           </Route>

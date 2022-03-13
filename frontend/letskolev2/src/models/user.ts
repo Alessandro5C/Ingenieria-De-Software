@@ -1,8 +1,8 @@
 export interface User {
-    id: string,
+    id?: string,
     displayedName: string,
-    email: string,
+    email?: string,
     phoneNumber: string | null,
-    birthday: Date,
+    birthday: Date | null,
     school: string | null,
 }

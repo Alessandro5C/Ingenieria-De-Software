@@ -21,4 +21,7 @@ export const request = {
   postwithheader: async <T>(url: string, body: {}) => await axios.post<T>(url, body, config),
   get: async <T>(url: string) => await axios.get<T>(url),
   getwithheader: async <T>(url: string) => await axios.get<T>(url, config),
+  putwithheader: async <T>(url: string, body: {}) => await axios.put<T>(url, body, config),
+  deletwithheader: async <T>(url: string) => await axios.delete<T>(url, config),
+
 }

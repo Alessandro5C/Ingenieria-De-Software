@@ -16,7 +16,6 @@ const apiUsers = {
         } 
     })
     .catch(err => {
-        console.log(err.response);
         if(err.response.data){
             window.alert(err.response.data);
         }
@@ -26,6 +25,25 @@ const apiUsers = {
         return null;
     }),
 
+    put: async (user: User) => await request.putwithheader<ResponseL>('User/Put', user)
+    .then( (response) => {
+        if(response.data.data) {
+            return response.data.data;
+        }
+        else if(response.data.message) {
+            window.alert(response.data.message);
+            return null;
+        }
+    })
+    .catch(err => {
+        if(err.response.data){
+            window.alert(err.response.data);
+        }
+        else { 
+            window.alert("Invalid token, need to login before using this app");
+        }
+        return null;
+    }),
     // detail: async (id: string) => await request.get<User>(`User/GetItemById?id=${id}`),
     // // Qts-ignore, student established as boolean
     // // data.student = (data.student == "true");

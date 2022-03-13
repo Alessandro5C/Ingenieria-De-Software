@@ -18,14 +18,13 @@ function UserProvider({ children }: Props) {
     FALSE: () => {
       setLogged(false);
     },
-    
   };
 
-  return (
-    <UserContext.Provider value={{ id: '', logged: logged, setlogged: setLoggedTo}}>
-      {children}
-    </UserContext.Provider>
-   );
+  // return (
+  //   <UserContext.Provider value={{ id: '', logged: logged, setlogged: setLoggedTo}}>
+  //     {children}
+  //   </UserContext.Provider>
+  //  );
 }
 
 export default UserProvider;

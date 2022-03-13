@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import { Route, useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 import MainContent from './MainContent';
@@ -13,11 +13,7 @@ import { User } from '../../models/user';
 import { isUser } from '../SignUpPage';
 import apiUsers from '../../api/api.user';
 import { setHeaderToken } from '../../api/api';
-import { Switch } from 'react-router-dom';
-import UserRouter from '../../router/user-router';
-import WelcomePage1  from '../WelcomePage';
-import UserPage from '../UserPage';
-import UserContext from '../../context/usercontext';
+import UserContext from '../../context/User/usercontext';
 
 
 function copyright(props:any) {
@@ -49,58 +45,57 @@ export const InitUser = {
 }
 
 export function Dashboard({ children }: Props) {
-  const ctx = React.useContext(UserContext);
+  // const ctx = React.useContext(UserContext);
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
-  const { id } = useParams<{ id: string}>();
-  const [user, setUser] = React.useState<User>(InitUser);
-  let match = useRouteMatch();
+  const { state } = React.useContext(UserContext);
+
+  // const { id } = useParams<{ id: string}>();
+  // const [user, setUser] = React.useState<User>(InitUser);
+  // let match = useRouteMatch();
+
 
   const toggleDrawer = () => {
       setOpen(!open);
       console.log(open);
   };  
-  React.useEffect(() => {
-
-      const token = window.localStorage.getItem('token');
-      if(token == null) {
-          window.alert('Need to login before using this app');
-          history.push('/');
-      }else {
-        // Todo verify the token
-        setHeaderToken(); 
-        apiUsers.get(id).then(
-          (appUserResponse) => {
-            if(appUserResponse && isUser(appUserResponse)){
-              setUser(appUserResponse);
-              console.log(appUserResponse);
-            } else{
-              window.localStorage.clear();
-              history.push('/');
-            }
-          }
-        )
-      }
-  }, []);  
+  // React.useEffect(() => {
+  //     // Todo verify the token
+  //     const token = window.localStorage.getItem('token');
   
-  const mdTheme = createTheme();
+  //     if(token == null) {
+  //         window.alert('Need to login before using this app');
+  //         history.push('/');
+  //     }else {
+  //       apiUsers.get(state.id).then( // call api
 
-  if(ctx.logged) {
-    return(
-    
-      <ThemeProvider theme={mdTheme}>
+  //         (appUserResponse) => {
+  //           if(appUserResponse && isUser(appUserResponse)){ // check if user
+  //             console.log('User logged correctly');
+
+  //           } else{ // token incorrect
+  //             window.localStorage.clear();
+  //             history.push('/');
+  //           }
+  //         }
+  //       )
+  //     }
+  // }, []);  
+  
+  // const mdTheme = createTheme();
+
+  if(state.logged) { // if it is logged
+    return(<>
       <CssBaseline />
       <Box sx={{display: 'flex'}}>
-    
         <NavBar open={open} toggleDrawer={toggleDrawer}/>
         <SideBar open={open} toggleDrawer={toggleDrawer}/>
         <MainContent children={children} />
-      
       </Box>
-      </ThemeProvider>
+      </>
     )
   }
-  else {
+  else { // otherwise
     return (
       <div>
         {children}

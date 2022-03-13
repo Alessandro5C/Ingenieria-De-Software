@@ -5,7 +5,9 @@ import UserPage from "../pages/UserPage";
 export default function UserRouter() {
     return (
         <React.Fragment>
-            <Route path="/dashboard/user:id" component={UserPage} />
+            <Route exact path="/dashboard/user/details">
+                <UserPage />
+            </Route>
         </React.Fragment>
     );
 }

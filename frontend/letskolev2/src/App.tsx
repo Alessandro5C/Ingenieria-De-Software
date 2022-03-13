@@ -8,7 +8,11 @@ import AuthRouter from './router/auth-router';
 import { useTranslation } from 'react-i18next';
 import { namespaces } from './i18next/i18n.constants';
 import { Dashboard } from './pages/Dashboard/Dashboard';
-import UserProvider from './context/userprovider';
+import UserProvider from './context/User/userprovider';
+import { userReducer } from './context/User/userreducer';
+import { initialUserState } from './context/User/userstate';
+import UserContext from './context/User/usercontext';
+import UserRouter from './router/user-router';
 
 const theme = createTheme({
   palette: {
@@ -28,17 +32,19 @@ function App() {
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   }
+  const [state, dispatch] = useReducer(userReducer, initialUserState);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Switch>
-          <UserProvider>
+          <UserContext.Provider value={{state, dispatch}}>
             <Dashboard changeLanguage={changeLanguage}>
-              <AuthRouter/>
+              <UserRouter />
+              <AuthRouter />
             </Dashboard>
-          </UserProvider>
+          </UserContext.Provider>
         </Switch>
       </BrowserRouter>
       </ThemeProvider>

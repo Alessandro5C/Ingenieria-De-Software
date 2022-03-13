@@ -20,7 +20,8 @@ import { SignIn } from '../models/signin';
 import { SignInResponse } from '../models/signin-response';
 import { setHeaderToken } from '../api/api';
 import { isUser } from './SignUpPage';
-import UserContext from '../context/usercontext';
+import UserContext from '../context/User/usercontext';
+import { setId, setLogged } from '../context/User/userreducer';
 
 const initSignIn : SignIn = {
   email: '',
@@ -36,7 +37,7 @@ export default function SignInPage(props: Props) {
   const [ signin, setSignIn ] = useState<SignIn>(initSignIn);
   const inputEmail = useRef<HTMLInputElement>(null);
   const { t } = useTranslation(namespaces.pages.signin);
-  const ctx = React.useContext(UserContext);
+  const { dispatch } = React.useContext(UserContext);
 
   function changeValueSignIn(
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -53,15 +54,22 @@ export default function SignInPage(props: Props) {
       return;
     }
 
+    // call api login
     await authService.login(signin).then(
       (signinresponse) => {
+        // check if it is signinresponse
         if (signinresponse && isSignInResponse(signinresponse)){
-          // Reviso su información
-          if (signinresponse.token){
-            window.localStorage.setItem('token', signinresponse.token);
-            history.push(`/dashboard/${signinresponse.id}`);
-            setHeaderToken();
-            ctx.setlogged.TRUE();
+          
+          // check if it is valid
+          if (signinresponse.valid){
+            window.localStorage.setItem('token', signinresponse.token); // save token on localstorage
+            setHeaderToken(); // set header for axios
+            dispatch(setId(signinresponse.id)); // set id (context)
+            dispatch(setLogged(true)); // set logged (context)
+
+            history.push(`/dashboard`);
+            
+            // ctx.setlogged.TRUE();
           } else{
             window.alert('User not registered'); // This because token empty
           }
