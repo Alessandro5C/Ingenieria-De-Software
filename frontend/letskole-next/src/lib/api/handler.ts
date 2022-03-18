@@ -1,49 +1,49 @@
-import responseBody from "../models/ResponseBody";
+import ResponseBody from "../responses/ResponseBody";
 
 
 const baseURL = "https://localhost:5001/api/v2/";
 
-// const responseBody = <T>(response: AxiosResponse<T>) => response.data;
+const handleError = async (res: Response) => {
+  let defaultError: ResponseBody<null> =
+    { code: res.status, status: "error", message: res.statusText, data: null };
+  if (res.status === 400 || res.status === 404)
+    defaultError.message = await res.json().catch(() => defaultError.message);
+  throw new Error(JSON.stringify(defaultError));
+};
+
 const apiHandler = {
-  get: <TData>(url:string, headers:HeadersInit) =>
-    fetch(baseURL+url, {method: "GET", headers:headers})
-      .then(response => response.json())
-      .then(data => console.log(data.data)),
-  post: <TData>(url:string, headers:HeadersInit, data:TData) =>
-    fetch(baseURL+url, {method: "POST", headers:headers, body: JSON.stringify(data)})
-      .then(response => response.json())
-      .then(data => console.log(data.data))
-}
-
-// fetch(
-//   "https://localhost:5001/api/v2/Game/GetAll",
-//   {
-//     method: "GET",
-//     headers: {
-//       "Content-type": "application/json",
-//       "Authorization": `Bearer ${token}`
-//     }
-//   })
-//   .then(response => response.json())
-//   .then(data => console.log(data.data))
-//   .catch(data => console.log(data));
-
-
-// import axios, { AxiosResponse } from "axios";
-//
-// axios.defaults.baseURL = "https://letskole.herokuapp.com/api/v1";
-// // axios.defaults.baseURL = "https://localhost:5001/api/v1/";
-//
-//
-// const responseBody = <T>(response: AxiosResponse<T>) => response.data;
-//
-// const request = {
-//   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-//   post: <T>(url: string, body: {}) =>
-//     axios.post<T>(url, body).then(responseBody),
-//   put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-//   delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
-// };
-//
+  get: async <ReturnedData>(url: string, headers: HeadersInit)
+    : Promise<ResponseBody<ReturnedData>> => {
+    const response = await
+      fetch(baseURL + url, { method: "GET", headers: headers });
+    if (!response.ok)
+      await handleError(response);
+    return response.json();
+  },
+  post: async <TData, ReturnedData>(url: string, headers: HeadersInit, data: TData)
+    : Promise<ResponseBody<ReturnedData>> => {
+    const response = await
+      fetch(baseURL + url, { method: "POST", headers: headers, body: JSON.stringify(data) });
+    if (!response.ok)
+      await handleError(response);
+    return response.json();
+  },
+  put: async <TData>(url: string, headers: HeadersInit, data: TData)
+    : Promise<ResponseBody<null>> => {
+    const response = await
+      fetch(baseURL + url, { method: "PUT", headers: headers, body: JSON.stringify(data) });
+    if (!response.ok)
+      await handleError(response);
+    return response.json();
+  },
+  delete: async (url: string, headers: HeadersInit)
+    : Promise<ResponseBody<null>> => {
+    const response = await
+      fetch(baseURL + url, { method: "DELETE", headers: headers });
+    if (!response.ok)
+      await handleError(response);
+    return response.json();
+  }
+};
 
 export default apiHandler;

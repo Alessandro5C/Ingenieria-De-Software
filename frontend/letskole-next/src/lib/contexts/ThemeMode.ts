@@ -3,19 +3,13 @@ import * as React from "react";
 type ThemeModeType = "light" | "dark";
 
 interface ThemeModeProps {
-  mode: ThemeModeType,
-  setModeTo: {
-    Light: () => void,
-    Dark: () => void
-  }
+  mode: ThemeModeType;
+  setMode: (mode: ThemeModeType) => void;
 }
 
 const ThemeModeContext = React.createContext<ThemeModeProps>({
   mode: "light",
-  setModeTo: {
-    Light: () => {},
-    Dark: () => {}
-  }
+  setMode: (mode) => {}
 });
 
 export type { ThemeModeType, ThemeModeProps };

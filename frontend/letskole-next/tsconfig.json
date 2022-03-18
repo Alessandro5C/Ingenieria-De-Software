@@ -5,7 +5,7 @@
       "@/api/*": ["src/lib/api/*"],
       "@/components/*": ["src/lib/components/*"],
       "@/contexts/*": ["src/lib/contexts/*"],
-      "@/models/*": ["src/lib/models/*"],
+      "@/responses/*": ["src/lib/responses/*"],
       "@/styles/*": ["styles/*"]
     },
     "target": "es6",

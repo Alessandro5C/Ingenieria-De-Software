@@ -3,5 +3,6 @@
   "txt-rememberMe": "Recuérdame",
   "txt-forgotPassword": "¿Olvidaste tu contraseña?",
   "txt-noAccount": "¿No tienes cuenta?",
-  "btn-signIn": "Iniciar sesión"
+  "btn-signIn": "Iniciar sesión",
+  "txt-noValid": "Correo electrónico o Contraseña son incorrectos"
 }

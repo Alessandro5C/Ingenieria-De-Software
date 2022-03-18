@@ -1,32 +1,53 @@
-import AuthResponse from "@/models/Auth";
+import AuthResponse from "../responses/Auth";
+import UserResponse from "../responses/User";
 import apiHandler from "./handler";
 
-const baseURL = "User/"
-const apiUser = {
-  SignIn: (headers: HeadersInit, data: {}) =>
-    apiHandler.post(baseURL + "SignIn", headers, data),
-  // SignIn: (headers: HeadersInit, data: AuthResponse) =>
-  //   apiHandler.post(baseURL + "SignIn", headers, data),
+interface SignInData {
+  email: string,
+  password: string
 }
 
-// import request from "../api";
-// import {User} from "../../models/user";
-// import {ApplicationUserLogin} from "../../models/auth/application-user-login";
-// import {ApplicationUserResponse} from "../../models/auth/application-user-response";
-//
-// const authService = {
-//     register: (appUserData: ApplicationUserLogin) => request.post("authenticate/register", appUserData),
-//     newUser: (appUserData: User) => request.post<User>("authenticate/NewUser", appUserData),
-//     login: (appUserData: ApplicationUserLogin) =>
-//         request.post<ApplicationUserResponse>("authenticate/login", appUserData)
-//             .then( (appUserResponse) => {
-//                 console.log(appUserResponse);
-//                 if (appUserResponse.token) {
-//                     localStorage.setItem("appUserData", JSON.stringify(appUserResponse));
-//                 }
-//                 return appUserResponse;
-//             }),
-//     logout: () => localStorage.removeItem("appUserData"),
-// }
-//
+interface SignUpData {
+  displayedName: string,
+  email: string,
+  password: string,
+  role: string
+}
+
+const baseURL = "User/";
+const apiUser = {
+  SignIn: async (headers: HeadersInit, data: SignInData) => {
+    try {
+      return await apiHandler.post<SignInData, AuthResponse>(
+        baseURL + "SignIn", headers, data);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  },
+  SignUp: async (headers: HeadersInit, data: SignUpData) => {
+    try {
+      return await apiHandler.post<SignUpData, UserResponse>(
+        baseURL + "SignUp", headers, data);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  },
+  GetItemById: async (headers: HeadersInit, id: string) => {
+    try {
+      return await apiHandler.get<UserResponse>(
+        baseURL + `GetItemById?id=${id}`, headers);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  },
+  Put: async (headers: HeadersInit, data: UserResponse) => {
+    try {
+      return await apiHandler.put<UserResponse>(
+        baseURL + `Put`, headers, data);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  }
+};
+
 export default apiUser;

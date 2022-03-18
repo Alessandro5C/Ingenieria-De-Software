@@ -1,25 +1,18 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import MuiLink from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SignForm from "@/components/forms/SignForm";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { ChangeEvent } from "react";
+import apiUser from "@/api/user";
+import AuthHandlerContext from "@/contexts/AuthHandler";
+import CustomButtonSubmitForm from "@/components/custom/button/SubmitForm";
 
 const roles = [
   {
@@ -33,39 +26,48 @@ const roles = [
 ];
 
 export default function SignUp() {
-  const { locale, locales, defaultLocale } = useRouter();
+  const ctx = React.useContext(AuthHandlerContext);
   const { t } = useTranslation(["common", "sign-up"]);
+  const { push } = useRouter();
 
-  // const [role, setRole] = React.useState("Student");
-  //
-  // const handleSetRole = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-  //   setRole(event.target.value as string)
-  // }
+  // const [user, setUser] = React.useState<UserResponse | null>({});
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // setRole(role);
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      role: data.get("role")
-    });
+
+    try {
+      setLoading(true);
+      const formData = new FormData(event.currentTarget);
+      const data = await apiUser.SignUp(ctx.headers, {
+        displayedName: formData.get("name") as string,
+        email: formData.get("email") as string,
+        password: formData.get("password") as string,
+        role: formData.get("role") as string
+      });
+
+      if (data?.status === "success") {
+        return await push("/users/sign-in");
+      } else {
+        setError(true);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <SignForm>
-
       <Typography component="h1" variant="h5">
         {t("sign-up:ttl-signUp")}
       </Typography>
-
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
 
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
+              error={error}
               required
               id="name"
               name="name"
@@ -77,6 +79,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              error={error}
               required
               id="email"
               name="email"
@@ -87,6 +90,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              error={error}
               required
               id="password"
               name="password"
@@ -94,19 +98,20 @@ export default function SignUp() {
               fullWidth
               autoComplete="new-password"
               type="password"
+              helperText={error && (t("sign-in:txt-noValid"))}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
+              error={error}
               required
               id="role"
               name="role"
               label={t("common:txt-role")}
               defaultValue="Student"
-              // value={role}
-              // onChange={handleSetRole}
               fullWidth
               select
+              helperText={error && (t("sign-in:txt-noValid"))}
             >
               {roles.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -117,14 +122,13 @@ export default function SignUp() {
           </Grid>
         </Grid>
 
-        <Button
-          type="submit"
+        <CustomButtonSubmitForm
+          loading={loading}
           fullWidth
-          variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
           {t("sign-up:btn-signUp")}
-        </Button>
+        </CustomButtonSubmitForm>
 
         <Grid container justifyContent="flex-end">
           <Grid item>
@@ -135,7 +139,6 @@ export default function SignUp() {
             </Link>
           </Grid>
         </Grid>
-
       </Box>
     </SignForm>
   );

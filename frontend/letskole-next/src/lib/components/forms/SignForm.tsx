@@ -1,12 +1,8 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import CustomFooter from "../custom/Footer";
-
-// import Footer from "custom/Footer";
 
 interface Props {
   children?: React.ReactNode;
@@ -57,6 +53,5 @@ export default function SignForm({ children }: Props) {
       </Grid>
 
     </Grid>
-
   );
 }

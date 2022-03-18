@@ -1,7 +1,7 @@
 import * as React from "react";
-import Button, { ButtonProps } from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
-import { CircularProgress } from "@mui/material";
+import Button, { ButtonProps } from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface Props extends ButtonProps {
   children?: React.ReactNode;

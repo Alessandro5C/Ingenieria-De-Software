@@ -9,8 +9,24 @@
   "txt-role": "Role",
   "txt-roleStudent": "Student",
   "txt-roleTeacher": "Teacher",
+  "ui-edit": "Edit",
   "ui-ok": "Ok",
+  "ui-cancel": "Cancel",
   "ui-next": "Next",
   "ui-previous": "Previous",
-  "ui-loading": "Loading"
+  "ui-loading": "Loading",
+  "drawer": {
+    "ttl-nav": "Navigation",
+    "ttl-mode": "Mode",
+    "ttl-lang": "Language",
+    "btn-login": "Login",
+    "btn-logout": "Logout"
+  },
+  "pages": {
+    "txt-profile": "Profile",
+    "txt-activities": "Activities",
+    "txt-groups": "Groups",
+    "txt-games": "Games",
+    "txt-404": "Page Not Found"
+  }
 }

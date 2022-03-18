@@ -1,57 +1,36 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import CustomAppBar from "./AppBar";
-import CustomDrawer from "./Drawer/Drawer";
-import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import CustomDrawer from "./drawer/Drawer";
+import AuthHandlerContext from "@/contexts/AuthHandler";
 
 interface Props {
   children?: React.ReactNode;
 }
 
-const avatar = (
-  <div>
-    {/*<Avatar*/}
-    {/*  // alt="Remy Sharp"*/}
-    {/*  // src="/static/images/avatar/2.jpg"*/}
-    {/*  sx={{*/}
-    {/*    width: 35,*/}
-    {/*    height: 35,*/}
-    {/*    bgcolor: "secondary.main"*/}
-    {/*  }}*/}
-    {/*>*/}
-    R
-    {/*</Avatar>*/}
-  </div>
-);
-
-const name = "R";
-const withoutAuth = (<LockOutlinedIcon/>);
-
 function CustomDashboard({ children }: Props) {
-  const logged = false;
+  const ctx = React.useContext(AuthHandlerContext);
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+  const toggleOpen = () => { setOpen(!open); };
 
   return (
     <div>
       <CssBaseline/>
       <CustomAppBar
         openDrawer={open}
-        toggleDrawer={toggleDrawer}
-        avatarContent={logged ? name : null}
+        toggleDrawer={toggleOpen}
+        logged={ctx.content.valid}
       />
 
       <CustomDrawer
         open={open}
-        toggleDrawer={toggleDrawer}
-      >
-        {}
-      </CustomDrawer>
+        toggleOpen={toggleOpen}
+        logged={ctx.content.valid}
+      />
+
       {children}
+
     </div>
   );
 }

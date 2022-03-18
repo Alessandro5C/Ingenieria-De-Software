@@ -11,15 +11,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-
-const pages = ["Activities", "Groups", "Games"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 interface Props {
   openDrawer: boolean;
   toggleDrawer: () => void;
-  avatarContent: React.ReactNode;
+  logged: boolean;
 }
 
 const btnStyle = { mr: 1 };
@@ -50,52 +48,27 @@ function CustomAppBar(props: Props) {
         }}
       >
         {/*LOGO*/}
-        <Box
-          textAlign="center"
-          sx={{
-            flexGrow: 1
-          }}
-        >
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-          >
+        <Box textAlign="center" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" noWrap component="div">
             Let Skole Logo
           </Typography>
         </Box>
         {/*LOGO*/}
 
         {/*SPACE OR DASHBOARD*/}
-        <Box
-          sx={{
-            flexGrow: 14,
-            display: { xs: "none", md: "flex" }
-          }}
-        />
-        <Box
-          sx={{
-            flexGrow: 6,
-            display: { xs: "flex", md: "none" }
-          }}
-        />
+        <Box sx={{ flexGrow: 14, display: { xs: "none", md: "flex" } }}/>
+        <Box sx={{ flexGrow: 6, display: { xs: "flex", md: "none" } }}/>
         {/*SPACE OR DASHBOARD*/}
 
         {/*RIGHT*/}
-        <Box
-          textAlign="center"
-          sx={{
-            flexGrow: 1,
-            color: "secondary.main"
-          }}
-        >
+        <Box textAlign="center" sx={{ flexGrow: 1 }}>
           <Button
             // color="secondary"
             onClick={props.toggleDrawer}
             variant="outlined"
             sx={{
               width: 40,
-              height: 35,
+              height: 35
             }}
           >
             <Avatar
@@ -105,7 +78,7 @@ function CustomAppBar(props: Props) {
                 bgcolor: "primary.main"
               }}
             >
-              {props.avatarContent}
+              {props.logged ? null : <LockOutlinedIcon/>}
             </Avatar>
             {props.openDrawer ? btnLeftIcon : btnMenuIcon}
           </Button>

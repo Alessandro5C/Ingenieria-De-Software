@@ -22,23 +22,22 @@ function ThemeWrapper({ children }: Props) {
     setMode((x === "light" || x === "dark") ? x : defaultMode);
   }, []);
 
-  const setModeTo = React.useMemo(() =>
-    ({
-      Light: () => {
-        setMode("light");
-        localStorage.setItem(storageKey, "light");
-      },
-      Dark: () => {
-        setMode("dark");
-        localStorage.setItem(storageKey, "dark");
-      }
-    }), []
-  );
+  const setModeTo = React.useMemo(() => ({
+    Mode: (mode: ThemeModeType) => {
+      setMode(mode);
+      localStorage.setItem(storageKey, mode);
+    }
+  }), []);
 
   const theme = React.useMemo(() =>
     createTheme({
       palette: {
         mode: mode
+        // @ts-ignore
+        // neutral: {
+        //   main: "#64748B",
+        //   contrastText: "#fff"
+        // },
       }
     }), [mode]
   );
@@ -47,7 +46,7 @@ function ThemeWrapper({ children }: Props) {
     <ThemeModeContext.Provider
       value={{
         mode: mode,
-        setModeTo: setModeTo
+        setMode: setModeTo.Mode
       }}
     >
       <ThemeProvider theme={theme}>

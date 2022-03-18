@@ -4,34 +4,46 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Brightness3Icon from "@mui/icons-material/Brightness3";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import ThemeModeContext, { ThemeModeType } from "@/contexts/ThemeMode";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 
 function CustomButtonThemeMode() {
   const ctx = React.useContext(ThemeModeContext);
-  const [mode, setMode] = React.useState<ThemeModeType>(ctx.mode);
 
   function handleChange(
     event: React.MouseEvent<HTMLElement>,
     newMode: ThemeModeType
   ) {
     if (newMode !== null)
-      setMode(newMode);
+      ctx.setMode(newMode);
   }
 
   return (
     <ToggleButtonGroup
       exclusive
-      color="primary"
-      value={mode}
+      value={ctx.mode}
       onChange={handleChange}
+      color="primary"
+      fullWidth
+      sx={ (theme) => ({
+        "& .MuiToggleButtonGroup-grouped": {
+          borderColor: `${theme.palette.primary.main}80`,
+          "&.Mui-selected": {
+            borderColor: theme.palette.primary.main,
+          }
+        }
+      })}
     >
-      <ToggleButton onClick={ctx.setModeTo.Light} value="light">
-        <Brightness7Icon sx={{ mr: 1 }}/>{`Light`}
+      <ToggleButton value="light">
+        <LightModeOutlinedIcon/>
       </ToggleButton>
-      <ToggleButton onClick={ctx.setModeTo.Dark} value="dark">
-        <Brightness3Icon sx={{ mr: 1 }}/>{`Dark`}
+      <ToggleButton value="dark">
+        <DarkModeOutlinedIcon/>
       </ToggleButton>
     </ToggleButtonGroup>
-
   );
 }
 

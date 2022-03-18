@@ -9,8 +9,25 @@
   "txt-role": "Rol",
   "txt-roleStudent": "Estudiante",
   "txt-roleTeacher": "Profesor",
+  "ui-edit": "Editar",
   "ui-ok": "Aceptar",
+  "ui-cancel": "Cancelar",
   "ui-next": "Siguiente",
   "ui-previous": "Anterior",
-  "ui-loading": "Cargando"
+  "ui-loading": "Cargando",
+  "drawer": {
+    "ttl-nav": "Navegación",
+    "ttl-mode": "Modo",
+    "ttl-lang": "Idioma",
+    "btn-login": "Iniciar sesión",
+    "btn-logout": "Cerrar sesión"
+
+  },
+  "pages": {
+    "txt-profile": "Perfil",
+    "txt-activities": "Actividades",
+    "txt-groups": "Grupos",
+    "txt-games": "Juegos",
+    "txt-404": "No se puede encontrar esta página"
+  }
 }

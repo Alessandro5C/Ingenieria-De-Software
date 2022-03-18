@@ -1,22 +1,29 @@
 import * as React from "react";
-import AuthResponse from "@/models/Auth";
+import AuthResponse from "../responses/Auth";
+
+const defaultContent = { id: "", token: "", valid: false };
+const defaultHeader = { "Content-type": "application/json" };
 
 interface AuthHandlerType {
-  logged: boolean,
-  content: AuthResponse | null,
-  setContent: () => void,
-  headers: HeadersInit
+  remember: boolean;
+  content: AuthResponse;
+  headers: HeadersInit;
+  handle: {
+    login: (remember: boolean, content: AuthResponse) => void,
+    logout: () => void,
+  };
 }
 
-const defaultAuthHandler = {
-  logged: false,
-  content: null,
-  setContent: () => {},
-  headers: { "Content-type": "application/json" }
-};
+const AuthHandlerContext = React.createContext<AuthHandlerType>({
+  remember: false,
+  content: { id: "", token: "", valid: false },
+  headers: {},
+  handle: {
+    login: () => {},
+    logout: () => {}
+  }
+});
 
-const AuthHandlerContext = React.createContext<AuthHandlerType>(defaultAuthHandler);
-
-export { defaultAuthHandler };
+export { defaultContent, defaultHeader };
 export type { AuthHandlerType };
 export default AuthHandlerContext;
