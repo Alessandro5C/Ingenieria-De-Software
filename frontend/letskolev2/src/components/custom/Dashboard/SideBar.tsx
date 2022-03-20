@@ -5,7 +5,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import { mainListItems, secondaryListItems } from './listitems';
+import { mainListItems, secondaryListItems, visualizationOptions, languagesOptions } from './listitems';
 import { drawerWidth } from './Dashboard';
 
 
@@ -43,6 +43,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 
 export default function SideBar (props: Props) {
   return (
+    // Alessandro: Tu Custom Drawer es como el Sidebar
     <Drawer variant="permanent" open={props.open}>
       <Toolbar sx={{
         display: 'flex',
@@ -57,6 +58,10 @@ export default function SideBar (props: Props) {
       <Divider/>
       <List component="nav">
         {mainListItems}
+        <Divider sx={{my:1}}/>
+        {visualizationOptions}
+        <Divider sx={{my:1}}/>
+        {languagesOptions}
         <Divider sx={{my:1}}/>
         {secondaryListItems} 
       </List>

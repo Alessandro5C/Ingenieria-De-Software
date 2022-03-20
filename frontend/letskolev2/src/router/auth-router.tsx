@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Dashboard  } from '../pages/Dashboard/Dashboard';
+import { Dashboard  } from '../components/custom/Dashboard/Dashboard';
 import SignInPage from '../pages/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage';
 import UserRouter from './user-router';

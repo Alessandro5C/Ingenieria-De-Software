@@ -7,12 +7,14 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import AuthRouter from './router/auth-router';
 import { useTranslation } from 'react-i18next';
 import { namespaces } from './i18next/i18n.constants';
-import { Dashboard } from './pages/Dashboard/Dashboard';
+import { Dashboard } from './components/custom/Dashboard/Dashboard';
 import UserProvider from './context/User/userprovider';
 import { userReducer } from './context/User/userreducer';
 import { initialUserState } from './context/User/userstate';
 import UserContext from './context/User/usercontext';
 import UserRouter from './router/user-router';
+import UserCover from './components/UserCover';
+import ThemeCover from './components/ThemeCover';
 
 const theme = createTheme({
   palette: {
@@ -28,26 +30,34 @@ const theme = createTheme({
 });
 
 function App() {
-  const { i18n } = useTranslation(namespaces.pages.signin);
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-  }
-  const [state, dispatch] = useReducer(userReducer, initialUserState);
+  // const { i18n } = useTranslation(namespaces.pages.signin);
+  // const changeLanguage = (language: string) => {
+  //   i18n.changeLanguage(language);
+  // }
+
 
   return (
-    <ThemeProvider theme={theme}>
+    // Alessandro: Tu Layout es como el App
+    // <ThemeProvider theme={theme}>
+    <ThemeCover>
       <CssBaseline />
+
+      {/* Important for React-router-dom */}
       <BrowserRouter>
         <Switch>
-          <UserContext.Provider value={{state, dispatch}}>
-            <Dashboard changeLanguage={changeLanguage}>
+          {/* <UserContext.Provider value={{state, dispatch}}> */}
+          {/* <UserCover> */}
+            <Dashboard> {/* changeLanguage={changeLanguage} */}
               <UserRouter />
               <AuthRouter />
             </Dashboard>
-          </UserContext.Provider>
+          {/* </UserCover> */}
+          {/* </UserContext.Provider> */}
         </Switch>
       </BrowserRouter>
-      </ThemeProvider>
+
+    </ThemeCover>
+    // </ThemeProvider>
   );
 }
 

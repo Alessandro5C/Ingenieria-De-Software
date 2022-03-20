@@ -9,11 +9,11 @@ import NavBar from './NavBar';
 import SideBar from './SideBar';
 import MainContent from './MainContent';
 import { useParams } from "react-router-dom";
-import { User } from '../../models/user';
-import { isUser } from '../SignUpPage';
-import apiUsers from '../../api/api.user';
-import { setHeaderToken } from '../../api/api';
-import UserContext from '../../context/User/usercontext';
+import { User } from '../../../models/user';
+import { isUser } from '../../../pages/SignUpPage';
+import apiUsers from '../../../api/api.user';
+import { setHeaderToken } from '../../../api/api';
+import UserContext from '../../../context/User/usercontext';
 
 
 function copyright(props:any) {
@@ -28,10 +28,10 @@ function copyright(props:any) {
         </Typography>
     );
 }
+
 export const drawerWidth: number = 240;
 
 interface Props {
-    changeLanguage?: (language: string) => void;
     children?: React.ReactNode;
 }
 
@@ -45,7 +45,6 @@ export const InitUser = {
 }
 
 export function Dashboard({ children }: Props) {
-  // const ctx = React.useContext(UserContext);
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const { state } = React.useContext(UserContext);
@@ -85,21 +84,19 @@ export function Dashboard({ children }: Props) {
   // const mdTheme = createTheme();
 
   if(state.logged) { // if it is logged
-    return(<>
-      <CssBaseline />
+    return(
       <Box sx={{display: 'flex'}}>
         <NavBar open={open} toggleDrawer={toggleDrawer}/>
         <SideBar open={open} toggleDrawer={toggleDrawer}/>
         <MainContent children={children} />
       </Box>
-      </>
     )
   }
   else { // otherwise
     return (
-      <div>
+      <>
         {children}
-      </div>
+      </>
     );
   }
 

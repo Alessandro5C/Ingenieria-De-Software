@@ -8,8 +8,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { drawerWidth } from './Dashboard';
-import UserContext from '../../context/User/usercontext';
-import { setLogged, setId } from '../../context/User/userreducer';
+import UserContext from '../../../context/User/usercontext';
+import { setLogged, setId } from '../../../context/User/userreducer';
 
 interface Props {
     open: boolean,
@@ -52,24 +52,27 @@ export default function NavBar(props: Props){
 
   return (
     <AppBar position="absolute" open={props.open}>
-      <Toolbar sx={{pr: '24px,'}}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="Open drawer"
-          onClick={props.toggleDrawer}
-          sx={{
-            marginRight:'36px',
-            ...(props.open && {display: 'none'}),
-          }}>
-          <MenuIcon />
-        </IconButton>
+      <Toolbar sx={{
+        display: "flex",
+        justifyContent: "space-between"
+      }}>
+        { // This trick is for making "Dashboard" centered
+          // if it is not opened, it shor icon
+          // else, an empty div is provided, just for flexbox justifycontent above
+          !props.open ? (<IconButton
+            edge="start"
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={props.toggleDrawer}>
+            <MenuIcon />
+          </IconButton>)
+          : <div></div> 
+        }
         <Typography
           component="h1"
           variant="h6"
           color="inherit"
-          noWrap
-          sx={{flexGrow: 1}}>
+          noWrap >
           Dashboard
         </Typography>
         <IconButton color="inherit" onClick={handleLogout}>

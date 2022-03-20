@@ -1,4 +1,11 @@
+// my own files
+import { ListItem } from '@mui/material';
+import CustomButtonThemeMode from '../button/ThemeMode';
+import CustomButtonLangSelector from '../button/LangSelector';
+// react
 import * as React from 'react';
+
+// material-ui
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -10,13 +17,14 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import GroupIcon from '@mui/icons-material/Group';
 
+
 export const mainListItems = (
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="User"/>
+      <ListItemText primary="User" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -64,3 +72,19 @@ export const secondaryListItems = (
     </ListItemButton>
   </React.Fragment>
 );
+
+export const visualizationOptions = (
+  <>
+    <ListSubheader inset>Visualización</ListSubheader>
+    <ListItem>
+      <CustomButtonThemeMode />
+    </ListItem>
+  </>
+)
+
+export const languagesOptions = (
+  <>
+    <ListSubheader inset>Languages</ListSubheader>
+    <CustomButtonLangSelector />
+  </>
+)

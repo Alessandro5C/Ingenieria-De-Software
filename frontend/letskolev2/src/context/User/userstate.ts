@@ -5,5 +5,5 @@ export interface UserState {
 
 export const initialUserState: UserState = {
     id: '',
-    logged: false
+    logged: false // Just for testing frontend
 }
