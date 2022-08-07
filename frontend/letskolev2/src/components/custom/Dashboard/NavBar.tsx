@@ -8,8 +8,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { drawerWidth } from './Dashboard';
-import UserContext from '../../../context/User/usercontext';
-import { setLogged, setId } from '../../../context/User/userreducer';
 
 interface Props {
     open: boolean,
@@ -38,16 +36,11 @@ const AppBar = styled(MuiAppBar,{
     }));
 
 export default function NavBar(props: Props){
-  const { dispatch } = React.useContext(UserContext);
   const history = useHistory();
 
   function handleLogout(e: React.MouseEvent<HTMLButtonElement>) {
     window.localStorage.clear();
     history.push('/');
-
-    // ctx.setlogged.FALSE();
-    dispatch(setId(''));    
-    dispatch(setLogged(false));
   }
 
   return (

@@ -1,0 +1,14 @@
+.card {
+    cursor: pointer;
+    height: inherit;
+    width: 100%;
+}
+
+.card:hover {
+    transform: scale(0.98);
+}
+
+.card-image {
+    height: inherit;
+    width: 100%;
+}

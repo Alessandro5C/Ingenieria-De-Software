@@ -10,10 +10,8 @@ import SideBar from './SideBar';
 import MainContent from './MainContent';
 import { useParams } from "react-router-dom";
 import { User } from '../../../models/user';
-import { isUser } from '../../../pages/SignUpPage';
 import apiUsers from '../../../api/api.user';
 import { setHeaderToken } from '../../../api/api';
-import UserContext from '../../../context/User/usercontext';
 
 
 function copyright(props:any) {
@@ -47,7 +45,6 @@ export const InitUser = {
 export function Dashboard({ children }: Props) {
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
-  const { state } = React.useContext(UserContext);
 
   // const { id } = useParams<{ id: string}>();
   // const [user, setUser] = React.useState<User>(InitUser);
@@ -58,47 +55,16 @@ export function Dashboard({ children }: Props) {
       setOpen(!open);
       console.log(open);
   };  
-  // React.useEffect(() => {
-  //     // Todo verify the token
-  //     const token = window.localStorage.getItem('token');
+
+  return(
+    <Box sx={{display: 'flex'}}>
+      <NavBar open={open} toggleDrawer={toggleDrawer}/>
+      <SideBar open={open} toggleDrawer={toggleDrawer}/>
+      <MainContent children={children} />
+    </Box>
+  )
   
-  //     if(token == null) {
-  //         window.alert('Need to login before using this app');
-  //         history.push('/');
-  //     }else {
-  //       apiUsers.get(state.id).then( // call api
 
-  //         (appUserResponse) => {
-  //           if(appUserResponse && isUser(appUserResponse)){ // check if user
-  //             console.log('User logged correctly');
-
-  //           } else{ // token incorrect
-  //             window.localStorage.clear();
-  //             history.push('/');
-  //           }
-  //         }
-  //       )
-  //     }
-  // }, []);  
-  
-  // const mdTheme = createTheme();
-
-  if(state.logged) { // if it is logged
-    return(
-      <Box sx={{display: 'flex'}}>
-        <NavBar open={open} toggleDrawer={toggleDrawer}/>
-        <SideBar open={open} toggleDrawer={toggleDrawer}/>
-        <MainContent children={children} />
-      </Box>
-    )
-  }
-  else { // otherwise
-    return (
-      <>
-        {children}
-      </>
-    );
-  }
 
 }
 

@@ -23,20 +23,8 @@ export default function MainContent({ children }: Props) {
         overflow:'auto',
       }}>
       <Toolbar/>
-      <Container maxWidth="lg" sx={{mt:4,mb:4}}>
-        <Grid container spacing={3}>
-          {/* poner las partes aca. */}
-          <Grid item xs={12} md={8} lg={9}>
-            <Paper
-              sx={{
-                p:2, 
-                display: 'flex',
-                flexDirection:'column',
-              }}>
-                {children}
-            </Paper>
-          </Grid>
-        </Grid>
+      <Container maxWidth="md" sx={{mt:4,mb:4}}>
+        {children}
       </Container>
     </Box>
   );
